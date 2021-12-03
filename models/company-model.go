@@ -15,13 +15,6 @@ import (
 	"github.com/nleeper/goment"
 )
 
-type sCompanyDetail struct {
-	Name   string `json:"company_name"`
-	Url    string `json:"company_url"`
-	Status string `json:"company_status"`
-	Create string `json:"company_create"`
-	Update string `json:"company_update"`
-}
 type sCompanyListAdmin struct {
 	Username      string `json:"company_admin_username"`
 	Typeadmin     string `json:"company_admin_typeadmin"`
@@ -357,10 +350,10 @@ func Fetch_company() (helpers.Response, error) {
 	return res, nil
 }
 func Fetch_companyDetail(company string) (helpers.Response, error) {
-	var obj sCompanyDetail
-	var arraobj []sCompanyDetail
+	var obj entities.Model_companydetail
+	var arraobj []entities.Model_companydetail
 	var res helpers.Response
-	msg := "Error"
+	msg := "Data Not Found"
 	flag := true
 	con := db.CreateCon()
 	ctx := context.Background()
@@ -378,16 +371,24 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 	)
 	rows := con.QueryRowContext(ctx, sql_detail, company)
 	switch err := rows.Scan(
-		&nmcompany_db, &companyurl_db,
-		&statuscompany_db, &createcompany_db, &createdatecompany_db, &updatecompany_db, &updatedatecompany_db); err {
+		&nmcompany_db, &companyurl_db, &statuscompany_db,
+		&createcompany_db, &createdatecompany_db, &updatecompany_db, &updatedatecompany_db); err {
 	case sql.ErrNoRows:
 		flag = false
 	case nil:
-		obj.Name = nmcompany_db
-		obj.Url = companyurl_db
-		obj.Status = statuscompany_db
-		obj.Create = createcompany_db + ", " + createdatecompany_db
-		obj.Update = updatecompany_db + ", " + updatedatecompany_db
+		create := ""
+		update := ""
+		if createcompany_db != "" {
+			create = createcompany_db + ", " + createdatecompany_db
+		}
+		if updatecompany_db != "" {
+			update = updatecompany_db + ", " + updatedatecompany_db
+		}
+		obj.Company_name = nmcompany_db
+		obj.Company_url = companyurl_db
+		obj.Company_status = statuscompany_db
+		obj.Company_create = create
+		obj.Company_update = update
 		arraobj = append(arraobj, obj)
 		msg = "Success"
 	default:
@@ -409,8 +410,8 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 	return res, nil
 }
 func Fetch_company_listadmin(company string) (helpers.Response, error) {
-	var obj sCompanyListAdmin
-	var arraobj []sCompanyListAdmin
+	var obj entities.Model_companylistadmin
+	var arraobj []entities.Model_companylistadmin
 	var res helpers.Response
 	msg := "Error"
 	con := db.CreateCon()
@@ -450,21 +451,23 @@ func Fetch_company_listadmin(company string) (helpers.Response, error) {
 		if lastlogin_comp_db == "0000-00-00 00:00:00" {
 			lastlogin_comp_db = ""
 		}
-		if createdatecomp_admin_db == "0000-00-00 00:00:00" {
-			createdatecomp_admin_db = ""
+		create := ""
+		update := ""
+		if createcomp_admin_db != "" {
+			create = createcomp_admin_db + ", " + createdatecomp_admin_db
 		}
-		if updatedatecomp_admin_db == "0000-00-00 00:00:00" {
-			updatedatecomp_admin_db = ""
+		if updatecomp_admin_db != "" {
+			update = updatecomp_admin_db + ", " + updatedatecomp_admin_db
 		}
-		obj.Username = username_comp_db
-		obj.Typeadmin = typeadmin_db
-		obj.Name = nama_comp_db
-		obj.Status = status_comp_db
-		obj.Statuscss = status_css
-		obj.Lastlogin = lastlogin_comp_db
-		obj.Lastippadress = lastipaddres_comp_db
-		obj.Create = createcomp_admin_db + "," + createdatecomp_admin_db
-		obj.Update = updatecomp_admin_db + "," + updatedatecomp_admin_db
+		obj.Company_admin_username = username_comp_db
+		obj.Company_admin_typeadmin = typeadmin_db
+		obj.Company_admin_name = nama_comp_db
+		obj.Company_admin_status = status_comp_db
+		obj.Company_admin_statuscss = status_css
+		obj.Company_admin_lastlogin = lastlogin_comp_db
+		obj.Company_admin_lastippadress = lastipaddres_comp_db
+		obj.Company_admin_create = create
+		obj.Company_admin_update = update
 		arraobj = append(arraobj, obj)
 		msg = "Success"
 	}

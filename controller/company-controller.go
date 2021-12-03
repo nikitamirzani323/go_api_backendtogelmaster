@@ -365,6 +365,7 @@ type rediscompanyhome struct {
 const Fieldcompany_home_redis = "LISTCOMPANY_MASTER"
 const Fieldcompanydetail_home_redis = "LISTCOMPANYDETAIL_MASTER"
 const Fieldcompanylistadmin_home_redis = "LISTCOMPANYLISTADMIN_MASTER"
+const Fieldcompanylistpasaran_home_redis = "LISTCOMPANYLISTPASARAN_MASTER"
 
 func CompanyHome(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
@@ -624,17 +625,59 @@ func CompanyDetailListPasaran(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
+	render_page := time.Now()
+	var obj entities.Model_companylistpasaran
+	var arraobj []entities.Model_companylistpasaran
+	resultredis, flag := helpers.GetRedis(Fieldcompanylistpasaran_home_redis + "_" + client.Company)
+	jsonredis := []byte(resultredis)
+	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
+	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		company_pasaran_idcomppasaran, _ := jsonparser.GetInt(value, "company_pasaran_idcomppasaran")
+		company_pasaran_idpasarantogel, _ := jsonparser.GetString(value, "company_pasaran_idpasarantogel")
+		company_pasaran_nmpasarantogel, _ := jsonparser.GetString(value, "company_pasaran_nmpasarantogel")
+		company_pasaran_periode, _ := jsonparser.GetString(value, "company_pasaran_periode")
+		company_pasaran_winlose, _ := jsonparser.GetInt(value, "company_pasaran_winlose")
+		company_pasaran_displaypasaran, _ := jsonparser.GetInt(value, "company_pasaran_displaypasaran")
+		company_pasaran_status, _ := jsonparser.GetString(value, "company_pasaran_status")
+		company_pasaran_statuscss, _ := jsonparser.GetString(value, "company_pasaran_statuscss")
+		company_pasaran_statuspasaranactive, _ := jsonparser.GetString(value, "company_pasaran_statuspasaranactive")
+		company_pasaran_statuspasaranactivecss, _ := jsonparser.GetString(value, "company_pasaran_statuspasaranactivecss")
 
-	result, err := models.Fetch_company_listpasaran(client.Company)
-	if err != nil {
-		c.Status(fiber.StatusBadRequest)
+		obj.Company_pasaran_idcomppasaran = int(company_pasaran_idcomppasaran)
+		obj.Company_pasaran_idpasarantogel = company_pasaran_idpasarantogel
+		obj.Company_pasaran_nmpasarantogel = company_pasaran_nmpasarantogel
+		obj.Company_pasaran_periode = company_pasaran_periode
+		obj.Company_pasaran_winlose = int(company_pasaran_winlose)
+		obj.Company_pasaran_displaypasaran = int(company_pasaran_displaypasaran)
+		obj.Company_pasaran_status = company_pasaran_status
+		obj.Company_pasaran_statuscss = company_pasaran_statuscss
+		obj.Company_pasaran_statusactive = company_pasaran_statuspasaranactive
+		obj.Company_pasaran_statusactivecss = company_pasaran_statuspasaranactivecss
+		arraobj = append(arraobj, obj)
+	})
+	if !flag {
+		result, err := models.Fetch_company_listpasaran(client.Company)
+		helpers.SetRedis(Fieldcompanylistpasaran_home_redis+"_"+client.Company, result, 20*time.Minute)
+		log.Println("COMPANY LISTPASARAN MYSQL " + client.Company)
+		if err != nil {
+			c.Status(fiber.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"status":  fiber.StatusBadRequest,
+				"message": err.Error(),
+				"record":  nil,
+			})
+		}
+		return c.JSON(result)
+	} else {
+		log.Println("COMPANY LISTPASARAN CACHE " + client.Company)
 		return c.JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": err.Error(),
-			"record":  nil,
+			"status":  fiber.StatusOK,
+			"message": "Success",
+			"record":  arraobj,
+			"time":    time.Since(render_page).String(),
 		})
 	}
-	return c.JSON(result)
+
 }
 func CompanyDetailListPasaranOnline(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse

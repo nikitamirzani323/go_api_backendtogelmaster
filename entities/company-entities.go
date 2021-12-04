@@ -230,6 +230,33 @@ type Model_companypasaranconf struct {
 	Company_Limitglobal_shio                  float32 `json:"limitglobal_shio"`
 	Company_Limittotal_shio                   float32 `json:"limittotal_shio"`
 }
+type Model_companylistkeluaran struct {
+	Company_Pasaran_no                int     `json:"company_pasaran_no"`
+	Company_Pasaran_idtrxkeluaran     int     `json:"company_pasaran_invoice"`
+	Company_Pasaran_idcomppasaran     int     `json:"company_pasaran_idcompp"`
+	Company_Pasaran_pasarancode       string  `json:"company_pasaran_code"`
+	Company_Pasaran_keluaranperiode   string  `json:"company_pasaran_periode"`
+	Company_Pasaran_nmpasaran         string  `json:"company_pasaran_name"`
+	Company_Pasaran_tanggalperiode    string  `json:"company_pasaran_tanggal"`
+	Company_Pasaran_keluarantogel     string  `json:"company_pasaran_keluaran"`
+	Company_Pasaran_status            string  `json:"company_pasaran_status"`
+	Company_Pasaran_status_css        string  `json:"company_pasaran_status_css"`
+	Company_Pasaran_total_Member      float32 `json:"company_pasaran_totalmember"`
+	Company_Pasaran_total_bet         float32 `json:"company_pasaran_totalbet"`
+	Company_Pasaran_total_outstanding float32 `json:"company_pasaran_totaloutstanding"`
+	Company_Pasaran_total_cancelbet   float32 `json:"company_pasaran_totalcancelbet"`
+	Company_Pasaran_winlose           float32 `json:"company_pasaran_winlose"`
+	Company_Pasaran_winlosetemp       int     `json:"company_pasaran_winlosetemp"`
+	Company_Pasaran_revisi            int     `json:"company_pasaran_revisi"`
+	Company_Pasaran_msgrevisi         string  `json:"company_pasaran_msgrevisi"`
+}
+type Model_invoicelistMember struct {
+	Member         string `json:"member"`
+	Totalbet       int    `json:"totalbet"`
+	Totalbayar     int    `json:"totalbayar"`
+	Totalcancelbet int    `json:"totalcancelbet"`
+	Totalwin       int    `json:"totalwin"`
+}
 
 type Controller_company struct {
 	Company_search string `json:"company_search"`
@@ -244,4 +271,14 @@ type Controller_companypasaranconf struct {
 	Sdata             string `json:"sData" validate:"required"`
 	Company           string `json:"company" validate:"required"`
 	Companypasaran_id int    `json:"companypasaran_id" validate:"required"`
+}
+type Controller_companylistkeluaran struct {
+	Company string `json:"company" validate:"required"`
+	Periode string `json:"periode" validate:"required"`
+	Pasaran int    `json:"pasaran" validate:"required"`
+}
+type Controller_companyinvoice struct {
+	Company  string `json:"company" validate:"required"`
+	Username string `json:"username" `
+	Invoice  int    `json:"invoice" validate:"required"`
 }

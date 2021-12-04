@@ -15,37 +15,6 @@ import (
 	"github.com/nleeper/goment"
 )
 
-type sCompanyListPasaranOnline struct {
-	Pasaran_onlineid int    `json:"company_pasaranonline_id"`
-	Pasaran_harian   string `json:"company_pasaranonline_hari"`
-}
-type scompanylistkeluaran struct {
-	No                int     `json:"pasaran_no"`
-	Idtrxkeluaran     int     `json:"pasaran_invoice"`
-	Idcomppasaran     int     `json:"pasaran_idcompp"`
-	Pasarancode       string  `json:"pasaran_code"`
-	Keluaranperiode   string  `json:"pasaran_periode"`
-	Nmpasaran         string  `json:"pasaran_name"`
-	Tanggalperiode    string  `json:"pasaran_tanggal"`
-	Keluarantogel     string  `json:"pasaran_keluaran"`
-	Status            string  `json:"pasaran_status"`
-	Status_css        string  `json:"pasaran_status_css"`
-	Total_Member      float32 `json:"pasaran_totalmember"`
-	Total_bet         float32 `json:"pasaran_totalbet"`
-	Total_outstanding float32 `json:"pasaran_totaloutstanding"`
-	Total_cancelbet   float32 `json:"pasaran_totalcancelbet"`
-	Winlose           float32 `json:"pasaran_winlose"`
-	Winlosetemp       int     `json:"pasaran_winlosetemp"`
-	Revisi            int     `json:"pasaran_revisi"`
-	Msgrevisi         string  `json:"pasaran_msgrevisi"`
-}
-type invoicelistMember struct {
-	Member         string `json:"member"`
-	Totalbet       int    `json:"totalbet"`
-	Totalbayar     int    `json:"totalbayar"`
-	Totalcancelbet int    `json:"totalcancelbet"`
-	Totalwin       int    `json:"totalwin"`
-}
 type invoicelistGroupPermainan struct {
 	Permainan string `json:"permainan"`
 }
@@ -914,8 +883,8 @@ func Fetch_company_listpasaranonline(company string, idcomppasaran int) (helpers
 	return res, nil
 }
 func Fetch_company_listkeluaran(company, periode string, pasaran int) (helpers.ResponseListKeluaran, error) {
-	var obj scompanylistkeluaran
-	var arraobj []scompanylistkeluaran
+	var obj entities.Model_companylistkeluaran
+	var arraobj []entities.Model_companylistkeluaran
 	var res helpers.ResponseListKeluaran
 	msg := "Error"
 	con := db.CreateCon()
@@ -964,24 +933,24 @@ func Fetch_company_listkeluaran(company, periode string, pasaran int) (helpers.R
 		}
 		totalwinlose := total_outstanding_db - total_cancel_db - winlose_db
 		subtotalwinlose = subtotalwinlose + int(totalwinlose)
-		obj.No = no
-		obj.Idtrxkeluaran = idtrxkeluaran_db
-		obj.Idcomppasaran = idcomppasaran_db
-		obj.Pasarancode = idpasarantogel_db
-		obj.Nmpasaran = nmpasarantogel_db
-		obj.Keluaranperiode = keluaranperiode_db + "-" + idpasarantogel_db
-		obj.Tanggalperiode = datekeluaran_db
-		obj.Keluarantogel = keluarantogel_db
-		obj.Total_Member = total_member_db
-		obj.Total_bet = total_bet_db
-		obj.Total_outstanding = total_outstanding_db
-		obj.Total_cancelbet = total_cancel_db
-		obj.Winlose = totalwinlose
-		obj.Winlosetemp = _winlosetemp(company, "", "", idtrxkeluaran_db)
-		obj.Revisi = revisi_db
-		obj.Msgrevisi = noterevisi_db
-		obj.Status = status
-		obj.Status_css = status_css
+		obj.Company_Pasaran_no = no
+		obj.Company_Pasaran_idtrxkeluaran = idtrxkeluaran_db
+		obj.Company_Pasaran_idcomppasaran = idcomppasaran_db
+		obj.Company_Pasaran_pasarancode = idpasarantogel_db
+		obj.Company_Pasaran_nmpasaran = nmpasarantogel_db
+		obj.Company_Pasaran_keluaranperiode = keluaranperiode_db + "-" + idpasarantogel_db
+		obj.Company_Pasaran_tanggalperiode = datekeluaran_db
+		obj.Company_Pasaran_keluarantogel = keluarantogel_db
+		obj.Company_Pasaran_total_Member = total_member_db
+		obj.Company_Pasaran_total_bet = total_bet_db
+		obj.Company_Pasaran_total_outstanding = total_outstanding_db
+		obj.Company_Pasaran_total_cancelbet = total_cancel_db
+		obj.Company_Pasaran_winlose = totalwinlose
+		obj.Company_Pasaran_winlosetemp = _winlosetemp(company, "", "", idtrxkeluaran_db)
+		obj.Company_Pasaran_revisi = revisi_db
+		obj.Company_Pasaran_msgrevisi = noterevisi_db
+		obj.Company_Pasaran_status = status
+		obj.Company_Pasaran_status_css = status_css
 		arraobj = append(arraobj, obj)
 		msg = "Success"
 	}
@@ -996,8 +965,8 @@ func Fetch_company_listkeluaran(company, periode string, pasaran int) (helpers.R
 	return res, nil
 }
 func Fetch_company_invoice_member(company string, invoice int) (helpers.Response, error) {
-	var obj invoicelistMember
-	var arraobj []invoicelistMember
+	var obj entities.Model_invoicelistMember
+	var arraobj []entities.Model_invoicelistMember
 	var res helpers.Response
 	msg := "Error"
 	con := db.CreateCon()
@@ -1051,8 +1020,8 @@ func Fetch_company_invoice_member(company string, invoice int) (helpers.Response
 	return res, nil
 }
 func Fetch_company_invoice_membertemp(company string, invoice int) (helpers.Response, error) {
-	var obj invoicelistMember
-	var arraobj []invoicelistMember
+	var obj entities.Model_invoicelistMember
+	var arraobj []entities.Model_invoicelistMember
 	var res helpers.Response
 	msg := "Error"
 	con := db.CreateCon()

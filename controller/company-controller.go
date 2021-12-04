@@ -370,6 +370,7 @@ const Fieldcompanylistpasaranonline_home_redis = "LISTCOMPANYLISTPASARANONLINE_M
 const Fieldcompanylistpasaranconf_home_redis = "LISTCOMPANYLISTPASARANCONF_MASTER"
 const Fieldcompanylistpasarankeluaran_home_redis = "LISTCOMPANYLISTPASARANKELUARAN_MASTER"
 const Fieldcompanyinvoicelist_home_redis = "LISTCOMPANYINVOICELISTMEMBER_MASTER"
+const Fieldcompanyinvoicelisttemp_home_redis = "LISTCOMPANYINVOICELISTTEMP_MASTER"
 
 func CompanyHome(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
@@ -1333,7 +1334,7 @@ func CompanyInvoiceMember(c *fiber.Ctx) error {
 }
 func CompanyInvoiceMemberTemp(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyinvoice)
+	client := new(entities.Controller_companyinvoice)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1358,17 +1359,48 @@ func CompanyInvoiceMemberTemp(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
+	render_page := time.Now()
+	var obj entities.Model_invoicelistMember
+	var arraobj []entities.Model_invoicelistMember
+	resultredis, flag := helpers.GetRedis(Fieldcompanyinvoicelisttemp_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Invoice))
+	jsonredis := []byte(resultredis)
+	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
+	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		member, _ := jsonparser.GetString(value, "member")
+		totalbet, _ := jsonparser.GetInt(value, "totalbet")
+		totalbayar, _ := jsonparser.GetInt(value, "totalbayar")
+		totalcancelbet, _ := jsonparser.GetInt(value, "totalcancelbet")
+		totalwin, _ := jsonparser.GetInt(value, "totalwin")
 
-	result, err := models.Fetch_company_invoice_membertemp(client.Company, client.Invoice)
-	if err != nil {
-		c.Status(fiber.StatusBadRequest)
+		obj.Member = member
+		obj.Totalbet = int(totalbet)
+		obj.Totalbayar = int(totalbayar)
+		obj.Totalcancelbet = int(totalcancelbet)
+		obj.Totalwin = int(totalwin)
+		arraobj = append(arraobj, obj)
+	})
+	if !flag {
+		result, err := models.Fetch_company_invoice_membertemp(client.Company, client.Invoice)
+		if err != nil {
+			c.Status(fiber.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"status":  fiber.StatusBadRequest,
+				"message": err.Error(),
+				"record":  nil,
+			})
+		}
+		helpers.SetRedis(Fieldcompanyinvoicelisttemp_home_redis+"_"+client.Company+"_"+strconv.Itoa(client.Invoice), result, 20*time.Minute)
+		log.Println("COMPANY INVOICE LIST MEMBER TEMP MYSQL " + client.Company)
+		return c.JSON(result)
+	} else {
+		log.Println("COMPANY INVOICE LIST MEMBER TEMP CACHE " + client.Company)
 		return c.JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": err.Error(),
-			"record":  nil,
+			"status":  fiber.StatusOK,
+			"message": "Success",
+			"record":  arraobj,
+			"time":    time.Since(render_page).String(),
 		})
 	}
-	return c.JSON(result)
 }
 func CompanyInvoiceMemberSync(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse

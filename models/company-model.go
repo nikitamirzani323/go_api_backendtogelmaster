@@ -871,8 +871,8 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 	return res, nil
 }
 func Fetch_company_listpasaranonline(company string, idcomppasaran int) (helpers.Response, error) {
-	var obj sCompanyListPasaranOnline
-	var arraobj []sCompanyListPasaranOnline
+	var obj entities.Model_companylistpasaranonline
+	var arraobj []entities.Model_companylistpasaranonline
 	var res helpers.Response
 	msg := "Error"
 	con := db.CreateCon()
@@ -898,8 +898,8 @@ func Fetch_company_listpasaranonline(company string, idcomppasaran int) (helpers
 		err = row.Scan(&idcomppasaranoff, &haripasaran)
 		helpers.ErrorCheck(err)
 
-		obj.Pasaran_onlineid = idcomppasaranoff
-		obj.Pasaran_harian = haripasaran
+		obj.Company_pasaran_onlineid = idcomppasaranoff
+		obj.Company_pasaran_harian = haripasaran
 
 		arraobj = append(arraobj, obj)
 		msg = "Success"

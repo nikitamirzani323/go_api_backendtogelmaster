@@ -45,6 +45,10 @@ type Model_companylistpasaran struct {
 	Company_pasaran_statusactive    string `json:"company_pasaran_statuspasaranactive"`
 	Company_pasaran_statusactivecss string `json:"company_pasaran_statuspasaranactivecss"`
 }
+type Model_companylistpasaranonline struct {
+	Company_pasaran_onlineid int    `json:"company_pasaranonline_id"`
+	Company_pasaran_harian   string `json:"company_pasaranonline_hari"`
+}
 type Model_companypasaranconf struct {
 	Company_Pasaran_diundi                    string  `json:"pasaran_diundi"`
 	Company_Pasaran_url                       string  `json:"pasaran_url"`
@@ -234,4 +238,10 @@ type Controller_companydetail struct {
 	Page    string `json:"page" validate:"required"`
 	Sdata   string `json:"sData" validate:"required"`
 	Company string `json:"company" validate:"required"`
+}
+type Controller_companypasaranconf struct {
+	Page              string `json:"page" validate:"required"`
+	Sdata             string `json:"sData" validate:"required"`
+	Company           string `json:"company" validate:"required"`
+	Companypasaran_id int    `json:"companypasaran_id" validate:"required"`
 }

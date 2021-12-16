@@ -9,21 +9,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/config"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/db"
+	"github.com/nikitamirzani323/go_api_backendtogelmaster/entities"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/helpers"
 	"github.com/nleeper/goment"
 )
 
-type sPasaranHome struct {
-	No             int    `json:"pasaran_no"`
-	Idpasarantogel string `json:"pasaran_idpasarantogel"`
-	Nmpasarantogel string `json:"pasaran_nmpasarantogel"`
-	Tipepasaran    string `json:"pasaran_tipepasaran"`
-	Urlpasaran     string `json:"pasaran_urlpasaran"`
-	Pasarandiundi  string `json:"pasaran_pasarandiundi"`
-	Jamtutup       string `json:"pasaran_jamtutup"`
-	Jamjadwal      string `json:"pasaran_jamjadwal"`
-	Jamopen        string `json:"pasaran_jamopen"`
-}
 type sPasaranDetail struct {
 	Nmpasarantogel string `json:"pasaran_nmpasarantogel"`
 	Tipepasaran    string `json:"pasaran_tipepasaran"`
@@ -212,8 +202,8 @@ type sPasaranDetailConf struct {
 }
 
 func Fetch_pasaran() (helpers.Response, error) {
-	var obj sPasaranHome
-	var arraobj []sPasaranHome
+	var obj entities.Model_pasaran
+	var arraobj []entities.Model_pasaran
 	var res helpers.Response
 	msg := "Error"
 	con := db.CreateCon()
@@ -242,15 +232,15 @@ func Fetch_pasaran() (helpers.Response, error) {
 			&jamtutup_db, &jamjadwal_db, &jamopen_db)
 		helpers.ErrorCheck(err)
 
-		obj.No = no
-		obj.Idpasarantogel = idpasarantogel_db
-		obj.Nmpasarantogel = nmpasarantogel_db
-		obj.Tipepasaran = tipepasaran_db
-		obj.Urlpasaran = urlpasaran_db
-		obj.Pasarandiundi = pasarandiundi_db
-		obj.Jamtutup = jamtutup_db
-		obj.Jamjadwal = jamjadwal_db
-		obj.Jamopen = jamopen_db
+		obj.Pasaran_no = no
+		obj.Pasaran_idpasarantogel = idpasarantogel_db
+		obj.Pasaran_nmpasarantogel = nmpasarantogel_db
+		obj.Pasaran_tipepasaran = tipepasaran_db
+		obj.Pasaran_urlpasaran = urlpasaran_db
+		obj.Pasaran_pasarandiundi = pasarandiundi_db
+		obj.Pasaran_jamtutup = jamtutup_db
+		obj.Pasaran_jamjadwal = jamjadwal_db
+		obj.Pasaran_jamopen = jamopen_db
 		arraobj = append(arraobj, obj)
 	}
 	defer row.Close()

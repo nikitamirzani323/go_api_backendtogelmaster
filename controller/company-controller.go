@@ -426,8 +426,6 @@ func CompanyHome(c *fiber.Ctx) error {
 	})
 	if !flag {
 		result, err := models.Fetch_company()
-		helpers.SetRedis(Fieldcompany_home_redis, result, 60*time.Minute)
-		log.Println("COMPANY MYSQL")
 		if err != nil {
 			c.Status(fiber.StatusBadRequest)
 			return c.JSON(fiber.Map{
@@ -436,6 +434,8 @@ func CompanyHome(c *fiber.Ctx) error {
 				"record":  nil,
 			})
 		}
+		helpers.SetRedis(Fieldcompany_home_redis, result, 60*time.Minute)
+		log.Println("COMPANY MYSQL")
 		return c.JSON(result)
 	} else {
 		log.Println("COMPANY CACHE")

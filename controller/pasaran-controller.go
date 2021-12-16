@@ -7,13 +7,11 @@ import (
 	"github.com/buger/jsonparser"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/nikitamirzani323/go_api_backendtogelmaster/entities"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/helpers"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/models"
 )
 
-type pasaranhome struct {
-	Master string `json:"master" validate:"required"`
-}
 type pasarandetail struct {
 	Pasarancode string `json:"pasarancode" validate:"required"`
 	Master      string `json:"master" validate:"required"`
@@ -263,9 +261,11 @@ type redispasaranhome struct {
 	Jamopen        string `json:"pasaran_jamopen"`
 }
 
+const Fieldpasaran_home_redis = "LISTPASARAN_MASTER"
+
 func PasaranHome(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaranhome)
+	client := new(entities.Controller_pasaran)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -290,11 +290,10 @@ func PasaranHome(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
-	field_redis := "LISTPASARAN_MASTER"
 	render_page := time.Now()
-	var obj redispasaranhome
-	var arraobj []redispasaranhome
-	resultredis, flag := helpers.GetRedis(field_redis)
+	var obj entities.Model_pasaran
+	var arraobj []entities.Model_pasaran
+	resultredis, flag := helpers.GetRedis(Fieldpasaran_home_redis)
 	jsonredis := []byte(resultredis)
 	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
@@ -308,21 +307,19 @@ func PasaranHome(c *fiber.Ctx) error {
 		pasaran_jamjadwal, _ := jsonparser.GetString(value, "pasaran_jamjadwal")
 		pasaran_jamopen, _ := jsonparser.GetString(value, "pasaran_jamopen")
 
-		obj.No = int(pasaran_no)
-		obj.Idpasarantogel = pasaran_idpasarantogel
-		obj.Nmpasarantogel = pasaran_nmpasarantogel
-		obj.Tipepasaran = pasaran_tipepasaran
-		obj.Urlpasaran = pasaran_urlpasaran
-		obj.Pasarandiundi = pasaran_pasarandiundi
-		obj.Jamtutup = pasaran_jamtutup
-		obj.Jamjadwal = pasaran_jamjadwal
-		obj.Jamopen = pasaran_jamopen
+		obj.Pasaran_no = int(pasaran_no)
+		obj.Pasaran_idpasarantogel = pasaran_idpasarantogel
+		obj.Pasaran_nmpasarantogel = pasaran_nmpasarantogel
+		obj.Pasaran_tipepasaran = pasaran_tipepasaran
+		obj.Pasaran_urlpasaran = pasaran_urlpasaran
+		obj.Pasaran_pasarandiundi = pasaran_pasarandiundi
+		obj.Pasaran_jamtutup = pasaran_jamtutup
+		obj.Pasaran_jamjadwal = pasaran_jamjadwal
+		obj.Pasaran_jamopen = pasaran_jamopen
 		arraobj = append(arraobj, obj)
 	})
 	if !flag {
 		result, err := models.Fetch_pasaran()
-		helpers.SetRedis(field_redis, result, 0)
-		log.Println("PASARAN MYSQL")
 		if err != nil {
 			c.Status(fiber.StatusBadRequest)
 			return c.JSON(fiber.Map{
@@ -331,6 +328,8 @@ func PasaranHome(c *fiber.Ctx) error {
 				"record":  nil,
 			})
 		}
+		helpers.SetRedis(Fieldpasaran_home_redis, result, 60*time.Minute)
+		log.Println("PASARAN MYSQL")
 		return c.JSON(result)
 	} else {
 		log.Println("PASARAN CACHE")

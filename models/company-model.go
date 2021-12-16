@@ -285,6 +285,7 @@ func Fetch_company() (helpers.Response, error) {
 		obj.Company_status = statuscompany_db
 		obj.Company_statuscss = status_css
 		arraobj = append(arraobj, obj)
+		msg = "Success"
 	}
 	defer row.Close()
 
@@ -1575,7 +1576,6 @@ func Fetch_company_invoice_listpermainanbyusername(company, username, permainan 
 func Save_company(sData, master, company, name, urldomain, status string) (helpers.Response, error) {
 	var res helpers.Response
 	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	msg := "Failed"
 	flag := false
@@ -1586,71 +1586,60 @@ func Save_company(sData, master, company, name, urldomain, status string) (helpe
 		flag_insert := CheckDB(config.DB_tbl_mst_company, "idcompany", company)
 
 		if !flag_insert {
-			rows_insert, err_insert := con.PrepareContext(ctx, `
+			sql_insert := `
 				INSERT INTO  
-				`+config.DB_tbl_mst_company+` (
+				` + config.DB_tbl_mst_company + ` (
 					idcompany, startjoincompany, idcurr, nmcompany, companyurl, statuscompany, createcompany, createdatecompany 
 				)VALUES( 
 					?,?,?,?,?,?,?,?
 				) 
-			`)
-			helpers.ErrorCheck(err_insert)
-			rec_comp, err_comp := rows_insert.ExecContext(ctx,
+			`
+			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_mst_company, "INSERT",
 				company,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-				"IDR",
-				name,
-				urldomain,
-				status,
-				master,
+				"IDR", name, urldomain, status, master,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"))
-			helpers.ErrorCheck(err_comp)
-			insert, e := rec_comp.RowsAffected()
-			helpers.ErrorCheck(e)
-			defer rows_insert.Close()
-			if insert > 0 {
+			if flag_insert {
 				flag = true
-				msg = "Success"
-				log.Println("Data Berhasil di save")
-			}
+				msg = "Succes"
+				log.Println(msg_insert)
 
-			newDB, err := CreateNewCompanyDB(tbl_mst_company, company, con)
-			helpers.ErrorCheck(err)
+				newDB, err := CreateNewCompanyDB(tbl_mst_company, company, con)
+				helpers.ErrorCheck(err)
 
-			if newDB == "ok" {
-				flag = true
-				msg = "Success"
-				log.Println("Database Berhasil di buat")
+				if newDB == "ok" {
+					flag = true
+					msg = "Success"
+					log.Println("Database Berhasil di buat")
+				}
+			} else {
+				log.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
 		}
 	} else {
-		rows_update, err_update := con.PrepareContext(ctx, `
+		sql_update := `
 				UPDATE 
-				`+config.DB_tbl_mst_company+`  
+				` + config.DB_tbl_mst_company + `  
 				SET nmcompany=?, companyurl=?, statuscompany=?,  
 				updatecompany=?, updatedatecompany=? 
 				WHERE idcompany=? 
-			`)
-		helpers.ErrorCheck(err_update)
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		`
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company, "UPDATE",
 			name,
 			urldomain,
 			status,
 			master,
 			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 			company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_company, name)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company)
+			log.Println(msg_update)
 		}
 	}
 	if flag {

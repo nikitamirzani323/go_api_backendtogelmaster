@@ -282,3 +282,11 @@ type Controller_companyinvoice struct {
 	Username string `json:"username" `
 	Invoice  int    `json:"invoice" validate:"required"`
 }
+type Controller_companysave struct {
+	Sdata     string `json:"sdata" validate:"required"`
+	Company   string `json:"company" validate:"required"`
+	Master    string `json:"master" validate:"required"`
+	Name      string `json:"name" validate:"required"`
+	Urldomain string `json:"urldomain" validate:"required"`
+	Status    string `json:"status" validate:"required"`
+}

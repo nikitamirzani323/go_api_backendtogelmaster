@@ -63,14 +63,7 @@ type companyinvoicelistpermainanusername struct {
 	Username  string `json:"username" validate:"required"`
 	Permainan string `json:"permainan" validate:"required"`
 }
-type companysave struct {
-	Sdata     string `json:"sdata" validate:"required"`
-	Company   string `json:"company" validate:"required"`
-	Master    string `json:"master" validate:"required"`
-	Name      string `json:"name" validate:"required"`
-	Urldomain string `json:"urldomain" validate:"required"`
-	Status    string `json:"status" validate:"required"`
-}
+
 type companyadminsave struct {
 	Sdata          string `json:"sdata" validate:"required"`
 	Company        string `json:"company" validate:"required"`
@@ -1599,7 +1592,7 @@ func CompanyInvoicelistpermainanbyusername(c *fiber.Ctx) error {
 }
 func CompanySave(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companysave)
+	client := new(entities.Controller_companysave)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1630,6 +1623,8 @@ func CompanySave(c *fiber.Ctx) error {
 		client.Master,
 		client.Company,
 		client.Name, client.Urldomain, client.Status)
+	val_company := helpers.DeleteRedis(Fieldcompany_home_redis)
+	log.Printf("Redis Delete MASTER COMPANY : %d", val_company)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{

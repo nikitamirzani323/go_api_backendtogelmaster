@@ -1658,8 +1658,6 @@ func Save_company(sData, master, company, name, urldomain, status string) (helpe
 }
 func Save_companyNewAdmin(sData, master, company, username, password, name, status string) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	msg := "Failed"
 	flag := false
@@ -1668,90 +1666,73 @@ func Save_companyNewAdmin(sData, master, company, username, password, name, stat
 
 		if !flag_insert {
 			hashpass := helpers.HashPasswordMD5(password)
-			rows_insert, err_insert := con.PrepareContext(ctx, `
+			sql_insert := `
 				INSERT INTO  
-				`+config.DB_tbl_mst_company_admin+` (
+				` + config.DB_tbl_mst_company_admin + ` (
 					username_comp, password_comp, idcompany, typeadmin, nama_comp, status_comp, createcomp_admin, createdatecomp_admin 
 				)VALUES( 
 					?,?,?,?,?,?,?,? 
 				) 
-			`)
-			helpers.ErrorCheck(err_insert)
-			rec_comp, err_comp := rows_insert.ExecContext(ctx,
-				username,
-				hashpass,
-				company,
-				"MASTER",
-				name,
-				status,
-				master,
-				tglnow.Format("YYYY-MM-DD HH:mm:ss"))
-			helpers.ErrorCheck(err_comp)
-			insert, e := rec_comp.RowsAffected()
-			helpers.ErrorCheck(e)
-			defer rows_insert.Close()
-			if insert > 0 {
+			`
+			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_mst_company_admin, "INSERT",
+				username, hashpass, company, "MASTER", name,
+				status, master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
+			if flag_insert {
 				flag = true
-				msg = "Success"
-				log.Println("Data Berhasil di save")
+				msg = "Succes"
+				log.Println(msg_insert)
+			} else {
+				log.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
 		}
 	} else {
 		if password == "" {
-			rows_update, err_update := con.PrepareContext(ctx, `
+			sql_update := `
 				UPDATE 
-				`+config.DB_tbl_mst_company_admin+`  
+				` + config.DB_tbl_mst_company_admin + `  
 				SET nama_comp=?, status_comp=?, 
 				updatecomp_admin=?, updatedatecomp_admin=? 
 				WHERE idcompany=? AND username_comp=? 
-			`)
-			helpers.ErrorCheck(err_update)
-			rec_comp, err_comp := rows_update.ExecContext(ctx,
+			`
+			flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_admin, "UPDATE",
 				name,
 				status,
 				master,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 				company, username)
-			helpers.ErrorCheck(err_comp)
-			update_comp, err_comp := rec_comp.RowsAffected()
-			helpers.ErrorCheck(err_comp)
-			defer rows_update.Close()
-			if update_comp > 0 {
+
+			if flag_update {
 				flag = true
-				msg = "Success"
-				log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_company_admin, name)
+				msg = "Succes"
+				log.Println(msg_update)
 			} else {
-				log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_admin)
+				log.Println(msg_update)
 			}
 		} else {
 			hashpass := helpers.HashPasswordMD5(password)
-			rows_update, err_update := con.PrepareContext(ctx, `
+			sql_update := `
 				UPDATE 
-				`+config.DB_tbl_mst_company_admin+`  
+				` + config.DB_tbl_mst_company_admin + `  
 				SET nama_comp=?, password_comp=?, status_comp=?,   
 				updatecomp_admin=?, updatedatecomp_admin=? 
-				WHERE idcompany=? AND username_comp=? 
-			`)
-			helpers.ErrorCheck(err_update)
-			rec_comp, err_comp := rows_update.ExecContext(ctx,
+				WHERE idcompany=? AND username_comp=?
+			`
+			flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_admin, "UPDATE",
 				name,
 				hashpass,
 				status,
 				master,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 				company, username)
-			helpers.ErrorCheck(err_comp)
-			update_comp, err_comp := rec_comp.RowsAffected()
-			helpers.ErrorCheck(err_comp)
-			defer rows_update.Close()
-			if update_comp > 0 {
+
+			if flag_update {
 				flag = true
-				msg = "Success"
-				log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_company_admin, name)
+				msg = "Succes"
+				log.Println(msg_update)
 			} else {
-				log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_admin)
+				log.Println(msg_update)
 			}
 		}
 
@@ -1781,18 +1762,6 @@ func Save_companyNewPasaran(master, company, pasarancode string) (helpers.Respon
 	flag_insert := CheckDBTwoField(config.DB_tbl_mst_company_game_pasaran, "idcompany", company, "idpasarantogel", pasarancode)
 
 	if !flag_insert {
-		rows_insert, err_insert := con.PrepareContext(ctx, `
-				INSERT INTO  
-				`+config.DB_tbl_mst_company_game_pasaran+` (
-					idcomppasaran, idcompany, idpasarantogel, 
-					pasarandiundi, pasaranurl, jamtutup, jamjadwal, jamopen, statuspasaran, statuspasaranactive, 
-					createcomppas, createdatecomppas 
-				)VALUES( 
-					?,?,?,?,?,?,?,?,?,?,?,?
-				) 
-			`)
-		helpers.ErrorCheck(err_insert)
-
 		sql_pasaran := `SELECT 
 			urlpasaran, pasarandiundi, 
 			jamtutup, jamjadwal, jamopen 
@@ -1812,12 +1781,23 @@ func Save_companyNewPasaran(master, company, pasarancode string) (helpers.Respon
 			flag = false
 			helpers.ErrorCheck(err)
 		}
+
+		sql_insert := `
+			INSERT INTO  
+			` + config.DB_tbl_mst_company_game_pasaran + ` (
+				idcomppasaran, idcompany, idpasarantogel, 
+				pasarandiundi, pasaranurl, jamtutup, jamjadwal, jamopen, statuspasaran, statuspasaranactive, 
+				createcomppas, createdatecomppas 
+			)VALUES( 
+				?,?,?,?,?,?,?,?,?,?,?,?
+			) 
+		`
 		if flag {
 			year := tglnow.Format("YYYY")
 			field_col := config.DB_tbl_mst_company_game_pasaran + year
 			idcomppasaran_counter := Get_counter(field_col)
 			idcomppasaran := tglnow.Format("YY") + strconv.Itoa(idcomppasaran_counter)
-			rec_comp, err_comp := rows_insert.ExecContext(ctx,
+			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_mst_company_game_pasaran, "INSERT",
 				idcomppasaran,
 				company,
 				pasarancode,
@@ -1830,14 +1810,12 @@ func Save_companyNewPasaran(master, company, pasarancode string) (helpers.Respon
 				"Y",
 				master,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"))
-			helpers.ErrorCheck(err_comp)
-			insert, e := rec_comp.RowsAffected()
-			helpers.ErrorCheck(e)
-			defer rows_insert.Close()
-			if insert > 0 {
+			if flag_insert {
 				flag = true
-				msg = "Success"
-				log.Println("Data Berhasil di save")
+				msg = "Succes"
+				log.Println(msg_insert)
+			} else {
+				log.Println(msg_insert)
 			}
 		}
 	} else {
@@ -2860,41 +2838,30 @@ func Save_companyUpdatePasaran(
 	pasarandiundi, pasaranurl, pasaranjamtutup, pasaranjamjadwal, pasaranjamopen, statuspasaranactive string,
 	idcomppasaran int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
 
 	sql_update := `
-			UPDATE   
-			` + config.DB_tbl_mst_company_game_pasaran + ` 
-			SET pasarandiundi=? , pasaranurl=?, jamtutup=?, jamjadwal=?, jamopen=?, statuspasaranactive=?, 
-			updatecomppas=?, updatedatecompas=? 
-			WHERE idcomppasaran=? AND idcompany=? 
+		UPDATE   
+		` + config.DB_tbl_mst_company_game_pasaran + ` 
+		SET pasarandiundi=? , pasaranurl=?, jamtutup=?, jamjadwal=?, jamopen=?, statuspasaranactive=?, 
+		updatecomppas=?, updatedatecompas=? 
+		WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		pasarandiundi,
 		pasaranurl, pasaranjamtutup, pasaranjamjadwal, pasaranjamopen, statuspasaranactive,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -2915,13 +2882,10 @@ func Save_companyUpdatePasaranLine(
 	master, company string, idcomppasaran int,
 	limitline_4d, limitline_3d, limitline_2d, limitline_2dd, limitline_2dt, bbfs int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
-
 	sql_update := `
 			UPDATE   
 			` + config.DB_tbl_mst_company_game_pasaran + ` 
@@ -2929,27 +2893,18 @@ func Save_companyUpdatePasaranLine(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		limitline_4d,
 		limitline_3d, limitline_2d, limitline_2dd, limitline_2dt, bbfs,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -2974,8 +2929,6 @@ func Save_companyUpdatePasaran432(
 	limitglobal4d, limitglobal3d, limitglobal2d, limitglobal2dd, limitglobal2dt int,
 	limittotal4d, limittotal3d, limittotal2d, limittotal2dd, limittotal2dt int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -2992,10 +2945,7 @@ func Save_companyUpdatePasaran432(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet4d, maxbet3d, maxbet2d, maxbet2dd, maxbet2dt,
 		win4d, win3d, win2d, win2dd, win2dt,
 		disc4d, disc3d, disc2d, disc2dd, disc2dt,
@@ -3003,19 +2953,13 @@ func Save_companyUpdatePasaran432(
 		limittotal4d, limittotal3d, limittotal2d, limittotal2dd, limittotal2dt,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3038,8 +2982,6 @@ func Save_companyUpdatePasarancolokbebas(
 	win, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3053,26 +2995,17 @@ func Save_companyUpdatePasarancolokbebas(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet, win, disc, limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3095,8 +3028,6 @@ func Save_companyUpdatePasarancolokmacau(
 	win2, win3, win4, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3110,28 +3041,19 @@ func Save_companyUpdatePasarancolokmacau(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
 		win2, win3, win4,
 		disc, limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3154,8 +3076,6 @@ func Save_companyUpdatePasarancoloknaga(
 	win3, win4, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3169,28 +3089,19 @@ func Save_companyUpdatePasarancoloknaga(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
 		win3, win4,
 		disc, limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3213,8 +3124,6 @@ func Save_companyUpdatePasarancolokjitu(
 	winas, winkop, winkepala, winekor, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3229,28 +3138,19 @@ func Save_companyUpdatePasarancolokjitu(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
 		winas, winkop, winkepala, winekor,
 		disc, limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3274,8 +3174,6 @@ func Save_companyUpdatePasaran5050umum(
 	discbesar, disckecil, discgenap, discganjil, disctengah, disctepi float64,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3291,10 +3189,7 @@ func Save_companyUpdatePasaran5050umum(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
 		helpers.ToFixed(keibesar, 3), helpers.ToFixed(keikecil, 3),
 		helpers.ToFixed(keigenap, 3), helpers.ToFixed(keiganjil, 3),
@@ -3305,19 +3200,13 @@ func Save_companyUpdatePasaran5050umum(
 		limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3347,8 +3236,6 @@ func Save_companyUpdatePasaran5050special(
 	discekorganjil, discekorgenap, discekorbesar, discekorkecil float64,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3370,10 +3257,7 @@ func Save_companyUpdatePasaran5050special(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
 		helpers.ToFixed(keiasganjil, 3), helpers.ToFixed(keiasgenap, 3), helpers.ToFixed(keiasbesar, 3), helpers.ToFixed(keiaskecil, 3),
 		helpers.ToFixed(keikopganjil, 3), helpers.ToFixed(keikopgenap, 3), helpers.ToFixed(keikopbesar, 3), helpers.ToFixed(keikopkecil, 3),
@@ -3386,19 +3270,13 @@ func Save_companyUpdatePasaran5050special(
 		limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3426,8 +3304,6 @@ func Save_companyUpdatePasaran5050kombinasi(
 	depandiscmono, depandiscstereo, depandisckembang, depandisckempis, depandisckembar float64,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3447,10 +3323,7 @@ func Save_companyUpdatePasaran5050kombinasi(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
 		helpers.ToFixed(belakangkeimono, 3), helpers.ToFixed(belakangkeistereo, 3), helpers.ToFixed(belakangkeikembang, 3), helpers.ToFixed(belakangkeikempis, 3), helpers.ToFixed(belakangkeikembar, 3),
 		helpers.ToFixed(tengahkeimono, 3), helpers.ToFixed(tengahkeistereo, 3), helpers.ToFixed(tengahkeikembang, 3), helpers.ToFixed(tengahkeikempis, 3), helpers.ToFixed(tengahkeikembar, 3),
@@ -3461,19 +3334,13 @@ func Save_companyUpdatePasaran5050kombinasi(
 		limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3496,8 +3363,6 @@ func Save_companyUpdatePasarankombinasi(
 	win, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3511,10 +3376,7 @@ func Save_companyUpdatePasarankombinasi(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet,
 		maxbet,
 		win,
@@ -3523,19 +3385,13 @@ func Save_companyUpdatePasarankombinasi(
 		limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3559,8 +3415,6 @@ func Save_companyUpdatePasarandasar(
 	discbesar, disckecil, discigenap, discganjil float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3576,10 +3430,7 @@ func Save_companyUpdatePasarandasar(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet,
 		maxbet,
 		keibesar, keikecil, keigenap, keiganjil,
@@ -3588,19 +3439,13 @@ func Save_companyUpdatePasarandasar(
 		limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3624,8 +3469,6 @@ func Save_companyUpdatePasaranshio(
 	win, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3640,10 +3483,7 @@ func Save_companyUpdatePasaranshio(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_update, err_update := con.PrepareContext(ctx, sql_update)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		shiotahunini,
 		minbet,
 		maxbet,
@@ -3653,19 +3493,13 @@ func Save_companyUpdatePasaranshio(
 		limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	log.Println(update_comp)
-	if update_comp > 0 {
+	log.Printf("%d-%d", minbet, maxbet)
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -3684,8 +3518,6 @@ func Save_companyUpdatePasaranshio(
 }
 func Save_companyInsertPasaranharionline(master, company string, idcomppasaran int, hari string) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -3704,27 +3536,18 @@ func Save_companyInsertPasaranharionline(master, company string, idcomppasaran i
 				?,?,?,?,?,?
 			) 
 		`
-
-		rows_insert, err_insert := con.PrepareContext(ctx, sql_insert)
-		helpers.ErrorCheck(err_insert)
-		rec_comp, err_comp := rows_insert.ExecContext(ctx,
+		flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_mst_company_game_pasaran_offline, "INSERT",
 			idrecord_counter,
 			idcomppasaran,
 			company,
 			hari,
 			master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
-		helpers.ErrorCheck(err_comp)
-		insert_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_insert.Close()
-		if insert_comp > 0 {
+		if flag_insert {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran_offline, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_insert)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran_offline)
+			log.Println(msg_insert)
 		}
 	} else {
 		msg = "Duplicate Entry"
@@ -3746,8 +3569,6 @@ func Save_companyInsertPasaranharionline(master, company string, idcomppasaran i
 }
 func Delete_companyPasaranharionline(master, company string, idcomppasaran, idcomppasaranoff int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
@@ -3756,22 +3577,14 @@ func Delete_companyPasaranharionline(master, company string, idcomppasaran, idco
 			` + config.DB_tbl_mst_company_game_pasaran_offline + ` 
 			WHERE idcomppasaranoff=? AND idcomppasaran=? AND idcompany=? 
 		`
-
-	rows_delete, err_delete := con.PrepareContext(ctx, sql_delete)
-	helpers.ErrorCheck(err_delete)
-	rec_comp, err_comp := rows_delete.ExecContext(ctx, idcomppasaranoff, idcomppasaran, company)
-	helpers.ErrorCheck(err_comp)
-	delete_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_delete.Close()
-	if delete_comp > 0 {
+	flag_delete, msg_delete := Exec_SQL(sql_delete, config.DB_tbl_mst_company_game_pasaran_offline, "DELETE",
+		idcomppasaranoff, idcomppasaran, company)
+	if flag_delete {
 		flag = true
-		msg = "Success"
-		log.Printf("Delete %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran_offline, idcomppasaran)
+		msg = "Succes"
+		log.Println(msg_delete)
 	} else {
-		flag = false
-		msg = "Failed"
-		log.Printf("Delete %s Failed \n", config.DB_tbl_mst_company_game_pasaran_offline)
+		log.Println(msg_delete)
 	}
 
 	if flag {

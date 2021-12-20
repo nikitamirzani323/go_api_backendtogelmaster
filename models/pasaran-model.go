@@ -205,7 +205,7 @@ func Fetch_pasaran() (helpers.Response, error) {
 	var obj entities.Model_pasaran
 	var arraobj []entities.Model_pasaran
 	var res helpers.Response
-	msg := "Error"
+	msg := "Data Not Found"
 	con := db.CreateCon()
 	ctx := context.Background()
 	render_page := time.Now()

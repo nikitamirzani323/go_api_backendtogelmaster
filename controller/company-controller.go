@@ -1435,6 +1435,8 @@ func CompanySaveNewPasaran(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaran_home_redis + "_" + client.Company)
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val_agent_periode := helpers.DeleteRedis("LISTPERIODE_AGENT_" + client.Company)
 	log.Printf("REDIS DELETE AGENT PERIODE: %d", val_agent_periode)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)

@@ -574,3 +574,9 @@ type Controller_companydeletepasaranonline struct {
 	Companypasaran_id    int    `json:"companypasaran_id" validate:"required"`
 	Companypasaran_idoff int    `json:"companypasaran_idoffline" validate:"required"`
 }
+type Controller_companyfetchpasaran432 struct {
+	Company           string `json:"company" validate:"required"`
+	Master            string `json:"master" validate:"required"`
+	Pasaran_id        string `json:"pasaran_id" validate:"required"`
+	Companypasaran_id int    `json:"companypasaran_id" validate:"required"`
+}

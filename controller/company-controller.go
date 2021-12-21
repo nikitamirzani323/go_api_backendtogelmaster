@@ -16,21 +16,6 @@ import (
 
 var ctx = context.Background()
 
-type companydetailonline struct {
-	Company           string `json:"company" validate:"required"`
-	Master            string `json:"master" validate:"required"`
-	Companypasaran_id int    `json:"companypasaran_id" validate:"required"`
-}
-
-type companypasaranconf struct {
-	Company           string `json:"company" validate:"required"`
-	Companypasaran_id int    `json:"companypasaran_id" validate:"required"`
-}
-type companylistkeluaran struct {
-	Company string `json:"company" validate:"required"`
-	Periode string `json:"periode" validate:"required"`
-	Pasaran int    `json:"pasaran" validate:"required"`
-}
 type companyinvoice struct {
 	Company  string `json:"company" validate:"required"`
 	Username string `json:"username" `
@@ -51,13 +36,6 @@ type companyinvoicelistpermainanusername struct {
 	Invoice   int    `json:"invoice" validate:"required"`
 	Username  string `json:"username" validate:"required"`
 	Permainan string `json:"permainan" validate:"required"`
-}
-
-type companyfetchpasaran432 struct {
-	Company           string `json:"company" validate:"required"`
-	Master            string `json:"master" validate:"required"`
-	Pasaran_id        string `json:"pasaran_id" validate:"required"`
-	Companypasaran_id int    `json:"companypasaran_id" validate:"required"`
 }
 
 type rediscompanyhome struct {
@@ -910,6 +888,7 @@ func CompanyListKeluaran(c *fiber.Ctx) error {
 	var arraobj []entities.Model_companylistkeluaran
 	resultredis, flag := helpers.GetRedis(Fieldcompanylistpasarankeluaran_home_redis + "_" + client.Company + "_" + client.Periode + "_" + strconv.Itoa(client.Pasaran))
 	jsonredis := []byte(resultredis)
+	totalwinlose_RD, _ := jsonparser.GetInt(jsonredis, "totalwinlose")
 	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		company_pasaran_no, _ := jsonparser.GetInt(value, "company_pasaran_no")
@@ -967,10 +946,11 @@ func CompanyListKeluaran(c *fiber.Ctx) error {
 	} else {
 		log.Println("COMPANY LISTPASARAN KELUARAN CACHE " + client.Company)
 		return c.JSON(fiber.Map{
-			"status":  fiber.StatusOK,
-			"message": "Success",
-			"record":  arraobj,
-			"time":    time.Since(render_page).String(),
+			"status":       fiber.StatusOK,
+			"message":      "Success",
+			"record":       arraobj,
+			"totalwinlose": totalwinlose_RD,
+			"time":         time.Since(render_page).String(),
 		})
 	}
 }
@@ -1541,7 +1521,7 @@ func CompanyDeletePasaranHariOnline(c *fiber.Ctx) error {
 }
 func CompanyFetchPasaranlimitline(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1575,6 +1555,8 @@ func CompanyFetchPasaranlimitline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_4-3-2")
 	log.Printf("REDIS DELETE FRONTEND CONFIG 4-3-2: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1587,7 +1569,7 @@ func CompanyFetchPasaranlimitline(c *fiber.Ctx) error {
 }
 func CompanyFetchPasaran432(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1621,6 +1603,8 @@ func CompanyFetchPasaran432(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_4-3-2")
 	log.Printf("REDIS DELETE FRONTEND CONFIG 4-3-2: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1633,7 +1617,7 @@ func CompanyFetchPasaran432(c *fiber.Ctx) error {
 }
 func CompanyFetchPasarancolokbebas(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1667,6 +1651,8 @@ func CompanyFetchPasarancolokbebas(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_colok")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1679,7 +1665,7 @@ func CompanyFetchPasarancolokbebas(c *fiber.Ctx) error {
 }
 func CompanyFetchPasarancolokmacau(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1713,6 +1699,8 @@ func CompanyFetchPasarancolokmacau(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_colok")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1725,7 +1713,7 @@ func CompanyFetchPasarancolokmacau(c *fiber.Ctx) error {
 }
 func CompanyFetchPasarancoloknaga(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1759,6 +1747,8 @@ func CompanyFetchPasarancoloknaga(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_colok")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1771,7 +1761,7 @@ func CompanyFetchPasarancoloknaga(c *fiber.Ctx) error {
 }
 func CompanyFetchPasarancolokjitu(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1805,6 +1795,8 @@ func CompanyFetchPasarancolokjitu(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_colok")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1817,7 +1809,7 @@ func CompanyFetchPasarancolokjitu(c *fiber.Ctx) error {
 }
 func CompanyFetchPasaran5050umum(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1851,6 +1843,8 @@ func CompanyFetchPasaran5050umum(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_5050")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1863,7 +1857,7 @@ func CompanyFetchPasaran5050umum(c *fiber.Ctx) error {
 }
 func CompanyFetchPasaran5050special(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1897,6 +1891,8 @@ func CompanyFetchPasaran5050special(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_5050")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1909,7 +1905,7 @@ func CompanyFetchPasaran5050special(c *fiber.Ctx) error {
 }
 func CompanyFetchPasaran5050kombinasi(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1943,6 +1939,8 @@ func CompanyFetchPasaran5050kombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_5050")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -1955,7 +1953,7 @@ func CompanyFetchPasaran5050kombinasi(c *fiber.Ctx) error {
 }
 func CompanyFetchPasaranmacaukombinasi(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1989,6 +1987,8 @@ func CompanyFetchPasaranmacaukombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_macaukombinasi")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -2001,7 +2001,7 @@ func CompanyFetchPasaranmacaukombinasi(c *fiber.Ctx) error {
 }
 func CompanyFetchPasarandasar(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -2035,6 +2035,8 @@ func CompanyFetchPasarandasar(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_dasar")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
@@ -2047,7 +2049,7 @@ func CompanyFetchPasarandasar(c *fiber.Ctx) error {
 }
 func CompanyFetchPasaranshio(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyfetchpasaran432)
+	client := new(entities.Controller_companyfetchpasaran432)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -2081,6 +2083,8 @@ func CompanyFetchPasaranshio(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
 	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_shio")
 	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
 	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)

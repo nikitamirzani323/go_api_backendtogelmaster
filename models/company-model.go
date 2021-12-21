@@ -1871,24 +1871,16 @@ func Fetch_companyPasaranlimitline(master, company, pasarancode string, idcomppa
 			limitline_2dt=?, bbfs=?  
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
-		helpers.ErrorCheck(err_update)
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			limitline_4d_db, limitline_3d_db, limitline_2d_db, limitline_2dd_db, limitline_2dt_db, bbfs_db,
 			idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
 
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = true
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -1960,29 +1952,20 @@ func Fetch_companyPasaran432(master, company, pasarancode string, idcomppasaran 
 			1_limittotal4d=?,1_limittotal3d=?,1_limittotal2d=?,1_limittotal2dd=?,1_limittotal2dt=?  
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
-		helpers.ErrorCheck(err_update)
-		log.Println(minbet_432d_db)
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_432d_db, maxbet4d_432d_db, maxbet3d_432d_db, maxbet2d_432d_db, maxbet2dd_432d_db, maxbet2dt_432d_db,
 			win4d_432d_db, win3d_432d_db, win2d_432d_db, win2dd_432d_db, win2dt_432d_db,
 			disc4d_432d_db, disc3d_432d_db, disc2d_432d_db, disc2dd_432d_db, disc2dt_432d_db,
 			limitglobal4d_432d_db, limitglobal3d_432d_db, limitglobal2d_432d_db, limitglobal2dd_432d_db, limitglobal2dt_432d_db,
 			limitotal4d_432d_db, limitotal3d_432d_db, limitotal2d_432d_db, limitotal2dd_432d_db, limitotal2dt_432d_db,
 			idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
 
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = true
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2037,24 +2020,17 @@ func Fetch_companyPasarancolokbebas(master, company, pasarancode string, idcompp
 			2_limitbuang=?, 2_limitotal=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
-		helpers.ErrorCheck(err_update)
 
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_cbebas_db, maxbet_cbebas_db, win_cbebas_db, disc_cbebas_db,
 			limitglobal_cbebas_db, limittotal_cbebas_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2111,26 +2087,17 @@ func Fetch_companyPasarancolokmacau(master, company, pasarancode string, idcompp
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
 
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_cmacau_db, maxbet_cmacau_db,
 			win2d_cmacau_db, win3d_cmacau_db, win4d_cmacau_db, disc_cmacau_db, limitglobal_cmacau_db, limitotal_cmacau_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
-			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
-		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
-		}
 
+		if flag_update {
+			flag = true
+			msg = "Succes"
+			log.Println(msg_update)
+		} else {
+			log.Println(msg_update)
+		}
 	}
 
 	if flag {
@@ -2185,24 +2152,16 @@ func Fetch_companyPasarancoloknaga(master, company, pasarancode string, idcomppa
 			WHERE idcomppasaran=? AND idcompany=?  
 		`
 
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_cnaga_db, maxbet_cnaga_db,
 			win3_cnaga_db, win4_cnaga_db, disc_cnaga_db, limitglobal_cnaga_db, limittotal_cnaga_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2260,25 +2219,20 @@ func Fetch_companyPasarancolokjitu(master, company, pasarancode string, idcomppa
 			5_desic=?, 5_limitbuang=?, 5_limitotal=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
-		helpers.ErrorCheck(err_update)
 
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_cjitu_db, maxbet_cjitu_db,
 			winas_cjitu_db, winkop_cjitu_db, winkepala_cjitu_db, winekor_cjitu_db,
 			desc_cjitu_db, limitglobal_cjitu_db, limittotal_cjitu_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
 			flag = false
 			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2344,28 +2298,21 @@ func Fetch_companyPasaran5050umum(master, company, pasarancode string, idcomppas
 			6_limitbuang=?, 6_limittotal=?   
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
-		helpers.ErrorCheck(err_update)
 
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_5050umum_db, maxbet_5050umum_db,
 			keibesar_5050umum_db, keikecil_5050umum_db, keigenap_5050umum_db, keiganjil_5050umum_db,
 			keitengah_5050umum_db, keitepi_5050umum_db,
 			discbesar_5050umum_db, disckecil_5050umum_db, discgenap_5050umum_db, discganjil_5050umum_db,
 			disctengah_5050umum_db, disctepi_5050umum_db,
 			limitglobal_5050umum_db, limittotal_5050umum_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Success"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2452,12 +2399,8 @@ func Fetch_companyPasaran5050special(master, company, pasarancode string, idcomp
 			7_limitbuang=?, 7_limittotal=?  
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		log.Println(sql_update)
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
 
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_5050special_db, maxbet_5050special_db,
 			keiasganjil_5050special_db, keiasgenap_5050special_db, keiasbesar_5050special_db, keiaskecil_5050special_db,
 			keikopganjil_5050special_db, keikopgenap_5050special_db, keikopbesar_5050special_db, keikopkecil_5050special_db,
@@ -2468,19 +2411,13 @@ func Fetch_companyPasaran5050special(master, company, pasarancode string, idcomp
 			disckepalaganjil_5050special_db, disckepalagenap_5050special_db, disckepalabesar_5050special_db, disckepalakecil_5050special_db,
 			discekorganjil_5050special_db, discekorgenap_5050special_db, discekorbesar_5050special_db, discekorkecil_5050special_db,
 			limitglobal_5050special_db, limittotal_5050special_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		log.Println(update_comp)
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2561,12 +2498,8 @@ func Fetch_companyPasaran5050kombinasi(master, company, pasarancode string, idco
 			8_limitbuang=?, 8_limittotal=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		log.Println(sql_update)
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
 
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_5050kombinasi_db, maxbet_5050kombinasi_db,
 			belakangkeimono_5050kombinasi_db, belakangkeistereo_5050kombinasi_db, belakangkeikembang_5050kombinasi_db, belakangkeikempis_5050kombinasi_db, belakangkeikembar_5050kombinasi_db,
 			tengahkeimono_5050kombinasi_db, tengahkeistereo_5050kombinasi_db, tengahkeikembang_5050kombinasi_db, tengahkeikempis_5050kombinasi_db, tengahkeikembar_5050kombinasi_db,
@@ -2575,20 +2508,15 @@ func Fetch_companyPasaran5050kombinasi(master, company, pasarancode string, idco
 			tengahdiscmono_5050kombinasi_db, tengahdiscstereo_5050kombinasi_db, tengahdisckembang_5050kombinasi_db, tengahdisckempis_5050kombinasi_db, tengahdisckembar_5050kombinasi_db,
 			depandiscmono_5050kombinasi_db, depandiscstereo_5050kombinasi_db, depandisckembang_5050kombinasi_db, depandisckempis_5050kombinasi_db, depandisckembar_5050kombinasi_db,
 			limitglobal_5050kombinasi_db, limittotal_5050kombinasi_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		log.Println(update_comp)
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
+
 	}
 
 	if flag {
@@ -2642,26 +2570,16 @@ func Fetch_companyPasaranmacau(master, company, pasarancode string, idcomppasara
 			9_limitbuang=?, 9_limittotal=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		log.Println(sql_update)
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
 
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			minbet_kombinasi_db, maxbet_kombinasi_db, win_kombinasi_db, disc_kombinasi_db, limitglobal_kombinasi_db, limittotal_kombinasi_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		log.Println(update_comp)
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2720,26 +2638,18 @@ func Fetch_companyPasarandasar(master, company, pasarancode string, idcomppasara
 			10_limitbuang=?, 10_limittotal=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		log.Println(sql_update)
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
 
-		helpers.ErrorCheck(err_update)
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
+			minbet_dasar_db, maxbet_dasar_db, keibesar_dasar_db, keikecil_dasar_db, keigenap_dasar_db,
+			keiganjil_dasar_db, discbesar_dasar_db, disckecil_dasar_db, discgenap_dasar_db, discganjil_dasar_db,
+			limitglobal_dasar_db, limittotal_dasar_db, idcomppasaran, company)
 
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
-			minbet_dasar_db, maxbet_dasar_db, keibesar_dasar_db, keikecil_dasar_db, keigenap_dasar_db, keiganjil_dasar_db, discbesar_dasar_db, disckecil_dasar_db, discgenap_dasar_db, discganjil_dasar_db, limitglobal_dasar_db, limittotal_dasar_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		log.Println(update_comp)
-		if update_comp > 0 {
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 
@@ -2796,26 +2706,16 @@ func Fetch_companyPasaranshio(master, company, pasarancode string, idcomppasaran
 			11_limitbuang=?, 11_limittotal=?  
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
-		log.Println(sql_update)
-		rows_update, err_update := con.PrepareContext(ctx, sql_update)
 
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 			shioyear_shio_db, minbet_shio_db, maxbet_shio_db, win_shio_db, disc_shio_db, limitglobal_shio_db, limittotal_shio_db, idcomppasaran, company)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		log.Println(update_comp)
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %d\n", config.DB_tbl_mst_company_game_pasaran, idcomppasaran)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			flag = false
-			msg = "Failed"
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_company_game_pasaran)
+			log.Println(msg_update)
 		}
 	}
 

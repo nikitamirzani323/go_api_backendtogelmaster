@@ -257,6 +257,30 @@ type Model_invoicelistMember struct {
 	Totalcancelbet int    `json:"totalcancelbet"`
 	Totalwin       int    `json:"totalwin"`
 }
+type Model_invoicelistpermainan struct {
+	Bet_id           int     `json:"bet_id"`
+	Bet_datetime     string  `json:"bet_datetime"`
+	Bet_ipaddress    string  `json:"bet_ipaddress"`
+	Bet_device       string  `json:"bet_device"`
+	Bet_timezone     string  `json:"bet_timezone"`
+	Bet_username     string  `json:"bet_username"`
+	Bet_typegame     string  `json:"bet_typegame"`
+	Bet_nomortogel   string  `json:"bet_nomortogel"`
+	Bet_bet          int     `json:"bet_bet"`
+	Bet_diskon       int     `json:"bet_diskon"`
+	Bet_diskonpercen int     `json:"bet_diskonpercen"`
+	Bet_kei          int     `json:"bet_kei"`
+	Bet_keipercen    int     `json:"bet_keipercen"`
+	Bet_win          float32 `json:"bet_win"`
+	Bet_totalwin     int     `json:"bet_totalwin"`
+	Bet_bayar        int     `json:"bet_bayar"`
+	Bet_status       string  `json:"bet_status"`
+	Bet_statuscss    string  `json:"bet_statuscss"`
+	Bet_create       string  `json:"bet_create"`
+	Bet_createDate   string  `json:"bet_createdate"`
+	Bet_update       string  `json:"bet_update"`
+	Bet_updateDate   string  `json:"bet_updatedate"`
+}
 
 type Controller_company struct {
 	Company_search string `json:"company_search"`
@@ -579,4 +603,20 @@ type Controller_companyfetchpasaran432 struct {
 	Master            string `json:"master" validate:"required"`
 	Pasaran_id        string `json:"pasaran_id" validate:"required"`
 	Companypasaran_id int    `json:"companypasaran_id" validate:"required"`
+}
+type Controller_companyinvoicelistpermainan struct {
+	Company   string `json:"company" validate:"required"`
+	Invoice   int    `json:"invoice" validate:"required"`
+	Permainan string `json:"permainan" validate:"required"`
+}
+type Controller_companyinvoicelistpermainanstatus struct {
+	Company string `json:"company" validate:"required"`
+	Invoice int    `json:"invoice" validate:"required"`
+	Status  string `json:"status" validate:"required"`
+}
+type Controller_companyinvoicelistpermainanusername struct {
+	Company   string `json:"company" validate:"required"`
+	Invoice   int    `json:"invoice" validate:"required"`
+	Username  string `json:"username" validate:"required"`
+	Permainan string `json:"permainan" validate:"required"`
 }

@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"context"
 	"log"
 	"strconv"
 	"time"
@@ -14,44 +13,6 @@ import (
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/models"
 )
 
-var ctx = context.Background()
-
-type companyinvoice struct {
-	Company  string `json:"company" validate:"required"`
-	Username string `json:"username" `
-	Invoice  int    `json:"invoice" validate:"required"`
-}
-type companyinvoicelistpermainan struct {
-	Company   string `json:"company" validate:"required"`
-	Invoice   int    `json:"invoice" validate:"required"`
-	Permainan string `json:"permainan" validate:"required"`
-}
-type companyinvoicelistpermainanstatus struct {
-	Company string `json:"company" validate:"required"`
-	Invoice int    `json:"invoice" validate:"required"`
-	Status  string `json:"status" validate:"required"`
-}
-type companyinvoicelistpermainanusername struct {
-	Company   string `json:"company" validate:"required"`
-	Invoice   int    `json:"invoice" validate:"required"`
-	Username  string `json:"username" validate:"required"`
-	Permainan string `json:"permainan" validate:"required"`
-}
-
-type rediscompanyhome struct {
-	No          int    `json:"company_no"`
-	Idcompany   string `json:"company_idcompany"`
-	Startjoin   string `json:"company_startjoin"`
-	Endjoin     string `json:"company_endjoin"`
-	Curr        string `json:"company_curr"`
-	Name        string `json:"company_name"`
-	Periode     string `json:"company_periode"`
-	Winlose     int    `json:"company_winlose"`
-	Winlosetemp int    `json:"company_winlosetemp"`
-	Status      string `json:"company_status"`
-	Statuscss   string `json:"company_statuscss"`
-}
-
 const Fieldcompany_home_redis = "LISTCOMPANY_MASTER"
 const Fieldcompanydetail_home_redis = "LISTCOMPANYDETAIL_MASTER"
 const Fieldcompanylistadmin_home_redis = "LISTCOMPANYLISTADMIN_MASTER"
@@ -61,6 +22,7 @@ const Fieldcompanylistpasaranconf_home_redis = "LISTCOMPANYLISTPASARANCONF_MASTE
 const Fieldcompanylistpasarankeluaran_home_redis = "LISTCOMPANYLISTPASARANKELUARAN_MASTER"
 const Fieldcompanyinvoicelist_home_redis = "LISTCOMPANYINVOICELISTMEMBER_MASTER"
 const Fieldcompanyinvoicelisttemp_home_redis = "LISTCOMPANYINVOICELISTTEMP_MASTER"
+const Fieldcompanyinvoicelistpermainan_home_redis = "LISTCOMPANYINVOICELISTPERMAINAN_MASTER"
 
 func CompanyHome(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
@@ -1096,7 +1058,7 @@ func CompanyInvoiceMemberTemp(c *fiber.Ctx) error {
 }
 func CompanyInvoiceMemberSync(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyinvoice)
+	client := new(entities.Controller_companyinvoice)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1135,7 +1097,7 @@ func CompanyInvoiceMemberSync(c *fiber.Ctx) error {
 }
 func CompanyInvoiceGroupPermainan(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyinvoice)
+	client := new(entities.Controller_companyinvoice)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1174,7 +1136,7 @@ func CompanyInvoiceGroupPermainan(c *fiber.Ctx) error {
 }
 func CompanyInvoicelistpermainan(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyinvoicelistpermainan)
+	client := new(entities.Controller_companyinvoicelistpermainan)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1199,21 +1161,86 @@ func CompanyInvoicelistpermainan(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
+	render_page := time.Now()
+	var obj entities.Model_invoicelistpermainan
+	var arraobj []entities.Model_invoicelistpermainan
+	resultredis, flag := helpers.GetRedis(Fieldcompanyinvoicelistpermainan_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Invoice) + "_" + client.Permainan)
+	jsonredis := []byte(resultredis)
+	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
+	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		bet_id, _ := jsonparser.GetInt(value, "bet_id")
+		bet_datetime, _ := jsonparser.GetString(value, "bet_datetime")
+		bet_ipaddress, _ := jsonparser.GetString(value, "bet_ipaddress")
+		bet_device, _ := jsonparser.GetString(value, "bet_device")
+		bet_timezone, _ := jsonparser.GetString(value, "bet_timezone")
+		bet_username, _ := jsonparser.GetString(value, "bet_username")
+		bet_typegame, _ := jsonparser.GetString(value, "bet_typegame")
+		bet_nomortogel, _ := jsonparser.GetString(value, "bet_nomortogel")
+		bet_bet, _ := jsonparser.GetInt(value, "bet_bet")
+		bet_diskon, _ := jsonparser.GetInt(value, "bet_diskon")
+		bet_diskonpercen, _ := jsonparser.GetInt(value, "bet_diskonpercen")
+		bet_kei, _ := jsonparser.GetInt(value, "bet_kei")
+		bet_keipercen, _ := jsonparser.GetInt(value, "bet_keipercen")
+		bet_win, _ := jsonparser.GetFloat(value, "bet_win")
+		bet_totalwin, _ := jsonparser.GetInt(value, "bet_totalwin")
+		bet_bayar, _ := jsonparser.GetInt(value, "bet_bayar")
+		bet_status, _ := jsonparser.GetString(value, "bet_status")
+		bet_statuscss, _ := jsonparser.GetString(value, "bet_statuscss")
+		bet_create, _ := jsonparser.GetString(value, "bet_create")
+		bet_createdate, _ := jsonparser.GetString(value, "bet_createdate")
+		bet_update, _ := jsonparser.GetString(value, "bet_update")
+		bet_updatedate, _ := jsonparser.GetString(value, "bet_updatedate")
 
-	result, err := models.Fetch_company_invoice_listpermainan(client.Company, client.Permainan, client.Invoice)
-	if err != nil {
-		c.Status(fiber.StatusBadRequest)
+		obj.Bet_id = int(bet_id)
+		obj.Bet_datetime = bet_datetime
+		obj.Bet_ipaddress = bet_ipaddress
+		obj.Bet_device = bet_device
+		obj.Bet_timezone = bet_timezone
+		obj.Bet_username = bet_username
+		obj.Bet_typegame = bet_typegame
+		obj.Bet_nomortogel = bet_nomortogel
+		obj.Bet_bet = int(bet_bet)
+		obj.Bet_diskon = int(bet_diskon)
+		obj.Bet_diskonpercen = int(bet_diskonpercen)
+		obj.Bet_kei = int(bet_kei)
+		obj.Bet_keipercen = int(bet_keipercen)
+		obj.Bet_win = float32(bet_win)
+		obj.Bet_totalwin = int(bet_totalwin)
+		obj.Bet_bayar = int(bet_bayar)
+		obj.Bet_status = bet_status
+		obj.Bet_statuscss = bet_statuscss
+		obj.Bet_create = bet_create
+		obj.Bet_createDate = bet_createdate
+		obj.Bet_update = bet_update
+		obj.Bet_updateDate = bet_updatedate
+		arraobj = append(arraobj, obj)
+	})
+	if !flag {
+		result, err := models.Fetch_company_invoice_listpermainan(client.Company, client.Permainan, client.Invoice)
+		if err != nil {
+			c.Status(fiber.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"status":  fiber.StatusBadRequest,
+				"message": err.Error(),
+				"record":  nil,
+			})
+		}
+		helpers.SetRedis(Fieldcompanyinvoicelistpermainan_home_redis+"_"+client.Company+"_"+strconv.Itoa(client.Invoice)+"_"+client.Permainan, result, 20*time.Minute)
+		log.Println("LIST PERMAINAN MYSQL")
+		return c.JSON(result)
+	} else {
+		log.Println("LIST PERMAINAN CACHE")
 		return c.JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": err.Error(),
-			"record":  nil,
+			"status":  fiber.StatusOK,
+			"message": "Success",
+			"record":  arraobj,
+			"time":    time.Since(render_page).String(),
 		})
 	}
-	return c.JSON(result)
 }
 func CompanyInvoicelistpermainanbystatus(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyinvoicelistpermainanstatus)
+	client := new(entities.Controller_companyinvoicelistpermainanstatus)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -1252,7 +1279,7 @@ func CompanyInvoicelistpermainanbystatus(c *fiber.Ctx) error {
 }
 func CompanyInvoicelistpermainanbyusername(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(companyinvoicelistpermainanusername)
+	client := new(entities.Controller_companyinvoicelistpermainanusername)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)

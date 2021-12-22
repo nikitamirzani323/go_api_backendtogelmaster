@@ -18,30 +18,7 @@ import (
 type invoicelistGroupPermainan struct {
 	Permainan string `json:"permainan"`
 }
-type invoicelistpermainan struct {
-	Bet_id           int     `json:"bet_id"`
-	Bet_datetime     string  `json:"bet_datetime"`
-	Bet_ipaddress    string  `json:"bet_ipaddress"`
-	Bet_device       string  `json:"bet_device"`
-	Bet_timezone     string  `json:"bet_timezone"`
-	Bet_username     string  `json:"bet_username"`
-	Bet_typegame     string  `json:"bet_typegame"`
-	Bet_nomortogel   string  `json:"bet_nomortogel"`
-	Bet_bet          int     `json:"bet_bet"`
-	Bet_diskon       int     `json:"bet_diskon"`
-	Bet_diskonpercen int     `json:"bet_diskonpercen"`
-	Bet_kei          int     `json:"bet_kei"`
-	Bet_keipercen    int     `json:"bet_keipercen"`
-	Bet_win          float32 `json:"bet_win"`
-	Bet_totalwin     int     `json:"bet_totalwin"`
-	Bet_bayar        int     `json:"bet_bayar"`
-	Bet_status       string  `json:"bet_status"`
-	Bet_statuscss    string  `json:"bet_statuscss"`
-	Bet_create       string  `json:"bet_create"`
-	Bet_createDate   string  `json:"bet_createdate"`
-	Bet_update       string  `json:"bet_update"`
-	Bet_updateDate   string  `json:"bet_updatedate"`
-}
+
 type sCompanyDetailPasaranConf struct {
 	Pasaran_diundi                    string  `json:"pasaran_diundi"`
 	Pasaran_url                       string  `json:"pasaran_url"`
@@ -1253,8 +1230,8 @@ func Fetch_company_invoice_grouppermainan(company, username string, invoice int)
 	}
 }
 func Fetch_company_invoice_listpermainan(company, permainan string, invoice int) (helpers.ResponseListPermainan, error) {
-	var obj invoicelistpermainan
-	var arraobj []invoicelistpermainan
+	var obj entities.Model_invoicelistpermainan
+	var arraobj []entities.Model_invoicelistpermainan
 	var res helpers.ResponseListPermainan
 	msg := "Error"
 	con := db.CreateCon()
@@ -1359,8 +1336,8 @@ func Fetch_company_invoice_listpermainan(company, permainan string, invoice int)
 	return res, nil
 }
 func Fetch_company_invoice_listpermainanbystatus(company, status string, invoice int) (helpers.ResponseListPermainan, error) {
-	var obj invoicelistpermainan
-	var arraobj []invoicelistpermainan
+	var obj entities.Model_invoicelistpermainan
+	var arraobj []entities.Model_invoicelistpermainan
 	var res helpers.ResponseListPermainan
 	msg := "Error"
 	con := db.CreateCon()
@@ -1464,8 +1441,8 @@ func Fetch_company_invoice_listpermainanbystatus(company, status string, invoice
 	return res, nil
 }
 func Fetch_company_invoice_listpermainanbyusername(company, username, permainan string, invoice int) (helpers.ResponseListPermainan, error) {
-	var obj invoicelistpermainan
-	var arraobj []invoicelistpermainan
+	var obj entities.Model_invoicelistpermainan
+	var arraobj []entities.Model_invoicelistpermainan
 	var res helpers.ResponseListPermainan
 	msg := "Error"
 	con := db.CreateCon()

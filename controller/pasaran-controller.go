@@ -862,6 +862,8 @@ func PasaranSaveConfColokNaga(c *fiber.Ctx) error {
 	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
 	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
 	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
+	val_master_conf := helpers.DeleteRedis(FieldpasarandetailCONF_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL CONF PASARAN : %d", val_master_conf)
 	return c.JSON(result)
 }
 func PasaranSaveConfColokJitu(c *fiber.Ctx) error {
@@ -909,6 +911,8 @@ func PasaranSaveConfColokJitu(c *fiber.Ctx) error {
 	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
 	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
 	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
+	val_master_conf := helpers.DeleteRedis(FieldpasarandetailCONF_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL CONF PASARAN : %d", val_master_conf)
 	return c.JSON(result)
 }
 func PasaranSaveConf5050umum(c *fiber.Ctx) error {

@@ -63,6 +63,7 @@ func Fetch_pasaran() (helpers.Response, error) {
 		obj.Pasaran_create = create
 		obj.Pasaran_update = update
 		arraobj = append(arraobj, obj)
+		msg = "Success"
 	}
 	defer row.Close()
 

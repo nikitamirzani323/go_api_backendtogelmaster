@@ -12,256 +12,9 @@ import (
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/models"
 )
 
-type pasarandetail struct {
-	Pasarancode string `json:"pasarancode" validate:"required"`
-	Master      string `json:"master" validate:"required"`
-}
-type pasaransave struct {
-	Sdata     string `json:"sdata" validate:"required"`
-	Master    string `json:"master" validate:"required"`
-	Idrecord  string `json:"idrecord" validate:"required,min=2,max=10"`
-	Name      string `json:"pasaran_name" validate:"required"`
-	Diundi    string `json:"pasaran_diundi" validate:"required"`
-	Url       string `json:"pasaran_url" validate:"required"`
-	Jamtutup  string `json:"pasaran_jamtutup" validate:"required"`
-	Jamjadwal string `json:"pasaran_jamjadwal" validate:"required"`
-	Jamopen   string `json:"pasaran_jamopen" validate:"required"`
-	Tipe      string `json:"pasaran_tipe" `
-}
-type pasaransavelimitline struct {
-	Master               string `json:"master" validate:"required"`
-	Idrecord             string `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_bbfs         int    `json:"pasaran_bbfs" validate:"required,numeric"`
-	Pasaran_limitline4d  int    `json:"pasaran_limitline4d" validate:"required,numeric"`
-	Pasaran_limitline3d  int    `json:"pasaran_limitline3d" validate:"required,numeric"`
-	Pasaran_limitline2d  int    `json:"pasaran_limitline2d" validate:"required,numeric"`
-	Pasaran_limitline2dd int    `json:"pasaran_limitline2dd" validate:"required,numeric"`
-	Pasaran_limitline2dt int    `json:"pasaran_limitline2dt" validate:"required,numeric"`
-}
-type pasaransaveconf432d struct {
-	Master                      string  `json:"master" validate:"required"`
-	Idrecord                    string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_432d         int     `json:"pasaran_minbet_432d" validate:"required,numeric"`
-	Pasaran_maxbet4d_432d       int     `json:"pasaran_maxbet4d_432d" validate:"required,numeric"`
-	Pasaran_maxbet3d_432d       int     `json:"pasaran_maxbet3d_432d" validate:"required,numeric"`
-	Pasaran_maxbet2d_432d       int     `json:"pasaran_maxbet2d_432d" validate:"required,numeric"`
-	Pasaran_maxbet2dd_432d      int     `json:"pasaran_maxbet2dd_432d" validate:"required,numeric"`
-	Pasaran_maxbet2dt_432d      int     `json:"pasaran_maxbet2dt_432d" validate:"required,numeric"`
-	Pasaran_limitotal4d_432d    int     `json:"pasaran_limitotal4d_432d" validate:"required,numeric"`
-	Pasaran_limitotal3d_432d    int     `json:"pasaran_limitotal3d_432d" validate:"required,numeric"`
-	Pasaran_limitotal2d_432d    int     `json:"pasaran_limitotal2d_432d" validate:"required,numeric"`
-	Pasaran_limitotal2dd_432d   int     `json:"pasaran_limitotal2dd_432d" validate:"required,numeric"`
-	Pasaran_limitotal2dt_432d   int     `json:"pasaran_limitotal2dt_432d" validate:"required,numeric"`
-	Pasaran_limitglobal4d_432d  int     `json:"pasaran_limitglobal4d_432d" validate:"required,numeric"`
-	Pasaran_limitglobal3d_432d  int     `json:"pasaran_limitglobal3d_432d" validate:"required,numeric"`
-	Pasaran_limitglobal2d_432d  int     `json:"pasaran_limitglobal2d_432d" validate:"required,numeric"`
-	Pasaran_limitglobal2dd_432d int     `json:"pasaran_limitglobal2dd_432d" validate:"required,numeric"`
-	Pasaran_limitglobal2dt_432d int     `json:"pasaran_limitglobal2dt_432d" validate:"required,numeric"`
-	Pasaran_win4d_432d          int     `json:"pasaran_win4d_432d" validate:"required,numeric"`
-	Pasaran_win3d_432d          int     `json:"pasaran_win3d_432d" validate:"required,numeric"`
-	Pasaran_win2d_432d          int     `json:"pasaran_win2d_432d" validate:"required,numeric"`
-	Pasaran_win2dd_432d         int     `json:"pasaran_win2dd_432d" validate:"required,numeric"`
-	Pasaran_win2dt_432d         int     `json:"pasaran_win2dt_432d" validate:"required,numeric"`
-	Pasaran_disc4d_432d         float32 `json:"pasaran_disc4d_432d" validate:"required,numeric"`
-	Pasaran_disc3d_432d         float32 `json:"pasaran_disc3d_432d" validate:"required,numeric"`
-	Pasaran_disc2d_432d         float32 `json:"pasaran_disc2d_432d" validate:"required,numeric"`
-	Pasaran_disc2dd_432d        float32 `json:"pasaran_disc2dd_432d" validate:"required,numeric"`
-	Pasaran_disc2dt_432d        float32 `json:"pasaran_disc2dt_432d" validate:"required,numeric"`
-}
-type pasaransaveconfcolokbebas struct {
-	Master                     string  `json:"master" validate:"required"`
-	Idrecord                   string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_cbebas      int     `json:"pasaran_minbet_cbebas" validate:"required,numeric"`
-	Pasaran_maxbet_cbebas      int     `json:"pasaran_maxbet_cbebas" validate:"required,numeric"`
-	Pasaran_limitotal_cbebas   int     `json:"pasaran_limitotal_cbebas" validate:"required,numeric"`
-	Pasaran_limitglobal_cbebas int     `json:"pasaran_limitglobal_cbebas" validate:"required,numeric"`
-	Pasaran_win_cbebas         float32 `json:"pasaran_win_cbebas" validate:"required,numeric"`
-	Pasaran_disc_cbebas        float32 `json:"pasaran_disc_cbebas" validate:"required,numeric"`
-}
-type pasaransaveconfcolokmacau struct {
-	Master                     string  `json:"master" validate:"required"`
-	Idrecord                   string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_cmacau      int     `json:"pasaran_minbet_cmacau" validate:"required,numeric"`
-	Pasaran_maxbet_cmacau      int     `json:"pasaran_maxbet_cmacau" validate:"required,numeric"`
-	Pasaran_limitotal_cmacau   int     `json:"pasaran_limitotal_cmacau" validate:"required,numeric"`
-	Pasaran_limitglobal_cmacau int     `json:"pasaran_limitglobal_cmacau" validate:"required,numeric"`
-	Pasaran_win2_cmacau        float32 `json:"pasaran_win2_cmacau" validate:"required,numeric"`
-	Pasaran_win3_cmacau        float32 `json:"pasaran_win3_cmacau" validate:"required,numeric"`
-	Pasaran_win4_cmacau        float32 `json:"pasaran_win4_cmacau" validate:"required,numeric"`
-	Pasaran_disc_cmacau        float32 `json:"pasaran_disc_cmacau" validate:"required,numeric"`
-}
-type pasaransaveconfcoloknaga struct {
-	Master                    string  `json:"master" validate:"required"`
-	Idrecord                  string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_cnaga      int     `json:"pasaran_minbet_cnaga" validate:"required,numeric"`
-	Pasaran_maxbet_cnaga      int     `json:"pasaran_maxbet_cnaga" validate:"required,numeric"`
-	Pasaran_limittotal_cnaga  int     `json:"pasaran_limittotal_cnaga" validate:"required,numeric"`
-	Pasaran_limitglobal_cnaga int     `json:"pasaran_limitglobal_cnaga" validate:"required,numeric"`
-	Pasaran_win3_cnaga        float32 `json:"pasaran_win3_cnaga" validate:"required,numeric"`
-	Pasaran_win4_cnaga        float32 `json:"pasaran_win4_cnaga" validate:"required,numeric"`
-	Pasaran_disc_cnaga        float32 `json:"pasaran_disc_cnaga" validate:"required,numeric"`
-}
-type pasaransaveconfcolokjitu struct {
-	Master                    string  `json:"master" validate:"required"`
-	Idrecord                  string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_cjitu      int     `json:"pasaran_minbet_cjitu" validate:"required,numeric"`
-	Pasaran_maxbet_cjitu      int     `json:"pasaran_maxbet_cjitu" validate:"required,numeric"`
-	Pasaran_limittotal_cjitu  int     `json:"pasaran_limittotal_cjitu" validate:"required,numeric"`
-	Pasaran_limitglobal_cjitu int     `json:"pasaran_limitglobal_cjitu" validate:"required,numeric"`
-	Pasaran_winas_cjitu       float32 `json:"pasaran_winas_cjitu" validate:"required,numeric"`
-	Pasaran_winkop_cjitu      float32 `json:"pasaran_winkop_cjitu" validate:"required,numeric"`
-	Pasaran_winkepala_cjitu   float32 `json:"pasaran_winkepala_cjitu" validate:"required,numeric"`
-	Pasaran_winekor_cjitu     float32 `json:"pasaran_winekor_cjitu" validate:"required,numeric"`
-	Pasaran_desc_cjitu        float32 `json:"pasaran_desc_cjitu" validate:"required,numeric"`
-}
-type pasaransaveconf5050umum struct {
-	Master                       string  `json:"master" validate:"required"`
-	Idrecord                     string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_5050umum      int     `json:"pasaran_minbet_5050umum" validate:"required,numeric"`
-	Pasaran_maxbet_5050umum      int     `json:"pasaran_maxbet_5050umum" validate:"required,numeric"`
-	Pasaran_limittotal_5050umum  int     `json:"pasaran_limittotal_5050umum" validate:"required,numeric"`
-	Pasaran_limitglobal_5050umum int     `json:"pasaran_limitglobal_5050umum" validate:"required,numeric"`
-	Pasaran_keibesar_5050umum    float32 `json:"pasaran_keibesar_5050umum" validate:"required,numeric"`
-	Pasaran_keikecil_5050umum    float32 `json:"pasaran_keikecil_5050umum" validate:"required,numeric"`
-	Pasaran_keigenap_5050umum    float32 `json:"pasaran_keigenap_5050umum" validate:"required,numeric"`
-	Pasaran_keiganjil_5050umum   float32 `json:"pasaran_keiganjil_5050umum" validate:"required,numeric"`
-	Pasaran_keitengah_5050umum   float32 `json:"pasaran_keitengah_5050umum" validate:"required,numeric"`
-	Pasaran_keitepi_5050umum     float32 `json:"pasaran_keitepi_5050umum" validate:"required,numeric"`
-	Pasaran_discbesar_5050umum   float32 `json:"pasaran_discbesar_5050umum" validate:"required,numeric"`
-	Pasaran_disckecil_5050umum   float32 `json:"pasaran_disckecil_5050umum" validate:"required,numeric"`
-	Pasaran_discgenap_5050umum   float32 `json:"pasaran_discgenap_5050umum" validate:"required,numeric"`
-	Pasaran_discganjil_5050umum  float32 `json:"pasaran_discganjil_5050umum" validate:"required,numeric"`
-	Pasaran_disctengah_5050umum  float32 `json:"pasaran_disctengah_5050umum" validate:"required,numeric"`
-	Pasaran_disctepi_5050umum    float32 `json:"pasaran_disctepi_5050umum" validate:"required,numeric"`
-}
-type pasaransaveconf5050special struct {
-	Master                               string  `json:"master" validate:"required"`
-	Idrecord                             string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_5050special           int     `json:"pasaran_minbet_5050special" validate:"required,numeric"`
-	Pasaran_maxbet_5050special           int     `json:"pasaran_maxbet_5050special" validate:"required,numeric"`
-	Pasaran_limitglobal_5050special      int     `json:"pasaran_limitglobal_5050special" validate:"required,numeric"`
-	Pasaran_limittotal_5050special       int     `json:"pasaran_limittotal_5050special" validate:"required,numeric"`
-	Pasaran_keiasganjil_5050special      float32 `json:"pasaran_keiasganjil_5050special" validate:"numeric"`
-	Pasaran_keiasgenap_5050special       float32 `json:"pasaran_keiasgenap_5050special" validate:"numeric"`
-	Pasaran_keiasbesar_5050special       float32 `json:"pasaran_keiasbesar_5050special" validate:"numeric"`
-	Pasaran_keiaskecil_5050special       float32 `json:"pasaran_keiaskecil_5050special" validate:"numeric"`
-	Pasaran_keikopganjil_5050special     float32 `json:"pasaran_keikopganjil_5050special" validate:"numeric"`
-	Pasaran_keikopgenap_5050special      float32 `json:"pasaran_keikopgenap_5050special" validate:"numeric"`
-	Pasaran_keikopbesar_5050special      float32 `json:"pasaran_keikopbesar_5050special" validate:"numeric"`
-	Pasaran_keikopkecil_5050special      float32 `json:"pasaran_keikopkecil_5050special" validate:"numeric"`
-	Pasaran_keikepalaganjil_5050special  float32 `json:"pasaran_keikepalaganjil_5050special" validate:"numeric"`
-	Pasaran_keikepalagenap_5050special   float32 `json:"pasaran_keikepalagenap_5050special" validate:"numeric"`
-	Pasaran_keikepalabesar_5050special   float32 `json:"pasaran_keikepalabesar_5050special" validate:"numeric"`
-	Pasaran_keikepalakecil_5050special   float32 `json:"pasaran_keikepalakecil_5050special" validate:"numeric"`
-	Pasaran_keiekorganjil_5050special    float32 `json:"pasaran_keiekorganjil_5050special" validate:"numeric"`
-	Pasaran_keiekorgenap_5050special     float32 `json:"pasaran_keiekorgenap_5050special" validate:"numeric"`
-	Pasaran_keiekorbesar_5050special     float32 `json:"pasaran_keiekorbesar_5050special" validate:"numeric"`
-	Pasaran_keiekorkecil_5050special     float32 `json:"pasaran_keiekorkecil_5050special" validate:"numeric"`
-	Pasaran_discasganjil_5050special     float32 `json:"pasaran_discasganjil_5050special" validate:"numeric"`
-	Pasaran_discasgenap_5050special      float32 `json:"pasaran_discasgenap_5050special" validate:"numeric"`
-	Pasaran_discasbesar_5050special      float32 `json:"pasaran_discasbesar_5050special" validate:"numeric"`
-	Pasaran_discaskecil_5050special      float32 `json:"pasaran_discaskecil_5050special" validate:"numeric"`
-	Pasaran_disckopganjil_5050special    float32 `json:"pasaran_disckopganjil_5050special" validate:"numeric"`
-	Pasaran_disckopgenap_5050special     float32 `json:"pasaran_disckopgenap_5050special" validate:"numeric"`
-	Pasaran_disckopbesar_5050special     float32 `json:"pasaran_disckopbesar_5050special" validate:"numeric"`
-	Pasaran_disckopkecil_5050special     float32 `json:"pasaran_disckopkecil_5050special" validate:"numeric"`
-	Pasaran_disckepalaganjil_5050special float32 `json:"pasaran_disckepalaganjil_5050special" validate:"numeric"`
-	Pasaran_disckepalagenap_5050special  float32 `json:"pasaran_disckepalagenap_5050special" validate:"numeric"`
-	Pasaran_disckepalabesar_5050special  float32 `json:"pasaran_disckepalabesar_5050special" validate:"numeric"`
-	Pasaran_disckepalakecil_5050special  float32 `json:"pasaran_disckepalakecil_5050special" validate:"numeric"`
-	Pasaran_discekorganjil_5050special   float32 `json:"pasaran_discekorganjil_5050special" validate:"numeric"`
-	Pasaran_discekorgenap_5050special    float32 `json:"pasaran_discekorgenap_5050special" validate:"numeric"`
-	Pasaran_discekorbesar_5050special    float32 `json:"pasaran_discekorbesar_5050special" validate:"numeric"`
-	Pasaran_discekorkecil_5050special    float32 `json:"pasaran_discekorkecil_5050special" validate:"numeric"`
-}
-type pasaransaveconf5050kombinasi struct {
-	Master                                    string  `json:"master" validate:"required"`
-	Idrecord                                  string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_5050kombinasi              int     `json:"pasaran_minbet_5050kombinasi" validate:"required,numeric"`
-	Pasaran_maxbet_5050kombinasi              int     `json:"pasaran_maxbet_5050kombinasi" validate:"required,numeric"`
-	Pasaran_limitglobal_5050kombinasi         int     `json:"pasaran_limitglobal_5050kombinasi" validate:"required,numeric"`
-	Pasaran_limittotal_5050kombinasi          int     `json:"pasaran_limittotal_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangkeimono_5050kombinasi     float32 `json:"pasaran_belakangkeimono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangkeistereo_5050kombinasi   float32 `json:"pasaran_belakangkeistereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangkeikembang_5050kombinasi  float32 `json:"pasaran_belakangkeikembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangkeikempis_5050kombinasi   float32 `json:"pasaran_belakangkeikempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangkeikembar_5050kombinasi   float32 `json:"pasaran_belakangkeikembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahkeimono_5050kombinasi       float32 `json:"pasaran_tengahkeimono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahkeistereo_5050kombinasi     float32 `json:"pasaran_tengahkeistereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahkeikembang_5050kombinasi    float32 `json:"pasaran_tengahkeikembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahkeikempis_5050kombinasi     float32 `json:"pasaran_tengahkeikempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahkeikembar_5050kombinasi     float32 `json:"pasaran_tengahkeikembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depankeimono_5050kombinasi        float32 `json:"pasaran_depankeimono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depankeistereo_5050kombinasi      float32 `json:"pasaran_depankeistereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depankeikembang_5050kombinasi     float32 `json:"pasaran_depankeikembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depankeikempis_5050kombinasi      float32 `json:"pasaran_depankeikempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depankeikembar_5050kombinasi      float32 `json:"pasaran_depankeikembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdiscmono_5050kombinasi    float32 `json:"pasaran_belakangdiscmono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdiscstereo_5050kombinasi  float32 `json:"pasaran_belakangdiscstereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdisckembang_5050kombinasi float32 `json:"pasaran_belakangdisckembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdisckempis_5050kombinasi  float32 `json:"pasaran_belakangdisckempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdisckembar_5050kombinasi  float32 `json:"pasaran_belakangdisckembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdiscmono_5050kombinasi      float32 `json:"pasaran_tengahdiscmono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdiscstereo_5050kombinasi    float32 `json:"pasaran_tengahdiscstereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdisckembang_5050kombinasi   float32 `json:"pasaran_tengahdisckembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdisckempis_5050kombinasi    float32 `json:"pasaran_tengahdisckempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdisckembar_5050kombinasi    float32 `json:"pasaran_tengahdisckembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandiscmono_5050kombinasi       float32 `json:"pasaran_depandiscmono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandiscstereo_5050kombinasi     float32 `json:"pasaran_depandiscstereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandisckembang_5050kombinasi    float32 `json:"pasaran_depandisckembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandisckempis_5050kombinasi     float32 `json:"pasaran_depandisckempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandisckembar_5050kombinasi     float32 `json:"pasaran_depandisckembar_5050kombinasi" validate:"required,numeric"`
-}
-type pasaransaveconfmacaukombinasi struct {
-	Master                        string  `json:"master" validate:"required"`
-	Idrecord                      string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_kombinasi      int     `json:"pasaran_minbet_kombinasi" validate:"required,numeric"`
-	Pasaran_maxbet_kombinasi      int     `json:"pasaran_maxbet_kombinasi" validate:"required,numeric"`
-	Pasaran_limitglobal_kombinasi int     `json:"pasaran_limitglobal_kombinasi" validate:"required,numeric"`
-	Pasaran_limittotal_kombinasi  int     `json:"pasaran_limittotal_kombinasi" validate:"required,numeric"`
-	Pasaran_win_kombinasi         float32 `json:"pasaran_win_kombinasi" validate:"required,numeric"`
-	Pasaran_disc_kombinasi        float32 `json:"pasaran_disc_kombinasi" validate:"required,numeric"`
-}
-type pasaransaveconfdasar struct {
-	Master                    string  `json:"master" validate:"required"`
-	Idrecord                  string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_minbet_dasar      int     `json:"pasaran_minbet_dasar" validate:"required,numeric"`
-	Pasaran_maxbet_dasar      int     `json:"pasaran_maxbet_dasar" validate:"required,numeric"`
-	Pasaran_limitglobal_dasar int     `json:"pasaran_limitglobal_dasar" validate:"required,numeric"`
-	Pasaran_limittotal_dasar  int     `json:"pasaran_limittotal_dasar" validate:"required,numeric"`
-	Pasaran_keibesar_dasar    float32 `json:"pasaran_keibesar_dasar" validate:"numeric"`
-	Pasaran_keikecil_dasar    float32 `json:"pasaran_keikecil_dasar" validate:"numeric"`
-	Pasaran_keigenap_dasar    float32 `json:"pasaran_keigenap_dasar" validate:"numeric"`
-	Pasaran_keiganjil_dasar   float32 `json:"pasaran_keiganjil_dasar" validate:"numeric"`
-	Pasaran_discbesar_dasar   float32 `json:"pasaran_discbesar_dasar" validate:"required,numeric"`
-	Pasaran_disckecil_dasar   float32 `json:"pasaran_disckecil_dasar" validate:"required,numeric"`
-	Pasaran_discgenap_dasar   float32 `json:"pasaran_discgenap_dasar" validate:"required,numeric"`
-	Pasaran_discganjil_dasar  float32 `json:"pasaran_discganjil_dasar" validate:"required,numeric"`
-}
-type pasaransaveconfshio struct {
-	Master                   string  `json:"master" validate:"required"`
-	Idrecord                 string  `json:"idrecord" validate:"required,min=2,max=10"`
-	Pasaran_shioyear_shio    string  `json:"pasaran_shioyear_shio" validate:"required"`
-	Pasaran_minbet_shio      int     `json:"pasaran_minbet_shio" validate:"required,numeric"`
-	Pasaran_maxbet_shio      int     `json:"pasaran_maxbet_shio" validate:"required,numeric"`
-	Pasaran_limitglobal_shio int     `json:"pasaran_limitglobal_shio" validate:"required,numeric"`
-	Pasaran_limittotal_shio  int     `json:"pasaran_limittotal_shio" validate:"required,numeric"`
-	Pasaran_disc_shio        float32 `json:"pasaran_disc_shio" validate:"numeric"`
-	Pasaran_win_shio         float32 `json:"pasaran_win_shio" validate:"numeric"`
-}
-type redispasaranhome struct {
-	No             int    `json:"pasaran_no"`
-	Idpasarantogel string `json:"pasaran_idpasarantogel"`
-	Nmpasarantogel string `json:"pasaran_nmpasarantogel"`
-	Tipepasaran    string `json:"pasaran_tipepasaran"`
-	Urlpasaran     string `json:"pasaran_urlpasaran"`
-	Pasarandiundi  string `json:"pasaran_pasarandiundi"`
-	Jamtutup       string `json:"pasaran_jamtutup"`
-	Jamjadwal      string `json:"pasaran_jamjadwal"`
-	Jamopen        string `json:"pasaran_jamopen"`
-}
-
 const Fieldpasaran_home_redis = "LISTPASARAN_MASTER"
+const Fieldpasarandetail_home_redis = "LISTPASARANDETAIL_MASTER"
+const FieldpasarandetailCONF_home_redis = "LISTPASARANDETAILCONF_MASTER"
 
 func PasaranHome(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
@@ -297,7 +50,6 @@ func PasaranHome(c *fiber.Ctx) error {
 	jsonredis := []byte(resultredis)
 	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
-		pasaran_no, _ := jsonparser.GetInt(value, "pasaran_no")
 		pasaran_idpasarantogel, _ := jsonparser.GetString(value, "pasaran_idpasarantogel")
 		pasaran_nmpasarantogel, _ := jsonparser.GetString(value, "pasaran_nmpasarantogel")
 		pasaran_tipepasaran, _ := jsonparser.GetString(value, "pasaran_tipepasaran")
@@ -307,7 +59,6 @@ func PasaranHome(c *fiber.Ctx) error {
 		pasaran_jamjadwal, _ := jsonparser.GetString(value, "pasaran_jamjadwal")
 		pasaran_jamopen, _ := jsonparser.GetString(value, "pasaran_jamopen")
 
-		obj.Pasaran_no = int(pasaran_no)
 		obj.Pasaran_idpasarantogel = pasaran_idpasarantogel
 		obj.Pasaran_nmpasarantogel = pasaran_nmpasarantogel
 		obj.Pasaran_tipepasaran = pasaran_tipepasaran
@@ -343,7 +94,7 @@ func PasaranHome(c *fiber.Ctx) error {
 }
 func PasaranDetail(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasarandetail)
+	client := new(entities.Controller_pasarandetail)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -368,21 +119,466 @@ func PasaranDetail(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
+	render_page := time.Now()
+	var obj entities.Model_pasaran
+	var arraobj []entities.Model_pasaran
+	resultredis, flag := helpers.GetRedis(Fieldpasarandetail_home_redis + "_" + client.Pasarancode)
+	jsonredis := []byte(resultredis)
+	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
+	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		pasaran_nmpasarantogel, _ := jsonparser.GetString(value, "pasaran_nmpasarantogel")
+		pasaran_tipepasaran, _ := jsonparser.GetString(value, "pasaran_tipepasaran")
+		pasaran_urlpasaran, _ := jsonparser.GetString(value, "pasaran_urlpasaran")
+		pasaran_pasarandiundi, _ := jsonparser.GetString(value, "pasaran_pasarandiundi")
+		pasaran_jamtutup, _ := jsonparser.GetString(value, "pasaran_jamtutup")
+		pasaran_jamjadwal, _ := jsonparser.GetString(value, "pasaran_jamjadwal")
+		pasaran_jamopen, _ := jsonparser.GetString(value, "pasaran_jamopen")
+		pasaran_create, _ := jsonparser.GetString(value, "pasaran_create")
+		pasaran_update, _ := jsonparser.GetString(value, "pasaran_update")
 
-	result, err := models.Fetch_pasaranDetail(client.Pasarancode)
-	if err != nil {
-		c.Status(fiber.StatusBadRequest)
+		obj.Pasaran_nmpasarantogel = pasaran_nmpasarantogel
+		obj.Pasaran_tipepasaran = pasaran_tipepasaran
+		obj.Pasaran_urlpasaran = pasaran_urlpasaran
+		obj.Pasaran_pasarandiundi = pasaran_pasarandiundi
+		obj.Pasaran_jamtutup = pasaran_jamtutup
+		obj.Pasaran_jamjadwal = pasaran_jamjadwal
+		obj.Pasaran_jamopen = pasaran_jamopen
+		obj.Pasaran_create = pasaran_create
+		obj.Pasaran_update = pasaran_update
+		arraobj = append(arraobj, obj)
+	})
+	if !flag {
+		result, err := models.Fetch_pasaranDetail(client.Pasarancode)
+		if err != nil {
+			c.Status(fiber.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"status":  fiber.StatusBadRequest,
+				"message": err.Error(),
+				"record":  nil,
+			})
+		}
+		helpers.SetRedis(Fieldpasarandetail_home_redis+"_"+client.Pasarancode, result, 60*time.Minute)
+		log.Println("PASARAN MYSQL")
+		return c.JSON(result)
+	} else {
+		log.Println("PASARAN CACHE")
 		return c.JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": err.Error(),
-			"record":  nil,
+			"status":  fiber.StatusOK,
+			"message": "Success",
+			"record":  arraobj,
+			"time":    time.Since(render_page).String(),
 		})
 	}
-	return c.JSON(result)
 }
 func PasaranDetailConf(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasarandetail)
+	client := new(entities.Controller_pasarandetail)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+	render_page := time.Now()
+	var obj entities.Model_pasaranDetailConf
+	var arraobj []entities.Model_pasaranDetailConf
+	resultredis, flag := helpers.GetRedis(FieldpasarandetailCONF_home_redis + "_" + client.Pasarancode)
+	jsonredis := []byte(resultredis)
+	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
+	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		limitline_4d, _ := jsonparser.GetInt(value, "limitline_4d")
+		limitline_3d, _ := jsonparser.GetInt(value, "limitline_3d")
+		limitline_2d, _ := jsonparser.GetInt(value, "limitline_2d")
+		limitline_2dd, _ := jsonparser.GetInt(value, "limitline_2dd")
+		limitline_2dt, _ := jsonparser.GetInt(value, "limitline_2dt")
+		bbfs, _ := jsonparser.GetInt(value, "bbfs")
+		minbet_432d, _ := jsonparser.GetFloat(value, "minbet_432d")
+		maxbet4d_432d, _ := jsonparser.GetFloat(value, "maxbet4d_432d")
+		maxbet3d_432d, _ := jsonparser.GetFloat(value, "maxbet3d_432d")
+		maxbet2d_432d, _ := jsonparser.GetFloat(value, "maxbet2d_432d")
+		maxbet2dd_432d, _ := jsonparser.GetFloat(value, "maxbet2dd_432d")
+		maxbet2dt_432d, _ := jsonparser.GetFloat(value, "maxbet2dt_432d")
+		limitotal4d_432d, _ := jsonparser.GetFloat(value, "limitotal4d_432d")
+		limitotal3d_432d, _ := jsonparser.GetFloat(value, "limitotal3d_432d")
+		limitotal2d_432d, _ := jsonparser.GetFloat(value, "limitotal2d_432d")
+		limitotal2dd_432d, _ := jsonparser.GetFloat(value, "limitotal2dd_432d")
+		limitotal2dt_432d, _ := jsonparser.GetFloat(value, "limitotal2dt_432d")
+		limitglobal4d_432d, _ := jsonparser.GetFloat(value, "limitglobal4d_432d")
+		limitglobal3d_432d, _ := jsonparser.GetFloat(value, "limitglobal3d_432d")
+		limitglobal2d_432d, _ := jsonparser.GetFloat(value, "limitglobal2d_432d")
+		limitglobal2dd_432d, _ := jsonparser.GetFloat(value, "limitglobal2dd_432d")
+		limitglobal2dt_432d, _ := jsonparser.GetFloat(value, "limitglobal2dt_432d")
+		disc4d_432d, _ := jsonparser.GetFloat(value, "disc4d_432d")
+		disc3d_432d, _ := jsonparser.GetFloat(value, "disc3d_432d")
+		disc2d_432d, _ := jsonparser.GetFloat(value, "disc2d_432d")
+		disc2dd_432d, _ := jsonparser.GetFloat(value, "disc2dd_432d")
+		disc2dt_432d, _ := jsonparser.GetFloat(value, "disc2dt_432d")
+		win4d_432d, _ := jsonparser.GetFloat(value, "win4d_432d")
+		win3d_432d, _ := jsonparser.GetFloat(value, "win3d_432d")
+		win2d_432d, _ := jsonparser.GetFloat(value, "win2d_432d")
+		win2dd_432d, _ := jsonparser.GetFloat(value, "win2dd_432d")
+		win2dt_432d, _ := jsonparser.GetFloat(value, "win2dt_432d")
+		minbet_cbebas, _ := jsonparser.GetFloat(value, "minbet_cbebas")
+		maxbet_cbebas, _ := jsonparser.GetFloat(value, "maxbet_cbebas")
+		win_cbebas, _ := jsonparser.GetFloat(value, "win_cbebas")
+		disc_cbebas, _ := jsonparser.GetFloat(value, "disc_cbebas")
+		limitglobal_cbebas, _ := jsonparser.GetFloat(value, "limitglobal_cbebas")
+		limittotal_cbebas, _ := jsonparser.GetFloat(value, "limittotal_cbebas")
+		minbet_cmacau, _ := jsonparser.GetFloat(value, "minbet_cmacau")
+		maxbet_cmacau, _ := jsonparser.GetFloat(value, "maxbet_cmacau")
+		win2d_cmacau, _ := jsonparser.GetFloat(value, "win2d_cmacau")
+		win3d_cmacau, _ := jsonparser.GetFloat(value, "win3d_cmacau")
+		win4d_cmacau, _ := jsonparser.GetFloat(value, "win4d_cmacau")
+		disc_cmacau, _ := jsonparser.GetFloat(value, "disc_cmacau")
+		limitglobal_cmacau, _ := jsonparser.GetFloat(value, "limitglobal_cmacau")
+		limitotal_cmacau, _ := jsonparser.GetFloat(value, "limitotal_cmacau")
+		minbet_cnaga, _ := jsonparser.GetFloat(value, "minbet_cnaga")
+		maxbet_cnaga, _ := jsonparser.GetFloat(value, "maxbet_cnaga")
+		win3_cnaga, _ := jsonparser.GetFloat(value, "win3_cnaga")
+		win4_cnaga, _ := jsonparser.GetFloat(value, "win4_cnaga")
+		disc_cnaga, _ := jsonparser.GetFloat(value, "disc_cnaga")
+		limitglobal_cnaga, _ := jsonparser.GetFloat(value, "limitglobal_cnaga")
+		limittotal_cnaga, _ := jsonparser.GetFloat(value, "limittotal_cnaga")
+		minbet_cjitu, _ := jsonparser.GetFloat(value, "minbet_cjitu")
+		maxbet_cjitu, _ := jsonparser.GetFloat(value, "maxbet_cjitu")
+		winas_cjitu, _ := jsonparser.GetFloat(value, "winas_cjitu")
+		winkop_cjitu, _ := jsonparser.GetFloat(value, "winkop_cjitu")
+		winkepala_cjitu, _ := jsonparser.GetFloat(value, "winkepala_cjitu")
+		winekor_cjitu, _ := jsonparser.GetFloat(value, "winekor_cjitu")
+		desc_cjitu, _ := jsonparser.GetFloat(value, "desc_cjitu")
+		limitglobal_cjitu, _ := jsonparser.GetFloat(value, "limitglobal_cjitu")
+		limittotal_cjitu, _ := jsonparser.GetFloat(value, "limittotal_cjitu")
+		minbet_5050umum, _ := jsonparser.GetFloat(value, "minbet_5050umum")
+		maxbet_5050umum, _ := jsonparser.GetFloat(value, "maxbet_5050umum")
+		keibesar_5050umum, _ := jsonparser.GetFloat(value, "keibesar_5050umum")
+		keikecil_5050umum, _ := jsonparser.GetFloat(value, "keikecil_5050umum")
+		Keigenap_5050umum, _ := jsonparser.GetFloat(value, "Keigenap_5050umum")
+		keiganjil_5050umum, _ := jsonparser.GetFloat(value, "keiganjil_5050umum")
+		keitengah_5050umum, _ := jsonparser.GetFloat(value, "keitengah_5050umum")
+		keitepi_5050umum, _ := jsonparser.GetFloat(value, "keitepi_5050umum")
+		discbesar_5050umum, _ := jsonparser.GetFloat(value, "discbesar_5050umum")
+		disckecil_5050umum, _ := jsonparser.GetFloat(value, "disckecil_5050umum")
+		discgenap_5050umum, _ := jsonparser.GetFloat(value, "discgenap_5050umum")
+		discganjil_5050umum, _ := jsonparser.GetFloat(value, "discganjil_5050umum")
+		disctengah_5050umum, _ := jsonparser.GetFloat(value, "disctengah_5050umum")
+		disctepi_5050umum, _ := jsonparser.GetFloat(value, "disctepi_5050umum")
+		limitglobal_5050umum, _ := jsonparser.GetFloat(value, "limitglobal_5050umum")
+		limittotal_5050umum, _ := jsonparser.GetFloat(value, "limittotal_5050umum")
+		minbet_5050special, _ := jsonparser.GetFloat(value, "minbet_5050special")
+		maxbet_5050special, _ := jsonparser.GetFloat(value, "maxbet_5050special")
+		keiasganjil_5050special, _ := jsonparser.GetFloat(value, "keiasganjil_5050special")
+		keiasgenap_5050special, _ := jsonparser.GetFloat(value, "keiasgenap_5050special")
+		keiasbesar_5050special, _ := jsonparser.GetFloat(value, "keiasbesar_5050special")
+		keiaskecil_5050special, _ := jsonparser.GetFloat(value, "keiaskecil_5050special")
+		keikopganjil_5050special, _ := jsonparser.GetFloat(value, "keikopganjil_5050special")
+		keikopgenap_5050special, _ := jsonparser.GetFloat(value, "keikopgenap_5050special")
+		keikopbesar_5050special, _ := jsonparser.GetFloat(value, "keikopbesar_5050special")
+		keikopkecil_5050special, _ := jsonparser.GetFloat(value, "keikopkecil_5050special")
+		keikepalaganjil_5050special, _ := jsonparser.GetFloat(value, "keikepalaganjil_5050special")
+		keikepalagenap_5050special, _ := jsonparser.GetFloat(value, "keikepalagenap_5050special")
+		keikepalabesar_5050special, _ := jsonparser.GetFloat(value, "keikepalabesar_5050special")
+		keikepalakecil_5050special, _ := jsonparser.GetFloat(value, "keikepalakecil_5050special")
+		keiekorganjil_5050special, _ := jsonparser.GetFloat(value, "keiekorganjil_5050special")
+		keiekorgenap_5050special, _ := jsonparser.GetFloat(value, "keiekorgenap_5050special")
+		keiekorbesar_5050special, _ := jsonparser.GetFloat(value, "keiekorbesar_5050special")
+		keiekorkecil_5050special, _ := jsonparser.GetFloat(value, "keiekorkecil_5050special")
+		discasganjil_5050special, _ := jsonparser.GetFloat(value, "discasganjil_5050special")
+		discasgenap_5050special, _ := jsonparser.GetFloat(value, "discasgenap_5050special")
+		discasbesar_5050special, _ := jsonparser.GetFloat(value, "discasbesar_5050special")
+		discaskecil_5050special, _ := jsonparser.GetFloat(value, "discaskecil_5050special")
+		disckopganjil_5050special, _ := jsonparser.GetFloat(value, "disckopganjil_5050special")
+		disckopgenap_5050special, _ := jsonparser.GetFloat(value, "disckopgenap_5050special")
+		disckopbesar_5050special, _ := jsonparser.GetFloat(value, "disckopbesar_5050special")
+		disckopkecil_5050special, _ := jsonparser.GetFloat(value, "disckopkecil_5050special")
+		disckepalaganjil_5050special, _ := jsonparser.GetFloat(value, "disckepalaganjil_5050special")
+		disckepalagenap_5050special, _ := jsonparser.GetFloat(value, "disckepalagenap_5050special")
+		disckepalabesar_5050special, _ := jsonparser.GetFloat(value, "disckepalabesar_5050special")
+		disckepalakecil_5050special, _ := jsonparser.GetFloat(value, "disckepalakecil_5050special")
+		discekorganjil_5050special, _ := jsonparser.GetFloat(value, "discekorganjil_5050special")
+		discekorgenap_5050special, _ := jsonparser.GetFloat(value, "discekorgenap_5050special")
+		discekorbesar_5050special, _ := jsonparser.GetFloat(value, "discekorbesar_5050special")
+		discekorkecil_5050special, _ := jsonparser.GetFloat(value, "discekorkecil_5050special")
+		limitglobal_5050special, _ := jsonparser.GetFloat(value, "limitglobal_5050special")
+		limittotal_5050special, _ := jsonparser.GetFloat(value, "limittotal_5050special")
+		minbet_5050kombinasi, _ := jsonparser.GetFloat(value, "minbet_5050kombinasi")
+		maxbet_5050kombinasi, _ := jsonparser.GetFloat(value, "maxbet_5050kombinasi")
+		belakangkeimono_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangkeimono_5050kombinasi")
+		belakangkeistereo_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangkeistereo_5050kombinasi")
+		belakangkeikembang_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangkeikembang_5050kombinasi")
+		belakangkeikempis_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangkeikempis_5050kombinasi")
+		belakangkeikembar_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangkeikembar_5050kombinasi")
+		tengahkeimono_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahkeimono_5050kombinasi")
+		tengahkeistereo_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahkeistereo_5050kombinasi")
+		tengahkeikembang_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahkeikembang_5050kombinasi")
+		tengahkeikempis_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahkeikempis_5050kombinasi")
+		tengahkeikembar_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahkeikembar_5050kombinasi")
+		depankeimono_5050kombinasi, _ := jsonparser.GetFloat(value, "depankeimono_5050kombinasi")
+		depankeistereo_5050kombinasi, _ := jsonparser.GetFloat(value, "depankeistereo_5050kombinasi")
+		depankeikembang_5050kombinasi, _ := jsonparser.GetFloat(value, "depankeikembang_5050kombinasi")
+		depankeikempis_5050kombinasi, _ := jsonparser.GetFloat(value, "depankeikempis_5050kombinasi")
+		depankeikembar_5050kombinasi, _ := jsonparser.GetFloat(value, "depankeikembar_5050kombinasi")
+		belakangdiscmono_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangdiscmono_5050kombinasi")
+		belakangdiscstereo_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangdiscstereo_5050kombinasi")
+		belakangdisckembang_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangdisckembang_5050kombinasi")
+		belakangdisckempis_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangdisckempis_5050kombinasi")
+		belakangdisckembar_5050kombinasi, _ := jsonparser.GetFloat(value, "belakangdisckembar_5050kombinasi")
+		tengahdiscmono_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahdiscmono_5050kombinasi")
+		tengahdiscstereo_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahdiscstereo_5050kombinasi")
+		tengahdisckembang_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahdisckembang_5050kombinasi")
+		tengahdisckempis_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahdisckempis_5050kombinasi")
+		tengahdisckembar_5050kombinasi, _ := jsonparser.GetFloat(value, "tengahdisckembar_5050kombinasi")
+		depandiscmono_5050kombinasi, _ := jsonparser.GetFloat(value, "depandiscmono_5050kombinasi")
+		depandiscstereo_5050kombinasi, _ := jsonparser.GetFloat(value, "depandiscstereo_5050kombinasi")
+		depandisckembang_5050kombinasi, _ := jsonparser.GetFloat(value, "depandisckembang_5050kombinasi")
+		depandisckempis_5050kombinasi, _ := jsonparser.GetFloat(value, "depandisckempis_5050kombinasi")
+		depandisckembar_5050kombinasi, _ := jsonparser.GetFloat(value, "depandisckembar_5050kombinasi")
+		limitglobal_5050kombinasi, _ := jsonparser.GetFloat(value, "limitglobal_5050kombinasi")
+		limittotal_5050kombinasi, _ := jsonparser.GetFloat(value, "limittotal_5050kombinasi")
+		minbet_kombinasi, _ := jsonparser.GetFloat(value, "minbet_kombinasi")
+		maxbet_kombinasi, _ := jsonparser.GetFloat(value, "maxbet_kombinasi")
+		win_kombinasi, _ := jsonparser.GetFloat(value, "win_kombinasi")
+		disc_kombinasi, _ := jsonparser.GetFloat(value, "disc_kombinasi")
+		limitglobal_kombinasi, _ := jsonparser.GetFloat(value, "limitglobal_kombinasi")
+		limittotal_kombinasi, _ := jsonparser.GetFloat(value, "limittotal_kombinasi")
+		minbet_dasar, _ := jsonparser.GetFloat(value, "minbet_dasar")
+		maxbet_dasar, _ := jsonparser.GetFloat(value, "maxbet_dasar")
+		keibesar_dasar, _ := jsonparser.GetFloat(value, "keibesar_dasar")
+		keikecil_dasar, _ := jsonparser.GetFloat(value, "keikecil_dasar")
+		keigenap_dasar, _ := jsonparser.GetFloat(value, "keigenap_dasar")
+		keiganjil_dasar, _ := jsonparser.GetFloat(value, "keiganjil_dasar")
+		discbesar_dasar, _ := jsonparser.GetFloat(value, "discbesar_dasar")
+		disckecil_dasar, _ := jsonparser.GetFloat(value, "disckecil_dasar")
+		discgenap_dasar, _ := jsonparser.GetFloat(value, "discgenap_dasar")
+		discganjil_dasar, _ := jsonparser.GetFloat(value, "discganjil_dasar")
+		limitglobal_dasar, _ := jsonparser.GetFloat(value, "limitglobal_dasar")
+		limittotal_dasar, _ := jsonparser.GetFloat(value, "limittotal_dasar")
+		minbet_shio, _ := jsonparser.GetFloat(value, "minbet_shio")
+		maxbet_shio, _ := jsonparser.GetFloat(value, "maxbet_shio")
+		win_shio, _ := jsonparser.GetFloat(value, "win_shio")
+		disc_shio, _ := jsonparser.GetFloat(value, "disc_shio")
+		shioyear_shio, _ := jsonparser.GetString(value, "shioyear_shio")
+		limitglobal_shio, _ := jsonparser.GetFloat(value, "limitglobal_shio")
+		limittotal_shio, _ := jsonparser.GetFloat(value, "limittotal_shio")
+
+		obj.Limitline4d = int(limitline_4d)
+		obj.Limitline3d = int(limitline_3d)
+		obj.Limitline2d = int(limitline_2d)
+		obj.Limitline2dd = int(limitline_2dd)
+		obj.Limitline2dt = int(limitline_2dt)
+		obj.Bbfs = int(bbfs)
+		obj.Minbet_432d = float32(minbet_432d)
+		obj.Maxbet4d_432d = float32(maxbet4d_432d)
+		obj.Maxbet3d_432d = float32(maxbet3d_432d)
+		obj.Maxbet2d_432d = float32(maxbet2d_432d)
+		obj.Maxbet2dd_432d = float32(maxbet2dd_432d)
+		obj.Maxbet2dt_432d = float32(maxbet2dt_432d)
+		obj.Limitotal4d_432d = float32(limitotal4d_432d)
+		obj.Limitotal3d_432d = float32(limitotal3d_432d)
+		obj.Limitotal2d_432d = float32(limitotal2d_432d)
+		obj.Limitotal2dd_432d = float32(limitotal2dd_432d)
+		obj.Limitotal2dt_432d = float32(limitotal2dt_432d)
+		obj.Limitglobal4d_432d = float32(limitglobal4d_432d)
+		obj.Limitglobal3d_432d = float32(limitglobal3d_432d)
+		obj.Limitglobal2d_432d = float32(limitglobal2d_432d)
+		obj.Limitglobal2dd_432d = float32(limitglobal2dd_432d)
+		obj.Limitglobal2dt_432d = float32(limitglobal2dt_432d)
+		obj.Disc4d_432d = float32(disc4d_432d)
+		obj.Disc3d_432d = float32(disc3d_432d)
+		obj.Disc2d_432d = float32(disc2d_432d)
+		obj.Disc2dd_432d = float32(disc2dd_432d)
+		obj.Disc2dt_432d = float32(disc2dt_432d)
+		obj.Win4d_432d = float32(win4d_432d)
+		obj.Win3d_432d = float32(win3d_432d)
+		obj.Win2d_432d = float32(win2d_432d)
+		obj.Win2dd_432d = float32(win2dd_432d)
+		obj.Win2dt_432d = float32(win2dt_432d)
+		obj.Minbet_cbebas = float32(minbet_cbebas)
+		obj.Maxbet_cbebas = float32(maxbet_cbebas)
+		obj.Win_cbebas = float32(win_cbebas)
+		obj.Disc_cbebas = float32(disc_cbebas)
+		obj.Limitglobal_cbebas = float32(limitglobal_cbebas)
+		obj.Limittotal_cbebas = float32(limittotal_cbebas)
+		obj.Minbet_cmacau = float32(minbet_cmacau)
+		obj.Maxbet_cmacau = float32(maxbet_cmacau)
+		obj.Win2d_cmacau = float32(win2d_cmacau)
+		obj.Win3d_cmacau = float32(win3d_cmacau)
+		obj.Win4d_cmacau = float32(win4d_cmacau)
+		obj.Disc_cmacau = float32(disc_cmacau)
+		obj.Limitglobal_cmacau = float32(limitglobal_cmacau)
+		obj.Limitotal_cmacau = float32(limitotal_cmacau)
+		obj.Minbet_cnaga = float32(minbet_cnaga)
+		obj.Maxbet_cnaga = float32(maxbet_cnaga)
+		obj.Win3_cnaga = float32(win3_cnaga)
+		obj.Win4_cnaga = float32(win4_cnaga)
+		obj.Disc_cnaga = float32(disc_cnaga)
+		obj.Limitglobal_cnaga = float32(limitglobal_cnaga)
+		obj.Limittotal_cnaga = float32(limittotal_cnaga)
+		obj.Minbet_cjitu = float32(minbet_cjitu)
+		obj.Maxbet_cjitu = float32(maxbet_cjitu)
+		obj.Winas_cjitu = float32(winas_cjitu)
+		obj.Winkop_cjitu = float32(winkop_cjitu)
+		obj.Winkepala_cjitu = float32(winkepala_cjitu)
+		obj.Winekor_cjitu = float32(winekor_cjitu)
+		obj.Desc_cjitu = float32(desc_cjitu)
+		obj.Limitglobal_cjitu = float32(limitglobal_cjitu)
+		obj.Limittotal_cjitu = float32(limittotal_cjitu)
+		obj.Minbet_5050umum = float32(minbet_5050umum)
+		obj.Maxbet_5050umum = float32(maxbet_5050umum)
+		obj.Keibesar_5050umum = float32(keibesar_5050umum)
+		obj.Keikecil_5050umum = float32(keikecil_5050umum)
+		obj.Keigenap_5050umum = float32(Keigenap_5050umum)
+		obj.Keiganjil_5050umum = float32(keiganjil_5050umum)
+		obj.Keitengah_5050umum = float32(keitengah_5050umum)
+		obj.Keitepi_5050umum = float32(keitepi_5050umum)
+		obj.Discbesar_5050umum = float32(discbesar_5050umum)
+		obj.Disckecil_5050umum = float32(disckecil_5050umum)
+		obj.Discgenap_5050umum = float32(discgenap_5050umum)
+		obj.Discganjil_5050umum = float32(discganjil_5050umum)
+		obj.Disctengah_5050umum = float32(disctengah_5050umum)
+		obj.Disctepi_5050umum = float32(disctepi_5050umum)
+		obj.Limitglobal_5050umum = float32(limitglobal_5050umum)
+		obj.Limittotal_5050umum = float32(limittotal_5050umum)
+		obj.Minbet_5050special = float32(minbet_5050special)
+		obj.Maxbet_5050special = float32(maxbet_5050special)
+		obj.Keiasganjil_5050special = float32(keiasganjil_5050special)
+		obj.Keiasgenap_5050special = float32(keiasgenap_5050special)
+		obj.Keiasbesar_5050special = float32(keiasbesar_5050special)
+		obj.Keiaskecil_5050special = float32(keiaskecil_5050special)
+		obj.Keikopganjil_5050special = float32(keikopganjil_5050special)
+		obj.Keikopgenap_5050special = float32(keikopgenap_5050special)
+		obj.Keikopbesar_5050special = float32(keikopbesar_5050special)
+		obj.Keikopkecil_5050special = float32(keikopkecil_5050special)
+		obj.Keikepalaganjil_5050special = float32(keikepalaganjil_5050special)
+		obj.Keikepalagenap_5050special = float32(keikepalagenap_5050special)
+		obj.Keikepalabesar_5050special = float32(keikepalabesar_5050special)
+		obj.Keikepalakecil_5050special = float32(keikepalakecil_5050special)
+		obj.Keiekorganjil_5050special = float32(keiekorganjil_5050special)
+		obj.Keiekorgenap_5050special = float32(keiekorgenap_5050special)
+		obj.Keiekorbesar_5050special = float32(keiekorbesar_5050special)
+		obj.Keiekorkecil_5050special = float32(keiekorkecil_5050special)
+		obj.Discasganjil_5050special = float32(discasganjil_5050special)
+		obj.Discasgenap_5050special = float32(discasgenap_5050special)
+		obj.Discasbesar_5050special = float32(discasbesar_5050special)
+		obj.Discaskecil_5050special = float32(discaskecil_5050special)
+		obj.Disckopganjil_5050special = float32(disckopganjil_5050special)
+		obj.Disckopgenap_5050special = float32(disckopgenap_5050special)
+		obj.Disckopbesar_5050special = float32(disckopbesar_5050special)
+		obj.Disckopkecil_5050special = float32(disckopkecil_5050special)
+		obj.Disckepalaganjil_5050special = float32(disckepalaganjil_5050special)
+		obj.Disckepalagenap_5050special = float32(disckepalagenap_5050special)
+		obj.Disckepalabesar_5050special = float32(disckepalabesar_5050special)
+		obj.Disckepalakecil_5050special = float32(disckepalakecil_5050special)
+		obj.Discekorganjil_5050special = float32(discekorganjil_5050special)
+		obj.Discekorgenap_5050special = float32(discekorgenap_5050special)
+		obj.Discekorbesar_5050special = float32(discekorbesar_5050special)
+		obj.Discekorkecil_5050special = float32(discekorkecil_5050special)
+		obj.Limitglobal_5050special = float32(limitglobal_5050special)
+		obj.Limittotal_5050special = float32(limittotal_5050special)
+		obj.Minbet_5050kombinasi = float32(minbet_5050kombinasi)
+		obj.Maxbet_5050kombinasi = float32(maxbet_5050kombinasi)
+		obj.Belakangkeimono_5050kombinasi = float32(belakangkeimono_5050kombinasi)
+		obj.Belakangkeistereo_5050kombinasi = float32(belakangkeistereo_5050kombinasi)
+		obj.Belakangkeikembang_5050kombinasi = float32(belakangkeikembang_5050kombinasi)
+		obj.Belakangkeikempis_5050kombinasi = float32(belakangkeikempis_5050kombinasi)
+		obj.Belakangkeikembar_5050kombinasi = float32(belakangkeikembar_5050kombinasi)
+		obj.Tengahkeimono_5050kombinasi = float32(tengahkeimono_5050kombinasi)
+		obj.Tengahkeistereo_5050kombinasi = float32(tengahkeistereo_5050kombinasi)
+		obj.Tengahkeikembang_5050kombinasi = float32(tengahkeikembang_5050kombinasi)
+		obj.Tengahkeikempis_5050kombinasi = float32(tengahkeikempis_5050kombinasi)
+		obj.Tengahkeikembar_5050kombinasi = float32(tengahkeikembar_5050kombinasi)
+		obj.Depankeimono_5050kombinasi = float32(depankeimono_5050kombinasi)
+		obj.Depankeistereo_5050kombinasi = float32(depankeistereo_5050kombinasi)
+		obj.Depankeikembang_5050kombinasi = float32(depankeikembang_5050kombinasi)
+		obj.Depankeikempis_5050kombinasi = float32(depankeikempis_5050kombinasi)
+		obj.Depankeikembar_5050kombinasi = float32(depankeikembar_5050kombinasi)
+		obj.Belakangdiscmono_5050kombinasi = float32(belakangdiscmono_5050kombinasi)
+		obj.Belakangdiscstereo_5050kombinasi = float32(belakangdiscstereo_5050kombinasi)
+		obj.Belakangdisckembang_5050kombinasi = float32(belakangdisckembang_5050kombinasi)
+		obj.Belakangdisckempis_5050kombinasi = float32(belakangdisckempis_5050kombinasi)
+		obj.Belakangdisckembar_5050kombinasi = float32(belakangdisckembar_5050kombinasi)
+		obj.Tengahdiscmono_5050kombinasi = float32(tengahdiscmono_5050kombinasi)
+		obj.Tengahdiscstereo_5050kombinasi = float32(tengahdiscstereo_5050kombinasi)
+		obj.Tengahdisckembang_5050kombinasi = float32(tengahdisckembang_5050kombinasi)
+		obj.Tengahdisckempis_5050kombinasi = float32(tengahdisckempis_5050kombinasi)
+		obj.Tengahdisckembar_5050kombinasi = float32(tengahdisckembar_5050kombinasi)
+		obj.Depandiscmono_5050kombinasi = float32(depandiscmono_5050kombinasi)
+		obj.Depandiscstereo_5050kombinasi = float32(depandiscstereo_5050kombinasi)
+		obj.Depandisckembang_5050kombinasi = float32(depandisckembang_5050kombinasi)
+		obj.Depandisckempis_5050kombinasi = float32(depandisckempis_5050kombinasi)
+		obj.Depandisckembar_5050kombinasi = float32(depandisckembar_5050kombinasi)
+		obj.Limitglobal_5050kombinasi = float32(limitglobal_5050kombinasi)
+		obj.Limittotal_5050kombinasi = float32(limittotal_5050kombinasi)
+		obj.Minbet_kombinasi = float32(minbet_kombinasi)
+		obj.Maxbet_kombinasi = float32(maxbet_kombinasi)
+		obj.Win_kombinasi = float32(win_kombinasi)
+		obj.Disc_kombinasi = float32(disc_kombinasi)
+		obj.Limitglobal_kombinasi = float32(limitglobal_kombinasi)
+		obj.Limittotal_kombinasi = float32(limittotal_kombinasi)
+		obj.Minbet_dasar = float32(minbet_dasar)
+		obj.Maxbet_dasar = float32(maxbet_dasar)
+		obj.Keibesar_dasar = float32(keibesar_dasar)
+		obj.Keikecil_dasar = float32(keikecil_dasar)
+		obj.Keigenap_dasar = float32(keigenap_dasar)
+		obj.Keiganjil_dasar = float32(keiganjil_dasar)
+		obj.Discbesar_dasar = float32(discbesar_dasar)
+		obj.Disckecil_dasar = float32(disckecil_dasar)
+		obj.Discgenap_dasar = float32(discgenap_dasar)
+		obj.Discganjil_dasar = float32(discganjil_dasar)
+		obj.Limitglobal_dasar = float32(limitglobal_dasar)
+		obj.Limittotal_dasar = float32(limittotal_dasar)
+		obj.Minbet_shio = float32(minbet_shio)
+		obj.Maxbet_shio = float32(maxbet_shio)
+		obj.Win_shio = float32(win_shio)
+		obj.Disc_shio = float32(disc_shio)
+		obj.Shioyear_shio = string(shioyear_shio)
+		obj.Limitglobal_shio = float32(limitglobal_shio)
+		obj.Limittotal_shio = float32(limittotal_shio)
+		arraobj = append(arraobj, obj)
+	})
+	if !flag {
+		result, err := models.Fetch_pasaranDetailConf(client.Pasarancode)
+		if err != nil {
+			c.Status(fiber.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"status":  fiber.StatusBadRequest,
+				"message": err.Error(),
+				"record":  nil,
+			})
+		}
+		helpers.SetRedis(FieldpasarandetailCONF_home_redis+"_"+client.Pasarancode, result, 30*time.Minute)
+		log.Println("PASARAN CONF MYSQL")
+		return c.JSON(result)
+	} else {
+		log.Println("PASARAN CONF CACHE")
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusOK,
+			"message": "Success",
+			"record":  arraobj,
+			"time":    time.Since(render_page).String(),
+		})
+	}
+}
+func PasaranSave(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Controller_pasaransave)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -408,45 +604,6 @@ func PasaranDetailConf(c *fiber.Ctx) error {
 		})
 	}
 
-	result, err := models.Fetch_pasaranDetailConf(client.Pasarancode)
-	if err != nil {
-		c.Status(fiber.StatusBadRequest)
-		return c.JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": err.Error(),
-			"record":  nil,
-		})
-	}
-	return c.JSON(result)
-}
-func PasaranSave(c *fiber.Ctx) error {
-	var errors []*helpers.ErrorResponse
-	client := new(pasaransave)
-	validate := validator.New()
-	if err := c.BodyParser(client); err != nil {
-		c.Status(fiber.StatusBadRequest)
-		return c.JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": err.Error(),
-			"record":  nil,
-		})
-	}
-	err := validate.Struct(client)
-	if err != nil {
-		for _, err := range err.(validator.ValidationErrors) {
-			var element helpers.ErrorResponse
-			element.Field = err.StructField()
-			element.Tag = err.Tag()
-			errors = append(errors, &element)
-		}
-		c.Status(fiber.StatusBadRequest)
-		return c.JSON(fiber.Map{
-			"status":  fiber.StatusBadRequest,
-			"message": "validation",
-			"record":  errors,
-		})
-	}
-	field_redis := "LISTPASARAN_MASTER"
 	result, err := models.Save_pasaran(client.Sdata, client.Master, client.Idrecord, client.Name, client.Tipe, client.Url, client.Diundi, client.Jamtutup, client.Jamjadwal, client.Jamopen)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -456,13 +613,16 @@ func PasaranSave(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(field_redis)
-	log.Printf("Redis Delete MASTER - PASARAN status: %d", val_master)
+
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveLimitLine(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransavelimitline)
+	client := new(entities.Controller_pasaransavelimitline)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -499,11 +659,15 @@ func PasaranSaveLimitLine(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConf432d(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconf432d)
+	client := new(entities.Controller_pasaransaveconf432d)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -545,11 +709,15 @@ func PasaranSaveConf432d(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConfColokBebas(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconfcolokbebas)
+	client := new(entities.Controller_pasaransaveconfcolokbebas)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -588,11 +756,15 @@ func PasaranSaveConfColokBebas(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConfColokMacau(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconfcolokmacau)
+	client := new(entities.Controller_pasaransaveconfcolokmacau)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -631,11 +803,15 @@ func PasaranSaveConfColokMacau(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConfColokNaga(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconfcoloknaga)
+	client := new(entities.Controller_pasaransaveconfcoloknaga)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -674,11 +850,15 @@ func PasaranSaveConfColokNaga(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConfColokJitu(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconfcolokjitu)
+	client := new(entities.Controller_pasaransaveconfcolokjitu)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -717,11 +897,15 @@ func PasaranSaveConfColokJitu(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConf5050umum(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconf5050umum)
+	client := new(entities.Controller_pasaransaveconf5050umum)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -761,11 +945,15 @@ func PasaranSaveConf5050umum(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConf5050special(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconf5050special)
+	client := new(entities.Controller_pasaransaveconf5050special)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -811,11 +999,15 @@ func PasaranSaveConf5050special(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConf5050kombinasi(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconf5050kombinasi)
+	client := new(entities.Controller_pasaransaveconf5050kombinasi)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -859,11 +1051,15 @@ func PasaranSaveConf5050kombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConfmacaukombinasi(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconfmacaukombinasi)
+	client := new(entities.Controller_pasaransaveconfmacaukombinasi)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -902,11 +1098,15 @@ func PasaranSaveConfmacaukombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConfdasar(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconfdasar)
+	client := new(entities.Controller_pasaransaveconfdasar)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -946,11 +1146,15 @@ func PasaranSaveConfdasar(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }
 func PasaranSaveConfshio(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(pasaransaveconfshio)
+	client := new(entities.Controller_pasaransaveconfshio)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -989,5 +1193,9 @@ func PasaranSaveConfshio(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
+	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)
+	val_master_detail := helpers.DeleteRedis(Fieldpasarandetail_home_redis + "_" + client.Idrecord)
+	log.Printf("Redis Delete MASTER DETAIL PASARAN : %d", val_master_detail)
 	return c.JSON(result)
 }

@@ -1349,8 +1349,7 @@ func CompanySave(c *fiber.Ctx) error {
 		client.Master,
 		client.Company,
 		client.Name, client.Urldomain, client.Status)
-	val_company := helpers.DeleteRedis(Fieldcompany_home_redis)
-	log.Printf("Redis Delete MASTER COMPANY : %d", val_company)
+
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{
@@ -1359,6 +1358,8 @@ func CompanySave(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	val_company := helpers.DeleteRedis(Fieldcompany_home_redis)
+	log.Printf("Redis Delete MASTER COMPANY : %d", val_company)
 	return c.JSON(result)
 }
 func CompanySaveNewAdmin(c *fiber.Ctx) error {

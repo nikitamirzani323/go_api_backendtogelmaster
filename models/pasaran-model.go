@@ -14,193 +14,6 @@ import (
 	"github.com/nleeper/goment"
 )
 
-type sPasaranDetail struct {
-	Nmpasarantogel string `json:"pasaran_nmpasarantogel"`
-	Tipepasaran    string `json:"pasaran_tipepasaran"`
-	Urlpasaran     string `json:"pasaran_urlpasaran"`
-	Pasarandiundi  string `json:"pasaran_pasarandiundi"`
-	Jamtutup       string `json:"pasaran_jamtutup"`
-	Jamjadwal      string `json:"pasaran_jamjadwal"`
-	Jamopen        string `json:"pasaran_jamopen"`
-	Create         string `json:"pasaran_create"`
-	Update         string `json:"pasaran_update"`
-}
-type sPasaranDetailConf struct {
-	Limitline4d                       int     `json:"limitline_4d"`
-	Limitline3d                       int     `json:"limitline_3d"`
-	Limitline2d                       int     `json:"limitline_2d"`
-	Limitline2dd                      int     `json:"limitline_2dd"`
-	Limitline2dt                      int     `json:"limitline_2dt"`
-	Bbfs                              int     `json:"bbfs"`
-	Minbet_432d                       float32 `json:"minbet_432d"`
-	Maxbet4d_432d                     float32 `json:"maxbet4d_432d"`
-	Maxbet3d_432d                     float32 `json:"maxbet3d_432d"`
-	Maxbet2d_432d                     float32 `json:"maxbet2d_432d"`
-	Maxbet2dd_432d                    float32 `json:"maxbet2dd_432d"`
-	Maxbet2dt_432d                    float32 `json:"maxbet2dt_432d"`
-	Limitotal4d_432d                  float32 `json:"limitotal4d_432d"`
-	Limitotal3d_432d                  float32 `json:"limitotal3d_432d"`
-	Limitotal2d_432d                  float32 `json:"limitotal2d_432d"`
-	Limitotal2dd_432d                 float32 `json:"limitotal2dd_432d"`
-	Limitotal2dt_432d                 float32 `json:"limitotal2dt_432d"`
-	Limitglobal4d_432d                float32 `json:"limitglobal4d_432d"`
-	Limitglobal3d_432d                float32 `json:"limitglobal3d_432d"`
-	Limitglobal2d_432d                float32 `json:"limitglobal2d_432d"`
-	Limitglobal2dd_432d               float32 `json:"limitglobal2dd_432d"`
-	Limitglobal2dt_432d               float32 `json:"limitglobal2dt_432d"`
-	Disc4d_432d                       float32 `json:"disc4d_432d"`
-	Disc3d_432d                       float32 `json:"disc3d_432d"`
-	Disc2d_432d                       float32 `json:"disc2d_432d"`
-	Disc2dd_432d                      float32 `json:"disc2dd_432d"`
-	Disc2dt_432d                      float32 `json:"disc2dt_432d"`
-	Win4d_432d                        float32 `json:"win4d_432d"`
-	Win3d_432d                        float32 `json:"win3d_432d"`
-	Win2d_432d                        float32 `json:"win2d_432d"`
-	Win2dd_432d                       float32 `json:"win2dd_432d"`
-	Win2dt_432d                       float32 `json:"win2dt_432d"`
-	Minbet_cbebas                     float32 `json:"minbet_cbebas"`
-	Maxbet_cbebas                     float32 `json:"maxbet_cbebas"`
-	Win_cbebas                        float32 `json:"win_cbebas"`
-	Disc_cbebas                       float32 `json:"disc_cbebas"`
-	Limitglobal_cbebas                float32 `json:"limitglobal_cbebas"`
-	Limittotal_cbebas                 float32 `json:"limittotal_cbebas"`
-	Minbet_cmacau                     float32 `json:"minbet_cmacau"`
-	Maxbet_cmacau                     float32 `json:"maxbet_cmacau"`
-	Win2d_cmacau                      float32 `json:"win2d_cmacau"`
-	Win3d_cmacau                      float32 `json:"win3d_cmacau"`
-	Win4d_cmacau                      float32 `json:"win4d_cmacau"`
-	Disc_cmacau                       float32 `json:"disc_cmacau"`
-	Limitglobal_cmacau                float32 `json:"limitglobal_cmacau"`
-	Limitotal_cmacau                  float32 `json:"limitotal_cmacau"`
-	Minbet_cnaga                      float32 `json:"minbet_cnaga"`
-	Maxbet_cnaga                      float32 `json:"maxbet_cnaga"`
-	Win3_cnaga                        float32 `json:"win3_cnaga"`
-	Win4_cnaga                        float32 `json:"win4_cnaga"`
-	Disc_cnaga                        float32 `json:"disc_cnaga"`
-	Limitglobal_cnaga                 float32 `json:"limitglobal_cnaga"`
-	Limittotal_cnaga                  float32 `json:"limittotal_cnaga"`
-	Minbet_cjitu                      float32 `json:"minbet_cjitu"`
-	Maxbet_cjitu                      float32 `json:"maxbet_cjitu"`
-	Winas_cjitu                       float32 `json:"winas_cjitu"`
-	Winkop_cjitu                      float32 `json:"winkop_cjitu"`
-	Winkepala_cjitu                   float32 `json:"winkepala_cjitu"`
-	Winekor_cjitu                     float32 `json:"winekor_cjitu"`
-	Desc_cjitu                        float32 `json:"desc_cjitu"`
-	Limitglobal_cjitu                 float32 `json:"limitglobal_cjitu"`
-	Limittotal_cjitu                  float32 `json:"limittotal_cjitu"`
-	Minbet_5050umum                   float32 `json:"minbet_5050umum"`
-	Maxbet_5050umum                   float32 `json:"maxbet_5050umum"`
-	Keibesar_5050umum                 float32 `json:"keibesar_5050umum"`
-	Keikecil_5050umum                 float32 `json:"keikecil_5050umum"`
-	Keigenap_5050umum                 float32 `json:"keigenap_5050umum"`
-	Keiganjil_5050umum                float32 `json:"keiganjil_5050umum"`
-	Keitengah_5050umum                float32 `json:"keitengah_5050umum"`
-	Keitepi_5050umum                  float32 `json:"keitepi_5050umum"`
-	Discbesar_5050umum                float32 `json:"discbesar_5050umum"`
-	Disckecil_5050umum                float32 `json:"disckecil_5050umum"`
-	Discgenap_5050umum                float32 `json:"discgenap_5050umum"`
-	Discganjil_5050umum               float32 `json:"discganjil_5050umum"`
-	Disctengah_5050umum               float32 `json:"disctengah_5050umum"`
-	Disctepi_5050umum                 float32 `json:"disctepi_5050umum"`
-	Limitglobal_5050umum              float32 `json:"limitglobal_5050umum"`
-	Limittotal_5050umum               float32 `json:"limittotal_5050umum"`
-	Minbet_5050special                float32 `json:"minbet_5050special"`
-	Maxbet_5050special                float32 `json:"maxbet_5050special"`
-	Keiasganjil_5050special           float32 `json:"keiasganjil_5050special"`
-	Keiasgenap_5050special            float32 `json:"keiasgenap_5050special"`
-	Keiasbesar_5050special            float32 `json:"keiasbesar_5050special"`
-	Keiaskecil_5050special            float32 `json:"keiaskecil_5050special"`
-	Keikopganjil_5050special          float32 `json:"keikopganjil_5050special"`
-	Keikopgenap_5050special           float32 `json:"keikopgenap_5050special"`
-	Keikopbesar_5050special           float32 `json:"keikopbesar_5050special"`
-	Keikopkecil_5050special           float32 `json:"keikopkecil_5050special"`
-	Keikepalaganjil_5050special       float32 `json:"keikepalaganjil_5050special"`
-	Keikepalagenap_5050special        float32 `json:"keikepalagenap_5050special"`
-	Keikepalabesar_5050special        float32 `json:"keikepalabesar_5050special"`
-	Keikepalakecil_5050special        float32 `json:"keikepalakecil_5050special"`
-	Keiekorganjil_5050special         float32 `json:"keiekorganjil_5050special"`
-	Keiekorgenap_5050special          float32 `json:"keiekorgenap_5050special"`
-	Keiekorbesar_5050special          float32 `json:"keiekorbesar_5050special"`
-	Keiekorkecil_5050special          float32 `json:"keiekorkecil_5050special"`
-	Discasganjil_5050special          float32 `json:"discasganjil_5050special"`
-	Discasgenap_5050special           float32 `json:"discasgenap_5050special"`
-	Discasbesar_5050special           float32 `json:"discasbesar_5050special"`
-	Discaskecil_5050special           float32 `json:"discaskecil_5050special"`
-	Disckopganjil_5050special         float32 `json:"disckopganjil_5050special"`
-	Disckopgenap_5050special          float32 `json:"disckopgenap_5050special"`
-	Disckopbesar_5050special          float32 `json:"disckopbesar_5050special"`
-	Disckopkecil_5050special          float32 `json:"disckopkecil_5050special"`
-	Disckepalaganjil_5050special      float32 `json:"disckepalaganjil_5050special"`
-	Disckepalagenap_5050special       float32 `json:"disckepalagenap_5050special"`
-	Disckepalabesar_5050special       float32 `json:"disckepalabesar_5050special"`
-	Disckepalakecil_5050special       float32 `json:"disckepalakecil_5050special"`
-	Discekorganjil_5050special        float32 `json:"discekorganjil_5050special"`
-	Discekorgenap_5050special         float32 `json:"discekorgenap_5050special"`
-	Discekorbesar_5050special         float32 `json:"discekorbesar_5050special"`
-	Discekorkecil_5050special         float32 `json:"discekorkecil_5050special"`
-	Limitglobal_5050special           float32 `json:"limitglobal_5050special"`
-	Limittotal_5050special            float32 `json:"limittotal_5050special"`
-	Minbet_5050kombinasi              float32 `json:"minbet_5050kombinasi"`
-	Maxbet_5050kombinasi              float32 `json:"maxbet_5050kombinasi"`
-	Belakangkeimono_5050kombinasi     float32 `json:"belakangkeimono_5050kombinasi"`
-	Belakangkeistereo_5050kombinasi   float32 `json:"belakangkeistereo_5050kombinasi"`
-	Belakangkeikembang_5050kombinasi  float32 `json:"belakangkeikembang_5050kombinasi"`
-	Belakangkeikempis_5050kombinasi   float32 `json:"belakangkeikempis_5050kombinasi"`
-	Belakangkeikembar_5050kombinasi   float32 `json:"belakangkeikembar_5050kombinasi"`
-	Tengahkeimono_5050kombinasi       float32 `json:"tengahkeimono_5050kombinasi"`
-	Tengahkeistereo_5050kombinasi     float32 `json:"tengahkeistereo_5050kombinasi"`
-	Tengahkeikembang_5050kombinasi    float32 `json:"tengahkeikembang_5050kombinasi"`
-	Tengahkeikempis_5050kombinasi     float32 `json:"tengahkeikempis_5050kombinasi"`
-	Tengahkeikembar_5050kombinasi     float32 `json:"tengahkeikembar_5050kombinasi"`
-	Depankeimono_5050kombinasi        float32 `json:"depankeimono_5050kombinasi"`
-	Depankeistereo_5050kombinasi      float32 `json:"depankeistereo_5050kombinasi"`
-	Depankeikembang_5050kombinasi     float32 `json:"depankeikembang_5050kombinasi"`
-	Depankeikempis_5050kombinasi      float32 `json:"depankeikempis_5050kombinasi"`
-	Depankeikembar_5050kombinasi      float32 `json:"depankeikembar_5050kombinasi"`
-	Belakangdiscmono_5050kombinasi    float32 `json:"belakangdiscmono_5050kombinasi"`
-	Belakangdiscstereo_5050kombinasi  float32 `json:"belakangdiscstereo_5050kombinasi"`
-	Belakangdisckembang_5050kombinasi float32 `json:"belakangdisckembang_5050kombinasi"`
-	Belakangdisckempis_5050kombinasi  float32 `json:"belakangdisckempis_5050kombinasi"`
-	Belakangdisckembar_5050kombinasi  float32 `json:"belakangdisckembar_5050kombinasi"`
-	Tengahdiscmono_5050kombinasi      float32 `json:"tengahdiscmono_5050kombinasi"`
-	Tengahdiscstereo_5050kombinasi    float32 `json:"tengahdiscstereo_5050kombinasi"`
-	Tengahdisckembang_5050kombinasi   float32 `json:"tengahdisckembang_5050kombinasi"`
-	Tengahdisckempis_5050kombinasi    float32 `json:"tengahdisckempis_5050kombinasi"`
-	Tengahdisckembar_5050kombinasi    float32 `json:"tengahdisckembar_5050kombinasi"`
-	Depandiscmono_5050kombinasi       float32 `json:"depandiscmono_5050kombinasi"`
-	Depandiscstereo_5050kombinasi     float32 `json:"depandiscstereo_5050kombinasi"`
-	Depandisckembang_5050kombinasi    float32 `json:"depandisckembang_5050kombinasi"`
-	Depandisckempis_5050kombinasi     float32 `json:"depandisckempis_5050kombinasi"`
-	Depandisckembar_5050kombinasi     float32 `json:"depandisckembar_5050kombinasi"`
-	Limitglobal_5050kombinasi         float32 `json:"limitglobal_5050kombinasi"`
-	Limittotal_5050kombinasi          float32 `json:"limittotal_5050kombinasi"`
-	Minbet_kombinasi                  float32 `json:"minbet_kombinasi"`
-	Maxbet_kombinasi                  float32 `json:"maxbet_kombinasi"`
-	Win_kombinasi                     float32 `json:"win_kombinasi"`
-	Disc_kombinasi                    float32 `json:"disc_kombinasi"`
-	Limitglobal_kombinasi             float32 `json:"limitglobal_kombinasi"`
-	Limittotal_kombinasi              float32 `json:"limittotal_kombinasi"`
-	Minbet_dasar                      float32 `json:"minbet_dasar"`
-	Maxbet_dasar                      float32 `json:"maxbet_dasar"`
-	Keibesar_dasar                    float32 `json:"keibesar_dasar"`
-	Keikecil_dasar                    float32 `json:"keikecil_dasar"`
-	Keigenap_dasar                    float32 `json:"keigenap_dasar"`
-	Keiganjil_dasar                   float32 `json:"keiganjil_dasar"`
-	Discbesar_dasar                   float32 `json:"discbesar_dasar"`
-	Disckecil_dasar                   float32 `json:"disckecil_dasar"`
-	Discgenap_dasar                   float32 `json:"discgenap_dasar"`
-	Discganjil_dasar                  float32 `json:"discganjil_dasar"`
-	Limitglobal_dasar                 float32 `json:"limitglobal_dasar"`
-	Limittotal_dasar                  float32 `json:"limittotal_dasar"`
-	Minbet_shio                       float32 `json:"minbet_shio"`
-	Maxbet_shio                       float32 `json:"maxbet_shio"`
-	Win_shio                          float32 `json:"win_shio"`
-	Disc_shio                         float32 `json:"disc_shio"`
-	Shioyear_shio                     string  `json:"shioyear_shio"`
-	Limitglobal_shio                  float32 `json:"limitglobal_shio"`
-	Limittotal_shio                   float32 `json:"limittotal_shio"`
-}
-
 func Fetch_pasaran() (helpers.Response, error) {
 	var obj entities.Model_pasaran
 	var arraobj []entities.Model_pasaran
@@ -209,11 +22,11 @@ func Fetch_pasaran() (helpers.Response, error) {
 	con := db.CreateCon()
 	ctx := context.Background()
 	render_page := time.Now()
-	var no int = 0
 
 	sql_periode := `SELECT 
 			idpasarantogel , nmpasarantogel, tipepasaran, urlpasaran, pasarandiundi, 
-			jamtutup, jamjadwal, jamopen   
+			jamtutup, jamjadwal, jamopen,
+			createpasarantogel, createdatepasarantogel, updatepasarantogel, updatedatepasarantogel    
 			FROM ` + config.DB_tbl_mst_pasaran_togel + ` 
 			ORDER BY nmpasarantogel ASC   
 		`
@@ -221,18 +34,24 @@ func Fetch_pasaran() (helpers.Response, error) {
 	row, err := con.QueryContext(ctx, sql_periode)
 	helpers.ErrorCheck(err)
 	for row.Next() {
-		no++
 		var (
-			idpasarantogel_db, nmpasarantogel_db, tipepasaran_db, urlpasaran_db, pasarandiundi_db string
-			jamtutup_db, jamjadwal_db, jamopen_db                                                 string
+			idpasarantogel_db, nmpasarantogel_db, tipepasaran_db, urlpasaran_db, pasarandiundi_db              string
+			jamtutup_db, jamjadwal_db, jamopen_db                                                              string
+			createpasarantogel_db, createdatepasarantogel_db, updatepasarantogel_db, updatedatepasarantogel_db string
 		)
 
 		err = row.Scan(
 			&idpasarantogel_db, &nmpasarantogel_db, &tipepasaran_db, &urlpasaran_db, &pasarandiundi_db,
-			&jamtutup_db, &jamjadwal_db, &jamopen_db)
+			&jamtutup_db, &jamjadwal_db, &jamopen_db, &createpasarantogel_db, &createdatepasarantogel_db, &updatepasarantogel_db, &updatedatepasarantogel_db)
 		helpers.ErrorCheck(err)
-
-		obj.Pasaran_no = no
+		create := ""
+		update := ""
+		if createpasarantogel_db != "" {
+			create = createpasarantogel_db + " " + createdatepasarantogel_db
+		}
+		if updatepasarantogel_db != "" {
+			update = updatepasarantogel_db + " " + updatedatepasarantogel_db
+		}
 		obj.Pasaran_idpasarantogel = idpasarantogel_db
 		obj.Pasaran_nmpasarantogel = nmpasarantogel_db
 		obj.Pasaran_tipepasaran = tipepasaran_db
@@ -241,6 +60,8 @@ func Fetch_pasaran() (helpers.Response, error) {
 		obj.Pasaran_jamtutup = jamtutup_db
 		obj.Pasaran_jamjadwal = jamjadwal_db
 		obj.Pasaran_jamopen = jamopen_db
+		obj.Pasaran_create = create
+		obj.Pasaran_update = update
 		arraobj = append(arraobj, obj)
 	}
 	defer row.Close()
@@ -253,10 +74,10 @@ func Fetch_pasaran() (helpers.Response, error) {
 	return res, nil
 }
 func Fetch_pasaranDetail(pasarancode string) (helpers.Response, error) {
-	var obj sPasaranDetail
-	var arraobj []sPasaranDetail
+	var obj entities.Model_pasaran
+	var arraobj []entities.Model_pasaran
 	var res helpers.Response
-	msg := "Error"
+	msg := "Data Not Found"
 	flag := true
 	con := db.CreateCon()
 	ctx := context.Background()
@@ -281,23 +102,24 @@ func Fetch_pasaranDetail(pasarancode string) (helpers.Response, error) {
 	case sql.ErrNoRows:
 		flag = false
 	case nil:
-
-		if createdatepasarantogel_db == "0000-00-00 00:00:00" {
-			createdatepasarantogel_db = ""
+		create := ""
+		update := ""
+		if createpasarantogel_db != "" {
+			create = createpasarantogel_db + " " + createdatepasarantogel_db
 		}
-		if updatedatepasarantogel_db == "0000-00-00 00:00:00" {
-			updatedatepasarantogel_db = ""
+		if updatepasarantogel_db != "" {
+			update = updatepasarantogel_db + " " + updatedatepasarantogel_db
 		}
 
-		obj.Nmpasarantogel = nmpasarantogel_db
-		obj.Tipepasaran = tipepasaran_db
-		obj.Urlpasaran = urlpasaran_db
-		obj.Pasarandiundi = pasarandiundi_db
-		obj.Jamtutup = jamtutup_db
-		obj.Jamjadwal = jamjadwal_db
-		obj.Jamopen = jamopen_db
-		obj.Create = createpasarantogel_db + " " + createdatepasarantogel_db
-		obj.Update = updatepasarantogel_db + " " + updatedatepasarantogel_db
+		obj.Pasaran_nmpasarantogel = nmpasarantogel_db
+		obj.Pasaran_tipepasaran = tipepasaran_db
+		obj.Pasaran_urlpasaran = urlpasaran_db
+		obj.Pasaran_pasarandiundi = pasarandiundi_db
+		obj.Pasaran_jamtutup = jamtutup_db
+		obj.Pasaran_jamjadwal = jamjadwal_db
+		obj.Pasaran_jamopen = jamopen_db
+		obj.Pasaran_create = create
+		obj.Pasaran_update = update
 
 		arraobj = append(arraobj, obj)
 		msg = "Success"
@@ -320,8 +142,8 @@ func Fetch_pasaranDetail(pasarancode string) (helpers.Response, error) {
 	return res, nil
 }
 func Fetch_pasaranDetailConf(idrecord string) (helpers.Response, error) {
-	var obj sPasaranDetailConf
-	var arraobj []sPasaranDetailConf
+	var obj entities.Model_pasaranDetailConf
+	var arraobj []entities.Model_pasaranDetailConf
 	var res helpers.Response
 	msg := "Error"
 	flag := true
@@ -650,8 +472,6 @@ func Fetch_pasaranDetailConf(idrecord string) (helpers.Response, error) {
 }
 func Save_pasaran(sData, master, idrecord, name, tipe, urlpasaran, diundi, jamtutup, jamjadwal, jamopen string) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
@@ -660,70 +480,46 @@ func Save_pasaran(sData, master, idrecord, name, tipe, urlpasaran, diundi, jamtu
 		flag_insert := CheckDB(config.DB_tbl_mst_pasaran_togel, "idpasarantogel", idrecord)
 
 		if !flag_insert {
-			rows_insert, err_insert := con.PrepareContext(ctx, `
+			sql_insert := `
 				INSERT INTO  
-				`+config.DB_tbl_mst_pasaran_togel+` (
+				` + config.DB_tbl_mst_pasaran_togel + ` (
 					idpasarantogel, nmpasarantogel, tipepasaran, urlpasaran, pasarandiundi, jamtutup, jamjadwal, jamopen, 
 					createpasarantogel, createdatepasarantogel  
 				)VALUES( 
 					?,?,?,?,?,?,?,?,?,? 
 				) 
-			`)
-			helpers.ErrorCheck(err_insert)
-			rec_comp, err_comp := rows_insert.ExecContext(ctx,
-				idrecord,
-				name,
-				tipe,
-				urlpasaran,
-				diundi,
-				jamtutup,
-				jamjadwal,
-				jamopen,
-				master,
-				tglnow.Format("YYYY-MM-DD HH:mm:ss"))
-			helpers.ErrorCheck(err_comp)
-			insert, e := rec_comp.RowsAffected()
-			helpers.ErrorCheck(e)
-			defer rows_insert.Close()
-			if insert > 0 {
+			`
+			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_mst_pasaran_togel, "INSERT",
+				idrecord, name, tipe, urlpasaran, diundi,
+				jamtutup, jamjadwal, jamopen, master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
+			if flag_insert {
 				flag = true
-				msg = "Success"
-				log.Println("Data Berhasil di save")
+				msg = "Succes"
+				log.Println(msg_insert)
+			} else {
+				log.Println(msg_insert)
 			}
 		} else {
 			msg = "Duplicate Entry"
 		}
 	} else {
-		rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_pasaran_togel+`  
-				SET nmpasarantogel=?, tipepasaran=?, urlpasaran=?, pasarandiundi=?, 
-				jamtutup=?, jamjadwal=?, jamopen=? , 
-				updatepasarantogel=?, updatedatepasarantogel=? 
-				WHERE idpasarantogel=? 
-			`)
-		helpers.ErrorCheck(err_update)
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
-			name,
-			tipe,
-			urlpasaran,
-			diundi,
-			jamtutup,
-			jamjadwal,
-			jamopen,
-			master,
-			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-			idrecord)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+		sql_update := `
+			UPDATE 
+			` + config.DB_tbl_mst_pasaran_togel + `  
+			SET nmpasarantogel=?, tipepasaran=?, urlpasaran=?, pasarandiundi=?, 
+			jamtutup=?, jamjadwal=?, jamopen=? , 
+			updatepasarantogel=?, updatedatepasarantogel=? 
+			WHERE idpasarantogel=? 
+		`
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
+			name, tipe, urlpasaran, diundi, jamtutup, jamjadwal, jamopen,
+			master, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idrecord)
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, name)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
+			log.Println(msg_update)
 		}
 	}
 	if flag {
@@ -742,42 +538,29 @@ func Save_pasaran(sData, master, idrecord, name, tipe, urlpasaran, diundi, jamtu
 }
 func Save_pasaranlimitline(master, idrecord string, limitline_4d, limitline_3d, limitline_2d, limitline_2dd, limitline_2dt, bbfs int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
-
-	rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_pasaran_togel+`  
-				SET limitline_4d=?, limitline_3d=?, limitline_2d=?, limitline_2dd=?, 
-				limitline_2dt=?, bbfs=?,  
-				updatepasarantogel=?, updatedatepasarantogel=? 
-				WHERE idpasarantogel=? 
-			`)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
-		limitline_4d,
-		limitline_3d,
-		limitline_2d,
-		limitline_2dd,
-		limitline_2dt,
+	sql_update := `
+		UPDATE 
+		` + config.DB_tbl_mst_pasaran_togel + `  
+		SET limitline_4d=?, limitline_3d=?, limitline_2d=?, limitline_2dd=?, 
+		limitline_2dt=?, bbfs=?,  
+		updatepasarantogel=?, updatedatepasarantogel=? 
+		WHERE idpasarantogel=? 
+	`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
+		limitline_4d, limitline_3d, limitline_2d, limitline_2dd, limitline_2dt,
 		bbfs,
-		master,
-		tglnow.Format("YYYY-MM-DD HH:mm:ss"),
+		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	if update_comp > 0 {
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -802,44 +585,36 @@ func Save_pasaranConf432(
 	limitglobal4d, limitglobal3d, limitglobal2d, limitglobal2dd, limitglobal2dt int,
 	limittotal4d, limittotal3d, limittotal2d, limittotal2dd, limittotal2dt int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
 
-	rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_pasaran_togel+`  
-				SET 1_minbet=? , 1_maxbet4d=?, 1_maxbet3d=?, 1_maxbet2d=?, 1_maxbet2dd=?, 1_maxbet2dt=?, 
-				1_win4d=?, 1_win3d=?, 1_win2d=?, 1_win2dd=?, 1_win2dt=?, 
-				1_disc4d=?, 1_disc3d=?, 1_disc2d=?, 1_disc2dd=?, 1_disc2dt=?, 
-				1_limitbuang4d=?, 1_limitbuang3d=?, 1_limitbuang2d=?, 1_limitbuang2dd=?, 1_limitbuang2dt=?,  
-				1_limittotal4d=?, 1_limittotal3d=?, 1_limittotal2d=?, 1_limittotal2dd=?, 1_limittotal2dt=?,  
-				updatepasarantogel=?, updatedatepasarantogel=? 
-				WHERE idpasarantogel=? 
-			`)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	sql_update := `
+		UPDATE 
+		` + config.DB_tbl_mst_pasaran_togel + `  
+		SET 1_minbet=? , 1_maxbet4d=?, 1_maxbet3d=?, 1_maxbet2d=?, 1_maxbet2dd=?, 1_maxbet2dt=?, 
+		1_win4d=?, 1_win3d=?, 1_win2d=?, 1_win2dd=?, 1_win2dt=?, 
+		1_disc4d=?, 1_disc3d=?, 1_disc2d=?, 1_disc2dd=?, 1_disc2dt=?, 
+		1_limitbuang4d=?, 1_limitbuang3d=?, 1_limitbuang2d=?, 1_limitbuang2dd=?, 1_limitbuang2dt=?,  
+		1_limittotal4d=?, 1_limittotal3d=?, 1_limittotal2d=?, 1_limittotal2dd=?, 1_limittotal2dt=?,  
+		updatepasarantogel=?, updatedatepasarantogel=? 
+		WHERE idpasarantogel=? 
+	`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
 		minbet, maxbet4d, maxbet3d, maxbet2d, maxbet2dd, maxbet2dt,
 		win4d, win3d, win2d, win2dd, win2dt,
 		disc4d, disc3d, disc2d, disc2dd, disc2dt,
 		limitglobal4d, limitglobal3d, limitglobal2d, limitglobal2dd, limitglobal2dt,
 		limittotal4d, limittotal3d, limittotal2d, limittotal2dd, limittotal2dt,
-		master,
-		tglnow.Format("YYYY-MM-DD HH:mm:ss"),
+		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	if update_comp > 0 {
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -862,37 +637,29 @@ func Save_pasaranConfColokBebas(
 	win, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
-
-	rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_pasaran_togel+`  
-				SET 2_minbet=? , 2_maxbet=?, 2_win=?, 2_disc=?, 
-				2_limitbuang=?, 2_limitotal=?, 
-				updatepasarantogel=?, updatedatepasarantogel=? 
-				WHERE idpasarantogel=? 
-			`)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	sql_update := `
+		UPDATE 
+		` + config.DB_tbl_mst_pasaran_togel + `  
+		SET 2_minbet=? , 2_maxbet=?, 2_win=?, 2_disc=?, 
+		2_limitbuang=?, 2_limitotal=?, 
+		updatepasarantogel=?, updatedatepasarantogel=? 
+		WHERE idpasarantogel=? 
+	`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
 		minbet, maxbet, win, disc, limitglobal, limittotal,
 		master,
 		tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	if update_comp > 0 {
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -915,39 +682,31 @@ func Save_pasaranConfColokMacau(
 	win2, win3, win4, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
-
-	rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_pasaran_togel+`  
-				SET 3_minbet=? , 3_maxbet=?, 3_win2digit=?, 3_win3digit=?, 3_win4digit=?, 
-				3_disc=?, 3_limitbuang=?, 3_limittotal=?,  
-				updatepasarantogel=?, updatedatepasarantogel=? 
-				WHERE idpasarantogel=? 
-			`)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	sql_update := `
+			UPDATE 
+			` + config.DB_tbl_mst_pasaran_togel + `  
+			SET 3_minbet=? , 3_maxbet=?, 3_win2digit=?, 3_win3digit=?, 3_win4digit=?, 
+			3_disc=?, 3_limitbuang=?, 3_limittotal=?,  
+			updatepasarantogel=?, updatedatepasarantogel=? 
+			WHERE idpasarantogel=? 
+	`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
 		minbet, maxbet,
 		win2, win3, win4,
 		disc, limitglobal, limittotal,
 		master,
 		tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	if update_comp > 0 {
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -970,39 +729,31 @@ func Save_pasaranConfColokNaga(
 	win3, win4, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
-
-	rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_pasaran_togel+`  
-				SET 4_minbet=? , 4_maxbet=?, 4_win3digit=?, 4_win4digit=?,  
-				4_disc=?, 4_limitbuang=?, 4_limittotal=?, 
-				updatepasarantogel=?, updatedatepasarantogel=? 
-				WHERE idpasarantogel=? 
-			`)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	sql_update := `
+		UPDATE 
+		` + config.DB_tbl_mst_pasaran_togel + `  
+		SET 4_minbet=? , 4_maxbet=?, 4_win3digit=?, 4_win4digit=?,  
+		4_disc=?, 4_limitbuang=?, 4_limittotal=?, 
+		updatepasarantogel=?, updatedatepasarantogel=? 
+		WHERE idpasarantogel=? 
+	`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
 		minbet, maxbet,
 		win3, win4,
 		disc, limitglobal, limittotal,
 		master,
 		tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	if update_comp > 0 {
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
+		log.Println(msg_update)
 	}
 
 	if flag {
@@ -1025,40 +776,32 @@ func Save_pasaranConfColokJitu(
 	winas, winkop, winkepala, winekor, disc float32,
 	limitglobal, limittotal int) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
-
-	rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_pasaran_togel+`  
-				SET 5_minbet=? , 5_maxbet=?, 
-				5_winas=?, 5_winkop=?, 5_winkepala=?, 5_winekor=?, 
-				5_desic=?, 5_limitbuang=?, 5_limitotal=?,  
-				updatepasarantogel=?, updatedatepasarantogel=? 
-				WHERE idpasarantogel=? 
-			`)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx,
+	sql_update := `
+		UPDATE 
+		` + config.DB_tbl_mst_pasaran_togel + `  
+		SET 5_minbet=? , 5_maxbet=?, 
+		5_winas=?, 5_winkop=?, 5_winkepala=?, 5_winekor=?, 
+		5_desic=?, 5_limitbuang=?, 5_limitotal=?,  
+		updatepasarantogel=?, updatedatepasarantogel=? 
+		WHERE idpasarantogel=? 
+	`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
 		minbet, maxbet,
 		winas, winkop, winkepala, winekor,
 		disc, limitglobal, limittotal,
 		master,
 		tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	if update_comp > 0 {
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
+		log.Println(msg_update)
 	}
 
 	if flag {

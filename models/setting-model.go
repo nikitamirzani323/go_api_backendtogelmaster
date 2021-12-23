@@ -9,19 +9,15 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/config"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/db"
+	"github.com/nikitamirzani323/go_api_backendtogelmaster/entities"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/helpers"
 )
 
-type setting struct {
-	StartMaintenance string `json:"maintenance_start"`
-	EndMaintenance   string `json:"maintenance_end"`
-}
-
 func Fetch_setting() (helpers.Response, error) {
-	var obj setting
-	var arraobj []setting
+	var obj entities.Model_setting
+	var arraobj []entities.Model_setting
 	var res helpers.Response
-	msg := "Error"
+	msg := "Data Not Found"
 	con := db.CreateCon()
 	ctx := context.Background()
 	render_page := time.Now()
@@ -70,31 +66,25 @@ func Fetch_setting() (helpers.Response, error) {
 }
 func Save_setting(start, end string) (helpers.Response, error) {
 	var res helpers.Response
-	con := db.CreateCon()
-	ctx := context.Background()
 	render_page := time.Now()
 	msg := "Failed"
 	flag := false
+	sql_update := `
+			UPDATE 
+			` + config.DB_tbl_mst_setting + `  
+			SET startmaintenance=?, endmaintenance=? 
+			WHERE idversion =? 
+		`
 
-	rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_mst_setting+`  
-				SET startmaintenance=?, endmaintenance=? 
-				WHERE idversion =? 
-			`)
-	helpers.ErrorCheck(err_update)
-	rec_comp, err_comp := rows_update.ExecContext(ctx, start, end, "1")
-	helpers.ErrorCheck(err_comp)
-	update_comp, err_comp := rec_comp.RowsAffected()
-	helpers.ErrorCheck(err_comp)
-	defer rows_update.Close()
-	if update_comp > 0 {
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_setting, "UPDATE", start, end, "1")
+	if flag_update {
 		flag = true
-		msg = "Success"
-		log.Printf("Update %s Success\n", config.DB_tbl_mst_setting)
+		msg = "Succes"
+		log.Println(msg_update)
 	} else {
-		log.Printf("Update %s Failed\n", config.DB_tbl_mst_setting)
+		log.Println(msg_update)
 	}
+	log.Printf("%s - %s - %t", start, end, flag_update)
 	if flag {
 		res.Status = fiber.StatusOK
 		res.Message = msg

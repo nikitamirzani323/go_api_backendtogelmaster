@@ -25,7 +25,7 @@ func Fetch_company() (helpers.Response, error) {
 	tglnow, _ := goment.New()
 	bulanskrg := tglnow.Format("MMMM") + "-" + tglnow.Format("YYYY")
 	render_page := time.Now()
-	endday, _, _ := helpers.GetEndRangeDate(tglnow.Format("MM"))
+	endday, _, _, _ := helpers.GetEndRangeDate(tglnow.Format("MM"))
 	start := tglnow.Format("YYYY-MM") + "-" + "01"
 	end := tglnow.Format("YYYY-MM") + "-" + endday
 
@@ -228,7 +228,7 @@ func Fetch_company_listpasaran(company string) (helpers.Response, error) {
 	tglnow, _ := goment.New()
 	bulanskrg := tglnow.Format("MMMM") + "-" + tglnow.Format("YYYY")
 	render_page := time.Now()
-	endday, _, _ := helpers.GetEndRangeDate(tglnow.Format("MM"))
+	endday, _, _, _ := helpers.GetEndRangeDate(tglnow.Format("MM"))
 	start := tglnow.Format("YYYY-MM") + "-" + "01"
 	end := tglnow.Format("YYYY-MM") + "-" + endday
 	var no int = 0
@@ -682,7 +682,7 @@ func Fetch_company_listkeluaran(company, periode string, pasaran int) (helpers.R
 	con := db.CreateCon()
 	ctx := context.Background()
 	render_page := time.Now()
-	_, startmonthyear, endmonthyear := helpers.GetEndRangeDate(periode)
+	_, startmonthyear, endmonthyear, _ := helpers.GetEndRangeDate(periode)
 	var no int = 0
 	subtotalwinlose := 0
 	tbl_trx_keluaran, _, _, _ := Get_mappingdatabase(company)

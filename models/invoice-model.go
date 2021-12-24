@@ -84,8 +84,8 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 		year := tglnow.Format("YYYY")
 		month := periode
 		periodeinvoice := year + "-" + month
-		nmcompinvoice := strings.ToUpper(tglnow.Format("MMMM")) + " " + year
-		endday, _, _ := helpers.GetEndRangeDate(periode)
+		endday, _, _, nmmonth := helpers.GetEndRangeDate(periode)
+		nmcompinvoice := nmmonth + " " + year
 		start := tglnow.Format("YYYY") + "-" + month + "-" + "01"
 		end := tglnow.Format("YYYY") + "-" + month + "-" + endday
 
@@ -190,9 +190,10 @@ func Save_invoicestatus(master, invoice, tipe string) (helpers.Response, error) 
 			temp := strings.Split(periodeinvoice_db, "-")
 			year := temp[0]
 			month := temp[1]
-			endday, _, _ := helpers.GetEndRangeDate(month)
+			endday, _, _, _ := helpers.GetEndRangeDate(month)
 			start := year + "-" + month + "-" + "01"
 			end := year + "-" + month + "-" + endday
+			log.Printf("%s - %s", start, end)
 			winlose = _winlose(idcompany_db, start, end, 0)
 
 		}

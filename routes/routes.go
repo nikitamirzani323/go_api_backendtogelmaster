@@ -86,5 +86,8 @@ func Init() *fiber.App {
 
 	app.Post("/api/setting", middleware.JWTProtected(), controller.SettingHome)
 	app.Post("/api/savesetting", middleware.JWTProtected(), controller.SettingSave)
+
+	app.Post("/api/domain", middleware.JWTProtected(), controller.Domainhome)
+	app.Post("/api/savedomain", middleware.JWTProtected(), controller.DomainSave)
 	return app
 }

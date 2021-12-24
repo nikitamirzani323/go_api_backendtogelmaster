@@ -15,6 +15,33 @@ import (
 const Fielddomain_home_redis = "LISTDOMAIN_MASTER"
 
 func Domainhome(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Controller_domain)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+
 	var obj entities.Model_domain
 	var arraobj []entities.Model_domain
 	render_page := time.Now()

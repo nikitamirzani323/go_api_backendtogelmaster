@@ -8,6 +8,9 @@ type Model_domain struct {
 	Domain_update   string `json:"domain_update"`
 }
 
+type Controller_domain struct {
+	Master string `json:"master" validate:"required"`
+}
 type Controller_domainsave struct {
 	Sdata         string `json:"sdata" validate:"required"`
 	Master        string `json:"master" validate:"required"`

@@ -10,23 +10,14 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/config"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/db"
+	"github.com/nikitamirzani323/go_api_backendtogelmaster/entities"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/helpers"
 	"github.com/nleeper/goment"
 )
 
-type invoicehome struct {
-	Idinvoice string `json:"invoice_id"`
-	Company   string `json:"invoice_company"`
-	Date      string `json:"invoice_date"`
-	Name      string `json:"invoice_name"`
-	Winlose   int    `json:"invoice_winlose"`
-	Status    string `json:"invoice_status"`
-	Statuscss string `json:"invoice_statuscss"`
-}
-
 func Fetch_invoice() (helpers.Response, error) {
-	var obj invoicehome
-	var arraobj []invoicehome
+	var obj entities.Model_invoicehome
+	var arraobj []entities.Model_invoicehome
 	var res helpers.Response
 	msg := "Error"
 	render_page := time.Now()
@@ -116,40 +107,33 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 
 			flag_insert := CheckDBTwoField(config.DB_tbl_trx_company_invoice, "idcompany", idcompany_db, "periodeinvoice", periodeinvoice)
 			if !flag_insert {
-				rows_insert, err_insert := con.PrepareContext(ctx, `
+				sql_insert := `
 					INSERT INTO  
-					`+config.DB_tbl_trx_company_invoice+` (
+					` + config.DB_tbl_trx_company_invoice + ` (
 						idcompinvoice , idcompany, datecompinvoice, periodeinvoice, nmcompinvoice, winlosecomp, 
 						statuscompinvoice, createcompinvoice, createdatecompinvoice 
 					)VALUES( 
 						?,?,?,?,?,?,
 						?,?,?
 					) 
-				`)
-				helpers.ErrorCheck(err_insert)
-
+				`
 				field_table := config.DB_tbl_trx_company_invoice + tglnow.Format("YYYY")
 				idrecord_counter := Get_counter(field_table)
 				idrecord := tglnow.Format("YY") + tglnow.Format("MM") + tglnow.Format("DD") + strconv.Itoa(idrecord_counter)
-
-				rec_comp, err_comp := rows_insert.ExecContext(ctx,
-					idrecord,
-					idcompany_db,
+				flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_trx_company_invoice, "INSERT",
+					idrecord, idcompany_db,
 					tglnow.Format("YYYY-MM-DD"),
 					periodeinvoice,
 					nmcompinvoice,
 					winlose,
 					"PROGRESS",
-					master,
-					tglnow.Format("YYYY-MM-DD HH:mm:ss"))
-				helpers.ErrorCheck(err_comp)
-				insert, e := rec_comp.RowsAffected()
-				helpers.ErrorCheck(e)
-				defer rows_insert.Close()
-				if insert > 0 {
+					master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
+				if flag_insert {
 					flag = true
-					msg = "Success"
-					log.Println("Data Berhasil di save")
+					msg = "Succes"
+					log.Println(msg_insert)
+				} else {
+					log.Println(msg_insert)
 				}
 			} else {
 				msg = "Duplicate Entry"
@@ -213,57 +197,43 @@ func Save_invoicestatus(master, invoice, tipe string) (helpers.Response, error) 
 
 		}
 		defer row_select.Close()
+		sql_update := `
+			UPDATE 
+			` + config.DB_tbl_trx_company_invoice + `  
+			SET winlosecomp=?,  
+			updatecompinvoice=?, updatedatecompinvoice=? 
+			WHERE idcompinvoice =? 
+		`
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_trx_company_invoice, "UPDATE",
+			winlose, master, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idinvoice)
 
-		rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_trx_company_invoice+`  
-				SET winlosecomp=?,  
-				updatecompinvoice=?, updatedatecompinvoice=? 
-				WHERE idcompinvoice =? 
-			`)
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
-			winlose,
-			master,
-			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-			idinvoice)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s WINLOSE Success : %s\n", config.DB_tbl_trx_company_invoice, idinvoice)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			log.Printf("Update %s WINLOSE Failed \n", config.DB_tbl_trx_company_invoice)
+			log.Println(msg_update)
 		}
 	case "UPDATE-STATUS":
-		rows_update, err_update := con.PrepareContext(ctx, `
-				UPDATE 
-				`+config.DB_tbl_trx_company_invoice+`  
-				SET statuscompinvoice=?,  
-				updatecompinvoice=?, updatedatecompinvoice=? 
-				WHERE idcompinvoice =? 
-			`)
-		helpers.ErrorCheck(err_update)
-
-		rec_comp, err_comp := rows_update.ExecContext(ctx,
+		sql_update := `
+			UPDATE 
+			` + config.DB_tbl_trx_company_invoice + `  
+			SET statuscompinvoice=?,  
+			updatecompinvoice=?, updatedatecompinvoice=? 
+			WHERE idcompinvoice =?  
+		`
+		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_trx_company_invoice, "UPDATE",
 			"COMPLETED",
 			master,
 			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 			idinvoice)
-		helpers.ErrorCheck(err_comp)
-		update_comp, err_comp := rec_comp.RowsAffected()
-		helpers.ErrorCheck(err_comp)
-		defer rows_update.Close()
-		if update_comp > 0 {
+
+		if flag_update {
 			flag = true
-			msg = "Success"
-			log.Printf("Update %s STATUS Success : %s\n", config.DB_tbl_trx_company_invoice, idinvoice)
+			msg = "Succes"
+			log.Println(msg_update)
 		} else {
-			log.Printf("Update %s STATUS Failed \n", config.DB_tbl_trx_company_invoice)
+			log.Println(msg_update)
 		}
 	}
 

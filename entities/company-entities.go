@@ -281,6 +281,9 @@ type Model_invoicelistpermainan struct {
 	Bet_update       string  `json:"bet_update"`
 	Bet_updateDate   string  `json:"bet_updatedate"`
 }
+type Model_invoicelistGroupPermainan struct {
+	Permainan string `json:"permainan"`
+}
 
 type Controller_company struct {
 	Company_search string `json:"company_search"`

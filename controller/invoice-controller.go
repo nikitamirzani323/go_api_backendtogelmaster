@@ -7,23 +7,11 @@ import (
 	"github.com/buger/jsonparser"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/nikitamirzani323/go_api_backendtogelmaster/entities"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/helpers"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/models"
 )
 
-type invoicehome struct {
-	Master string `json:"master" validate:"required"`
-}
-type invoicesave struct {
-	Sdata   string `json:"sdata" validate:"required"`
-	Master  string `json:"master" validate:"required"`
-	Periode string `json:"periode" validate:"required"`
-}
-type invoicesavestatus struct {
-	Master  string `json:"master" validate:"required"`
-	Invoice string `json:"invoice" validate:"required"`
-	Tipe    string `json:"tipe" validate:"required"`
-}
 type redis_invoicehome struct {
 	Idinvoice string `json:"invoice_id"`
 	Company   string `json:"invoice_company"`
@@ -34,9 +22,11 @@ type redis_invoicehome struct {
 	Statuscss string `json:"invoice_statuscss"`
 }
 
+const Fieldinvoice_home_redis = "LISTINVOICE_MASTER"
+
 func InvoiceHome(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(invoicehome)
+	client := new(entities.Controller_invoicehome)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -61,11 +51,10 @@ func InvoiceHome(c *fiber.Ctx) error {
 			"record":  errors,
 		})
 	}
-	field_redis := "LISTINVOICE_MASTER"
 	render_page := time.Now()
 	var obj redis_invoicehome
 	var arraobj []redis_invoicehome
-	resultredis, flag := helpers.GetRedis(field_redis)
+	resultredis, flag := helpers.GetRedis(Fieldinvoice_home_redis)
 	jsonredis := []byte(resultredis)
 	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
@@ -96,7 +85,7 @@ func InvoiceHome(c *fiber.Ctx) error {
 				"record":  nil,
 			})
 		}
-		helpers.SetRedis(field_redis, result, 0)
+		helpers.SetRedis(Fieldinvoice_home_redis, result, 60*time.Minute)
 		log.Println("INVOICE MYSQL")
 		return c.JSON(result)
 	} else {
@@ -111,7 +100,7 @@ func InvoiceHome(c *fiber.Ctx) error {
 }
 func InvoiceSave(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(invoicesave)
+	client := new(entities.Controller_invoicesave)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -146,14 +135,14 @@ func InvoiceSave(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	field_redis := "LISTINVOICE_MASTER"
-	val_master := helpers.DeleteRedis(field_redis)
+
+	val_master := helpers.DeleteRedis(Fieldinvoice_home_redis)
 	log.Printf("Redis Delete MASTER LISTINVOICE_MASTER : %d", val_master)
 	return c.JSON(result)
 }
 func InvoiceSavewinlosestatus(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
-	client := new(invoicesavestatus)
+	client := new(entities.Controller_invoicesavestatus)
 	validate := validator.New()
 	if err := c.BodyParser(client); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -188,8 +177,8 @@ func InvoiceSavewinlosestatus(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	field_redis := "LISTINVOICE_MASTER"
-	val_master := helpers.DeleteRedis(field_redis)
+
+	val_master := helpers.DeleteRedis(Fieldinvoice_home_redis)
 	log.Printf("Redis Delete MASTER LISTINVOICE_MASTER : %d", val_master)
 	return c.JSON(result)
 }

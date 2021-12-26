@@ -75,6 +75,50 @@ func CheckLogin(c *fiber.Ctx) error {
 
 	}
 }
+func CheckLoginOtherWebsite(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Loginwebsite)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+
+	log.Printf("PASSWORD : %s", client.Password)
+	dataclient := client.Password
+	dataclient_encr, keymap := helpers.Encryption(dataclient)
+	dataclient_encr_final := dataclient_encr + "|" + strconv.Itoa(keymap)
+	log.Printf("HASH : %s", dataclient_encr_final)
+	t, err := helpers.GenerateNewAccessToken(dataclient_encr_final)
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+
+	return c.JSON(fiber.Map{
+		"status": fiber.StatusOK,
+		"token":  t,
+	})
+}
 
 func Home(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse

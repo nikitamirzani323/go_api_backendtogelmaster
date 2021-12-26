@@ -16,6 +16,7 @@ func Init() *fiber.App {
 	app.Use(compress.New())
 
 	app.Post("/api/login", controller.CheckLogin)
+	app.Post("/api/loginother", controller.CheckLoginOtherWebsite)
 
 	app.Post("/api/home", middleware.JWTProtected(), controller.Home)
 	app.Post("/api/allinvoice", middleware.JWTProtected(), controller.InvoiceHome)
@@ -89,5 +90,8 @@ func Init() *fiber.App {
 
 	app.Post("/api/domain", middleware.JWTProtected(), controller.Domainhome)
 	app.Post("/api/savedomain", middleware.JWTProtected(), controller.DomainSave)
+
+	app.Post("/api/listpasaranwajib", middleware.JWTProtected(), controller.Listpasaranwajib)
+	app.Post("/api/prediksiwajib", middleware.JWTProtected(), controller.Prediksiwajib)
 	return app
 }

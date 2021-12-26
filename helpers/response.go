@@ -23,6 +23,7 @@ type ResponseListPermainan struct {
 	Subtotalcancel int         `json:"subtotalcancel"`
 	Subtotalwin    int         `json:"subtotalwin"`
 }
+
 type ErrorResponse struct {
 	Field string
 	Tag   string

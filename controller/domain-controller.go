@@ -51,12 +51,14 @@ func Domainhome(c *fiber.Ctx) error {
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		domain_iddomain, _ := jsonparser.GetInt(value, "domain_iddomain")
 		domain_name, _ := jsonparser.GetString(value, "domain_name")
+		domain_tipe, _ := jsonparser.GetString(value, "domain_tipe")
 		domain_status, _ := jsonparser.GetString(value, "domain_status")
 		domain_create, _ := jsonparser.GetString(value, "domain_create")
 		domain_update, _ := jsonparser.GetString(value, "domain_update")
 
 		obj.Domain_iddomain = int(domain_iddomain)
 		obj.Domain_name = domain_name
+		obj.Domain_tipe = domain_tipe
 		obj.Domain_status = domain_status
 		obj.Domain_create = domain_create
 		obj.Domain_update = domain_update
@@ -117,7 +119,7 @@ func DomainSave(c *fiber.Ctx) error {
 
 	result, err := models.Save_domain(
 		client.Master,
-		client.Domain_name, client.Domain_status, client.Sdata, client.Domain_id)
+		client.Domain_name, client.Domain_status, client.Domain_tipe, client.Sdata, client.Domain_id)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{

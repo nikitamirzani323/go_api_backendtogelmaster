@@ -25,7 +25,7 @@ func Fetch_domain() (helpers.Response, error) {
 
 	var no int = 0
 	sql_periode := `SELECT 
-			iddomain , nmdomain,statusdomain, 
+			iddomain , nmdomain,statusdomain,tipedomain,  
 			createdomain, COALESCE(createdatedomain,""),updatedomain, COALESCE(updatedatedomain,"")   
 			FROM ` + config.DB_tbl_mst_domain + ` 
 			ORDER BY iddomain ASC 
@@ -36,12 +36,12 @@ func Fetch_domain() (helpers.Response, error) {
 		no++
 		var (
 			iddomain_db                                                                int
-			nmdomain_db, statusdomain_db                                               string
+			nmdomain_db, statusdomain_db, tipedomain_db                                string
 			createdomain_db, createdatedomain_db, updatedomain_db, updatedatedomain_db string
 		)
 
 		err = row.Scan(
-			&iddomain_db, &nmdomain_db, &statusdomain_db,
+			&iddomain_db, &nmdomain_db, &statusdomain_db, &tipedomain_db,
 			&createdomain_db, &createdatedomain_db, &updatedomain_db, &updatedatedomain_db)
 		helpers.ErrorCheck(err)
 
@@ -56,6 +56,7 @@ func Fetch_domain() (helpers.Response, error) {
 
 		obj.Domain_iddomain = iddomain_db
 		obj.Domain_name = nmdomain_db
+		obj.Domain_tipe = tipedomain_db
 		obj.Domain_status = statusdomain_db
 		obj.Domain_create = create
 		obj.Domain_update = update
@@ -71,7 +72,7 @@ func Fetch_domain() (helpers.Response, error) {
 
 	return res, nil
 }
-func Save_domain(admin, nmdomain, status, sData string, idrecord int) (helpers.Response, error) {
+func Save_domain(admin, nmdomain, status, tipe, sData string, idrecord int) (helpers.Response, error) {
 	var res helpers.Response
 	msg := "Failed"
 	tglnow, _ := goment.New()
@@ -84,17 +85,17 @@ func Save_domain(admin, nmdomain, status, sData string, idrecord int) (helpers.R
 			sql_insert := `
 				insert into
 				` + config.DB_tbl_mst_domain + ` (
-					iddomain , nmdomain, statusdomain, 
+					iddomain , nmdomain, statusdomain, tipedomain, 
 					createdomain, createdatedomain
 				) values (
-					?, ?, ?, 
+					?, ?, ?, ?, 
 					?, ?
 				)
 			`
 			field_column := config.DB_tbl_mst_domain + tglnow.Format("YYYY")
 			idrecord_counter := Get_counter(field_column)
 			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_mst_domain, "INSERT",
-				tglnow.Format("YY")+strconv.Itoa(idrecord_counter), nmdomain, status,
+				tglnow.Format("YY")+strconv.Itoa(idrecord_counter), nmdomain, status, tipe,
 				admin,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 
@@ -112,13 +113,13 @@ func Save_domain(admin, nmdomain, status, sData string, idrecord int) (helpers.R
 		sql_update := `
 				UPDATE 
 				` + config.DB_tbl_mst_domain + `  
-				SET nmdomain =?, statusdomain=?, 
+				SET nmdomain =?, statusdomain=?, tipedomain=?,
 				updatedomain=?, updatedatedomain=? 
 				WHERE iddomain =? 
 			`
 
 		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_domain, "UPDATE",
-			nmdomain, status,
+			nmdomain, status, tipe,
 			admin,
 			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 			idrecord)

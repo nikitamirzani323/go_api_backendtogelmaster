@@ -1410,28 +1410,55 @@ func Save_company(sData, master, company, name, urldomain, status string) (helpe
 			msg = "Duplicate Entry"
 		}
 	} else {
-		sql_update := `
+		if status == "DEACTIVE" {
+			sql_update := `
+				UPDATE 
+				` + config.DB_tbl_mst_company + `  
+				SET nmcompany=?, companyurl=?, statuscompany=?,  
+				updatecompany=?, updatedatecompany=?, endjoincompany=?  
+				WHERE idcompany=? 
+			`
+			flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company, "UPDATE",
+				name,
+				urldomain,
+				status,
+				master,
+				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
+				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
+				company)
+
+			if flag_update {
+				flag = true
+				msg = "Succes"
+				log.Println(msg_update)
+			} else {
+				log.Println(msg_update)
+			}
+		} else {
+			sql_update := `
 				UPDATE 
 				` + config.DB_tbl_mst_company + `  
 				SET nmcompany=?, companyurl=?, statuscompany=?,  
 				updatecompany=?, updatedatecompany=? 
 				WHERE idcompany=? 
-		`
-		flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company, "UPDATE",
-			name,
-			urldomain,
-			status,
-			master,
-			tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-			company)
+			`
+			flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company, "UPDATE",
+				name,
+				urldomain,
+				status,
+				master,
+				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
+				company)
 
-		if flag_update {
-			flag = true
-			msg = "Succes"
-			log.Println(msg_update)
-		} else {
-			log.Println(msg_update)
+			if flag_update {
+				flag = true
+				msg = "Succes"
+				log.Println(msg_update)
+			} else {
+				log.Println(msg_update)
+			}
 		}
+
 	}
 	if flag {
 		res.Status = fiber.StatusOK

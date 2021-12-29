@@ -5,12 +5,15 @@ type Model_pasaranlist struct {
 	Pasaranlist_nmpasarantogel string `json:"pasaranlist_nmpasarantogel"`
 }
 type Model_prediksiwajib struct {
-	Prediksi_idcompany   string      `json:"prediksi_idcompany"`
-	Prediksi_nmcompany   string      `json:"prediksi_nmcompany"`
-	Prediksi_result      interface{} `json:"prediksi_result"`
-	Prediksi_totalbet    int         `json:"prediksi_totalbet"`
-	Prediksi_subtotal    int         `json:"prediksi_subtotal"`
-	Prediksi_subtotalwin int         `json:"prediksi_subtotalwin"`
+	Prediksi_idcompany      string      `json:"prediksi_idcompany"`
+	Prediksi_nmcompany      string      `json:"prediksi_nmcompany"`
+	Prediksi_invoice        string      `json:"prediksi_invoice"`
+	Prediksi_invoicedate    string      `json:"prediksi_invoicedate"`
+	Prediksi_invoiceperiode string      `json:"prediksi_invoiceperiode"`
+	Prediksi_result         interface{} `json:"prediksi_result"`
+	Prediksi_totalbet       int         `json:"prediksi_totalbet"`
+	Prediksi_subtotal       int         `json:"prediksi_subtotal"`
+	Prediksi_subtotalwin    int         `json:"prediksi_subtotalwin"`
 }
 type Model_listPrediksi struct {
 	Prediksi_tanggal      string  `json:"prediksi_tanggal"`

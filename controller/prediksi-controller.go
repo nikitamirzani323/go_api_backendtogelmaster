@@ -119,6 +119,9 @@ func Prediksiwajib(c *fiber.Ctx) error {
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		prediksi_idcompany, _ := jsonparser.GetString(value, "prediksi_idcompany")
 		prediksi_nmcompany, _ := jsonparser.GetString(value, "prediksi_nmcompany")
+		prediksi_invoice, _ := jsonparser.GetString(value, "prediksi_invoice")
+		prediksi_invoicedate, _ := jsonparser.GetString(value, "prediksi_invoicedate")
+		prediksi_invoiceperiode, _ := jsonparser.GetString(value, "prediksi_invoiceperiode")
 		prediksi_totalbet, _ := jsonparser.GetInt(value, "prediksi_totalbet")
 		prediksi_subtotal, _ := jsonparser.GetInt(value, "prediksi_subtotal")
 		prediksi_subtotalwin, _ := jsonparser.GetInt(value, "prediksi_subtotalwin")
@@ -143,6 +146,9 @@ func Prediksiwajib(c *fiber.Ctx) error {
 
 		obj.Prediksi_idcompany = prediksi_idcompany
 		obj.Prediksi_nmcompany = prediksi_nmcompany
+		obj.Prediksi_invoice = prediksi_invoice
+		obj.Prediksi_invoicedate = prediksi_invoicedate
+		obj.Prediksi_invoiceperiode = prediksi_invoiceperiode
 		obj.Prediksi_result = arraobjdetail
 		obj.Prediksi_totalbet = int(prediksi_totalbet)
 		obj.Prediksi_subtotal = int(prediksi_subtotal)

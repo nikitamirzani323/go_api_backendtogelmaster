@@ -3243,9 +3243,9 @@ func Save_companyInsertPasaranharionline(master, company string, idcomppasaran i
 
 	flag = Get_OnlinePasaran(company, idcomppasaran, hari, "hari")
 	if !flag {
-		year, _ := strconv.Atoi(tglnow.Format("YYYY"))
+		year := tglnow.Format("YYYY")
 		field_col := config.DB_tbl_mst_company_game_pasaran_offline + "_" + tglnow.Format("YYYY")
-		idrecord_counter := year + Get_counter(field_col)
+		idrecord_counter := year + strconv.Itoa(Get_counter(field_col))
 		sql_insert := `
 			INSERT INTO  
 			` + config.DB_tbl_mst_company_game_pasaran_offline + ` (

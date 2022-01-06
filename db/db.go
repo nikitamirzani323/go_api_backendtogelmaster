@@ -45,7 +45,7 @@ func Init() {
 		conString = dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName
 	}
 
-	db, err = sql.Open("mysql", conString)
+	db, err = sql.Open(dbDriver, conString)
 	helpers.ErrorCheck(err)
 
 	db.SetMaxIdleConns(10)

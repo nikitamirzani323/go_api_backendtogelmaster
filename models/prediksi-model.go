@@ -798,7 +798,6 @@ func _rumusTogel(angka, tipe, nomorkeluaran, company, simpandb string, idcomppas
 		}
 	case "SHIO":
 		flag := false
-
 		kepala := string([]byte(temp)[2])
 		ekor := string([]byte(temp)[3])
 		data := _tableshio(kepala + ekor)
@@ -814,6 +813,8 @@ func _rumusTogel(angka, tipe, nomorkeluaran, company, simpandb string, idcomppas
 	return result, win
 }
 func _tableshio(shiodata string) string {
+	log.Printf("Data shio : %s", shiodata)
+
 	tglnow, _ := goment.New()
 	yearnow := tglnow.Format("YYYY")
 	log.Println(yearnow)

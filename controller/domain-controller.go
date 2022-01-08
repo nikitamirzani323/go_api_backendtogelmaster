@@ -13,6 +13,7 @@ import (
 )
 
 const Fielddomain_home_redis = "LISTDOMAIN_MASTER"
+const Fielddomain_client_redis = "LISTDOMAIN"
 
 func Domainhome(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
@@ -131,5 +132,7 @@ func DomainSave(c *fiber.Ctx) error {
 
 	val_master := helpers.DeleteRedis(Fielddomain_home_redis)
 	log.Printf("Redis Delete MASTER DOMAIN : %d", val_master)
+	val_client := helpers.DeleteRedis(Fielddomain_client_redis)
+	log.Printf("Redis Delete CLIENT DOMAIN : %d", val_client)
 	return c.JSON(result)
 }

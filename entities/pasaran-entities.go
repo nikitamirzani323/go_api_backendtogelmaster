@@ -16,6 +16,7 @@ type Model_pasaran struct {
 type Model_pasaranDetailConf struct {
 	Limitline4d                       int     `json:"limitline_4d"`
 	Limitline3d                       int     `json:"limitline_3d"`
+	Limitline3dd                      int     `json:"limitline_3dd"`
 	Limitline2d                       int     `json:"limitline_2d"`
 	Limitline2dd                      int     `json:"limitline_2dd"`
 	Limitline2dt                      int     `json:"limitline_2dt"`
@@ -23,26 +24,31 @@ type Model_pasaranDetailConf struct {
 	Minbet_432d                       float32 `json:"minbet_432d"`
 	Maxbet4d_432d                     float32 `json:"maxbet4d_432d"`
 	Maxbet3d_432d                     float32 `json:"maxbet3d_432d"`
+	Maxbet3dd_432d                    float32 `json:"maxbet3dd_432d"`
 	Maxbet2d_432d                     float32 `json:"maxbet2d_432d"`
 	Maxbet2dd_432d                    float32 `json:"maxbet2dd_432d"`
 	Maxbet2dt_432d                    float32 `json:"maxbet2dt_432d"`
 	Limitotal4d_432d                  float32 `json:"limitotal4d_432d"`
 	Limitotal3d_432d                  float32 `json:"limitotal3d_432d"`
+	Limitotal3dd_432d                 float32 `json:"limitotal3dd_432d"`
 	Limitotal2d_432d                  float32 `json:"limitotal2d_432d"`
 	Limitotal2dd_432d                 float32 `json:"limitotal2dd_432d"`
 	Limitotal2dt_432d                 float32 `json:"limitotal2dt_432d"`
 	Limitglobal4d_432d                float32 `json:"limitglobal4d_432d"`
 	Limitglobal3d_432d                float32 `json:"limitglobal3d_432d"`
+	Limitglobal3dd_432d               float32 `json:"limitglobal3dd_432d"`
 	Limitglobal2d_432d                float32 `json:"limitglobal2d_432d"`
 	Limitglobal2dd_432d               float32 `json:"limitglobal2dd_432d"`
 	Limitglobal2dt_432d               float32 `json:"limitglobal2dt_432d"`
 	Disc4d_432d                       float32 `json:"disc4d_432d"`
 	Disc3d_432d                       float32 `json:"disc3d_432d"`
+	Disc3dd_432d                      float32 `json:"disc3dd_432d"`
 	Disc2d_432d                       float32 `json:"disc2d_432d"`
 	Disc2dd_432d                      float32 `json:"disc2dd_432d"`
 	Disc2dt_432d                      float32 `json:"disc2dt_432d"`
 	Win4d_432d                        float32 `json:"win4d_432d"`
 	Win3d_432d                        float32 `json:"win3d_432d"`
+	Win3dd_432d                       float32 `json:"win3dd_432d"`
 	Win2d_432d                        float32 `json:"win2d_432d"`
 	Win2dd_432d                       float32 `json:"win2dd_432d"`
 	Win2dt_432d                       float32 `json:"win2dt_432d"`
@@ -213,6 +219,7 @@ type Controller_pasaransavelimitline struct {
 	Pasaran_bbfs         int    `json:"pasaran_bbfs" validate:"required,numeric"`
 	Pasaran_limitline4d  int    `json:"pasaran_limitline4d" validate:"required,numeric"`
 	Pasaran_limitline3d  int    `json:"pasaran_limitline3d" validate:"required,numeric"`
+	Pasaran_limitline3dd int    `json:"pasaran_limitline3dd" validate:"required,numeric"`
 	Pasaran_limitline2d  int    `json:"pasaran_limitline2d" validate:"required,numeric"`
 	Pasaran_limitline2dd int    `json:"pasaran_limitline2dd" validate:"required,numeric"`
 	Pasaran_limitline2dt int    `json:"pasaran_limitline2dt" validate:"required,numeric"`
@@ -223,26 +230,31 @@ type Controller_pasaransaveconf432d struct {
 	Pasaran_minbet_432d         int     `json:"pasaran_minbet_432d" validate:"required,numeric"`
 	Pasaran_maxbet4d_432d       int     `json:"pasaran_maxbet4d_432d" validate:"required,numeric"`
 	Pasaran_maxbet3d_432d       int     `json:"pasaran_maxbet3d_432d" validate:"required,numeric"`
+	Pasaran_maxbet3dd_432d      int     `json:"pasaran_maxbet3dd_432d" validate:"required,numeric"`
 	Pasaran_maxbet2d_432d       int     `json:"pasaran_maxbet2d_432d" validate:"required,numeric"`
 	Pasaran_maxbet2dd_432d      int     `json:"pasaran_maxbet2dd_432d" validate:"required,numeric"`
 	Pasaran_maxbet2dt_432d      int     `json:"pasaran_maxbet2dt_432d" validate:"required,numeric"`
 	Pasaran_limitotal4d_432d    int     `json:"pasaran_limitotal4d_432d" validate:"required,numeric"`
 	Pasaran_limitotal3d_432d    int     `json:"pasaran_limitotal3d_432d" validate:"required,numeric"`
+	Pasaran_limitotal3dd_432d   int     `json:"pasaran_limitotal3dd_432d" validate:"required,numeric"`
 	Pasaran_limitotal2d_432d    int     `json:"pasaran_limitotal2d_432d" validate:"required,numeric"`
 	Pasaran_limitotal2dd_432d   int     `json:"pasaran_limitotal2dd_432d" validate:"required,numeric"`
 	Pasaran_limitotal2dt_432d   int     `json:"pasaran_limitotal2dt_432d" validate:"required,numeric"`
 	Pasaran_limitglobal4d_432d  int     `json:"pasaran_limitglobal4d_432d" validate:"required,numeric"`
 	Pasaran_limitglobal3d_432d  int     `json:"pasaran_limitglobal3d_432d" validate:"required,numeric"`
+	Pasaran_limitglobal3dd_432d int     `json:"pasaran_limitglobal3dd_432d" validate:"required,numeric"`
 	Pasaran_limitglobal2d_432d  int     `json:"pasaran_limitglobal2d_432d" validate:"required,numeric"`
 	Pasaran_limitglobal2dd_432d int     `json:"pasaran_limitglobal2dd_432d" validate:"required,numeric"`
 	Pasaran_limitglobal2dt_432d int     `json:"pasaran_limitglobal2dt_432d" validate:"required,numeric"`
 	Pasaran_win4d_432d          int     `json:"pasaran_win4d_432d" validate:"required,numeric"`
 	Pasaran_win3d_432d          int     `json:"pasaran_win3d_432d" validate:"required,numeric"`
+	Pasaran_win3dd_432d         int     `json:"pasaran_win3dd_432d" validate:"required,numeric"`
 	Pasaran_win2d_432d          int     `json:"pasaran_win2d_432d" validate:"required,numeric"`
 	Pasaran_win2dd_432d         int     `json:"pasaran_win2dd_432d" validate:"required,numeric"`
 	Pasaran_win2dt_432d         int     `json:"pasaran_win2dt_432d" validate:"required,numeric"`
 	Pasaran_disc4d_432d         float32 `json:"pasaran_disc4d_432d" validate:"required,numeric"`
 	Pasaran_disc3d_432d         float32 `json:"pasaran_disc3d_432d" validate:"required,numeric"`
+	Pasaran_disc3dd_432d        float32 `json:"pasaran_disc3dd_432d" validate:"required,numeric"`
 	Pasaran_disc2d_432d         float32 `json:"pasaran_disc2d_432d" validate:"required,numeric"`
 	Pasaran_disc2dd_432d        float32 `json:"pasaran_disc2dd_432d" validate:"required,numeric"`
 	Pasaran_disc2dt_432d        float32 `json:"pasaran_disc2dt_432d" validate:"required,numeric"`

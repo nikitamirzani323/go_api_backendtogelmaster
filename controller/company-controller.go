@@ -442,6 +442,7 @@ func CompanyDetailListPasaranConf(c *fiber.Ctx) error {
 		pasaran_statusactive, _ := jsonparser.GetString(value, "pasaran_statusactive")
 		limitline_4d, _ := jsonparser.GetInt(value, "limitline_4d")
 		limitline_3d, _ := jsonparser.GetInt(value, "limitline_3d")
+		limitline_3dd, _ := jsonparser.GetInt(value, "limitline_3dd")
 		limitline_2d, _ := jsonparser.GetInt(value, "limitline_2d")
 		limitline_2dd, _ := jsonparser.GetInt(value, "limitline_2dd")
 		limitline_2dt, _ := jsonparser.GetInt(value, "limitline_2dt")
@@ -449,26 +450,31 @@ func CompanyDetailListPasaranConf(c *fiber.Ctx) error {
 		minbet_432d, _ := jsonparser.GetFloat(value, "minbet_432d")
 		maxbet4d_432d, _ := jsonparser.GetFloat(value, "maxbet4d_432d")
 		maxbet3d_432d, _ := jsonparser.GetFloat(value, "maxbet3d_432d")
+		maxbet3dd_432d, _ := jsonparser.GetFloat(value, "maxbet3dd_432d")
 		maxbet2d_432d, _ := jsonparser.GetFloat(value, "maxbet2d_432d")
 		maxbet2dd_432d, _ := jsonparser.GetFloat(value, "maxbet2dd_432d")
 		maxbet2dt_432d, _ := jsonparser.GetFloat(value, "maxbet2dt_432d")
 		limitotal4d_432d, _ := jsonparser.GetFloat(value, "limitotal4d_432d")
 		limitotal3d_432d, _ := jsonparser.GetFloat(value, "limitotal3d_432d")
+		limitotal3dd_432d, _ := jsonparser.GetFloat(value, "limitotal3dd_432d")
 		limitotal2d_432d, _ := jsonparser.GetFloat(value, "limitotal2d_432d")
 		limitotal2dd_432d, _ := jsonparser.GetFloat(value, "limitotal2dd_432d")
 		limitotal2dt_432d, _ := jsonparser.GetFloat(value, "limitotal2dt_432d")
 		limitglobal4d_432d, _ := jsonparser.GetFloat(value, "limitglobal4d_432d")
 		limitglobal3d_432d, _ := jsonparser.GetFloat(value, "limitglobal3d_432d")
+		limitglobal3dd_432d, _ := jsonparser.GetFloat(value, "limitglobal3dd_432d")
 		limitglobal2d_432d, _ := jsonparser.GetFloat(value, "limitglobal2d_432d")
 		limitglobal2dd_432d, _ := jsonparser.GetFloat(value, "limitglobal2dd_432d")
 		limitglobal2dt_432d, _ := jsonparser.GetFloat(value, "limitglobal2dt_432d")
 		disc4d_432d, _ := jsonparser.GetFloat(value, "disc4d_432d")
 		disc3d_432d, _ := jsonparser.GetFloat(value, "disc3d_432d")
+		disc3dd_432d, _ := jsonparser.GetFloat(value, "disc3dd_432d")
 		disc2d_432d, _ := jsonparser.GetFloat(value, "disc2d_432d")
 		disc2dd_432d, _ := jsonparser.GetFloat(value, "disc2dd_432d")
 		disc2dt_432d, _ := jsonparser.GetFloat(value, "disc2dt_432d")
 		win4d_432d, _ := jsonparser.GetFloat(value, "win4d_432d")
 		win3d_432d, _ := jsonparser.GetFloat(value, "win3d_432d")
+		win3dd_432d, _ := jsonparser.GetFloat(value, "win3dd_432d")
 		win2d_432d, _ := jsonparser.GetFloat(value, "win2d_432d")
 		win2dd_432d, _ := jsonparser.GetFloat(value, "win2dd_432d")
 		win2dt_432d, _ := jsonparser.GetFloat(value, "win2dt_432d")
@@ -622,6 +628,7 @@ func CompanyDetailListPasaranConf(c *fiber.Ctx) error {
 		obj.Company_Pasaran_statusactive = pasaran_statusactive
 		obj.Company_Limitline4d = int(limitline_4d)
 		obj.Company_Limitline3d = int(limitline_3d)
+		obj.Company_Limitline3dd = int(limitline_3dd)
 		obj.Company_Limitline2d = int(limitline_2d)
 		obj.Company_Limitline2dd = int(limitline_2dd)
 		obj.Company_Limitline2dt = int(limitline_2dt)
@@ -629,26 +636,31 @@ func CompanyDetailListPasaranConf(c *fiber.Ctx) error {
 		obj.Company_Minbet_432d = float32(minbet_432d)
 		obj.Company_Maxbet4d_432d = float32(maxbet4d_432d)
 		obj.Company_Maxbet3d_432d = float32(maxbet3d_432d)
+		obj.Company_Maxbet3dd_432d = float32(maxbet3dd_432d)
 		obj.Company_Maxbet2d_432d = float32(maxbet2d_432d)
 		obj.Company_Maxbet2dd_432d = float32(maxbet2dd_432d)
 		obj.Company_Maxbet2dt_432d = float32(maxbet2dt_432d)
 		obj.Company_Limitotal4d_432d = float32(limitotal4d_432d)
 		obj.Company_Limitotal3d_432d = float32(limitotal3d_432d)
+		obj.Company_Limitotal3dd_432d = float32(limitotal3dd_432d)
 		obj.Company_Limitotal2d_432d = float32(limitotal2d_432d)
 		obj.Company_Limitotal2dd_432d = float32(limitotal2dd_432d)
 		obj.Company_Limitotal2dt_432d = float32(limitotal2dt_432d)
 		obj.Company_Limitglobal4d_432d = float32(limitglobal4d_432d)
 		obj.Company_Limitglobal3d_432d = float32(limitglobal3d_432d)
+		obj.Company_Limitglobal3dd_432d = float32(limitglobal3dd_432d)
 		obj.Company_Limitglobal2d_432d = float32(limitglobal2d_432d)
 		obj.Company_Limitglobal2dd_432d = float32(limitglobal2dd_432d)
 		obj.Company_Limitglobal2dt_432d = float32(limitglobal2dt_432d)
 		obj.Company_Disc4d_432d = float32(disc4d_432d)
 		obj.Company_Disc3d_432d = float32(disc3d_432d)
+		obj.Company_Disc3dd_432d = float32(disc3dd_432d)
 		obj.Company_Disc2d_432d = float32(disc2d_432d)
 		obj.Company_Disc2dd_432d = float32(disc2dd_432d)
 		obj.Company_Disc2dt_432d = float32(disc2dt_432d)
 		obj.Company_Win4d_432d = float32(win4d_432d)
 		obj.Company_Win3d_432d = float32(win3d_432d)
+		obj.Company_Win3dd_432d = float32(win3dd_432d)
 		obj.Company_Win2d_432d = float32(win2d_432d)
 		obj.Company_Win2dd_432d = float32(win2dd_432d)
 		obj.Company_Win2dt_432d = float32(win2dt_432d)
@@ -2202,7 +2214,7 @@ func CompanyPasaranUpdateLimitline(c *fiber.Ctx) error {
 
 	result, err := models.Save_companyUpdatePasaranLine(
 		client.Master, client.Company, client.Companypasaran_id, client.Pasaran_limitline_4d,
-		client.Pasaran_limitline_3d, client.Pasaran_limitline_2d, client.Pasaran_limitline_2dd,
+		client.Pasaran_limitline_3d, client.Pasaran_limitline_3dd, client.Pasaran_limitline_2d, client.Pasaran_limitline_2dd,
 		client.Pasaran_limitline_2dt, client.Pasaran_bbfs)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -2254,12 +2266,12 @@ func CompanyPasaranUpdate432(c *fiber.Ctx) error {
 
 	result, err := models.Save_companyUpdatePasaran432(
 		client.Master, client.Company, client.Companypasaran_id,
-		client.Pasaran_minbet_432d, client.Pasaran_maxbet4d_432d, client.Pasaran_maxbet3d_432d,
+		client.Pasaran_minbet_432d, client.Pasaran_maxbet4d_432d, client.Pasaran_maxbet3d_432d, client.Pasaran_maxbet3dd_432d,
 		client.Pasaran_maxbet2d_432d, client.Pasaran_maxbet2dd_432d, client.Pasaran_maxbet2dt_432d,
-		client.Pasaran_win4d_432d, client.Pasaran_win3d_432d, client.Pasaran_win2d_432d, client.Pasaran_win2dd_432d, client.Pasaran_win2dt_432d,
-		client.Pasaran_disc4d_432d, client.Pasaran_disc3d_432d, client.Pasaran_disc2d_432d, client.Pasaran_disc2dd_432d, client.Pasaran_disc2dt_432d,
-		client.Pasaran_limitglobal4d_432d, client.Pasaran_limitglobal3d_432d, client.Pasaran_limitglobal2d_432d, client.Pasaran_limitglobal2dd_432d, client.Pasaran_limitglobal2dt_432d,
-		client.Pasaran_limitotal4d_432d, client.Pasaran_limitotal3d_432d, client.Pasaran_limitotal2d_432d, client.Pasaran_limitotal2dd_432d, client.Pasaran_limitotal2dt_432d)
+		client.Pasaran_win4d_432d, client.Pasaran_win3d_432d, client.Pasaran_win3dd_432d, client.Pasaran_win2d_432d, client.Pasaran_win2dd_432d, client.Pasaran_win2dt_432d,
+		client.Pasaran_disc4d_432d, client.Pasaran_disc3d_432d, client.Pasaran_disc3dd_432d, client.Pasaran_disc2d_432d, client.Pasaran_disc2dd_432d, client.Pasaran_disc2dt_432d,
+		client.Pasaran_limitglobal4d_432d, client.Pasaran_limitglobal3d_432d, client.Pasaran_limitglobal3dd_432d, client.Pasaran_limitglobal2d_432d, client.Pasaran_limitglobal2dd_432d, client.Pasaran_limitglobal2dt_432d,
+		client.Pasaran_limitotal4d_432d, client.Pasaran_limitotal3d_432d, client.Pasaran_limitotal3dd_432d, client.Pasaran_limitotal2d_432d, client.Pasaran_limitotal2dd_432d, client.Pasaran_limitotal2dt_432d)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{

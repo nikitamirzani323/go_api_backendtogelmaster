@@ -3,7 +3,9 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -626,6 +628,42 @@ func Save_pasaranConf432(
 		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - 432 - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET 4D - 432 - " + strconv.Itoa(maxbet4d) + "<br />"
+		noteafter += "MAXBET 3D - 432 - " + strconv.Itoa(maxbet3d) + "<br />"
+		noteafter += "MAXBET 3DD - 432 - " + strconv.Itoa(maxbet3dd) + "<br />"
+		noteafter += "MAXBET 2D - 432 - " + strconv.Itoa(maxbet2d) + "<br />"
+		noteafter += "MAXBET 2DD - 432 - " + strconv.Itoa(maxbet2dd) + "<br />"
+		noteafter += "MAXBET 2DT - 432 - " + strconv.Itoa(maxbet2dt) + "<br />"
+		noteafter += "LIMITGLOBAL 4D - 432 - " + strconv.Itoa(limitglobal4d) + "<br />"
+		noteafter += "LIMITGLOBAL 3D - 432 - " + strconv.Itoa(limitglobal3d) + "<br />"
+		noteafter += "LIMITGLOBAL 3DD - 432 - " + strconv.Itoa(limitglobal3dd) + "<br />"
+		noteafter += "LIMITGLOBAL 2D - 432 - " + strconv.Itoa(limitglobal2d) + "<br />"
+		noteafter += "LIMITGLOBAL 2DD - 432 - " + strconv.Itoa(limitglobal2dd) + "<br />"
+		noteafter += "LIMITGLOBAL 2DT - 432 - " + strconv.Itoa(limitglobal2dt) + "<br />"
+		noteafter += "LIMITTOTAL 4D - 432 - " + strconv.Itoa(limittotal4d) + "<br />"
+		noteafter += "LIMITTOTAL 3D - 432 - " + strconv.Itoa(limittotal3d) + "<br />"
+		noteafter += "LIMITTOTAL 3DD - 432 - " + strconv.Itoa(limittotal3dd) + "<br />"
+		noteafter += "LIMITTOTAL 2D - 432 - " + strconv.Itoa(limittotal2d) + "<br />"
+		noteafter += "LIMITTOTAL 2DD - 432 - " + strconv.Itoa(limittotal2dd) + "<br />"
+		noteafter += "LIMITTOTAL 2DT - 432 - " + strconv.Itoa(limittotal2dt) + "<br />"
+		noteafter += "DISC 4D - 432 - " + fmt.Sprintf("%.2f", disc4d) + "<br />"
+		noteafter += "DISC 3D - 432 - " + fmt.Sprintf("%.2f", disc3d) + "<br />"
+		noteafter += "DISC 3DD - 432 - " + fmt.Sprintf("%.2f", disc3dd) + "<br />"
+		noteafter += "DISC 2D - 432 - " + fmt.Sprintf("%.2f", disc2d) + "<br />"
+		noteafter += "DISC 2DD - 432 - " + fmt.Sprintf("%.2f", disc2dd) + "<br />"
+		noteafter += "DISC 2DT - 432 - " + fmt.Sprintf("%.2f", disc2dt) + "<br />"
+		noteafter += "WIN 4D - 432 - " + strconv.Itoa(win4d) + "<br />"
+		noteafter += "WIN 3D - 432 - " + strconv.Itoa(win3d) + "<br />"
+		noteafter += "WIN 3DD - 432 - " + strconv.Itoa(win3dd) + "<br />"
+		noteafter += "WIN 2D - 432 - " + strconv.Itoa(win2d) + "<br />"
+		noteafter += "WIN 2DD - 432 - " + strconv.Itoa(win2dd) + "<br />"
+		noteafter += "WIN 2DT - 432 - " + strconv.Itoa(win2dt) + "<br />"
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}
@@ -671,6 +709,17 @@ func Save_pasaranConfColokBebas(
 		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - COLOK BEBAS - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - COLOK BEBAS - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - COLOK BEBAS - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - COLOK BEBAS - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC - COLOK BEBAS - " + fmt.Sprintf("%.2f", disc) + "<br />"
+		noteafter += "WIN - COLOK BEBAS - " + fmt.Sprintf("%.2f", win)
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}
@@ -1217,4 +1266,33 @@ func Save_pasaranConfshio(
 	}
 
 	return res, nil
+}
+
+func _pasaranmaster_id(pasarancode, tipecolumn string) string {
+	con := db.CreateCon()
+	ctx := context.Background()
+	result := ""
+	sql_pasaran := `SELECT 
+		tipepasaran,nmpasarantogel 
+		FROM ` + config.DB_tbl_mst_pasaran_togel + `  
+		WHERE idpasarantogel = ? 
+	`
+	var (
+		tipepasaran_db, nmpasarantogel_db string
+	)
+	rows := con.QueryRowContext(ctx, sql_pasaran, pasarancode)
+	switch err := rows.Scan(&tipepasaran_db, &nmpasarantogel_db); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		switch tipecolumn {
+		case "tipepasaran":
+			result = tipepasaran_db
+		case "nmpasarantogel":
+			result = nmpasarantogel_db
+		}
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return result
 }

@@ -776,8 +776,8 @@ func Save_pasaranConfColokMacau(
 		noteafter += "LIMITGLOBAL - COLOK MACAU - " + strconv.Itoa(limitglobal) + "<br />"
 		noteafter += "LIMITTOTAL - COLOK MACAU - " + strconv.Itoa(limittotal) + "<br />"
 		noteafter += "DISC - COLOK MACAU - " + fmt.Sprintf("%.2f", disc) + "<br />"
-		noteafter += "WIN 2 - COLOK MACAU - " + fmt.Sprintf("%.2f", win2)
-		noteafter += "WIN 3 - COLOK MACAU - " + fmt.Sprintf("%.2f", win3)
+		noteafter += "WIN 2 - COLOK MACAU - " + fmt.Sprintf("%.2f", win2) + "<br />"
+		noteafter += "WIN 3 - COLOK MACAU - " + fmt.Sprintf("%.2f", win3) + "<br />"
 		noteafter += "WIN 4 - COLOK MACAU - " + fmt.Sprintf("%.2f", win4)
 		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
@@ -836,7 +836,7 @@ func Save_pasaranConfColokNaga(
 		noteafter += "LIMITGLOBAL - COLOK NAGA - " + strconv.Itoa(limitglobal) + "<br />"
 		noteafter += "LIMITTOTAL - COLOK NAGA - " + strconv.Itoa(limittotal) + "<br />"
 		noteafter += "DISC - COLOK NAGA - " + fmt.Sprintf("%.2f", disc) + "<br />"
-		noteafter += "WIN 3 - COLOK NAGA - " + fmt.Sprintf("%.2f", win3)
+		noteafter += "WIN 3 - COLOK NAGA - " + fmt.Sprintf("%.2f", win3) + "<br />"
 		noteafter += "WIN 4 - COLOK NAGA - " + fmt.Sprintf("%.2f", win4)
 		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
@@ -896,10 +896,10 @@ func Save_pasaranConfColokJitu(
 		noteafter += "LIMITGLOBAL - COLOK JITU - " + strconv.Itoa(limitglobal) + "<br />"
 		noteafter += "LIMITTOTAL - COLOK JITU - " + strconv.Itoa(limittotal) + "<br />"
 		noteafter += "DISC - COLOK JITU - " + fmt.Sprintf("%.2f", disc) + "<br />"
-		noteafter += "WIN AS - COLOK JITU - " + fmt.Sprintf("%.2f", winas)
-		noteafter += "WIN KOP - COLOK JITU - " + fmt.Sprintf("%.2f", winkop)
-		noteafter += "WIN KEPALA - COLOK JITU - " + fmt.Sprintf("%.2f", winkepala)
-		noteafter += "WIN EKOR - COLOK JITU - " + fmt.Sprintf("%.2f", winekor)
+		noteafter += "WIN AS - COLOK JITU - " + fmt.Sprintf("%.2f", winas) + "<br />"
+		noteafter += "WIN KOP - COLOK JITU - " + fmt.Sprintf("%.2f", winkop) + "<br />"
+		noteafter += "WIN KEPALA - COLOK JITU - " + fmt.Sprintf("%.2f", winkepala) + "<br />"
+		noteafter += "WIN EKOR - COLOK JITU - " + fmt.Sprintf("%.2f", winekor) + "<br />"
 		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Println(msg_update)
@@ -960,6 +960,27 @@ func Save_pasaranConf5050umum(
 		flag = true
 		msg = "Success"
 		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - 5050UMUM - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - 5050UMUM - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - 5050UMUM - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - 5050UMUM - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC BESAR - 5050UMUM - " + fmt.Sprintf("%.2f", discbesar) + "<br />"
+		noteafter += "DISC KECIL - 5050UMUM - " + fmt.Sprintf("%.2f", disckecil) + "<br />"
+		noteafter += "DISC GENAP - 5050UMUM - " + fmt.Sprintf("%.2f", discgenap) + "<br />"
+		noteafter += "DISC GANJIL - 5050UMUM - " + fmt.Sprintf("%.2f", discganjil) + "<br />"
+		noteafter += "DISC TENGAH - 5050UMUM - " + fmt.Sprintf("%.2f", disctengah) + "<br />"
+		noteafter += "DISC TEPI - 5050UMUM - " + fmt.Sprintf("%.2f", disctepi) + "<br />"
+		noteafter += "KEI BESAR - 5050UMUM - " + fmt.Sprintf("%.2f", keibesar) + "<br />"
+		noteafter += "KEI KECIL - 5050UMUM - " + fmt.Sprintf("%.2f", keikecil) + "<br />"
+		noteafter += "KEI GENAP - 5050UMUM - " + fmt.Sprintf("%.2f", keigenap) + "<br />"
+		noteafter += "KEI GANJIL - 5050UMUM - " + fmt.Sprintf("%.2f", keiganjil) + "<br />"
+		noteafter += "KEI TENGAH - 5050UMUM - " + fmt.Sprintf("%.2f", keitengah) + "<br />"
+		noteafter += "KEI TEPI - 5050UMUM - " + fmt.Sprintf("%.2f", keitepi)
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
 	}
@@ -1037,6 +1058,47 @@ func Save_pasaranConf5050special(
 		flag = true
 		msg = "Success"
 		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - 5050SPECIAL - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - 5050SPECIAL - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - 5050SPECIAL - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - 5050SPECIAL - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC AS GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", discasganjil) + "<br />"
+		noteafter += "DISC AS GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", discasgenap) + "<br />"
+		noteafter += "DISC AS BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", discasbesar) + "<br />"
+		noteafter += "DISC AS KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", discaskecil) + "<br />"
+		noteafter += "DISC KOP GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckopganjil) + "<br />"
+		noteafter += "DISC KOP GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckopgenap) + "<br />"
+		noteafter += "DISC KOP BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckopbesar) + "<br />"
+		noteafter += "DISC KOP KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckopkecil) + "<br />"
+		noteafter += "DISC KEPALA GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckepalaganjil) + "<br />"
+		noteafter += "DISC KEPALA GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckepalagenap) + "<br />"
+		noteafter += "DISC KEPALA BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckepalabesar) + "<br />"
+		noteafter += "DISC KEPALA KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", disckepalakecil) + "<br />"
+		noteafter += "DISC EKOR GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", discekorganjil) + "<br />"
+		noteafter += "DISC EKOR GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", discekorgenap) + "<br />"
+		noteafter += "DISC EKOR BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", discekorbesar) + "<br />"
+		noteafter += "DISC EKOR KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", discekorkecil) + "<br />"
+		noteafter += "KEI AS GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiasganjil) + "<br />"
+		noteafter += "KEI AS GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiasgenap) + "<br />"
+		noteafter += "KEI AS BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiasbesar) + "<br />"
+		noteafter += "KEI AS KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiaskecil) + "<br />"
+		noteafter += "KEI KOP GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikopganjil) + "<br />"
+		noteafter += "KEI KOP GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikopgenap) + "<br />"
+		noteafter += "KEI KOP BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikopbesar) + "<br />"
+		noteafter += "KEI KOP KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikopkecil) + "<br />"
+		noteafter += "KEI KEPALA GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikepalaganjil) + "<br />"
+		noteafter += "KEI KEPALA GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikepalagenap) + "<br />"
+		noteafter += "KEI KEPALA BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikepalabesar) + "<br />"
+		noteafter += "KEI KEPALA KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keikepalakecil) + "<br />"
+		noteafter += "KEI EKOR GANJIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiekorganjil) + "<br />"
+		noteafter += "KEI EKOR GENAP - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiekorgenap) + "<br />"
+		noteafter += "KEI EKOR BESAR - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiekorbesar) + "<br />"
+		noteafter += "KEI EKOR KECIL - 5050SPECIAL - " + fmt.Sprintf("%.2f", keiekorkecil) + "<br />"
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
 	}

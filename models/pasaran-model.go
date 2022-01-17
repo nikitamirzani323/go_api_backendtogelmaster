@@ -1170,6 +1170,45 @@ func Save_pasaranConf5050kombinasi(
 		flag = true
 		msg = "Success"
 		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - 5050KOMBINASI - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - 5050KOMBINASI - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - 5050KOMBINASI - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - 5050KOMBINASI - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC BELAKANG MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdiscmono) + "<br />"
+		noteafter += "DISC BELAKANG STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdiscstereo) + "<br />"
+		noteafter += "DISC BELAKANG KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdisckembang) + "<br />"
+		noteafter += "DISC BELAKANG KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdisckempis) + "<br />"
+		noteafter += "DISC BELAKANG KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdisckembar) + "<br />"
+		noteafter += "DISC TENGAH MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdiscmono) + "<br />"
+		noteafter += "DISC TENGAH STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdiscstereo) + "<br />"
+		noteafter += "DISC TENGAH KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdisckembang) + "<br />"
+		noteafter += "DISC TENGAH KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdisckempis) + "<br />"
+		noteafter += "DISC TENGAH KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdisckembar) + "<br />"
+		noteafter += "DISC DEPAN MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandiscmono) + "<br />"
+		noteafter += "DISC DEPAN STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandiscstereo) + "<br />"
+		noteafter += "DISC DEPAN KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandisckembang) + "<br />"
+		noteafter += "DISC DEPAN KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandisckempis) + "<br />"
+		noteafter += "DISC DEPAN KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandisckembar) + "<br />"
+		noteafter += "KEI BELAKANG MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeimono) + "<br />"
+		noteafter += "KEI BELAKANG STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeistereo) + "<br />"
+		noteafter += "KEI BELAKANG KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeikembang) + "<br />"
+		noteafter += "KEI BELAKANG KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeikempis) + "<br />"
+		noteafter += "KEI BELAKANG KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeikembar) + "<br />"
+		noteafter += "KEI TENGAH MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeimono) + "<br />"
+		noteafter += "KEI TENGAH STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeistereo) + "<br />"
+		noteafter += "KEI TENGAH KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeikembang) + "<br />"
+		noteafter += "KEI TENGAH KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeikempis) + "<br />"
+		noteafter += "KEI TENGAH KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeikembar) + "<br />"
+		noteafter += "KEI DEPAN MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeimono) + "<br />"
+		noteafter += "KEI DEPAN STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeistereo) + "<br />"
+		noteafter += "KEI DEPAN KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeikembang) + "<br />"
+		noteafter += "KEI DEPAN KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeikempis) + "<br />"
+		noteafter += "KEI DEPAN KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeikembar)
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
 	}
@@ -1228,6 +1267,17 @@ func Save_pasaranConfmacaukombinasi(
 		flag = true
 		msg = "Success"
 		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - MACAU KOMBINASI - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - MACAU KOMBINASI - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - MACAU KOMBINASI - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - MACAU KOMBINASI - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC - MACAU KOMBINASI - " + fmt.Sprintf("%.2f", disc) + "<br />"
+		noteafter += "WIN - MACAU KOMBINASI - " + fmt.Sprintf("%.2f", win) + "<br />"
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
 	}
@@ -1289,6 +1339,23 @@ func Save_pasaranConfdasar(
 		flag = true
 		msg = "Success"
 		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - DASAR - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - DASAR - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - DASAR - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - DASAR - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC BESAR - DASAR - " + fmt.Sprintf("%.2f", discbesar) + "<br />"
+		noteafter += "DISC KECIL - DASAR - " + fmt.Sprintf("%.2f", disckecil) + "<br />"
+		noteafter += "DISC GENAP - DASAR - " + fmt.Sprintf("%.2f", discigenap) + "<br />"
+		noteafter += "DISC GANJIL - DASAR - " + fmt.Sprintf("%.2f", discganjil) + "<br />"
+		noteafter += "KEI BESAR - DASAR - " + fmt.Sprintf("%.2f", keibesar) + "<br />"
+		noteafter += "KEI KECIL - DASAR - " + fmt.Sprintf("%.2f", keikecil) + "<br />"
+		noteafter += "KEI GENAP - DASAR - " + fmt.Sprintf("%.2f", keigenap) + "<br />"
+		noteafter += "KEI GANJIL - DASAR - " + fmt.Sprintf("%.2f", keiganjil) + "<br />"
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
 	}
@@ -1350,6 +1417,18 @@ func Save_pasaranConfshio(
 		flag = true
 		msg = "Success"
 		log.Printf("Update %s Success : %s\n", config.DB_tbl_mst_pasaran_togel, idrecord)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - SHIO - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - SHIO - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - SHIO - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - SHIO - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC - SHIO - " + fmt.Sprintf("%.2f", disc) + "<br />"
+		noteafter += "WIN - SHIO - " + fmt.Sprintf("%.2f", win) + "<br />"
+		noteafter += "SHIO - SHIO - " + shiotahunini
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Printf("Update %s Failed \n", config.DB_tbl_mst_pasaran_togel)
 	}

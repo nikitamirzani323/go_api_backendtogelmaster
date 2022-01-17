@@ -767,6 +767,19 @@ func Save_pasaranConfColokMacau(
 		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - COLOK MACAU - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - COLOK MACAU - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - COLOK MACAU - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - COLOK MACAU - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC - COLOK MACAU - " + fmt.Sprintf("%.2f", disc) + "<br />"
+		noteafter += "WIN 2 - COLOK MACAU - " + fmt.Sprintf("%.2f", win2)
+		noteafter += "WIN 3 - COLOK MACAU - " + fmt.Sprintf("%.2f", win3)
+		noteafter += "WIN 4 - COLOK MACAU - " + fmt.Sprintf("%.2f", win4)
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}
@@ -814,6 +827,18 @@ func Save_pasaranConfColokNaga(
 		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - COLOK NAGA - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - COLOK NAGA - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - COLOK NAGA - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - COLOK NAGA - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC - COLOK NAGA - " + fmt.Sprintf("%.2f", disc) + "<br />"
+		noteafter += "WIN 3 - COLOK NAGA - " + fmt.Sprintf("%.2f", win3)
+		noteafter += "WIN 4 - COLOK NAGA - " + fmt.Sprintf("%.2f", win4)
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}
@@ -862,6 +887,20 @@ func Save_pasaranConfColokJitu(
 		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "MINBET - COLOK JITU - " + strconv.Itoa(minbet) + "<br />"
+		noteafter += "MAXBET - COLOK JITU - " + strconv.Itoa(maxbet) + "<br />"
+		noteafter += "LIMITGLOBAL - COLOK JITU - " + strconv.Itoa(limitglobal) + "<br />"
+		noteafter += "LIMITTOTAL - COLOK JITU - " + strconv.Itoa(limittotal) + "<br />"
+		noteafter += "DISC - COLOK JITU - " + fmt.Sprintf("%.2f", disc) + "<br />"
+		noteafter += "WIN AS - COLOK JITU - " + fmt.Sprintf("%.2f", winas)
+		noteafter += "WIN KOP - COLOK JITU - " + fmt.Sprintf("%.2f", winkop)
+		noteafter += "WIN KEPALA - COLOK JITU - " + fmt.Sprintf("%.2f", winkepala)
+		noteafter += "WIN EKOR - COLOK JITU - " + fmt.Sprintf("%.2f", winekor)
+		Insert_log("MASTER", master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}

@@ -5,11 +5,13 @@ import (
 	"database/sql"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/config"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/db"
 	"github.com/nikitamirzani323/go_api_backendtogelmaster/helpers"
+	"github.com/nleeper/goment"
 )
 
 func CheckDB(table, field, value string) bool {
@@ -305,6 +307,36 @@ func Get_OnlinePasaran(company string, idcomppasaran int, hari, tipe string) boo
 	}
 
 	return flag
+}
+func Insert_log(idcompany, username, page, tipe, notebefore, noteafter string) {
+	tglnow, _ := goment.New()
+	sql_insert := `
+		INSERT INTO 
+		` + config.DB_tbl_trx_log + ` (
+			idlog, datetimelog, yearlog, 
+			idcompany, username, pagelog, tipelog,
+			notebefore, noteafter 
+		) VALUES (
+			?, ?, ?,
+			?, ?, ?, ?, 
+			?, ?
+		)
+	`
+
+	year := tglnow.Format("YYYY")
+	month := tglnow.Format("MM")
+	field_col := config.DB_tbl_trx_log + year + month
+	idlog_counter := Get_counter(field_col)
+	idlog := tglnow.Format("YY") + tglnow.Format("MM") + tglnow.Format("DD") + tglnow.Format("HH") + strconv.Itoa(idlog_counter)
+	flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_trx_log, "INSERT",
+		idlog, tglnow.Format("YYYY-MM-DD HH:mm:ss"), year,
+		idcompany, username, page, tipe, notebefore, noteafter)
+	if flag_insert {
+		log.Println(msg_insert)
+	} else {
+		log.Println(msg_insert)
+	}
+
 }
 func Exec_SQL(sql, table, action string, args ...interface{}) (bool, string) {
 	con := db.CreateCon()

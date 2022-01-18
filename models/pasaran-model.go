@@ -508,6 +508,17 @@ func Save_pasaran(sData, master, idrecord, name, tipe, urlpasaran, diundi, jamtu
 				flag = true
 				msg = "Succes"
 				log.Println(msg_insert)
+
+				noteafter := ""
+				noteafter += "PASARAN CODE - " + idrecord + "<br />"
+				noteafter += "PASARAN NAME - " + name + "<br />"
+				noteafter += "PASARAN TIPE - " + tipe + "<br />"
+				noteafter += "PASARAN URL - " + urlpasaran + "<br />"
+				noteafter += "PASARAN DIUNDI - " + diundi + "<br />"
+				noteafter += "PASARAN JAMTUTUP - " + jamtutup + "<br />"
+				noteafter += "PASARAN JAMJADWAL - " + jamjadwal + "<br />"
+				noteafter += "PASARAN JAMOPEN - " + jamopen + "<br />"
+				Insert_log("MASTER", master, "PASARAN", "INSERT", "", noteafter)
 			} else {
 				log.Println(msg_insert)
 			}
@@ -530,6 +541,17 @@ func Save_pasaran(sData, master, idrecord, name, tipe, urlpasaran, diundi, jamtu
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			noteafter := ""
+			noteafter += "PASARAN CODE - " + idrecord + "<br />"
+			noteafter += "PASARAN NAME - " + name + "<br />"
+			noteafter += "PASARAN TIPE - " + tipe + "<br />"
+			noteafter += "PASARAN URL - " + urlpasaran + "<br />"
+			noteafter += "PASARAN DIUNDI - " + diundi + "<br />"
+			noteafter += "PASARAN JAMTUTUP - " + jamtutup + "<br />"
+			noteafter += "PASARAN JAMJADWAL - " + jamjadwal + "<br />"
+			noteafter += "PASARAN JAMOPEN - " + jamopen + "<br />"
+			Insert_log("MASTER", master, "PASARAN", "UPDATE", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -563,7 +585,7 @@ func Save_pasaranlimitline(master, idrecord string, limitline_4d, limitline_3d, 
 		WHERE idpasarantogel=? 
 	`
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
-		limitline_4d, limitline_3d, limitline_3d, limitline_2d, limitline_2dd, limitline_2dt,
+		limitline_4d, limitline_3d, limitline_3dd, limitline_2d, limitline_2dd, limitline_2dt,
 		bbfs,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
@@ -571,6 +593,18 @@ func Save_pasaranlimitline(master, idrecord string, limitline_4d, limitline_3d, 
 		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
+
+		nmpasarantogel := _pasaranmaster_id(idrecord, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+		noteafter += "LIMITLINE4D - 432 - " + strconv.Itoa(limitline_4d) + "<br />"
+		noteafter += "LIMITLINE3D - 432 - " + strconv.Itoa(limitline_3d) + "<br />"
+		noteafter += "LIMITLINE3DD - 432 - " + strconv.Itoa(limitline_3dd) + "<br />"
+		noteafter += "LIMITLINE2D - 432 - " + strconv.Itoa(limitline_2d) + "<br />"
+		noteafter += "LIMITLINE2DD - 432 - " + strconv.Itoa(limitline_2dd) + "<br />"
+		noteafter += "LIMITLINE2DT - 432 - " + strconv.Itoa(limitline_2dt) + "<br />"
+		noteafter += "BBFS - 432 - " + strconv.Itoa(bbfs)
+		Insert_log("MASTER", master, "PASARAN", "UPDATE LIMITLINE", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}

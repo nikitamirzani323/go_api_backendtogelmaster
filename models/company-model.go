@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"strconv"
 	"time"
@@ -1705,6 +1706,19 @@ func Fetch_companyPasaranlimitline(master, company, pasarancode string, idcomppa
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "BBFS - 432 - " + strconv.Itoa(bbfs_db) + "<br />"
+			noteafter += "LIMITLINE4D - 432 : " + strconv.Itoa(limitline_4d_db) + "<br />"
+			noteafter += "LIMITLINE3D - 432 : " + strconv.Itoa(limitline_3d_db) + "<br />"
+			noteafter += "LIMITLINE3DD - 432 : " + strconv.Itoa(limitline_3dd_db) + "<br />"
+			noteafter += "LIMITLINE2D - 432 : " + strconv.Itoa(limitline_2d_db) + "<br />"
+			noteafter += "LIMITLINE2DD - 432 : " + strconv.Itoa(limitline_2dd_db) + "<br />"
+			noteafter += "LIMITLINE2DT - 432 : " + strconv.Itoa(limitline_2dt_db) + "<br />"
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN LIMITLINE FETCH", "UPDATE", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -1790,6 +1804,42 @@ func Fetch_companyPasaran432(master, company, pasarancode string, idcomppasaran 
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - 432 : " + fmt.Sprintf("%.2f", minbet_432d_db) + "<br />"
+			noteafter += "MAXBET 4D - 432 : " + fmt.Sprintf("%.2f", maxbet4d_432d_db) + "<br />"
+			noteafter += "MAXBET 3D - 432 : " + fmt.Sprintf("%.2f", maxbet3d_432d_db) + "<br />"
+			noteafter += "MAXBET 3DD - 432 : " + fmt.Sprintf("%.2f", maxbet3dd_432d_db) + "<br />"
+			noteafter += "MAXBET 2D - 432 : " + fmt.Sprintf("%.2f", maxbet2d_432d_db) + "<br />"
+			noteafter += "MAXBET 2DD - 432 : " + fmt.Sprintf("%.2f", maxbet2dd_432d_db) + "<br />"
+			noteafter += "MAXBET 2DT - 432 : " + fmt.Sprintf("%.2f", maxbet2dt_432d_db) + "<br />"
+			noteafter += "LIMITGLOBAL 4D - 432 : " + fmt.Sprintf("%.2f", limitglobal4d_432d_db) + "<br />"
+			noteafter += "LIMITGLOBAL 3D - 432 : " + fmt.Sprintf("%.2f", limitglobal3d_432d_db) + "<br />"
+			noteafter += "LIMITGLOBAL 3DD - 432 : " + fmt.Sprintf("%.2f", limitglobal3dd_432d_db) + "<br />"
+			noteafter += "LIMITGLOBAL 2D - 432 : " + fmt.Sprintf("%.2f", limitglobal2d_432d_db) + "<br />"
+			noteafter += "LIMITGLOBAL 2DD - 432 : " + fmt.Sprintf("%.2f", limitglobal2dd_432d_db) + "<br />"
+			noteafter += "LIMITGLOBAL 2DT - 432 : " + fmt.Sprintf("%.2f", limitglobal2dt_432d_db) + "<br />"
+			noteafter += "LIMITTOTAL 4D - 432 : " + fmt.Sprintf("%.2f", limitotal4d_432d_db) + "<br />"
+			noteafter += "LIMITTOTAL 3D - 432 : " + fmt.Sprintf("%.2f", limitotal3d_432d_db) + "<br />"
+			noteafter += "LIMITTOTAL 3DD - 432 : " + fmt.Sprintf("%.2f", limitotal3dd_432d_db) + "<br />"
+			noteafter += "LIMITTOTAL 2D - 432 : " + fmt.Sprintf("%.2f", limitotal2d_432d_db) + "<br />"
+			noteafter += "LIMITTOTAL 2DD - 432 : " + fmt.Sprintf("%.2f", limitotal2dd_432d_db) + "<br />"
+			noteafter += "LIMITTOTAL 2DT - 432 : " + fmt.Sprintf("%.2f", limitotal2dt_432d_db) + "<br />"
+			noteafter += "DISC 4D - 432 : " + fmt.Sprintf("%.2f", disc4d_432d_db) + "<br />"
+			noteafter += "DISC 3D - 432 : " + fmt.Sprintf("%.2f", disc3d_432d_db) + "<br />"
+			noteafter += "DISC 3DD - 432 : " + fmt.Sprintf("%.2f", disc3dd_432d_db) + "<br />"
+			noteafter += "DISC 2D - 432 : " + fmt.Sprintf("%.2f", disc2d_432d_db) + "<br />"
+			noteafter += "DISC 2DD - 432 : " + fmt.Sprintf("%.2f", disc2dd_432d_db) + "<br />"
+			noteafter += "DISC 2DT - 432 : " + fmt.Sprintf("%.2f", disc2dt_432d_db) + "<br />"
+			noteafter += "WIN 4D - 432 : " + fmt.Sprintf("%.2f", win4d_432d_db) + "<br />"
+			noteafter += "WIN 3D - 432 : " + fmt.Sprintf("%.2f", win3d_432d_db) + "<br />"
+			noteafter += "WIN 3DD - 432 : " + fmt.Sprintf("%.2f", win3dd_432d_db) + "<br />"
+			noteafter += "WIN 2D - 432 : " + fmt.Sprintf("%.2f", win2d_432d_db) + "<br />"
+			noteafter += "WIN 2DD - 432 : " + fmt.Sprintf("%.2f", win2dd_432d_db) + "<br />"
+			noteafter += "WIN 2DT - 432 : " + fmt.Sprintf("%.2f", win2dt_432d_db) + "<br />"
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - 4-3-2 FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -1855,6 +1905,17 @@ func Fetch_companyPasarancolokbebas(master, company, pasarancode string, idcompp
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - COLOK BEBAS : " + fmt.Sprintf("%.2f", minbet_cbebas_db) + "<br />"
+			noteafter += "MAXBET - COLOK BEBAS : " + fmt.Sprintf("%.2f", maxbet_cbebas_db) + "<br />"
+			noteafter += "LIMITGLOBAL - COLOK BEBAS : " + fmt.Sprintf("%.2f", limitglobal_cbebas_db) + "<br />"
+			noteafter += "LIMITTOTAL - COLOK BEBAS : " + fmt.Sprintf("%.2f", limittotal_cbebas_db) + "<br />"
+			noteafter += "DISC - COLOK BEBAS : " + fmt.Sprintf("%.2f", disc_cbebas_db) + "<br />"
+			noteafter += "WIN - COLOK BEBAS : " + fmt.Sprintf("%.2f", win_cbebas_db)
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - COLOK BEBAS FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -1921,6 +1982,19 @@ func Fetch_companyPasarancolokmacau(master, company, pasarancode string, idcompp
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - COLOK MACAU : " + fmt.Sprintf("%.2f", minbet_cmacau_db) + "<br />"
+			noteafter += "MAXBET - COLOK MACAU : " + fmt.Sprintf("%.2f", maxbet_cmacau_db) + "<br />"
+			noteafter += "LIMITGLOBAL - COLOK MACAU : " + fmt.Sprintf("%.2f", limitglobal_cmacau_db) + "<br />"
+			noteafter += "LIMITTOTAL - COLOK MACAU : " + fmt.Sprintf("%.2f", limitotal_cmacau_db) + "<br />"
+			noteafter += "DISC - COLOK MACAU : " + fmt.Sprintf("%.2f", disc_cmacau_db) + "<br />"
+			noteafter += "WIN 2 - COLOK MACAU : " + fmt.Sprintf("%.2f", win2d_cmacau_db) + "<br />"
+			noteafter += "WIN 3 - COLOK MACAU : " + fmt.Sprintf("%.2f", win3d_cmacau_db)
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - COLOK MACAU FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -1986,6 +2060,19 @@ func Fetch_companyPasarancoloknaga(master, company, pasarancode string, idcomppa
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - COLOK NAGA : " + fmt.Sprintf("%.2f", minbet_cnaga_db) + "<br />"
+			noteafter += "MAXBET - COLOK NAGA : " + fmt.Sprintf("%.2f", maxbet_cnaga_db) + "<br />"
+			noteafter += "LIMITGLOBAL - COLOK NAGA : " + fmt.Sprintf("%.2f", limitglobal_cnaga_db) + "<br />"
+			noteafter += "LIMITTOTAL - COLOK NAGA : " + fmt.Sprintf("%.2f", limittotal_cnaga_db) + "<br />"
+			noteafter += "DISC - COLOK NAGA : " + fmt.Sprintf("%.2f", disc_cnaga_db) + "<br />"
+			noteafter += "WIN 3 - COLOK NAGA : " + fmt.Sprintf("%.2f", win3_cnaga_db) + "<br />"
+			noteafter += "WIN 3 - COLOK NAGA : " + fmt.Sprintf("%.2f", win4_cnaga_db)
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - COLOK NAGA FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -2055,6 +2142,21 @@ func Fetch_companyPasarancolokjitu(master, company, pasarancode string, idcomppa
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - COLOK JITU : " + fmt.Sprintf("%.2f", minbet_cjitu_db) + "<br />"
+			noteafter += "MAXBET - COLOK JITU : " + fmt.Sprintf("%.2f", maxbet_cjitu_db) + "<br />"
+			noteafter += "LIMITGLOBAL - COLOK JITU : " + fmt.Sprintf("%.2f", limitglobal_cjitu_db) + "<br />"
+			noteafter += "LIMITTOTAL - COLOK JITU : " + fmt.Sprintf("%.2f", limittotal_cjitu_db) + "<br />"
+			noteafter += "DISC - COLOK JITU : " + fmt.Sprintf("%.2f", desc_cjitu_db) + "<br />"
+			noteafter += "WIN AS - COLOK JITU : " + fmt.Sprintf("%.2f", winas_cjitu_db) + "<br />"
+			noteafter += "WIN KOP - COLOK JITU : " + fmt.Sprintf("%.2f", winkop_cjitu_db) + "<br />"
+			noteafter += "WIN KEPALA - COLOK JITU : " + fmt.Sprintf("%.2f", winkepala_cjitu_db) + "<br />"
+			noteafter += "WIN EKOR - COLOK JITU : " + fmt.Sprintf("%.2f", winekor_cjitu_db)
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - COLOK JITU FETCH", "", noteafter)
 		} else {
 			flag = false
 			msg = "Failed"
@@ -2137,6 +2239,28 @@ func Fetch_companyPasaran5050umum(master, company, pasarancode string, idcomppas
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - 5050UMUM : " + fmt.Sprintf("%.2f", minbet_5050umum_db) + "<br />"
+			noteafter += "MAXBET - 5050UMUM : " + fmt.Sprintf("%.2f", maxbet_5050umum_db) + "<br />"
+			noteafter += "LIMITGLOBAL - 5050UMUM : " + fmt.Sprintf("%.2f", limitglobal_5050umum_db) + "<br />"
+			noteafter += "LIMITTOTAL - 5050UMUM : " + fmt.Sprintf("%.2f", limittotal_5050umum_db) + "<br />"
+			noteafter += "DISC BESAR - 5050UMUM : " + fmt.Sprintf("%.2f", discbesar_5050umum_db) + "<br />"
+			noteafter += "DISC KECIL - 5050UMUM : " + fmt.Sprintf("%.2f", disckecil_5050umum_db) + "<br />"
+			noteafter += "DISC GENAP - 5050UMUM : " + fmt.Sprintf("%.2f", discgenap_5050umum_db) + "<br />"
+			noteafter += "DISC GANJIL - 5050UMUM : " + fmt.Sprintf("%.2f", discganjil_5050umum_db) + "<br />"
+			noteafter += "DISC TENGAH - 5050UMUM : " + fmt.Sprintf("%.2f", disctengah_5050umum_db) + "<br />"
+			noteafter += "DISC TEPI - 5050UMUM : " + fmt.Sprintf("%.2f", disctepi_5050umum_db) + "<br />"
+			noteafter += "KEI BESAR - 5050UMUM : " + fmt.Sprintf("%.2f", keibesar_5050umum_db) + "<br />"
+			noteafter += "KEI KECIL - 5050UMUM : " + fmt.Sprintf("%.2f", keikecil_5050umum_db) + "<br />"
+			noteafter += "KEI GENAP - 5050UMUM : " + fmt.Sprintf("%.2f", keigenap_5050umum_db) + "<br />"
+			noteafter += "KEI GANJIL - 5050UMUM : " + fmt.Sprintf("%.2f", keiganjil_5050umum_db) + "<br />"
+			noteafter += "KEI TENGAH - 5050UMUM : " + fmt.Sprintf("%.2f", keitengah_5050umum_db) + "<br />"
+			noteafter += "KEI TEPI - 5050UMUM : " + fmt.Sprintf("%.2f", keitepi_5050umum_db)
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - 5050UMUM FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -2242,6 +2366,48 @@ func Fetch_companyPasaran5050special(master, company, pasarancode string, idcomp
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - 5050SPECIAL : " + fmt.Sprintf("%.2f", minbet_5050special_db) + "<br />"
+			noteafter += "MAXBET - 5050SPECIAL : " + fmt.Sprintf("%.2f", maxbet_5050special_db) + "<br />"
+			noteafter += "LIMITGLOBAL - 5050SPECIAL : " + fmt.Sprintf("%.2f", limitglobal_5050special_db) + "<br />"
+			noteafter += "LIMITTOTAL - 5050SPECIAL : " + fmt.Sprintf("%.2f", limittotal_5050special_db) + "<br />"
+			noteafter += "DISC AS GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", discasganjil_5050special_db) + "<br />"
+			noteafter += "DISC AS GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", discasgenap_5050special_db) + "<br />"
+			noteafter += "DISC AS BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", discasbesar_5050special_db) + "<br />"
+			noteafter += "DISC AS KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", discaskecil_5050special_db) + "<br />"
+			noteafter += "DISC KOP GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckopganjil_5050special_db) + "<br />"
+			noteafter += "DISC KOP GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckopgenap_5050special_db) + "<br />"
+			noteafter += "DISC KOP BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckopbesar_5050special_db) + "<br />"
+			noteafter += "DISC KOP KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckopkecil_5050special_db) + "<br />"
+			noteafter += "DISC KEPALA GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckepalaganjil_5050special_db) + "<br />"
+			noteafter += "DISC KEPALA GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckepalagenap_5050special_db) + "<br />"
+			noteafter += "DISC KEPALA BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckepalabesar_5050special_db) + "<br />"
+			noteafter += "DISC KEPALA KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", disckepalakecil_5050special_db) + "<br />"
+			noteafter += "DISC EKOR GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", discekorganjil_5050special_db) + "<br />"
+			noteafter += "DISC EKOR GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", discekorgenap_5050special_db) + "<br />"
+			noteafter += "DISC EKOR BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", discekorbesar_5050special_db) + "<br />"
+			noteafter += "DISC EKOR KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", discekorkecil_5050special_db) + "<br />"
+			noteafter += "KEI AS GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiasganjil_5050special_db) + "<br />"
+			noteafter += "KEI AS GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiasgenap_5050special_db) + "<br />"
+			noteafter += "KEI AS BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiasbesar_5050special_db) + "<br />"
+			noteafter += "KEI AS KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiaskecil_5050special_db) + "<br />"
+			noteafter += "KEI KOP GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikopganjil_5050special_db) + "<br />"
+			noteafter += "KEI KOP GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikopgenap_5050special_db) + "<br />"
+			noteafter += "KEI KOP BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikopbesar_5050special_db) + "<br />"
+			noteafter += "KEI KOP KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikopkecil_5050special_db) + "<br />"
+			noteafter += "KEI KEPALA GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikepalaganjil_5050special_db) + "<br />"
+			noteafter += "KEI KEPALA GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikepalagenap_5050special_db) + "<br />"
+			noteafter += "KEI KEPALA BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikepalabesar_5050special_db) + "<br />"
+			noteafter += "KEI KEPALA KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keikepalakecil_5050special_db) + "<br />"
+			noteafter += "KEI EKOR GANJIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiekorganjil_5050special_db) + "<br />"
+			noteafter += "KEI EKOR GENAP - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiekorgenap_5050special_db) + "<br />"
+			noteafter += "KEI EKOR BESAR - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiekorbesar_5050special_db) + "<br />"
+			noteafter += "KEI EKOR KECIL - 5050SPECIAL : " + fmt.Sprintf("%.2f", keiekorkecil_5050special_db) + "<br />"
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - 5050SPECIAL FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -2339,6 +2505,46 @@ func Fetch_companyPasaran5050kombinasi(master, company, pasarancode string, idco
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - 5050KOMBINASI : " + fmt.Sprintf("%.2f", minbet_5050kombinasi_db) + "<br />"
+			noteafter += "MAXBET - 5050KOMBINASI : " + fmt.Sprintf("%.2f", maxbet_5050kombinasi_db) + "<br />"
+			noteafter += "LIMITGLOBAL - 5050KOMBINASI : " + fmt.Sprintf("%.2f", limitglobal_5050kombinasi_db) + "<br />"
+			noteafter += "LIMITTOTAL - 5050KOMBINASI : " + fmt.Sprintf("%.2f", limittotal_5050kombinasi_db) + "<br />"
+			noteafter += "DISC BELAKANG MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdiscmono_5050kombinasi_db) + "<br />"
+			noteafter += "DISC BELAKANG STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdiscstereo_5050kombinasi_db) + "<br />"
+			noteafter += "DISC BELAKANG KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdisckembang_5050kombinasi_db) + "<br />"
+			noteafter += "DISC BELAKANG KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdisckempis_5050kombinasi_db) + "<br />"
+			noteafter += "DISC BELAKANG KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangdisckembar_5050kombinasi_db) + "<br />"
+			noteafter += "DISC TENGAH MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdiscmono_5050kombinasi_db) + "<br />"
+			noteafter += "DISC TENGAH STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdiscstereo_5050kombinasi_db) + "<br />"
+			noteafter += "DISC TENGAH KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdisckembang_5050kombinasi_db) + "<br />"
+			noteafter += "DISC TENGAH KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdisckempis_5050kombinasi_db) + "<br />"
+			noteafter += "DISC TENGAH KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahdisckembar_5050kombinasi_db) + "<br />"
+			noteafter += "DISC DEPAN MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandiscmono_5050kombinasi_db) + "<br />"
+			noteafter += "DISC DEPAN STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandiscstereo_5050kombinasi_db) + "<br />"
+			noteafter += "DISC DEPAN KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandisckembang_5050kombinasi_db) + "<br />"
+			noteafter += "DISC DEPAN KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandisckempis_5050kombinasi_db) + "<br />"
+			noteafter += "DISC DEPAN KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depandisckembar_5050kombinasi_db) + "<br />"
+			noteafter += "KEI BELAKANG MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeimono_5050kombinasi_db) + "<br />"
+			noteafter += "KEI BELAKANG STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeistereo_5050kombinasi_db) + "<br />"
+			noteafter += "KEI BELAKANG KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeikembang_5050kombinasi_db) + "<br />"
+			noteafter += "KEI BELAKANG KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeikempis_5050kombinasi_db) + "<br />"
+			noteafter += "KEI BELAKANG KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", belakangkeikembar_5050kombinasi_db) + "<br />"
+			noteafter += "KEI TENGAH MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeimono_5050kombinasi_db) + "<br />"
+			noteafter += "KEI TENGAH STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeistereo_5050kombinasi_db) + "<br />"
+			noteafter += "KEI TENGAH KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeikembang_5050kombinasi_db) + "<br />"
+			noteafter += "KEI TENGAH KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeikempis_5050kombinasi_db) + "<br />"
+			noteafter += "KEI TENGAH KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", tengahkeikembar_5050kombinasi_db) + "<br />"
+			noteafter += "KEI DEPAN MONO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeimono_5050kombinasi_db) + "<br />"
+			noteafter += "KEI DEPAN STEREO - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeistereo_5050kombinasi_db) + "<br />"
+			noteafter += "KEI DEPAN KEMBANG - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeikembang_5050kombinasi_db) + "<br />"
+			noteafter += "KEI DEPAN KEMPIS - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeikempis_5050kombinasi_db) + "<br />"
+			noteafter += "KEI DEPAN KEMBAR - 5050KOMBINASI - " + fmt.Sprintf("%.2f", depankeikembar_5050kombinasi_db)
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - 5050KOMBINASI FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -2404,6 +2610,18 @@ func Fetch_companyPasaranmacau(master, company, pasarancode string, idcomppasara
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - MACAU KOMBINASI : " + fmt.Sprintf("%.2f", minbet_kombinasi_db) + "<br />"
+			noteafter += "MAXBET - MACAU KOMBINASI : " + fmt.Sprintf("%.2f", maxbet_kombinasi_db) + "<br />"
+			noteafter += "LIMITGLOBAL - MACAU KOMBINASI : " + fmt.Sprintf("%.2f", limitglobal_kombinasi_db) + "<br />"
+			noteafter += "LIMITTOTAL - MACAU KOMBINASI : " + fmt.Sprintf("%.2f", limittotal_kombinasi_db) + "<br />"
+			noteafter += "DISC - MACAU KOMBINASI : " + fmt.Sprintf("%.2f", disc_kombinasi_db) + "<br />"
+			noteafter += "WIN - MACAU KOMBINASI : " + fmt.Sprintf("%.2f", win_kombinasi_db) + "<br />"
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - MACAU KOMBINASI FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -2474,6 +2692,24 @@ func Fetch_companyPasarandasar(master, company, pasarancode string, idcomppasara
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - DASAR : " + fmt.Sprintf("%.2f", minbet_dasar_db) + "<br />"
+			noteafter += "MAXBET - DASAR : " + fmt.Sprintf("%.2f", maxbet_dasar_db) + "<br />"
+			noteafter += "LIMITGLOBAL - DASAR : " + fmt.Sprintf("%.2f", limitglobal_dasar_db) + "<br />"
+			noteafter += "LIMITTOTAL - DASAR : " + fmt.Sprintf("%.2f", limittotal_dasar_db) + "<br />"
+			noteafter += "DISC BESAR - DASAR : " + fmt.Sprintf("%.2f", discbesar_dasar_db) + "<br />"
+			noteafter += "DISC KECIL - DASAR : " + fmt.Sprintf("%.2f", disckecil_dasar_db) + "<br />"
+			noteafter += "DISC GENAP - DASAR : " + fmt.Sprintf("%.2f", discgenap_dasar_db) + "<br />"
+			noteafter += "DISC GANJIL - DASAR : " + fmt.Sprintf("%.2f", discganjil_dasar_db) + "<br />"
+			noteafter += "KEI BESAR - DASAR : " + fmt.Sprintf("%.2f", keibesar_dasar_db) + "<br />"
+			noteafter += "KEI KECIL - DASAR : " + fmt.Sprintf("%.2f", keikecil_dasar_db) + "<br />"
+			noteafter += "KEI GENAP - DASAR : " + fmt.Sprintf("%.2f", keigenap_dasar_db) + "<br />"
+			noteafter += "KEI GANJIL - DASAR : " + fmt.Sprintf("%.2f", keiganjil_dasar_db) + "<br />"
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - DASAR FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -2540,6 +2776,19 @@ func Fetch_companyPasaranshio(master, company, pasarancode string, idcomppasaran
 			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
+
+			idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+			nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+			noteafter := ""
+			noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+			noteafter += "MINBET - SHIO : " + fmt.Sprintf("%.2f", minbet_shio_db) + "<br />"
+			noteafter += "MAXBET - SHIO : " + fmt.Sprintf("%.2f", maxbet_shio_db) + "<br />"
+			noteafter += "LIMITGLOBAL : SHIO - " + fmt.Sprintf("%.2f", limitglobal_shio_db) + "<br />"
+			noteafter += "LIMITTOTAL : SHIO - " + fmt.Sprintf("%.2f", limittotal_shio_db) + "<br />"
+			noteafter += "DISC - SHIO : " + fmt.Sprintf("%.2f", disc_shio_db) + "<br />"
+			noteafter += "WIN - SHIO : " + fmt.Sprintf("%.2f", win_shio_db) + "<br />"
+			noteafter += "SHIO - SHIO : " + shioyear_shio_db
+			Insert_log(company, master, "PASARAN", "UPDATE PASARAN - SHIO FETCH", "", noteafter)
 		} else {
 			log.Println(msg_update)
 		}
@@ -2586,6 +2835,17 @@ func Save_companyUpdatePasaran(
 		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
+		idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+		nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+		noteafter := ""
+		noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+		noteafter += "PASARAN DIUNDI : " + pasarandiundi + "<br />"
+		noteafter += "PASARAN URL : " + pasaranurl + "<br />"
+		noteafter += "PASARAN JAMTUTUP : " + pasaranjamtutup + "<br />"
+		noteafter += "PASARAN JADWAL : " + pasaranjamjadwal + "<br />"
+		noteafter += "PASARAN OPEN : " + pasaranjamopen + "<br />"
+		noteafter += "PASARAN STATUS : " + statuspasaranactive
+		Insert_log(company, master, "PASARAN", "UPDATE PASARAN", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}
@@ -3428,4 +3688,30 @@ func _rumuswinhasil(permainan string, bayar int, bet int, win float32) int {
 		winhasil = int(float32(bet) * win)
 	}
 	return winhasil
+}
+func _companypasaran_id(idcomppasaran int, company, tipecolumn string) string {
+	con := db.CreateCon()
+	ctx := context.Background()
+	result := ""
+	sql_pasaran := `SELECT 
+		idpasarantogel 
+		FROM ` + config.DB_tbl_mst_company_game_pasaran + `  
+		WHERE idcomppasaran = ? AND idcompany = ? 
+	`
+	var (
+		idpasarantogel string
+	)
+	rows := con.QueryRowContext(ctx, sql_pasaran, idcomppasaran, company)
+	switch err := rows.Scan(&idpasarantogel); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		switch tipecolumn {
+		case "idpasarantogel":
+			result = idpasarantogel
+		}
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return result
 }

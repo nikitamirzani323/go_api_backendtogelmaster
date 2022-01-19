@@ -1789,7 +1789,7 @@ func Fetch_companyPasaran432(master, company, pasarancode string, idcomppasaran 
 			1_limitbuang2d as limitglobal2d_432d, 1_limitbuang2dd as limitglobal2dd_432d, 1_limitbuang2dt as limitglobal2dt_432d, 
 			1_disc4d as disc4d_432d, 1_disc3d as disc3d_432d, 1_disc3dd as disc3dd_432d, 1_disc2d as disc2d_432d, 1_disc2dd as disc2dd_432d, 1_disc2dt as disc2dt_432d, 
 			1_win4d as win4d_432d, 1_win3d as win3d_432d, 1_win3dd as win3dd_432d, 1_win2d as win2d_432d, 1_win2dd as win2dd_432d, 1_win2dt as win2dt_432d,  
-			1_win4dnodisc as win4dnodisc_432d, 1_win3dnodisc as win3dnodisc_432d, 1_win3ddnodisc as win3ddnodisc_432d, 1_win2dnodisc as win2dnodisc_432d, 1_win2ddnodisc as win2ddnodisc_432d, 1_win2dtnodisc as win2dtnodisc_432d,  
+			1_win4dnodisc as win4dnodisc_432d, 1_win3dnodisc as win3dnodisc_432d, 1_win3ddnodisc as win3ddnodisc_432d, 1_win2dnodisc as win2dnodisc_432d, 1_win2ddnodisc as win2ddnodisc_432d, 1_win2dtnodisc as win2dtnodisc_432d 
 			FROM ` + config.DB_tbl_mst_pasaran_togel + ` 
 			WHERE idpasarantogel = ? 
 		`

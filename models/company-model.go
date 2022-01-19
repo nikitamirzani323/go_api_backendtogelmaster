@@ -1508,6 +1508,11 @@ func Save_companyNewAdmin(sData, master, company, username, password, name, stat
 				flag = true
 				msg = "Succes"
 				log.Println(msg_insert)
+
+				noteafter := ""
+				noteafter += "USERNAME : " + username + "<br />"
+				noteafter += "NAME : " + name
+				Insert_log(company, master, "AGEN", "NEW ADMIN", "", noteafter)
 			} else {
 				log.Println(msg_insert)
 			}
@@ -1534,6 +1539,11 @@ func Save_companyNewAdmin(sData, master, company, username, password, name, stat
 				flag = true
 				msg = "Succes"
 				log.Println(msg_update)
+
+				noteafter := ""
+				noteafter += "USERNAME : " + username + "<br />"
+				noteafter += "NAME : " + name
+				Insert_log(company, master, "AGEN", "UPDATE ADMIN", "", noteafter)
 			} else {
 				log.Println(msg_update)
 			}
@@ -1558,6 +1568,11 @@ func Save_companyNewAdmin(sData, master, company, username, password, name, stat
 				flag = true
 				msg = "Succes"
 				log.Println(msg_update)
+
+				noteafter := ""
+				noteafter += "USERNAME : " + username + "<br />"
+				noteafter += "NAME : " + name
+				Insert_log(company, master, "AGEN", "UPDATE ADMIN PASSWORD", "", noteafter)
 			} else {
 				log.Println(msg_update)
 			}
@@ -1641,6 +1656,15 @@ func Save_companyNewPasaran(master, company, pasarancode string) (helpers.Respon
 				flag = true
 				msg = "Succes"
 				log.Println(msg_insert)
+
+				nmpasarantogel := _pasaranmaster_id(pasarancode, "nmpasarantogel")
+				noteafter := ""
+				noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+				noteafter += "PASARAN DIUNDI : " + pasarandiundi_db
+				noteafter += "PASARAN JAM TUTUP : " + jamtutup_db
+				noteafter += "PASARAN JAM JADWAL : " + jamjadwal_db
+				noteafter += "PASARAN JAM OPEN : " + jamopen_db
+				Insert_log(company, master, "AGEN", "NEW PASARAN", "", noteafter)
 			} else {
 				log.Println(msg_insert)
 			}

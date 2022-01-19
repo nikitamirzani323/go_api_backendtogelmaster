@@ -510,14 +510,14 @@ func Save_pasaran(sData, master, idrecord, name, tipe, urlpasaran, diundi, jamtu
 				log.Println(msg_insert)
 
 				noteafter := ""
-				noteafter += "PASARAN CODE - " + idrecord + "<br />"
-				noteafter += "PASARAN NAME - " + name + "<br />"
-				noteafter += "PASARAN TIPE - " + tipe + "<br />"
-				noteafter += "PASARAN URL - " + urlpasaran + "<br />"
-				noteafter += "PASARAN DIUNDI - " + diundi + "<br />"
-				noteafter += "PASARAN JAMTUTUP - " + jamtutup + "<br />"
-				noteafter += "PASARAN JAMJADWAL - " + jamjadwal + "<br />"
-				noteafter += "PASARAN JAMOPEN - " + jamopen + "<br />"
+				noteafter += "PASARAN CODE : " + idrecord + "<br />"
+				noteafter += "PASARAN NAME : " + name + "<br />"
+				noteafter += "PASARAN TIPE : " + tipe + "<br />"
+				noteafter += "PASARAN URL : " + urlpasaran + "<br />"
+				noteafter += "PASARAN DIUNDI : " + diundi + "<br />"
+				noteafter += "PASARAN JAMTUTUP : " + jamtutup + "<br />"
+				noteafter += "PASARAN JAMJADWAL : " + jamjadwal + "<br />"
+				noteafter += "PASARAN JAMOPEN : " + jamopen + "<br />"
 				Insert_log("MASTER", master, "PASARAN", "INSERT", "", noteafter)
 			} else {
 				log.Println(msg_insert)
@@ -543,14 +543,14 @@ func Save_pasaran(sData, master, idrecord, name, tipe, urlpasaran, diundi, jamtu
 			log.Println(msg_update)
 
 			noteafter := ""
-			noteafter += "PASARAN CODE - " + idrecord + "<br />"
-			noteafter += "PASARAN NAME - " + name + "<br />"
-			noteafter += "PASARAN TIPE - " + tipe + "<br />"
-			noteafter += "PASARAN URL - " + urlpasaran + "<br />"
-			noteafter += "PASARAN DIUNDI - " + diundi + "<br />"
-			noteafter += "PASARAN JAMTUTUP - " + jamtutup + "<br />"
-			noteafter += "PASARAN JAMJADWAL - " + jamjadwal + "<br />"
-			noteafter += "PASARAN JAMOPEN - " + jamopen + "<br />"
+			noteafter += "PASARAN CODE : " + idrecord + "<br />"
+			noteafter += "PASARAN NAME : " + name + "<br />"
+			noteafter += "PASARAN TIPE : " + tipe + "<br />"
+			noteafter += "PASARAN URL : " + urlpasaran + "<br />"
+			noteafter += "PASARAN DIUNDI : " + diundi + "<br />"
+			noteafter += "PASARAN JAMTUTUP : " + jamtutup + "<br />"
+			noteafter += "PASARAN JAMJADWAL : " + jamjadwal + "<br />"
+			noteafter += "PASARAN JAMOPEN : " + jamopen + "<br />"
 			Insert_log("MASTER", master, "PASARAN", "UPDATE", "", noteafter)
 		} else {
 			log.Println(msg_update)

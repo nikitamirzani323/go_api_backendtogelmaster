@@ -100,6 +100,12 @@ type Model_companypasaranconf struct {
 	Company_Win2dnodisc_432d                  float32 `json:"win2dnodisc_432d"`
 	Company_Win2ddnodisc_432d                 float32 `json:"win2ddnodisc_432d"`
 	Company_Win2dtnodisc_432d                 float32 `json:"win2dtnodisc_432d"`
+	Company_Win4dbb_432d                      float32 `json:"win4dbb_432d"`
+	Company_Win3dbb_432d                      float32 `json:"win3dbb_432d"`
+	Company_Win3ddbb_432d                     float32 `json:"win3ddbb_432d"`
+	Company_Win2dbb_432d                      float32 `json:"win2dbb_432d"`
+	Company_Win2ddbb_432d                     float32 `json:"win2ddbb_432d"`
+	Company_Win2dtbb_432d                     float32 `json:"win2dtbb_432d"`
 	Company_Minbet_cbebas                     float32 `json:"minbet_cbebas"`
 	Company_Maxbet_cbebas                     float32 `json:"maxbet_cbebas"`
 	Company_Win_cbebas                        float32 `json:"win_cbebas"`
@@ -404,6 +410,12 @@ type Controller_companypasaran432 struct {
 	Pasaran_win2dnodisc_432d    int     `json:"pasaran_win2dnodisc_432d" validate:"required,numeric"`
 	Pasaran_win2ddnodisc_432d   int     `json:"pasaran_win2ddnodisc_432d" validate:"required,numeric"`
 	Pasaran_win2dtnodisc_432d   int     `json:"pasaran_win2dtnodisc_432d" validate:"required,numeric"`
+	Pasaran_win4dbb_432d        int     `json:"pasaran_win4dbb_432d" validate:"required,numeric"`
+	Pasaran_win3dbb_432d        int     `json:"pasaran_win3dbb_432d" validate:"required,numeric"`
+	Pasaran_win3ddbb_432d       int     `json:"pasaran_win3ddbb_432d" validate:"required,numeric"`
+	Pasaran_win2dbb_432d        int     `json:"pasaran_win2dbb_432d" validate:"required,numeric"`
+	Pasaran_win2ddbb_432d       int     `json:"pasaran_win2ddbb_432d" validate:"required,numeric"`
+	Pasaran_win2dtbb_432d       int     `json:"pasaran_win2dtbb_432d" validate:"required,numeric"`
 	Pasaran_disc4d_432d         float32 `json:"pasaran_disc4d_432d" validate:"required,numeric"`
 	Pasaran_disc3d_432d         float32 `json:"pasaran_disc3d_432d" validate:"required,numeric"`
 	Pasaran_disc3dd_432d        float32 `json:"pasaran_disc3dd_432d" validate:"required,numeric"`

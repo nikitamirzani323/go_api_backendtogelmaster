@@ -61,7 +61,7 @@ type Model_pasaranDetailConf struct {
 	Win4dbb_432d                      float32 `json:"win4dbb_432d"`
 	Win3dbb_432d                      float32 `json:"win3dbb_432d"`
 	Win3ddbb_432d                     float32 `json:"win3ddbb_432d"`
-	Win2dbb_432d                      float32 `json:"win2db_432d"`
+	Win2dbb_432d                      float32 `json:"win2dbb_432d"`
 	Win2ddbb_432d                     float32 `json:"win2ddbb_432d"`
 	Win2dtbb_432d                     float32 `json:"win2dtbb_432d"`
 	Minbet_cbebas                     float32 `json:"minbet_cbebas"`

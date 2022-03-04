@@ -1176,16 +1176,33 @@ func Save_pasaranConf5050special(
 	log.Printf("KEI EKOR BESAR : %s", fmt.Sprintf("%.3f", keiekorbesar))
 	log.Printf("KEI EKOR KECIL : %s", fmt.Sprintf("%.3f", keiekorkecil))
 
+	log.Printf("DISC AS GANJIL : %s", fmt.Sprintf("%.3f", discasganjil))
+	log.Printf("DISC AS GENAP : %s", fmt.Sprintf("%.3f", discasgenap))
+	log.Printf("DISC AS BESAR : %s", fmt.Sprintf("%.3f", discasbesar))
+	log.Printf("DISC AS KECIL : %s", fmt.Sprintf("%.3f", discaskecil))
+	log.Printf("DISC KOP GANJIL : %s", fmt.Sprintf("%.3f", disckopganjil))
+	log.Printf("DISC KOP GENAP : %s", fmt.Sprintf("%.3f", disckopgenap))
+	log.Printf("DISC KOP BESAR : %s", fmt.Sprintf("%.3f", disckopbesar))
+	log.Printf("DISC KOP KECIL : %s", fmt.Sprintf("%.3f", disckopkecil))
+	log.Printf("DISC KEPALA GANJIL : %s", fmt.Sprintf("%.3f", disckepalaganjil))
+	log.Printf("DISC KEPALA GENAP : %s", fmt.Sprintf("%.3f", disckepalagenap))
+	log.Printf("DISC KEPALA BESAR : %s", fmt.Sprintf("%.3f", disckepalabesar))
+	log.Printf("DISC KEPALA KECIL : %s", fmt.Sprintf("%.3f", disckepalakecil))
+	log.Printf("DISC EKOR GANJIL : %s", fmt.Sprintf("%.3f", discekorganjil))
+	log.Printf("DISC EKOR GENAP : %s", fmt.Sprintf("%.3f", discekorgenap))
+	log.Printf("DISC EKOR BESAR : %s", fmt.Sprintf("%.3f", discekorbesar))
+	log.Printf("DISC EKOR KECIL : %s", fmt.Sprintf("%.3f", discekorkecil))
+
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
 		minbet, maxbet,
 		fmt.Sprintf("%.3f", keiasganjil), fmt.Sprintf("%.3f", keiasgenap), fmt.Sprintf("%.3f", keiasbesar), fmt.Sprintf("%.3f", keiaskecil),
 		fmt.Sprintf("%.3f", keikopganjil), fmt.Sprintf("%.3f", keikopgenap), fmt.Sprintf("%.3f", keikopbesar), fmt.Sprintf("%.3f", keikopkecil),
 		fmt.Sprintf("%.3f", keikepalaganjil), fmt.Sprintf("%.3f", keikepalagenap), fmt.Sprintf("%.3f", keikepalabesar), fmt.Sprintf("%.3f", keikepalakecil),
 		fmt.Sprintf("%.3f", keiekorganjil), fmt.Sprintf("%.3f", keiekorgenap), fmt.Sprintf("%.3f", keiekorbesar), fmt.Sprintf("%.3f", keiekorkecil),
-		discasganjil, discasgenap, discasbesar, discaskecil,
-		disckopganjil, disckopgenap, disckopbesar, disckopkecil,
-		disckepalaganjil, disckepalagenap, disckepalabesar, disckepalakecil,
-		discekorganjil, discekorgenap, discekorbesar, discekorkecil,
+		fmt.Sprintf("%.3f", discasganjil), fmt.Sprintf("%.3f", discasgenap), fmt.Sprintf("%.3f", discasbesar), fmt.Sprintf("%.3f", discaskecil),
+		fmt.Sprintf("%.3f", disckopganjil), fmt.Sprintf("%.3f", disckopgenap), fmt.Sprintf("%.3f", disckopbesar), fmt.Sprintf("%.3f", disckopkecil),
+		fmt.Sprintf("%.3f", disckepalaganjil), fmt.Sprintf("%.3f", disckepalagenap), fmt.Sprintf("%.3f", disckepalabesar), fmt.Sprintf("%.3f", disckepalakecil),
+		fmt.Sprintf("%.3f", discekorganjil), fmt.Sprintf("%.3f", discekorgenap), fmt.Sprintf("%.3f", discekorbesar), fmt.Sprintf("%.3f", discekorkecil),
 		limitglobal, limittotal,
 		master,
 		tglnow.Format("YYYY-MM-DD HH:mm:ss"),

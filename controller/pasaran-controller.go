@@ -294,7 +294,7 @@ func PasaranDetailConf(c *fiber.Ctx) error {
 		maxbet_5050umum, _ := jsonparser.GetFloat(value, "maxbet_5050umum")
 		keibesar_5050umum, _ := jsonparser.GetFloat(value, "keibesar_5050umum")
 		keikecil_5050umum, _ := jsonparser.GetFloat(value, "keikecil_5050umum")
-		Keigenap_5050umum, _ := jsonparser.GetFloat(value, "Keigenap_5050umum")
+		Keigenap_5050umum, _ := jsonparser.GetFloat(value, "keigenap_5050umum")
 		keiganjil_5050umum, _ := jsonparser.GetFloat(value, "keiganjil_5050umum")
 		keitengah_5050umum, _ := jsonparser.GetFloat(value, "keitengah_5050umum")
 		keitepi_5050umum, _ := jsonparser.GetFloat(value, "keitepi_5050umum")
@@ -616,6 +616,7 @@ func PasaranDetailConf(c *fiber.Ctx) error {
 		return c.JSON(result)
 	} else {
 		log.Println("PASARAN CONF CACHE")
+
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",

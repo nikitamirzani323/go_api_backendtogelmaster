@@ -504,12 +504,12 @@ type Controller_companypasaran5050umum struct {
 	Pasaran_keiganjil_5050umum   float64 `json:"pasaran_keiganjil_5050umum" validate:"required,numeric"`
 	Pasaran_keitengah_5050umum   float64 `json:"pasaran_keitengah_5050umum" validate:"required,numeric"`
 	Pasaran_keitepi_5050umum     float64 `json:"pasaran_keitepi_5050umum" validate:"required,numeric"`
-	Pasaran_discbesar_5050umum   float64 `json:"pasaran_discbesar_5050umum" validate:"required,numeric"`
-	Pasaran_disckecil_5050umum   float64 `json:"pasaran_disckecil_5050umum" validate:"required,numeric"`
-	Pasaran_discgenap_5050umum   float64 `json:"pasaran_discgenap_5050umum" validate:"required,numeric"`
-	Pasaran_discganjil_5050umum  float64 `json:"pasaran_discganjil_5050umum" validate:"required,numeric"`
-	Pasaran_disctengah_5050umum  float64 `json:"pasaran_disctengah_5050umum" validate:"required,numeric"`
-	Pasaran_disctepi_5050umum    float64 `json:"pasaran_disctepi_5050umum" validate:"required,numeric"`
+	Pasaran_discbesar_5050umum   float64 `json:"pasaran_discbesar_5050umum" validate:"numeric"`
+	Pasaran_disckecil_5050umum   float64 `json:"pasaran_disckecil_5050umum" validate:"numeric"`
+	Pasaran_discgenap_5050umum   float64 `json:"pasaran_discgenap_5050umum" validate:"numeric"`
+	Pasaran_discganjil_5050umum  float64 `json:"pasaran_discganjil_5050umum" validate:"numeric"`
+	Pasaran_disctengah_5050umum  float64 `json:"pasaran_disctengah_5050umum" validate:"numeric"`
+	Pasaran_disctepi_5050umum    float64 `json:"pasaran_disctepi_5050umum" validate:"numeric"`
 }
 type Controller_companypasaran5050special struct {
 	Company                              string  `json:"company" validate:"required"`
@@ -520,22 +520,22 @@ type Controller_companypasaran5050special struct {
 	Pasaran_maxbet_5050special           int     `json:"pasaran_maxbet_5050special" validate:"required,numeric"`
 	Pasaran_limitglobal_5050special      int     `json:"pasaran_limitglobal_5050special" validate:"required,numeric"`
 	Pasaran_limittotal_5050special       int     `json:"pasaran_limittotal_5050special" validate:"required,numeric"`
-	Pasaran_keiasganjil_5050special      float64 `json:"pasaran_keiasganjil_5050special" validate:"numeric"`
-	Pasaran_keiasgenap_5050special       float64 `json:"pasaran_keiasgenap_5050special" validate:"numeric"`
-	Pasaran_keiasbesar_5050special       float64 `json:"pasaran_keiasbesar_5050special" validate:"numeric"`
-	Pasaran_keiaskecil_5050special       float64 `json:"pasaran_keiaskecil_5050special" validate:"numeric"`
-	Pasaran_keikopganjil_5050special     float64 `json:"pasaran_keikopganjil_5050special" validate:"numeric"`
-	Pasaran_keikopgenap_5050special      float64 `json:"pasaran_keikopgenap_5050special" validate:"numeric"`
-	Pasaran_keikopbesar_5050special      float64 `json:"pasaran_keikopbesar_5050special" validate:"numeric"`
-	Pasaran_keikopkecil_5050special      float64 `json:"pasaran_keikopkecil_5050special" validate:"numeric"`
-	Pasaran_keikepalaganjil_5050special  float64 `json:"pasaran_keikepalaganjil_5050special" validate:"numeric"`
-	Pasaran_keikepalagenap_5050special   float64 `json:"pasaran_keikepalagenap_5050special" validate:"numeric"`
-	Pasaran_keikepalabesar_5050special   float64 `json:"pasaran_keikepalabesar_5050special" validate:"numeric"`
-	Pasaran_keikepalakecil_5050special   float64 `json:"pasaran_keikepalakecil_5050special" validate:"numeric"`
-	Pasaran_keiekorganjil_5050special    float64 `json:"pasaran_keiekorganjil_5050special" validate:"numeric"`
-	Pasaran_keiekorgenap_5050special     float64 `json:"pasaran_keiekorgenap_5050special" validate:"numeric"`
-	Pasaran_keiekorbesar_5050special     float64 `json:"pasaran_keiekorbesar_5050special" validate:"numeric"`
-	Pasaran_keiekorkecil_5050special     float64 `json:"pasaran_keiekorkecil_5050special" validate:"numeric"`
+	Pasaran_keiasganjil_5050special      float64 `json:"pasaran_keiasganjil_5050special" validate:"required,numeric"`
+	Pasaran_keiasgenap_5050special       float64 `json:"pasaran_keiasgenap_5050special" validate:"required,numeric"`
+	Pasaran_keiasbesar_5050special       float64 `json:"pasaran_keiasbesar_5050special" validate:"required,numeric"`
+	Pasaran_keiaskecil_5050special       float64 `json:"pasaran_keiaskecil_5050special" validate:"required,numeric"`
+	Pasaran_keikopganjil_5050special     float64 `json:"pasaran_keikopganjil_5050special" validate:"required,numeric"`
+	Pasaran_keikopgenap_5050special      float64 `json:"pasaran_keikopgenap_5050special" validate:"required,numeric"`
+	Pasaran_keikopbesar_5050special      float64 `json:"pasaran_keikopbesar_5050special" validate:"required,numeric"`
+	Pasaran_keikopkecil_5050special      float64 `json:"pasaran_keikopkecil_5050special" validate:"required,numeric"`
+	Pasaran_keikepalaganjil_5050special  float64 `json:"pasaran_keikepalaganjil_5050special" validate:"required,numeric"`
+	Pasaran_keikepalagenap_5050special   float64 `json:"pasaran_keikepalagenap_5050special" validate:"required,numeric"`
+	Pasaran_keikepalabesar_5050special   float64 `json:"pasaran_keikepalabesar_5050special" validate:"required,numeric"`
+	Pasaran_keikepalakecil_5050special   float64 `json:"pasaran_keikepalakecil_5050special" validate:"required,numeric"`
+	Pasaran_keiekorganjil_5050special    float64 `json:"pasaran_keiekorganjil_5050special" validate:"required,numeric"`
+	Pasaran_keiekorgenap_5050special     float64 `json:"pasaran_keiekorgenap_5050special" validate:"required,numeric"`
+	Pasaran_keiekorbesar_5050special     float64 `json:"pasaran_keiekorbesar_5050special" validate:"required,numeric"`
+	Pasaran_keiekorkecil_5050special     float64 `json:"pasaran_keiekorkecil_5050special" validate:"required,numeric"`
 	Pasaran_discasganjil_5050special     float64 `json:"pasaran_discasganjil_5050special" validate:"numeric"`
 	Pasaran_discasgenap_5050special      float64 `json:"pasaran_discasgenap_5050special" validate:"numeric"`
 	Pasaran_discasbesar_5050special      float64 `json:"pasaran_discasbesar_5050special" validate:"numeric"`
@@ -577,21 +577,21 @@ type Controller_companypasaran5050kombinasi struct {
 	Pasaran_depankeikembang_5050kombinasi     float64 `json:"pasaran_depankeikembang_5050kombinasi" validate:"required,numeric"`
 	Pasaran_depankeikempis_5050kombinasi      float64 `json:"pasaran_depankeikempis_5050kombinasi" validate:"required,numeric"`
 	Pasaran_depankeikembar_5050kombinasi      float64 `json:"pasaran_depankeikembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdiscmono_5050kombinasi    float64 `json:"pasaran_belakangdiscmono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdiscstereo_5050kombinasi  float64 `json:"pasaran_belakangdiscstereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdisckembang_5050kombinasi float64 `json:"pasaran_belakangdisckembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdisckempis_5050kombinasi  float64 `json:"pasaran_belakangdisckempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_belakangdisckembar_5050kombinasi  float64 `json:"pasaran_belakangdisckembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdiscmono_5050kombinasi      float64 `json:"pasaran_tengahdiscmono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdiscstereo_5050kombinasi    float64 `json:"pasaran_tengahdiscstereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdisckembang_5050kombinasi   float64 `json:"pasaran_tengahdisckembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdisckempis_5050kombinasi    float64 `json:"pasaran_tengahdisckempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_tengahdisckembar_5050kombinasi    float64 `json:"pasaran_tengahdisckembar_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandiscmono_5050kombinasi       float64 `json:"pasaran_depandiscmono_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandiscstereo_5050kombinasi     float64 `json:"pasaran_depandiscstereo_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandisckembang_5050kombinasi    float64 `json:"pasaran_depandisckembang_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandisckempis_5050kombinasi     float64 `json:"pasaran_depandisckempis_5050kombinasi" validate:"required,numeric"`
-	Pasaran_depandisckembar_5050kombinasi     float64 `json:"pasaran_depandisckembar_5050kombinasi" validate:"required,numeric"`
+	Pasaran_belakangdiscmono_5050kombinasi    float64 `json:"pasaran_belakangdiscmono_5050kombinasi" validate:"numeric"`
+	Pasaran_belakangdiscstereo_5050kombinasi  float64 `json:"pasaran_belakangdiscstereo_5050kombinasi" validate:"numeric"`
+	Pasaran_belakangdisckembang_5050kombinasi float64 `json:"pasaran_belakangdisckembang_5050kombinasi" validate:"numeric"`
+	Pasaran_belakangdisckempis_5050kombinasi  float64 `json:"pasaran_belakangdisckempis_5050kombinasi" validate:"numeric"`
+	Pasaran_belakangdisckembar_5050kombinasi  float64 `json:"pasaran_belakangdisckembar_5050kombinasi" validate:"numeric"`
+	Pasaran_tengahdiscmono_5050kombinasi      float64 `json:"pasaran_tengahdiscmono_5050kombinasi" validate:"numeric"`
+	Pasaran_tengahdiscstereo_5050kombinasi    float64 `json:"pasaran_tengahdiscstereo_5050kombinasi" validate:"numeric"`
+	Pasaran_tengahdisckembang_5050kombinasi   float64 `json:"pasaran_tengahdisckembang_5050kombinasi" validate:"numeric"`
+	Pasaran_tengahdisckempis_5050kombinasi    float64 `json:"pasaran_tengahdisckempis_5050kombinasi" validate:"numeric"`
+	Pasaran_tengahdisckembar_5050kombinasi    float64 `json:"pasaran_tengahdisckembar_5050kombinasi" validate:"numeric"`
+	Pasaran_depandiscmono_5050kombinasi       float64 `json:"pasaran_depandiscmono_5050kombinasi" validate:"numeric"`
+	Pasaran_depandiscstereo_5050kombinasi     float64 `json:"pasaran_depandiscstereo_5050kombinasi" validate:"numeric"`
+	Pasaran_depandisckembang_5050kombinasi    float64 `json:"pasaran_depandisckembang_5050kombinasi" validate:"numeric"`
+	Pasaran_depandisckempis_5050kombinasi     float64 `json:"pasaran_depandisckempis_5050kombinasi" validate:"numeric"`
+	Pasaran_depandisckembar_5050kombinasi     float64 `json:"pasaran_depandisckembar_5050kombinasi" validate:"numeric"`
 }
 
 type Controller_companypasarankombinasi struct {
@@ -619,10 +619,10 @@ type Controller_companypasarandasar struct {
 	Pasaran_keikecil_dasar    float32 `json:"pasaran_keikecil_dasar" validate:"numeric"`
 	Pasaran_keigenap_dasar    float32 `json:"pasaran_keigenap_dasar" validate:"numeric"`
 	Pasaran_keiganjil_dasar   float32 `json:"pasaran_keiganjil_dasar" validate:"numeric"`
-	Pasaran_discbesar_dasar   float32 `json:"pasaran_discbesar_dasar" validate:"required,numeric"`
-	Pasaran_disckecil_dasar   float32 `json:"pasaran_disckecil_dasar" validate:"required,numeric"`
-	Pasaran_discgenap_dasar   float32 `json:"pasaran_discgenap_dasar" validate:"required,numeric"`
-	Pasaran_discganjil_dasar  float32 `json:"pasaran_discganjil_dasar" validate:"required,numeric"`
+	Pasaran_discbesar_dasar   float32 `json:"pasaran_discbesar_dasar" validate:"numeric"`
+	Pasaran_disckecil_dasar   float32 `json:"pasaran_disckecil_dasar" validate:"numeric"`
+	Pasaran_discgenap_dasar   float32 `json:"pasaran_discgenap_dasar" validate:"numeric"`
+	Pasaran_discganjil_dasar  float32 `json:"pasaran_discganjil_dasar" validate:"numeric"`
 }
 type Controller_companypasaranshio struct {
 	Company                  string  `json:"company" validate:"required"`
@@ -635,7 +635,7 @@ type Controller_companypasaranshio struct {
 	Pasaran_limitglobal_shio int     `json:"pasaran_limitglobal_shio" validate:"required,numeric"`
 	Pasaran_limittotal_shio  int     `json:"pasaran_limittotal_shio" validate:"required,numeric"`
 	Pasaran_disc_shio        float32 `json:"pasaran_disc_shio" validate:"numeric"`
-	Pasaran_win_shio         float32 `json:"pasaran_win_shio" validate:"numeric"`
+	Pasaran_win_shio         float32 `json:"pasaran_win_shio" validate:"required,numeric"`
 }
 type Controller_companydetailonlinesave struct {
 	Company           string `json:"company" validate:"required"`

@@ -1940,17 +1940,10 @@ func Fetch_companyPasaran432(master, company, pasarancode string, idcomppasaran 
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2018,17 +2011,10 @@ func Fetch_companyPasarancolokbebas(master, company, pasarancode string, idcompp
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2102,17 +2088,10 @@ func Fetch_companyPasarancolokmacau(master, company, pasarancode string, idcompp
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2275,17 +2254,10 @@ func Fetch_companyPasarancolokjitu(master, company, pasarancode string, idcomppa
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2389,17 +2361,10 @@ func Fetch_companyPasaran5050umum(master, company, pasarancode string, idcomppas
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2569,17 +2534,10 @@ func Fetch_companyPasaran5050special(master, company, pasarancode string, idcomp
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2740,17 +2698,10 @@ func Fetch_companyPasaran5050kombinasi(master, company, pasarancode string, idco
 
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2818,17 +2769,10 @@ func Fetch_companyPasaranmacau(master, company, pasarancode string, idcomppasara
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2915,17 +2859,10 @@ func Fetch_companyPasarandasar(master, company, pasarancode string, idcomppasara
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }
@@ -2998,17 +2935,10 @@ func Fetch_companyPasaranshio(master, company, pasarancode string, idcomppasaran
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = tglnow.Format("YYYY-MM-DD HH:mm:ss")
 
 	return res, nil
 }

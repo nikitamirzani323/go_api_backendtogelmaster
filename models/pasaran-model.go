@@ -929,7 +929,7 @@ func Save_pasaranConfColokNaga(
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_pasaran_togel, "UPDATE",
 		minbet, maxbet,
 		fmt.Sprintf("%.3f", win3), fmt.Sprintf("%.3f", win4),
-		disc, limitglobal, limittotal,
+		fmt.Sprintf("%.3f", disc), limitglobal, limittotal,
 		master,
 		tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)

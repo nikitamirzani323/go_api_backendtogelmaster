@@ -3055,7 +3055,6 @@ func Save_companyUpdatePasaran432(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3071,37 +3070,36 @@ func Save_companyUpdatePasaran432(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("432D")
+	log.Printf("DISC 4D : %s", fmt.Sprintf("%.3f", disc4d))
+	log.Printf("DISC 3D : %s", fmt.Sprintf("%.3f", disc3d))
+	log.Printf("DISC 3DD : %s", fmt.Sprintf("%.3f", disc3dd))
+	log.Printf("DISC 2D : %s", fmt.Sprintf("%.3f", disc2d))
+	log.Printf("DISC 2DD : %s", fmt.Sprintf("%.3f", disc2dd))
+	log.Printf("DISC 2DT : %s", fmt.Sprintf("%.3f", disc2dt))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet4d, maxbet3d, maxbet3dd, maxbet2d, maxbet2dd, maxbet2dt,
 		win4d, win3d, win3dd, win2d, win2dd, win2dt,
 		win4dnodisc, win3dnodisc, win3ddnodisc, win2dnodisc, win2ddnodisc, win2dtnodisc,
 		win4dbb_kena, win3dbb_kena, win3ddbb_kena, win2dbb_kena, win2ddbb_kena, win2dtbb_kena,
 		win4dbb, win3dbb, win3ddbb, win2dbb, win2ddbb, win2dtbb,
-		disc4d, disc3d, disc3dd, disc2d, disc2dd, disc2dt,
+		fmt.Sprintf("%.3f", disc4d), fmt.Sprintf("%.3f", disc3d), fmt.Sprintf("%.3f", disc3dd), fmt.Sprintf("%.3f", disc2d), fmt.Sprintf("%.3f", disc2dd), fmt.Sprintf("%.3f", disc2dt),
 		limitglobal4d, limitglobal3d, limitglobal3dd, limitglobal2d, limitglobal2dd, limitglobal2dt,
 		limittotal4d, limittotal3d, limittotal3dd, limittotal2d, limittotal2dd, limittotal2dt,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3114,7 +3112,6 @@ func Save_companyUpdatePasarancolokbebas(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3124,30 +3121,25 @@ func Save_companyUpdatePasarancolokbebas(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("COLOK BEBAS")
+	log.Printf("WIN : %s", fmt.Sprintf("%.3f", win))
+	log.Printf("DISC : %s", fmt.Sprintf("%.3f", disc))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
-		minbet, maxbet, win, disc, limitglobal, limittotal,
+		minbet, maxbet, fmt.Sprintf("%.3f", win), fmt.Sprintf("%.3f", disc), limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3160,7 +3152,6 @@ func Save_companyUpdatePasarancolokmacau(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3170,32 +3161,29 @@ func Save_companyUpdatePasarancolokmacau(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("COLOK MACAU")
+	log.Printf("WIN 2 : %s", fmt.Sprintf("%.3f", win2))
+	log.Printf("WIN 3 : %s", fmt.Sprintf("%.3f", win3))
+	log.Printf("WIN 4 : %s", fmt.Sprintf("%.3f", win4))
+	log.Printf("DISC : %s", fmt.Sprintf("%.3f", disc))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
-		win2, win3, win4,
-		disc, limitglobal, limittotal,
+		fmt.Sprintf("%.3f", win2), fmt.Sprintf("%.3f", win3), fmt.Sprintf("%.3f", win4),
+		fmt.Sprintf("%.3f", disc), limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3208,7 +3196,6 @@ func Save_companyUpdatePasarancoloknaga(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3218,32 +3205,28 @@ func Save_companyUpdatePasarancoloknaga(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("COLOK NAGA")
+	log.Printf("WIN 3 : %s", fmt.Sprintf("%.3f", win3))
+	log.Printf("WIN 4 : %s", fmt.Sprintf("%.3f", win4))
+	log.Printf("DISC : %s", fmt.Sprintf("%.3f", disc))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
-		win3, win4,
-		disc, limitglobal, limittotal,
+		fmt.Sprintf("%.3f", win3), fmt.Sprintf("%.3f", win4),
+		fmt.Sprintf("%.3f", disc), limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3256,7 +3239,6 @@ func Save_companyUpdatePasarancolokjitu(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3267,32 +3249,30 @@ func Save_companyUpdatePasarancolokjitu(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("COLOK JITU")
+	log.Printf("WIN AS : %s", fmt.Sprintf("%.3f", winas))
+	log.Printf("WIN KOP : %s", fmt.Sprintf("%.3f", winkop))
+	log.Printf("WIN KEPALA : %s", fmt.Sprintf("%.3f", winkepala))
+	log.Printf("WIN EKOR : %s", fmt.Sprintf("%.3f", winekor))
+	log.Printf("DISC : %s", fmt.Sprintf("%.3f", disc))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
-		winas, winkop, winkepala, winekor,
-		disc, limitglobal, limittotal,
+		fmt.Sprintf("%.3f", winas), fmt.Sprintf("%.3f", winkop), fmt.Sprintf("%.3f", winkepala), fmt.Sprintf("%.3f", winekor),
+		fmt.Sprintf("%.3f", disc), limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3306,7 +3286,6 @@ func Save_companyUpdatePasaran5050umum(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3318,37 +3297,40 @@ func Save_companyUpdatePasaran5050umum(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("5050 UMUM")
+	log.Printf("KEI BESAR : %s", fmt.Sprintf("%.3f", keibesar))
+	log.Printf("KEI KECIL : %s", fmt.Sprintf("%.3f", keikecil))
+	log.Printf("KEI GENAP : %s", fmt.Sprintf("%.3f", keigenap))
+	log.Printf("KEI GANJIL : %s", fmt.Sprintf("%.3f", keiganjil))
+	log.Printf("KEI TENGAH : %s", fmt.Sprintf("%.3f", keitengah))
+	log.Printf("KEI TEPI : %s", fmt.Sprintf("%.3f", keitepi))
+	log.Printf("DISC BESAR : %s", fmt.Sprintf("%.3f", discbesar))
+	log.Printf("DISC KECIL : %s", fmt.Sprintf("%.3f", disckecil))
+	log.Printf("DISC GENAP : %s", fmt.Sprintf("%.3f", discgenap))
+	log.Printf("DISC GANJIL : %s", fmt.Sprintf("%.3f", discganjil))
+	log.Printf("DISC TENGAH : %s", fmt.Sprintf("%.3f", disctengah))
+	log.Printf("DISC TEPI : %s", fmt.Sprintf("%.3f", disctepi))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
-		helpers.ToFixed(keibesar, 3), helpers.ToFixed(keikecil, 3),
-		helpers.ToFixed(keigenap, 3), helpers.ToFixed(keiganjil, 3),
-		helpers.ToFixed(keitengah, 3), helpers.ToFixed(keitepi, 3),
-		helpers.ToFixed(discbesar, 3), helpers.ToFixed(disckecil, 3),
-		helpers.ToFixed(discgenap, 3), helpers.ToFixed(discganjil, 3),
-		helpers.ToFixed(disctengah, 3), helpers.ToFixed(disctepi, 3),
+		fmt.Sprintf("%.3f", keibesar), fmt.Sprintf("%.3f", keikecil), fmt.Sprintf("%.3f", keigenap), fmt.Sprintf("%.3f", keiganjil),
+		fmt.Sprintf("%.3f", keitengah), fmt.Sprintf("%.3f", keitepi),
+		fmt.Sprintf("%.3f", discbesar), fmt.Sprintf("%.3f", disckecil), fmt.Sprintf("%.3f", discgenap), fmt.Sprintf("%.3f", discganjil),
+		fmt.Sprintf("%.3f", disctengah), fmt.Sprintf("%.3f", disctepi),
 		limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3368,7 +3350,6 @@ func Save_companyUpdatePasaran5050special(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3386,39 +3367,65 @@ func Save_companyUpdatePasaran5050special(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("5050 SPECIAL")
+	log.Printf("KEI AS GANJIL : %s", fmt.Sprintf("%.3f", keiasganjil))
+	log.Printf("KEI AS GENAP : %s", fmt.Sprintf("%.3f", keiasgenap))
+	log.Printf("KEI AS BESAR : %s", fmt.Sprintf("%.3f", keiasbesar))
+	log.Printf("KEI AS KECIL : %s", fmt.Sprintf("%.3f", keiaskecil))
+	log.Printf("KEI KOP GANJIL : %s", fmt.Sprintf("%.3f", keikopganjil))
+	log.Printf("KEI KOP GENAP : %s", fmt.Sprintf("%.3f", keikopgenap))
+	log.Printf("KEI KOP BESAR : %s", fmt.Sprintf("%.3f", keikopbesar))
+	log.Printf("KEI KOP KECIL : %s", fmt.Sprintf("%.3f", keikopkecil))
+	log.Printf("KEI KEPALA GANJIL : %s", fmt.Sprintf("%.3f", keikepalaganjil))
+	log.Printf("KEI KEPALA GENAP : %s", fmt.Sprintf("%.3f", keikepalagenap))
+	log.Printf("KEI KEPALA BESAR : %s", fmt.Sprintf("%.3f", keikepalabesar))
+	log.Printf("KEI KEPALA KECIL : %s", fmt.Sprintf("%.3f", keikepalakecil))
+	log.Printf("KEI EKOR GANJIL : %s", fmt.Sprintf("%.3f", keiekorganjil))
+	log.Printf("KEI EKOR GENAP : %s", fmt.Sprintf("%.3f", keiekorgenap))
+	log.Printf("KEI EKOR BESAR : %s", fmt.Sprintf("%.3f", keiekorbesar))
+	log.Printf("KEI EKOR KECIL : %s", fmt.Sprintf("%.3f", keiekorkecil))
+
+	log.Printf("DISC AS GANJIL : %s", fmt.Sprintf("%.3f", discasganjil))
+	log.Printf("DISC AS GENAP : %s", fmt.Sprintf("%.3f", discasgenap))
+	log.Printf("DISC AS BESAR : %s", fmt.Sprintf("%.3f", discasbesar))
+	log.Printf("DISC AS KECIL : %s", fmt.Sprintf("%.3f", discaskecil))
+	log.Printf("DISC KOP GANJIL : %s", fmt.Sprintf("%.3f", disckopganjil))
+	log.Printf("DISC KOP GENAP : %s", fmt.Sprintf("%.3f", disckopgenap))
+	log.Printf("DISC KOP BESAR : %s", fmt.Sprintf("%.3f", disckopbesar))
+	log.Printf("DISC KOP KECIL : %s", fmt.Sprintf("%.3f", disckopkecil))
+	log.Printf("DISC KEPALA GANJIL : %s", fmt.Sprintf("%.3f", disckepalaganjil))
+	log.Printf("DISC KEPALA GENAP : %s", fmt.Sprintf("%.3f", disckepalagenap))
+	log.Printf("DISC KEPALA BESAR : %s", fmt.Sprintf("%.3f", disckepalabesar))
+	log.Printf("DISC KEPALA KECIL : %s", fmt.Sprintf("%.3f", disckepalakecil))
+	log.Printf("DISC EKOR GANJIL : %s", fmt.Sprintf("%.3f", discekorganjil))
+	log.Printf("DISC EKOR GENAP : %s", fmt.Sprintf("%.3f", discekorgenap))
+	log.Printf("DISC EKOR BESAR : %s", fmt.Sprintf("%.3f", discekorbesar))
+	log.Printf("DISC EKOR KECIL : %s", fmt.Sprintf("%.3f", discekorkecil))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
-		helpers.ToFixed(keiasganjil, 3), helpers.ToFixed(keiasgenap, 3), helpers.ToFixed(keiasbesar, 3), helpers.ToFixed(keiaskecil, 3),
-		helpers.ToFixed(keikopganjil, 3), helpers.ToFixed(keikopgenap, 3), helpers.ToFixed(keikopbesar, 3), helpers.ToFixed(keikopkecil, 3),
-		helpers.ToFixed(keikepalaganjil, 3), helpers.ToFixed(keikepalagenap, 3), helpers.ToFixed(keikepalabesar, 3), helpers.ToFixed(keikepalakecil, 3),
-		helpers.ToFixed(keiekorganjil, 3), helpers.ToFixed(keiekorgenap, 3), helpers.ToFixed(keiekorbesar, 3), helpers.ToFixed(keiekorkecil, 3),
-		helpers.ToFixed(discasganjil, 3), helpers.ToFixed(discasgenap, 3), helpers.ToFixed(discasbesar, 3), helpers.ToFixed(discaskecil, 3),
-		helpers.ToFixed(disckopganjil, 3), helpers.ToFixed(disckopgenap, 3), helpers.ToFixed(disckopbesar, 3), helpers.ToFixed(disckopkecil, 3),
-		helpers.ToFixed(disckepalaganjil, 3), helpers.ToFixed(disckepalagenap, 3), helpers.ToFixed(disckepalabesar, 3), helpers.ToFixed(disckepalakecil, 3),
-		helpers.ToFixed(discekorganjil, 3), helpers.ToFixed(discekorgenap, 3), helpers.ToFixed(discekorbesar, 3), helpers.ToFixed(discekorkecil, 3),
+		fmt.Sprintf("%.3f", keiasganjil), fmt.Sprintf("%.3f", keiasgenap), fmt.Sprintf("%.3f", keiasbesar), fmt.Sprintf("%.3f", keiaskecil),
+		fmt.Sprintf("%.3f", keikopganjil), fmt.Sprintf("%.3f", keikopgenap), fmt.Sprintf("%.3f", keikopbesar), fmt.Sprintf("%.3f", keikopkecil),
+		fmt.Sprintf("%.3f", keikepalaganjil), fmt.Sprintf("%.3f", keikepalagenap), fmt.Sprintf("%.3f", keikepalabesar), fmt.Sprintf("%.3f", keikepalakecil),
+		fmt.Sprintf("%.3f", keiekorganjil), fmt.Sprintf("%.3f", keiekorgenap), fmt.Sprintf("%.3f", keiekorbesar), fmt.Sprintf("%.3f", keiekorkecil),
+		fmt.Sprintf("%.3f", discasganjil), fmt.Sprintf("%.3f", discasgenap), fmt.Sprintf("%.3f", discasbesar), fmt.Sprintf("%.3f", discaskecil),
+		fmt.Sprintf("%.3f", disckopganjil), fmt.Sprintf("%.3f", disckopgenap), fmt.Sprintf("%.3f", disckopbesar), fmt.Sprintf("%.3f", disckopkecil),
+		fmt.Sprintf("%.3f", disckepalaganjil), fmt.Sprintf("%.3f", disckepalagenap), fmt.Sprintf("%.3f", disckepalabesar), fmt.Sprintf("%.3f", disckepalakecil),
+		fmt.Sprintf("%.3f", discekorganjil), fmt.Sprintf("%.3f", discekorgenap), fmt.Sprintf("%.3f", discekorbesar), fmt.Sprintf("%.3f", discekorkecil),
 		limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3436,7 +3443,6 @@ func Save_companyUpdatePasaran5050kombinasi(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3452,37 +3458,68 @@ func Save_companyUpdatePasaran5050kombinasi(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("5050 KOMBINASI")
+	log.Printf("BELAKANG KEI MONO : %s", fmt.Sprintf("%.3f", belakangkeimono))
+	log.Printf("BELAKANG KEI STEREO : %s", fmt.Sprintf("%.3f", belakangkeistereo))
+	log.Printf("BELAKANG KEI KEMBANG : %s", fmt.Sprintf("%.3f", belakangkeikembang))
+	log.Printf("BELAKANG KEI KEMPIS : %s", fmt.Sprintf("%.3f", belakangkeikempis))
+	log.Printf("BELAKANG KEI KEMBAR : %s", fmt.Sprintf("%.3f", belakangkeikembar))
+	log.Printf("TENGAH KEI MONO : %s", fmt.Sprintf("%.3f", tengahkeimono))
+	log.Printf("TENGAH KEI STEREO : %s", fmt.Sprintf("%.3f", tengahkeistereo))
+	log.Printf("TENGAH KEI KEMBANG : %s", fmt.Sprintf("%.3f", tengahkeikembang))
+	log.Printf("TENGAH KEI KEMPIS : %s", fmt.Sprintf("%.3f", tengahkeikempis))
+	log.Printf("TENGAH KEI KEMBAR : %s", fmt.Sprintf("%.3f", tengahkeikembar))
+	log.Printf("DEPAN KEI MONO : %s", fmt.Sprintf("%.3f", depankeimono))
+	log.Printf("DEPAN KEI STEREO : %s", fmt.Sprintf("%.3f", depankeistereo))
+	log.Printf("DEPAN KEI KEMBANG : %s", fmt.Sprintf("%.3f", depankeikembang))
+	log.Printf("DEPAN KEI KEMPIS : %s", fmt.Sprintf("%.3f", depankeikempis))
+	log.Printf("DEPAN KEI KEMBAR : %s", fmt.Sprintf("%.3f", depankeikembar))
+
+	log.Printf("BELAKANG DISC MONO : %s", fmt.Sprintf("%.3f", belakangdiscmono))
+	log.Printf("BELAKANG DISC STEREO : %s", fmt.Sprintf("%.3f", belakangdiscstereo))
+	log.Printf("BELAKANG DISC KEMBANG : %s", fmt.Sprintf("%.3f", belakangdisckembang))
+	log.Printf("BELAKANG DISC KEMPIS : %s", fmt.Sprintf("%.3f", belakangdisckempis))
+	log.Printf("BELAKANG DISC KEMBAR : %s", fmt.Sprintf("%.3f", belakangdisckembar))
+	log.Printf("TENGAH DISC MONO : %s", fmt.Sprintf("%.3f", tengahdiscmono))
+	log.Printf("TENGAH DISC STEREO : %s", fmt.Sprintf("%.3f", tengahdiscstereo))
+	log.Printf("TENGAH DISC KEMBANG : %s", fmt.Sprintf("%.3f", tengahdisckembang))
+	log.Printf("TENGAH DISC KEMPIS : %s", fmt.Sprintf("%.3f", tengahdisckempis))
+	log.Printf("TENGAH DISC KEMBAR : %s", fmt.Sprintf("%.3f", tengahdisckembar))
+	log.Printf("DEPAN DISC MONO : %s", fmt.Sprintf("%.3f", depandiscmono))
+	log.Printf("DEPAN DISC STEREO : %s", fmt.Sprintf("%.3f", depandiscstereo))
+	log.Printf("DEPAN DISC KEMBANG : %s", fmt.Sprintf("%.3f", depandisckembang))
+	log.Printf("DEPAN DISC KEMPIS : %s", fmt.Sprintf("%.3f", depandisckempis))
+	log.Printf("DEPAN DISC KEMBAR : %s", fmt.Sprintf("%.3f", depandisckembar))
+
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet, maxbet,
-		helpers.ToFixed(belakangkeimono, 3), helpers.ToFixed(belakangkeistereo, 3), helpers.ToFixed(belakangkeikembang, 3), helpers.ToFixed(belakangkeikempis, 3), helpers.ToFixed(belakangkeikembar, 3),
-		helpers.ToFixed(tengahkeimono, 3), helpers.ToFixed(tengahkeistereo, 3), helpers.ToFixed(tengahkeikembang, 3), helpers.ToFixed(tengahkeikempis, 3), helpers.ToFixed(tengahkeikembar, 3),
-		helpers.ToFixed(depankeimono, 3), helpers.ToFixed(depankeistereo, 3), helpers.ToFixed(depankeikembang, 3), helpers.ToFixed(depankeikempis, 3), helpers.ToFixed(depankeikembar, 3),
-		helpers.ToFixed(belakangdiscmono, 3), helpers.ToFixed(belakangdiscstereo, 3), helpers.ToFixed(belakangdisckembang, 3), helpers.ToFixed(belakangdisckempis, 3), helpers.ToFixed(belakangdisckembar, 3),
-		helpers.ToFixed(tengahdiscmono, 3), helpers.ToFixed(tengahdiscstereo, 3), helpers.ToFixed(tengahdisckembang, 3), helpers.ToFixed(tengahdisckempis, 3), helpers.ToFixed(tengahdisckembar, 3),
-		helpers.ToFixed(depandiscmono, 3), helpers.ToFixed(depandiscstereo, 3), helpers.ToFixed(depandisckembang, 3), helpers.ToFixed(depandisckempis, 3), helpers.ToFixed(depandisckembar, 3),
+		fmt.Sprintf("%.3f", belakangkeimono), fmt.Sprintf("%.3f", belakangkeistereo), fmt.Sprintf("%.3f", belakangkeikembang),
+		fmt.Sprintf("%.3f", belakangkeikempis), fmt.Sprintf("%.3f", belakangkeikembar),
+		fmt.Sprintf("%.3f", tengahkeimono), fmt.Sprintf("%.3f", tengahkeistereo), fmt.Sprintf("%.3f", tengahkeikembang),
+		fmt.Sprintf("%.3f", tengahkeikempis), fmt.Sprintf("%.3f", tengahkeikembar),
+		fmt.Sprintf("%.3f", depankeimono), fmt.Sprintf("%.3f", depankeistereo), fmt.Sprintf("%.3f", depankeikembang),
+		fmt.Sprintf("%.3f", depankeikempis), fmt.Sprintf("%.3f", depankeikembar),
+		fmt.Sprintf("%.3f", belakangdiscmono), fmt.Sprintf("%.3f", belakangdiscstereo), fmt.Sprintf("%.3f", belakangdisckembang),
+		fmt.Sprintf("%.3f", belakangdisckempis), fmt.Sprintf("%.3f", belakangdisckembar),
+		fmt.Sprintf("%.3f", tengahdiscmono), fmt.Sprintf("%.3f", tengahdiscstereo), fmt.Sprintf("%.3f", tengahdisckembang),
+		fmt.Sprintf("%.3f", tengahdisckempis), fmt.Sprintf("%.3f", tengahdisckembar),
+		fmt.Sprintf("%.3f", depandiscmono), fmt.Sprintf("%.3f", depandiscstereo), fmt.Sprintf("%.3f", depandisckembang),
+		fmt.Sprintf("%.3f", depandisckempis), fmt.Sprintf("%.3f", depandisckembar),
 		limitglobal, limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -3505,11 +3542,14 @@ func Save_companyUpdatePasarankombinasi(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("MACAU KOMBINASI")
+	log.Printf("WIN : %s", fmt.Sprintf("%.3f", win))
+	log.Printf("DISC : %s", fmt.Sprintf("%.3f", disc))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet,
 		maxbet,
-		win,
-		disc,
+		fmt.Sprintf("%.3f", win),
+		fmt.Sprintf("%.3f", disc),
 		limitglobal,
 		limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
@@ -3559,11 +3599,20 @@ func Save_companyUpdatePasarandasar(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("DASAR")
+	log.Printf("KEI BESAR : %s", fmt.Sprintf("%.3f", keibesar))
+	log.Printf("KEI KECIL : %s", fmt.Sprintf("%.3f", keikecil))
+	log.Printf("KEI GENAP : %s", fmt.Sprintf("%.3f", keigenap))
+	log.Printf("KEI GANJIL : %s", fmt.Sprintf("%.3f", keiganjil))
+	log.Printf("DISC BESAR : %s", fmt.Sprintf("%.3f", discbesar))
+	log.Printf("DISC KECIL : %s", fmt.Sprintf("%.3f", disckecil))
+	log.Printf("DISC GENAP : %s", fmt.Sprintf("%.3f", discigenap))
+	log.Printf("DISC GANJIL : %s", fmt.Sprintf("%.3f", discganjil))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		minbet,
 		maxbet,
-		keibesar, keikecil, keigenap, keiganjil,
-		discbesar, disckecil, discigenap, discganjil,
+		fmt.Sprintf("%.3f", keibesar), fmt.Sprintf("%.3f", keikecil), fmt.Sprintf("%.3f", keigenap), fmt.Sprintf("%.3f", keiganjil),
+		fmt.Sprintf("%.3f", discbesar), fmt.Sprintf("%.3f", disckecil), fmt.Sprintf("%.3f", discigenap), fmt.Sprintf("%.3f", discganjil),
 		limitglobal,
 		limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
@@ -3601,7 +3650,6 @@ func Save_companyUpdatePasaranshio(
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	sql_update := `
 			UPDATE   
@@ -3612,36 +3660,31 @@ func Save_companyUpdatePasaranshio(
 			updatecomppas=?, updatedatecompas=? 
 			WHERE idcomppasaran=? AND idcompany=? 
 		`
+	log.Println("SHIO")
+	log.Printf("WIN : %s", fmt.Sprintf("%.3f", win))
+	log.Printf("DISC : %s", fmt.Sprintf("%.3f", disc))
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
 		shiotahunini,
 		minbet,
 		maxbet,
-		win,
-		disc,
+		fmt.Sprintf("%.3f", win),
+		fmt.Sprintf("%.3f", disc),
 		limitglobal,
 		limittotal,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 	log.Printf("%d-%d", minbet, maxbet)
 	if flag_update {
-		flag = true
 		msg = "Succes"
 		log.Println(msg_update)
 	} else {
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }

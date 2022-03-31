@@ -100,7 +100,7 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 
 	sql_detail := `SELECT 
 		nmcompany, companyurl,  
-		statuscompany, createcompany, createdatecompany, updatecompany, updatedatecompany  
+		statuscompany, createcompany, COALESCE(createdatecompany,""), updatecompany, COALESCE(updatedatecompany,"")   
 		FROM ` + config.DB_tbl_mst_company + `
 		WHERE idcompany = ? 
 	`

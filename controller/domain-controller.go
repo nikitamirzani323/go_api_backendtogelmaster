@@ -130,9 +130,15 @@ func DomainSave(c *fiber.Ctx) error {
 		})
 	}
 
+	_deleteredis_domain()
+	return c.JSON(result)
+}
+func _deleteredis_domain() {
+	//MASTER
 	val_master := helpers.DeleteRedis(Fielddomain_home_redis)
 	log.Printf("Redis Delete MASTER DOMAIN : %d", val_master)
+
+	//CLIENT
 	val_client := helpers.DeleteRedis(Fielddomain_client_redis)
 	log.Printf("Redis Delete CLIENT DOMAIN : %d", val_client)
-	return c.JSON(result)
 }

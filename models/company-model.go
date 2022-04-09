@@ -160,7 +160,7 @@ func Fetch_company_listadmin(company string) (helpers.Response, error) {
 
 	sql_periode := `SELECT 
 			username_comp, typeadmin, nama_comp, status_comp, lastlogin_comp, 
-			lastipaddres_comp, createcomp_admin, createdatecomp_admin, updatecomp_admin, updatedatecomp_admin    
+			lastipaddres_comp, createcomp_admin, createdatecomp_admin,  COALESCE(updatecomp_admin,""),  COALESCE(updatedatecomp_admin,"")     
 			FROM ` + config.DB_tbl_mst_company_admin + ` 
 			WHERE idcompany = ? 
 			ORDER BY lastlogin_comp  

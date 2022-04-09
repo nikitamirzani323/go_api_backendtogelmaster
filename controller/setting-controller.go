@@ -115,8 +115,12 @@ func SettingSave(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-
+	_deleteredis_setting()
+	return c.JSON(result)
+}
+func _deleteredis_setting() {
+	//MASTER
 	val_setting := helpers.DeleteRedis(Fieldsetting_home_redis)
 	log.Printf("Redis Delete MASTER - SETTING status: %d", val_setting)
-	return c.JSON(result)
+
 }

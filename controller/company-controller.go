@@ -1407,8 +1407,7 @@ func CompanySave(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_company := helpers.DeleteRedis(Fieldcompany_home_redis)
-	log.Printf("Redis Delete MASTER COMPANY : %d", val_company)
+	_deleteredis_company(client.Company, 0, "")
 	return c.JSON(result)
 }
 func CompanySaveNewAdmin(c *fiber.Ctx) error {
@@ -1450,9 +1449,7 @@ func CompanySaveNewAdmin(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-
-	val_company_listadmin := helpers.DeleteRedis(Fieldcompanylistadmin_home_redis + "_" + client.Company)
-	log.Printf("Redis Delete MASTER COMPANY LISTADMIN : %d", val_company_listadmin)
+	_deleteredis_company(client.Company, 0, "")
 	return c.JSON(result)
 }
 func CompanySaveNewPasaran(c *fiber.Ctx) error {
@@ -1492,14 +1489,8 @@ func CompanySaveNewPasaran(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaran_home_redis + "_" + client.Company)
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val_agent_periode := helpers.DeleteRedis("LISTPERIODE_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PERIODE: %d", val_agent_periode)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, 0, "")
+
 	return c.JSON(result)
 }
 func CompanySaveNewPasaranHariOnline(c *fiber.Ctx) error {
@@ -1539,14 +1530,7 @@ func CompanySaveNewPasaranHariOnline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranonline_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER: %d", val_master)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + client.Company)
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyDeletePasaranHariOnline(c *fiber.Ctx) error {
@@ -1586,14 +1570,7 @@ func CompanyDeletePasaranHariOnline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranonline_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER PASARAN ONLINE: %d", val_master)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaranlimitline(c *fiber.Ctx) error {
@@ -1632,16 +1609,7 @@ func CompanyFetchPasaranlimitline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_4-3-2")
-	log.Printf("REDIS DELETE FRONTEND CONFIG 4-3-2: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasaran432(c *fiber.Ctx) error {
@@ -1680,16 +1648,7 @@ func CompanyFetchPasaran432(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_4-3-2")
-	log.Printf("REDIS DELETE FRONTEND CONFIG 4-3-2: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasarancolokbebas(c *fiber.Ctx) error {
@@ -1728,16 +1687,7 @@ func CompanyFetchPasarancolokbebas(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasarancolokmacau(c *fiber.Ctx) error {
@@ -1776,16 +1726,7 @@ func CompanyFetchPasarancolokmacau(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasarancoloknaga(c *fiber.Ctx) error {
@@ -1824,16 +1765,7 @@ func CompanyFetchPasarancoloknaga(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasarancolokjitu(c *fiber.Ctx) error {
@@ -1872,16 +1804,7 @@ func CompanyFetchPasarancolokjitu(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasaran5050umum(c *fiber.Ctx) error {
@@ -1920,16 +1843,7 @@ func CompanyFetchPasaran5050umum(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_5050")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasaran5050special(c *fiber.Ctx) error {
@@ -1968,16 +1882,7 @@ func CompanyFetchPasaran5050special(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_5050")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasaran5050kombinasi(c *fiber.Ctx) error {
@@ -2016,16 +1921,7 @@ func CompanyFetchPasaran5050kombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_5050")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasaranmacaukombinasi(c *fiber.Ctx) error {
@@ -2064,16 +1960,7 @@ func CompanyFetchPasaranmacaukombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_macaukombinasi")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasarandasar(c *fiber.Ctx) error {
@@ -2112,16 +1999,7 @@ func CompanyFetchPasarandasar(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_dasar")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyFetchPasaranshio(c *fiber.Ctx) error {
@@ -2160,16 +2038,7 @@ func CompanyFetchPasaranshio(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_shio")
-	log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate(c *fiber.Ctx) error {
@@ -2212,12 +2081,7 @@ func CompanyPasaranUpdate(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdateLimitline(c *fiber.Ctx) error {
@@ -2260,16 +2124,7 @@ func CompanyPasaranUpdateLimitline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + client.Company + "_" + client.Pasaran_id + "_4-3-2")
-	log.Printf("REDIS DELETE FRONTEND CONFIG 4-3-2: %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate432(c *fiber.Ctx) error {
@@ -2319,16 +2174,7 @@ func CompanyPasaranUpdate432(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_4-3-2")
-	log.Printf("REDIS DELETE FRONTEND CONF 4-3-2 : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecolokbebas(c *fiber.Ctx) error {
@@ -2372,16 +2218,7 @@ func CompanyPasaranUpdatecolokbebas(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONF COLOK : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecolokmacau(c *fiber.Ctx) error {
@@ -2425,16 +2262,7 @@ func CompanyPasaranUpdatecolokmacau(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONF COLOK : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecoloknaga(c *fiber.Ctx) error {
@@ -2478,16 +2306,7 @@ func CompanyPasaranUpdatecoloknaga(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONF COLOK : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecolokjitu(c *fiber.Ctx) error {
@@ -2531,16 +2350,7 @@ func CompanyPasaranUpdatecolokjitu(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_colok")
-	log.Printf("REDIS DELETE FRONTEND CONF COLOK : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate5050umum(c *fiber.Ctx) error {
@@ -2585,16 +2395,7 @@ func CompanyPasaranUpdate5050umum(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_5050")
-	log.Printf("REDIS DELETE FRONTEND CONF 5050 : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate5050special(c *fiber.Ctx) error {
@@ -2645,16 +2446,7 @@ func CompanyPasaranUpdate5050special(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_5050")
-	log.Printf("REDIS DELETE FRONTEND CONF 5050 : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate5050kombinasi(c *fiber.Ctx) error {
@@ -2703,16 +2495,7 @@ func CompanyPasaranUpdate5050kombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_5050")
-	log.Printf("REDIS DELETE FRONTEND CONF 5050 : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatekombinasi(c *fiber.Ctx) error {
@@ -2756,16 +2539,7 @@ func CompanyPasaranUpdatekombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_macaukombinasi")
-	log.Printf("REDIS DELETE FRONTEND CONF MACAU KOMBINASI : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatedasar(c *fiber.Ctx) error {
@@ -2810,16 +2584,7 @@ func CompanyPasaranUpdatedasar(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_dasar")
-	log.Printf("REDIS DELETE FRONTEND CONF DASAR : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
 }
 func CompanyPasaranUpdateshio(c *fiber.Ctx) error {
@@ -2863,15 +2628,53 @@ func CompanyPasaranUpdateshio(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + client.Company + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
-	val := helpers.DeleteRedis("config_" + strings.ToLower(client.Company) + "_" + strings.ToLower(client.Pasaran_id) + "_shio")
-	log.Printf("REDIS DELETE FRONTEND CONF SHIO : %d", val)
-	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
-	val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(client.Company) + "_" + strconv.Itoa(client.Companypasaran_id))
-	log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
-	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(client.Company))
-	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
 	return c.JSON(result)
+}
+func _deleteredis_company(company string, idcomppasaran int, pasaranid string) {
+	//MASTER
+	val_company := helpers.DeleteRedis(Fieldcompany_home_redis)
+	log.Printf("Redis Delete MASTER COMPANY : %d", val_company)
+	val_company_listadmin := helpers.DeleteRedis(Fieldcompanylistadmin_home_redis + "_" + company)
+	log.Printf("Redis Delete MASTER COMPANY LISTADMIN : %d", val_company_listadmin)
+	val_master := helpers.DeleteRedis(Fieldcompanylistpasaran_home_redis + "_" + company)
+	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
+
+	if idcomppasaran > 0 {
+		val_master_pasaranonline := helpers.DeleteRedis(Fieldcompanylistpasaranonline_home_redis + "_" + company + "_" + strconv.Itoa(idcomppasaran))
+		log.Printf("REDIS DELETE MASTER: %d", val_master_pasaranonline)
+		val_master := helpers.DeleteRedis(Fieldcompanylistpasaranconf_home_redis + "_" + company + "_" + strconv.Itoa(idcomppasaran))
+		log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
+	}
+
+	//AGEN
+	val_agent_periode := helpers.DeleteRedis("LISTPERIODE_AGENT_" + strings.ToLower(company))
+	log.Printf("REDIS DELETE AGENT PERIODE: %d", val_agent_periode)
+	val_agent_pasaran := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(company))
+	log.Printf("REDIS DELETE AGENT PASARAN: %d", val_agent_pasaran)
+
+	if idcomppasaran > 0 {
+		val_agent_pasaran_detail := helpers.DeleteRedis("LISTPASARAN_AGENT_" + strings.ToLower(company) + "_" + strconv.Itoa(idcomppasaran))
+		log.Printf("REDIS DELETE AGENT PASARAN DETAIL: %d", val_agent_pasaran_detail)
+
+	}
+
+	//CLIENT
+	val_frontend_pasaran_detail := helpers.DeleteRedis("listpasaran_" + strings.ToLower(company))
+	log.Printf("REDIS DELETE FRONTEND PASARAN DETAIL: %d", val_frontend_pasaran_detail)
+
+	if pasaranid != "" {
+		val_conf_432 := helpers.DeleteRedis("config_" + strings.ToLower(company) + "_" + strings.ToLower(pasaranid) + "_4-3-2")
+		log.Printf("REDIS DELETE FRONTEND CONFIG 4-3-2: %d", val_conf_432)
+		val_colok := helpers.DeleteRedis("config_" + strings.ToLower(company) + "_" + strings.ToLower(pasaranid) + "_colok")
+		log.Printf("REDIS DELETE FRONTEND CONFIG COLOK: %d", val_colok)
+		val_5050 := helpers.DeleteRedis("config_" + strings.ToLower(company) + "_" + strings.ToLower(pasaranid) + "_5050")
+		log.Printf("REDIS DELETE FRONTEND CONFIG 5050: %d", val_5050)
+		val_macau := helpers.DeleteRedis("config_" + strings.ToLower(company) + "_" + strings.ToLower(pasaranid) + "_macaukombinasi")
+		log.Printf("REDIS DELETE FRONTEND CONFIG MACAUKOMBINASI: %d", val_macau)
+		val_dasar := helpers.DeleteRedis("config_" + strings.ToLower(company) + "_" + strings.ToLower(pasaranid) + "_dasar")
+		log.Printf("REDIS DELETE FRONTEND CONFIG DASAR: %d", val_dasar)
+		val_shio := helpers.DeleteRedis("config_" + strings.ToLower(company) + "_" + strings.ToLower(pasaranid) + "_shio")
+		log.Printf("REDIS DELETE FRONTEND CONFIG SHIO: %d", val_shio)
+	}
 }

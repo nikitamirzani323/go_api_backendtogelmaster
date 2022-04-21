@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   apimaster:
-    image: toto_api_master:0.0.6
+    image: toto_api_master:0.1.0
     build: "."
     ports:
       - "7074"
@@ -25,6 +25,7 @@ services:
       - apimaster
     ports:
       - "7073:7073"
+    restart: always
     networks:
       - "totoapimaster.network"
 networks:

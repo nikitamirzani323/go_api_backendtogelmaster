@@ -816,7 +816,9 @@ func PasaranSaveConf432d(c *fiber.Ctx) error {
 		client.Pasaran_win4dbb_432d, client.Pasaran_win3dbb_432d, client.Pasaran_win3ddbb_432d, client.Pasaran_win2dbb_432d, client.Pasaran_win2ddbb_432d, client.Pasaran_win2dtbb_432d,
 		client.Pasaran_disc4d_432d, client.Pasaran_disc3d_432d, client.Pasaran_disc3dd_432d, client.Pasaran_disc2d_432d, client.Pasaran_disc2dd_432d, client.Pasaran_disc2dt_432d,
 		client.Pasaran_limitglobal4d_432d, client.Pasaran_limitglobal3d_432d, client.Pasaran_limitglobal3dd_432d, client.Pasaran_limitglobal2d_432d, client.Pasaran_limitglobal2dd_432d, client.Pasaran_limitglobal2dt_432d,
-		client.Pasaran_limitotal4d_432d, client.Pasaran_limitotal3d_432d, client.Pasaran_limitotal3dd_432d, client.Pasaran_limitotal2d_432d, client.Pasaran_limitotal2dd_432d, client.Pasaran_limitotal2dt_432d)
+		client.Pasaran_limitotal4d_432d, client.Pasaran_limitotal3d_432d, client.Pasaran_limitotal3dd_432d, client.Pasaran_limitotal2d_432d, client.Pasaran_limitotal2dd_432d, client.Pasaran_limitotal2dt_432d,
+		client.Pasaran_limitglobal4d_fullbb_432d, client.Pasaran_limitglobal3d_fullbb_432d, client.Pasaran_limitglobal3dd_fullbb_432d, client.Pasaran_limitglobal2d_fullbb_432d, client.Pasaran_limitglobal2dd_fullbb_432d, client.Pasaran_limitglobal2dt_fullbb_432d,
+		client.Pasaran_limitotal4d_fullbb_432d, client.Pasaran_limitotal3d_fullbb_432d, client.Pasaran_limitotal3dd_fullbb_432d, client.Pasaran_limitotal2d_fullbb_432d, client.Pasaran_limitotal2dd_fullbb_432d, client.Pasaran_limitotal2dt_fullbb_432d)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{

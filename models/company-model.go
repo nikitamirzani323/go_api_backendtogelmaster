@@ -460,7 +460,6 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 		&minbet_dasar_db, &maxbet_dasar_db, &maxbuy_dasar_db, &keibesar_dasar_db, &keikecil_dasar_db, &keigenap_dasar_db, &keiganjil_dasar_db, &discbesar_dasar_db, &disckecil_dasar_db, &discgenap_dasar_db, &discganjil_dasar_db, &limitglobal_dasar_db, &limittotal_dasar_db,
 		&minbet_shio_db, &maxbet_shio_db, &maxbuy_shio_db, &win_shio_db, &disc_shio_db, &limitglobal_shio_db, &limittotal_shio_db, &shioyear_shio_db); err {
 	case sql.ErrNoRows:
-		flag = false
 	case nil:
 		obj.Company_Pasaran_diundi = pasarandiundi_db
 		obj.Company_Pasaran_url = pasaranurl_db

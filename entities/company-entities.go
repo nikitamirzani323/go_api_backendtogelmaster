@@ -70,6 +70,18 @@ type Model_companypasaranconf struct {
 	Company_Maxbet2d_432d                     float32 `json:"maxbet2d_432d"`
 	Company_Maxbet2dd_432d                    float32 `json:"maxbet2dd_432d"`
 	Company_Maxbet2dt_432d                    float32 `json:"maxbet2dt_432d"`
+	Company_Maxbet4d_fullbb_432d              float32 `json:"maxbet4d_fullbb_432d"`
+	Company_Maxbet3d_fullbb_432d              float32 `json:"maxbet3d_fullbb_432d"`
+	Company_Maxbet3dd_fullbb_432d             float32 `json:"maxbet3dd_fullbb_432d"`
+	Company_Maxbet2d_fullbb_432d              float32 `json:"maxbet2d_fullbb_432d"`
+	Company_Maxbet2dd_fullbb_432d             float32 `json:"maxbet2dd_fullbb_432d"`
+	Company_Maxbet2dt_fullbb_432d             float32 `json:"maxbet2dt_fullbb_432d"`
+	Company_Maxbuy4d_432d                     float32 `json:"maxbuy4d_432d"`
+	Company_Maxbuy3d_432d                     float32 `json:"maxbuy3d_432d"`
+	Company_Maxbuy3dd_432d                    float32 `json:"maxbuy3dd_432d"`
+	Company_Maxbuy2d_432d                     float32 `json:"maxbuy2d_432d"`
+	Company_Maxbuy2dd_432d                    float32 `json:"maxbuy2dd_432d"`
+	Company_Maxbuy2dt_432d                    float32 `json:"maxbuy2dt_432d"`
 	Company_Limitotal4d_432d                  float32 `json:"limitotal4d_432d"`
 	Company_Limitotal3d_432d                  float32 `json:"limitotal3d_432d"`
 	Company_Limitotal3dd_432d                 float32 `json:"limitotal3dd_432d"`
@@ -82,6 +94,18 @@ type Model_companypasaranconf struct {
 	Company_Limitglobal2d_432d                float32 `json:"limitglobal2d_432d"`
 	Company_Limitglobal2dd_432d               float32 `json:"limitglobal2dd_432d"`
 	Company_Limitglobal2dt_432d               float32 `json:"limitglobal2dt_432d"`
+	Company_Limitotal4d_fullbb_432d           float32 `json:"limitotal4d_fullbb_432d"`
+	Company_Limitotal3d_fullbb_432d           float32 `json:"limitotal3d_fullbb_432d"`
+	Company_Limitotal3dd_fullbb_432d          float32 `json:"limitotal3dd_fullbb_432d"`
+	Company_Limitotal2d_fullbb_432d           float32 `json:"limitotal2d_fullbb_432d"`
+	Company_Limitotal2dd_fullbb_432d          float32 `json:"limitotal2dd_fullbb_432d"`
+	Company_Limitotal2dt_fullbb_432d          float32 `json:"limitotal2dt_fullbb_432d"`
+	Company_Limitglobal4d_fullbb_432d         float32 `json:"limitglobal4d_fullbb_432d"`
+	Company_Limitglobal3d_fullbb_432d         float32 `json:"limitglobal3d_fullbb_432d"`
+	Company_Limitglobal3dd_fullbb_432d        float32 `json:"limitglobal3dd_fullbb_432d"`
+	Company_Limitglobal2d_fullbb_432d         float32 `json:"limitglobal2d_fullbb_432d"`
+	Company_Limitglobal2dd_fullbb_432d        float32 `json:"limitglobal2dd_fullbb_432d"`
+	Company_Limitglobal2dt_fullbb_432d        float32 `json:"limitglobal2dt_fullbb_432d"`
 	Company_Disc4d_432d                       float32 `json:"disc4d_432d"`
 	Company_Disc3d_432d                       float32 `json:"disc3d_432d"`
 	Company_Disc3dd_432d                      float32 `json:"disc3dd_432d"`
@@ -114,12 +138,14 @@ type Model_companypasaranconf struct {
 	Company_Win2dtbb_432d                     float32 `json:"win2dtbb_432d"`
 	Company_Minbet_cbebas                     float32 `json:"minbet_cbebas"`
 	Company_Maxbet_cbebas                     float32 `json:"maxbet_cbebas"`
+	Company_Maxbuy_cbebas                     float32 `json:"maxbuy_cbebas"`
 	Company_Win_cbebas                        float32 `json:"win_cbebas"`
 	Company_Disc_cbebas                       float32 `json:"disc_cbebas"`
 	Company_Limitglobal_cbebas                float32 `json:"limitglobal_cbebas"`
 	Company_Limittotal_cbebas                 float32 `json:"limittotal_cbebas"`
 	Company_Minbet_cmacau                     float32 `json:"minbet_cmacau"`
 	Company_Maxbet_cmacau                     float32 `json:"maxbet_cmacau"`
+	Company_Maxbuy_cmacau                     float32 `json:"maxbuy_cmacau"`
 	Company_Win2d_cmacau                      float32 `json:"win2d_cmacau"`
 	Company_Win3d_cmacau                      float32 `json:"win3d_cmacau"`
 	Company_Win4d_cmacau                      float32 `json:"win4d_cmacau"`
@@ -128,6 +154,7 @@ type Model_companypasaranconf struct {
 	Company_Limitotal_cmacau                  float32 `json:"limitotal_cmacau"`
 	Company_Minbet_cnaga                      float32 `json:"minbet_cnaga"`
 	Company_Maxbet_cnaga                      float32 `json:"maxbet_cnaga"`
+	Company_Maxbuy_cnaga                      float32 `json:"maxbuy_cnaga"`
 	Company_Win3_cnaga                        float32 `json:"win3_cnaga"`
 	Company_Win4_cnaga                        float32 `json:"win4_cnaga"`
 	Company_Disc_cnaga                        float32 `json:"disc_cnaga"`
@@ -135,6 +162,7 @@ type Model_companypasaranconf struct {
 	Company_Limittotal_cnaga                  float32 `json:"limittotal_cnaga"`
 	Company_Minbet_cjitu                      float32 `json:"minbet_cjitu"`
 	Company_Maxbet_cjitu                      float32 `json:"maxbet_cjitu"`
+	Company_Maxbuy_cjitu                      float32 `json:"maxbuy_cjitu"`
 	Company_Winas_cjitu                       float32 `json:"winas_cjitu"`
 	Company_Winkop_cjitu                      float32 `json:"winkop_cjitu"`
 	Company_Winkepala_cjitu                   float32 `json:"winkepala_cjitu"`
@@ -144,6 +172,7 @@ type Model_companypasaranconf struct {
 	Company_Limittotal_cjitu                  float32 `json:"limittotal_cjitu"`
 	Company_Minbet_5050umum                   float32 `json:"minbet_5050umum"`
 	Company_Maxbet_5050umum                   float32 `json:"maxbet_5050umum"`
+	Company_Maxbuy_5050umum                   float32 `json:"maxbuy_5050umum"`
 	Company_Keibesar_5050umum                 float32 `json:"keibesar_5050umum"`
 	Company_Keikecil_5050umum                 float32 `json:"keikecil_5050umum"`
 	Company_Keigenap_5050umum                 float32 `json:"keigenap_5050umum"`
@@ -160,6 +189,7 @@ type Model_companypasaranconf struct {
 	Company_Limittotal_5050umum               float32 `json:"limittotal_5050umum"`
 	Company_Minbet_5050special                float32 `json:"minbet_5050special"`
 	Company_Maxbet_5050special                float32 `json:"maxbet_5050special"`
+	Company_Maxbuy_5050special                float32 `json:"maxbuy_5050special"`
 	Company_Keiasganjil_5050special           float32 `json:"keiasganjil_5050special"`
 	Company_Keiasgenap_5050special            float32 `json:"keiasgenap_5050special"`
 	Company_Keiasbesar_5050special            float32 `json:"keiasbesar_5050special"`
@@ -196,6 +226,7 @@ type Model_companypasaranconf struct {
 	Company_Limittotal_5050special            float32 `json:"limittotal_5050special"`
 	Company_Minbet_5050kombinasi              float32 `json:"minbet_5050kombinasi"`
 	Company_Maxbet_5050kombinasi              float32 `json:"maxbet_5050kombinasi"`
+	Company_Maxbuy_5050kombinasi              float32 `json:"maxbuy_5050kombinasi"`
 	Company_Belakangkeimono_5050kombinasi     float32 `json:"belakangkeimono_5050kombinasi"`
 	Company_Belakangkeistereo_5050kombinasi   float32 `json:"belakangkeistereo_5050kombinasi"`
 	Company_Belakangkeikembang_5050kombinasi  float32 `json:"belakangkeikembang_5050kombinasi"`
@@ -230,12 +261,14 @@ type Model_companypasaranconf struct {
 	Company_Limittotal_5050kombinasi          float32 `json:"limittotal_5050kombinasi"`
 	Company_Minbet_kombinasi                  float32 `json:"minbet_kombinasi"`
 	Company_Maxbet_kombinasi                  float32 `json:"maxbet_kombinasi"`
+	Company_Maxbuy_kombinasi                  float32 `json:"maxbuy_kombinasi"`
 	Company_Win_kombinasi                     float32 `json:"win_kombinasi"`
 	Company_Disc_kombinasi                    float32 `json:"disc_kombinasi"`
 	Company_Limitglobal_kombinasi             float32 `json:"limitglobal_kombinasi"`
 	Company_Limittotal_kombinasi              float32 `json:"limittotal_kombinasi"`
 	Company_Minbet_dasar                      float32 `json:"minbet_dasar"`
 	Company_Maxbet_dasar                      float32 `json:"maxbet_dasar"`
+	Company_Maxbuy_dasar                      float32 `json:"maxbuy_dasar"`
 	Company_Keibesar_dasar                    float32 `json:"keibesar_dasar"`
 	Company_Keikecil_dasar                    float32 `json:"keikecil_dasar"`
 	Company_Keigenap_dasar                    float32 `json:"keigenap_dasar"`
@@ -248,6 +281,7 @@ type Model_companypasaranconf struct {
 	Company_Limittotal_dasar                  float32 `json:"limittotal_dasar"`
 	Company_Minbet_shio                       float32 `json:"minbet_shio"`
 	Company_Maxbet_shio                       float32 `json:"maxbet_shio"`
+	Company_Maxbuy_shio                       float32 `json:"maxbuy_shio"`
 	Company_Win_shio                          float32 `json:"win_shio"`
 	Company_Disc_shio                         float32 `json:"disc_shio"`
 	Company_Shioyear_shio                     string  `json:"shioyear_shio"`

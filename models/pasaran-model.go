@@ -956,7 +956,7 @@ func Save_pasaranConfColokNaga(
 	sql_update := `
 		UPDATE 
 		` + config.DB_tbl_mst_pasaran_togel + `  
-		SET 4_minbet=? , 4_maxbet=?, 4_maxbet=?, 4_win3digit=?, 4_win4digit=?,  
+		SET 4_minbet=? , 4_maxbet=?, 4_maxbuy=?, 4_win3digit=?, 4_win4digit=?,  
 		4_disc=?, 4_limitbuang=?, 4_limittotal=?, 
 		updatepasarantogel=?, updatedatepasarantogel=? 
 		WHERE idpasarantogel=? 

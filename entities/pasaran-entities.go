@@ -52,6 +52,18 @@ type Model_pasaranDetailConf struct {
 	Limitglobal2d_432d                float32 `json:"limitglobal2d_432d"`
 	Limitglobal2dd_432d               float32 `json:"limitglobal2dd_432d"`
 	Limitglobal2dt_432d               float32 `json:"limitglobal2dt_432d"`
+	Limitotal4d_fullbb_432d           float32 `json:"limitotal4d_fullbb_432d"`
+	Limitotal3d_fullbb_432d           float32 `json:"limitotal3d_fullbb_432d"`
+	Limitotal3dd_fullbb_432d          float32 `json:"limitotal3dd_fullbb_432d"`
+	Limitotal2d_fullbb_432d           float32 `json:"limitotal2d_fullbb_432d"`
+	Limitotal2dd_fullbb_432d          float32 `json:"limitotal2dd_fullbb_432d"`
+	Limitotal2dt_fullbb_432d          float32 `json:"limitotal2dt_fullbb_432d"`
+	Limitglobal4d_fullbb_432d         float32 `json:"limitglobal4d_fullbb_432d"`
+	Limitglobal3d_fullbb_432d         float32 `json:"limitglobal3d_fullbb_432d"`
+	Limitglobal3dd_fullbb_432d        float32 `json:"limitglobal3dd_fullbb_432d"`
+	Limitglobal2d_fullbb_432d         float32 `json:"limitglobal2d_fullbb_432d"`
+	Limitglobal2dd_fullbb_432d        float32 `json:"limitglobal2dd_fullbb_432d"`
+	Limitglobal2dt_fullbb_432d        float32 `json:"limitglobal2dt_fullbb_432d"`
 	Disc4d_432d                       float32 `json:"disc4d_432d"`
 	Disc3d_432d                       float32 `json:"disc3d_432d"`
 	Disc3dd_432d                      float32 `json:"disc3dd_432d"`

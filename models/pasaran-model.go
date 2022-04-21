@@ -166,6 +166,10 @@ func Fetch_pasaranDetailConf(idrecord string) (helpers.Response, error) {
 		1_limittotal2d as limitotal2d_432d, 1_limittotal2dd as limitotal2dd_432d, 1_limittotal2dt as limitotal2dt_432d, 
 		1_limitbuang4d as limitglobal4d_432d, 1_limitbuang3d as limitglobal3d_432d, 1_limitbuang3dd as limitglobal3dd_432d,
 		1_limitbuang2d as limitglobal2d_432d, 1_limitbuang2dd as limitglobal2dd_432d, 1_limitbuang2dt as limitglobal2dt_432d, 
+		1_limittotal4d_fullbb as limitotal4d_fullbb_432d, 1_limittotal3d_fullbb as limitotal3d_fullbb_432d, 1_limittotal3dd_fullbb as limitotal3dd_fullbb_432d,
+		1_limittotal2d_fullbb as limitotal2d_fullbb_432d, 1_limittotal2dd_fullbb as limitotal2dd_fullbb_432d, 1_limittotal2dt_fullbb as limitotal2dt_fullbb_432d, 
+		1_limitbuang4d_fullbb as limitglobal4d_fullbb_432d, 1_limitbuang3d_fullbb as limitglobal3d_fullbb_432d, 1_limitbuang3dd_fullbb as limitglobal3dd_fullbb_432d,
+		1_limitbuang2d_fullbb as limitglobal2d_fullbb_432d, 1_limitbuang2dd_fullbb as limitglobal2dd_fullbb_432d, 1_limitbuang2dt_fullbb as limitglobal2dt_fullbb_432d, 
 		1_disc4d as disc4d_432d, 1_disc3d as disc3d_432d, 1_disc3dd as disc3dd_432d, 
 		1_disc2d as disc2d_432d, 1_disc2dd as disc2dd_432d, 1_disc2dt as disc2dt_432d, 
 		1_win4d as win4d_432d, 1_win3d as win3d_432d, 1_win3dd as win3dd_432d, 
@@ -234,6 +238,8 @@ func Fetch_pasaranDetailConf(idrecord string) (helpers.Response, error) {
 		maxbuy4d_432d_db, maxbuy3d_432d_db, maxbuy3dd_432d_db, maxbuy2d_432d_db, maxbuy2dd_432d_db, maxbuy2dt_432d_db                                                                                                                                                                                            float32
 		limitotal4d_432d_db, limitotal3d_432d_db, limitotal3dd_432d_db, limitotal2d_432d_db, limitotal2dd_432d_db, limitotal2dt_432d_db                                                                                                                                                                          float32
 		limitglobal4d_432d_db, limitglobal3d_432d_db, limitglobal3dd_432d_db, limitglobal2d_432d_db, limitglobal2dd_432d_db, limitglobal2dt_432d_db                                                                                                                                                              float32
+		limitotal4d_fullbb_432d_db, limitotal3d_fullbb_432d_db, limitotal3dd_fullbb_432d_db, limitotal2d_fullbb_432d_db, limitotal2dd_fullbb_432d_db, limitotal2dt_fullbb_432d_db                                                                                                                                float32
+		limitglobal4d_fullbb_432d_db, limitglobal3d_fullbb_432d_db, limitglobal3dd_fullbb_432d_db, limitglobal2d_fullbb_432d_db, limitglobal2dd_fullbb_432d_db, limitglobal2dt_fullbb_432d_db                                                                                                                    float32
 		disc4d_432d_db, disc3d_432d_db, disc3dd_432d_db, disc2d_432d_db, disc2dd_432d_db, disc2dt_432d_db                                                                                                                                                                                                        float32
 		win4d_432d_db, win3d_432d_db, win3dd_432d_db, win2d_432d_db, win2dd_432d_db, win2dt_432d_db                                                                                                                                                                                                              float32
 		win4dnodisc_432d_db, win3dnodisc_432d_db, win3ddnodisc_432d_db, win2dnodisc_432d_db, win2ddnodisc_432d_db, win2dtnodisc_432d_db                                                                                                                                                                          float32
@@ -271,6 +277,8 @@ func Fetch_pasaranDetailConf(idrecord string) (helpers.Response, error) {
 		&maxbuy4d_432d_db, &maxbuy3d_432d_db, &maxbuy3dd_432d_db, &maxbuy2d_432d_db, &maxbuy2dd_432d_db, &maxbuy2dt_432d_db,
 		&limitotal4d_432d_db, &limitotal3d_432d_db, &limitotal3dd_432d_db, &limitotal2d_432d_db, &limitotal2dd_432d_db, &limitotal2dt_432d_db,
 		&limitglobal4d_432d_db, &limitglobal3d_432d_db, &limitglobal3dd_432d_db, &limitglobal2d_432d_db, &limitglobal2dd_432d_db, &limitglobal2dt_432d_db,
+		&limitotal4d_fullbb_432d_db, &limitotal3d_fullbb_432d_db, &limitotal3dd_fullbb_432d_db, &limitotal2d_fullbb_432d_db, &limitotal2dd_fullbb_432d_db, &limitotal2dt_fullbb_432d_db,
+		&limitglobal4d_fullbb_432d_db, &limitglobal3d_fullbb_432d_db, &limitglobal3dd_fullbb_432d_db, &limitglobal2d_fullbb_432d_db, &limitglobal2dd_fullbb_432d_db, &limitglobal2dt_fullbb_432d_db,
 		&disc4d_432d_db, &disc3d_432d_db, &disc3dd_432d_db, &disc2d_432d_db, &disc2dd_432d_db, &disc2dt_432d_db,
 		&win4d_432d_db, &win3d_432d_db, &win3dd_432d_db, &win2d_432d_db, &win2dd_432d_db, &win2dt_432d_db,
 		&win4dnodisc_432d_db, &win3dnodisc_432d_db, &win3ddnodisc_432d_db, &win2dnodisc_432d_db, &win2ddnodisc_432d_db, &win2dtnodisc_432d_db,
@@ -340,6 +348,18 @@ func Fetch_pasaranDetailConf(idrecord string) (helpers.Response, error) {
 		obj.Limitglobal2d_432d = limitglobal2d_432d_db
 		obj.Limitglobal2dd_432d = limitglobal2dd_432d_db
 		obj.Limitglobal2dt_432d = limitglobal2dt_432d_db
+		obj.Limitotal4d_fullbb_432d = limitotal4d_fullbb_432d_db
+		obj.Limitotal3d_fullbb_432d = limitotal3d_fullbb_432d_db
+		obj.Limitotal3dd_fullbb_432d = limitotal3dd_fullbb_432d_db
+		obj.Limitotal2d_fullbb_432d = limitotal2d_fullbb_432d_db
+		obj.Limitotal2dd_fullbb_432d = limitotal2dd_fullbb_432d_db
+		obj.Limitotal2dt_fullbb_432d = limitotal2dt_fullbb_432d_db
+		obj.Limitglobal4d_fullbb_432d = limitglobal4d_fullbb_432d_db
+		obj.Limitglobal3d_fullbb_432d = limitglobal3d_fullbb_432d_db
+		obj.Limitglobal3dd_fullbb_432d = limitglobal3dd_fullbb_432d_db
+		obj.Limitglobal2d_fullbb_432d = limitglobal2d_fullbb_432d_db
+		obj.Limitglobal2dd_fullbb_432d = limitglobal2dd_fullbb_432d_db
+		obj.Limitglobal2dt_fullbb_432d = limitglobal2dt_fullbb_432d_db
 		obj.Disc4d_432d = disc4d_432d_db
 		obj.Disc3d_432d = disc3d_432d_db
 		obj.Disc3dd_432d = disc3dd_432d_db
@@ -686,7 +706,9 @@ func Save_pasaranConf432(
 	win4dbb, win3dbb, win3ddbb, win2dbb, win2ddbb, win2dtbb int,
 	disc4d, disc3d, disc3dd, disc2d, disc2dd, disc2dt float32,
 	limitglobal4d, limitglobal3d, limitglobal3dd, limitglobal2d, limitglobal2dd, limitglobal2dt int,
-	limittotal4d, limittotal3d, limittotal3dd, limittotal2d, limittotal2dd, limittotal2dt int) (helpers.Response, error) {
+	limittotal4d, limittotal3d, limittotal3dd, limittotal2d, limittotal2dd, limittotal2dt int,
+	limitglobal4d_fullbb, limitglobal3d_fullbb, limitglobal3dd_fullbb, limitglobal2d_fullbb, limitglobal2dd_fullbb, limitglobal2dt_fullbb int,
+	limittotal4d_fullbb, limittotal3d_fullbb, limittotal3dd_fullbb, limittotal2d_fullbb, limittotal2dd_fullbb, limittotal2dt_fullbb int) (helpers.Response, error) {
 	var res helpers.Response
 	tglnow, _ := goment.New()
 	render_page := time.Now()
@@ -705,6 +727,8 @@ func Save_pasaranConf432(
 		1_disc4d=?, 1_disc3d=?, 1_disc3dd=?, 1_disc2d=?, 1_disc2dd=?, 1_disc2dt=?, 
 		1_limitbuang4d=?, 1_limitbuang3d=?, 1_limitbuang3dd=?,1_limitbuang2d=?, 1_limitbuang2dd=?, 1_limitbuang2dt=?,  
 		1_limittotal4d=?, 1_limittotal3d=?, 1_limittotal3dd=?,1_limittotal2d=?, 1_limittotal2dd=?, 1_limittotal2dt=?,  
+		1_limitbuang4d_fullbb=?, 1_limitbuang3d_fullbb=?, 1_limitbuang3dd_fullbb=?,1_limitbuang2d_fullbb=?, 1_limitbuang2dd_fullbb=?, 1_limitbuang2dt_fullbb=?,  
+		1_limittotal4d_fullbb=?, 1_limittotal3d_fullbb=?, 1_limittotal3dd_fullbb=?,1_limittotal2d_fullbb=?, 1_limittotal2dd_fullbb=?, 1_limittotal2dt_fullbb=?, 
 		updatepasarantogel=?, updatedatepasarantogel=? 
 		WHERE idpasarantogel=? 
 	`
@@ -727,6 +751,8 @@ func Save_pasaranConf432(
 		fmt.Sprintf("%.3f", disc2d), fmt.Sprintf("%.3f", disc2dd), fmt.Sprintf("%.3f", disc2dt),
 		limitglobal4d, limitglobal3d, limitglobal3dd, limitglobal2d, limitglobal2dd, limitglobal2dt,
 		limittotal4d, limittotal3d, limittotal3dd, limittotal2d, limittotal2dd, limittotal2dt,
+		limitglobal4d_fullbb, limitglobal3d_fullbb, limitglobal3dd_fullbb, limitglobal2d_fullbb, limitglobal2dd_fullbb, limitglobal2dt_fullbb,
+		limittotal4d_fullbb, limittotal3d_fullbb, limittotal3dd_fullbb, limittotal2d_fullbb, limittotal2dd_fullbb, limittotal2dt_fullbb,
 		master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idrecord)
 	if flag_update {

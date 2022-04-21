@@ -13,7 +13,7 @@ WORKDIR /app
 RUN apk add tzdata
 COPY --from=masterapibuilds /appbuilds/binary .
 COPY --from=masterapibuilds /appbuilds/.env /app/.env
-ENV PORT=7073
+ENV PORT=7074
 ENV DB_USER="sperma"
 ENV DB_PASS="asdQWE123!@#"
 ENV DB_HOST="128.199.124.131"

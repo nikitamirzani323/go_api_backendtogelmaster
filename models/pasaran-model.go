@@ -282,7 +282,7 @@ func Fetch_pasaranDetailConf(idrecord string) (helpers.Response, error) {
 		&minbet_cjitu_db, &maxbet_cjitu_db, &maxbuy_cjitu_db,
 		&winas_cjitu_db, &winkop_cjitu_db, &winkepala_cjitu_db, &winekor_cjitu_db,
 		&desc_cjitu_db, &limitglobal_cjitu_db, &limittotal_cjitu_db,
-		&minbet_5050umum_db, &maxbet_5050umum_db, maxbuy_5050umum_db,
+		&minbet_5050umum_db, &maxbet_5050umum_db, &maxbuy_5050umum_db,
 		&keibesar_5050umum_db, &keikecil_5050umum_db, &keigenap_5050umum_db, &keiganjil_5050umum_db, &keitengah_5050umum_db, &keitepi_5050umum_db,
 		&discbesar_5050umum_db, &disckecil_5050umum_db, &discgenap_5050umum_db, &discganjil_5050umum_db, &disctengah_5050umum_db, &disctepi_5050umum_db, &limitglobal_5050umum_db, &limittotal_5050umum_db,
 		&minbet_5050special_db, &maxbet_5050special_db, &maxbuy_5050special_db, &keiasganjil_5050special_db, &keiasgenap_5050special_db, &keiasbesar_5050special_db, &keiaskecil_5050special_db, &keikopganjil_5050special_db, &keikopgenap_5050special_db,
@@ -1577,17 +1577,10 @@ func Save_pasaranConfshio(
 		log.Println(msg_update)
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }

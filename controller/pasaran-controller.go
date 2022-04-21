@@ -782,6 +782,10 @@ func PasaranSaveConf432d(c *fiber.Ctx) error {
 	result, err := models.Save_pasaranConf432(
 		client.Master, client.Idrecord,
 		client.Pasaran_minbet_432d, client.Pasaran_maxbet4d_432d, client.Pasaran_maxbet3d_432d, client.Pasaran_maxbet3dd_432d, client.Pasaran_maxbet2d_432d, client.Pasaran_maxbet2dd_432d, client.Pasaran_maxbet2dt_432d,
+		client.Pasaran_maxbet4dfullbb_432d, client.Pasaran_maxbet3dfullbb_432d, client.Pasaran_maxbet3ddfullbb_432d,
+		client.Pasaran_maxbet2dfullbb_432d, client.Pasaran_maxbet2ddfullbb_432d, client.Pasaran_maxbet2dtfullbb_432d,
+		client.Pasaran_maxbuy4d_432d, client.Pasaran_maxbuy3d_432d, client.Pasaran_maxbuy3dd_432d,
+		client.Pasaran_maxbuy2d_432d, client.Pasaran_maxbuy2dd_432d, client.Pasaran_maxbuy2dt_432d,
 		client.Pasaran_win4d_432d, client.Pasaran_win3d_432d, client.Pasaran_win3dd_432d, client.Pasaran_win2d_432d, client.Pasaran_win2dd_432d, client.Pasaran_win2dt_432d,
 		client.Pasaran_win4dnodisc_432d, client.Pasaran_win3dnodisc_432d, client.Pasaran_win3ddnodisc_432d, client.Pasaran_win2dnodisc_432d, client.Pasaran_win2ddnodisc_432d, client.Pasaran_win2dtnodisc_432d,
 		client.Pasaran_win4dbb_kena_432d, client.Pasaran_win3dbb_kena_432d, client.Pasaran_win3ddbb_kena_432d, client.Pasaran_win2dbb_kena_432d, client.Pasaran_win2ddbb_kena_432d, client.Pasaran_win2dtbb_kena_432d,
@@ -830,7 +834,7 @@ func PasaranSaveConfColokBebas(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConfColokBebas(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_cbebas, client.Pasaran_maxbet_cbebas,
+		client.Pasaran_minbet_cbebas, client.Pasaran_maxbet_cbebas, client.Pasaran_maxbuy_cbebas,
 		client.Pasaran_win_cbebas, client.Pasaran_disc_cbebas,
 		client.Pasaran_limitglobal_cbebas, client.Pasaran_limitotal_cbebas)
 	if err != nil {
@@ -874,7 +878,7 @@ func PasaranSaveConfColokMacau(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConfColokMacau(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_cmacau, client.Pasaran_maxbet_cmacau,
+		client.Pasaran_minbet_cmacau, client.Pasaran_maxbet_cmacau, client.Pasaran_maxbuy_cmacau,
 		client.Pasaran_win2_cmacau, client.Pasaran_win3_cmacau, client.Pasaran_win4_cmacau, client.Pasaran_disc_cmacau,
 		client.Pasaran_limitglobal_cmacau, client.Pasaran_limitotal_cmacau)
 	if err != nil {
@@ -918,7 +922,7 @@ func PasaranSaveConfColokNaga(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConfColokNaga(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_cnaga, client.Pasaran_maxbet_cnaga,
+		client.Pasaran_minbet_cnaga, client.Pasaran_maxbet_cnaga, client.Pasaran_maxbuy_cnaga,
 		client.Pasaran_win3_cnaga, client.Pasaran_win4_cnaga, client.Pasaran_disc_cnaga,
 		client.Pasaran_limitglobal_cnaga, client.Pasaran_limittotal_cnaga)
 	if err != nil {
@@ -962,7 +966,7 @@ func PasaranSaveConfColokJitu(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConfColokJitu(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_cjitu, client.Pasaran_maxbet_cjitu,
+		client.Pasaran_minbet_cjitu, client.Pasaran_maxbet_cjitu, client.Pasaran_maxbuy_cjitu,
 		client.Pasaran_winas_cjitu, client.Pasaran_winkop_cjitu, client.Pasaran_winkepala_cjitu, client.Pasaran_winekor_cjitu, client.Pasaran_desc_cjitu,
 		client.Pasaran_limitglobal_cjitu, client.Pasaran_limittotal_cjitu)
 	if err != nil {
@@ -1006,7 +1010,7 @@ func PasaranSaveConf5050umum(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConf5050umum(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_5050umum, client.Pasaran_maxbet_5050umum,
+		client.Pasaran_minbet_5050umum, client.Pasaran_maxbet_5050umum, client.Pasaran_maxbuy_5050umum,
 		client.Pasaran_keibesar_5050umum, client.Pasaran_keikecil_5050umum, client.Pasaran_keigenap_5050umum, client.Pasaran_keiganjil_5050umum, client.Pasaran_keitengah_5050umum, client.Pasaran_keitepi_5050umum,
 		client.Pasaran_discbesar_5050umum, client.Pasaran_disckecil_5050umum, client.Pasaran_discgenap_5050umum, client.Pasaran_discganjil_5050umum, client.Pasaran_disctengah_5050umum, client.Pasaran_disctepi_5050umum,
 		client.Pasaran_limitglobal_5050umum, client.Pasaran_limittotal_5050umum)
@@ -1051,7 +1055,7 @@ func PasaranSaveConf5050special(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConf5050special(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_5050special, client.Pasaran_maxbet_5050special,
+		client.Pasaran_minbet_5050special, client.Pasaran_maxbet_5050special, client.Pasaran_maxbuy_5050special,
 		client.Pasaran_keiasganjil_5050special, client.Pasaran_keiasgenap_5050special, client.Pasaran_keiasbesar_5050special, client.Pasaran_keiaskecil_5050special,
 		client.Pasaran_keikopganjil_5050special, client.Pasaran_keikopgenap_5050special, client.Pasaran_keikopbesar_5050special, client.Pasaran_keikopkecil_5050special,
 		client.Pasaran_keikepalaganjil_5050special, client.Pasaran_keikepalagenap_5050special, client.Pasaran_keikepalabesar_5050special, client.Pasaran_keikepalakecil_5050special,
@@ -1102,7 +1106,7 @@ func PasaranSaveConf5050kombinasi(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConf5050kombinasi(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_5050kombinasi, client.Pasaran_maxbet_5050kombinasi,
+		client.Pasaran_minbet_5050kombinasi, client.Pasaran_maxbet_5050kombinasi, client.Pasaran_maxbuy_5050kombinasi,
 		client.Pasaran_belakangkeimono_5050kombinasi, client.Pasaran_belakangkeistereo_5050kombinasi, client.Pasaran_belakangkeikembang_5050kombinasi, client.Pasaran_belakangkeikempis_5050kombinasi, client.Pasaran_belakangkeikembar_5050kombinasi,
 		client.Pasaran_tengahkeimono_5050kombinasi, client.Pasaran_tengahkeistereo_5050kombinasi, client.Pasaran_tengahkeikembang_5050kombinasi, client.Pasaran_tengahkeikempis_5050kombinasi, client.Pasaran_tengahkeikembar_5050kombinasi,
 		client.Pasaran_depankeimono_5050kombinasi, client.Pasaran_depankeistereo_5050kombinasi, client.Pasaran_depankeikembang_5050kombinasi, client.Pasaran_depankeikempis_5050kombinasi, client.Pasaran_depankeikembar_5050kombinasi,
@@ -1151,7 +1155,7 @@ func PasaranSaveConfmacaukombinasi(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConfmacaukombinasi(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_kombinasi, client.Pasaran_maxbet_kombinasi,
+		client.Pasaran_minbet_kombinasi, client.Pasaran_maxbet_kombinasi, client.Pasaran_maxbuy_kombinasi,
 		client.Pasaran_win_kombinasi, client.Pasaran_disc_kombinasi,
 		client.Pasaran_limitglobal_kombinasi, client.Pasaran_limittotal_kombinasi)
 	if err != nil {
@@ -1195,7 +1199,7 @@ func PasaranSaveConfdasar(c *fiber.Ctx) error {
 
 	result, err := models.Save_pasaranConfdasar(
 		client.Master, client.Idrecord,
-		client.Pasaran_minbet_dasar, client.Pasaran_maxbet_dasar,
+		client.Pasaran_minbet_dasar, client.Pasaran_maxbet_dasar, client.Pasaran_maxbuy_dasar,
 		client.Pasaran_keibesar_dasar, client.Pasaran_keikecil_dasar, client.Pasaran_keigenap_dasar, client.Pasaran_keiganjil_dasar,
 		client.Pasaran_discbesar_dasar, client.Pasaran_disckecil_dasar, client.Pasaran_discgenap_dasar, client.Pasaran_discganjil_dasar,
 		client.Pasaran_limitglobal_dasar, client.Pasaran_limittotal_dasar)
@@ -1241,7 +1245,7 @@ func PasaranSaveConfshio(c *fiber.Ctx) error {
 	result, err := models.Save_pasaranConfshio(
 		client.Master, client.Idrecord,
 		client.Pasaran_shioyear_shio,
-		client.Pasaran_minbet_shio, client.Pasaran_maxbet_shio,
+		client.Pasaran_minbet_shio, client.Pasaran_maxbet_shio, client.Pasaran_maxbuy_shio,
 		client.Pasaran_win_shio, client.Pasaran_disc_shio, client.Pasaran_limitglobal_shio, client.Pasaran_limittotal_shio)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)

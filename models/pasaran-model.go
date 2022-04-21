@@ -1011,7 +1011,7 @@ func Save_pasaranConfColokJitu(
 	sql_update := `
 		UPDATE 
 		` + config.DB_tbl_mst_pasaran_togel + `  
-		SET 5_minbet=? , 5_maxbet=?, 5_maxbuy, 
+		SET 5_minbet=? , 5_maxbet=?, 5_maxbuy=?, 
 		5_winas=?, 5_winkop=?, 5_winkepala=?, 5_winekor=?, 
 		5_desic=?, 5_limitbuang=?, 5_limitotal=?,  
 		updatepasarantogel=?, updatedatepasarantogel=? 

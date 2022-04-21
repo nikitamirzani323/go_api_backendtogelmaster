@@ -11,12 +11,7 @@ import (
 
 func Init() *fiber.App {
 	app := fiber.New()
-	app.Use(logger.New(logger.Config{
-		Next: func(c *fiber.Ctx) bool {
-			return c.Path() == "/"
-		},
-		Format: "${time} | ${status} | ${latency} | ${ips[0]} | ${method} | ${path} - ${queryParams} ${body}\n",
-	}))
+	app.Use(logger.New())
 	app.Use(recover.New())
 	app.Use(compress.New())
 

@@ -415,59 +415,83 @@ type Controller_companypasaranline struct {
 	Pasaran_bbfs          int    `json:"pasaran_bbfs" validate:"required"`
 }
 type Controller_companypasaran432 struct {
-	Company                     string  `json:"company" validate:"required"`
-	Master                      string  `json:"master" validate:"required"`
-	Pasaran_id                  string  `json:"pasaran_id" validate:"required"`
-	Companypasaran_id           int     `json:"companypasaran_id" validate:"required"`
-	Pasaran_minbet_432d         int     `json:"pasaran_minbet_432d" validate:"required,numeric"`
-	Pasaran_maxbet4d_432d       int     `json:"pasaran_maxbet4d_432d" validate:"required,numeric"`
-	Pasaran_maxbet3d_432d       int     `json:"pasaran_maxbet3d_432d" validate:"required,numeric"`
-	Pasaran_maxbet3dd_432d      int     `json:"pasaran_maxbet3dd_432d" validate:"required,numeric"`
-	Pasaran_maxbet2d_432d       int     `json:"pasaran_maxbet2d_432d" validate:"required,numeric"`
-	Pasaran_maxbet2dd_432d      int     `json:"pasaran_maxbet2dd_432d" validate:"required,numeric"`
-	Pasaran_maxbet2dt_432d      int     `json:"pasaran_maxbet2dt_432d" validate:"required,numeric"`
-	Pasaran_limitotal4d_432d    int     `json:"pasaran_limitotal4d_432d" validate:"required,numeric"`
-	Pasaran_limitotal3d_432d    int     `json:"pasaran_limitotal3d_432d" validate:"required,numeric"`
-	Pasaran_limitotal3dd_432d   int     `json:"pasaran_limitotal3dd_432d" validate:"required,numeric"`
-	Pasaran_limitotal2d_432d    int     `json:"pasaran_limitotal2d_432d" validate:"required,numeric"`
-	Pasaran_limitotal2dd_432d   int     `json:"pasaran_limitotal2dd_432d" validate:"required,numeric"`
-	Pasaran_limitotal2dt_432d   int     `json:"pasaran_limitotal2dt_432d" validate:"required,numeric"`
-	Pasaran_limitglobal4d_432d  int     `json:"pasaran_limitglobal4d_432d" validate:"required,numeric"`
-	Pasaran_limitglobal3d_432d  int     `json:"pasaran_limitglobal3d_432d" validate:"required,numeric"`
-	Pasaran_limitglobal3dd_432d int     `json:"pasaran_limitglobal3dd_432d" validate:"required,numeric"`
-	Pasaran_limitglobal2d_432d  int     `json:"pasaran_limitglobal2d_432d" validate:"required,numeric"`
-	Pasaran_limitglobal2dd_432d int     `json:"pasaran_limitglobal2dd_432d" validate:"required,numeric"`
-	Pasaran_limitglobal2dt_432d int     `json:"pasaran_limitglobal2dt_432d" validate:"required,numeric"`
-	Pasaran_win4d_432d          int     `json:"pasaran_win4d_432d" validate:"required,numeric"`
-	Pasaran_win3d_432d          int     `json:"pasaran_win3d_432d" validate:"required,numeric"`
-	Pasaran_win3dd_432d         int     `json:"pasaran_win3dd_432d" validate:"required,numeric"`
-	Pasaran_win2d_432d          int     `json:"pasaran_win2d_432d" validate:"required,numeric"`
-	Pasaran_win2dd_432d         int     `json:"pasaran_win2dd_432d" validate:"required,numeric"`
-	Pasaran_win2dt_432d         int     `json:"pasaran_win2dt_432d" validate:"required,numeric"`
-	Pasaran_win4dnodisc_432d    int     `json:"pasaran_win4dnodisc_432d" validate:"required,numeric"`
-	Pasaran_win3dnodisc_432d    int     `json:"pasaran_win3dnodisc_432d" validate:"required,numeric"`
-	Pasaran_win3ddnodisc_432d   int     `json:"pasaran_win3ddnodisc_432d" validate:"required,numeric"`
-	Pasaran_win2dnodisc_432d    int     `json:"pasaran_win2dnodisc_432d" validate:"required,numeric"`
-	Pasaran_win2ddnodisc_432d   int     `json:"pasaran_win2ddnodisc_432d" validate:"required,numeric"`
-	Pasaran_win2dtnodisc_432d   int     `json:"pasaran_win2dtnodisc_432d" validate:"required,numeric"`
-	Pasaran_win4dbb_kena_432d   int     `json:"pasaran_win4dbb_kena_432d" validate:"required,numeric"`
-	Pasaran_win3dbb_kena_432d   int     `json:"pasaran_win3dbb_kena_432d" validate:"required,numeric"`
-	Pasaran_win3ddbb_kena_432d  int     `json:"pasaran_win3ddbb_kena_432d" validate:"required,numeric"`
-	Pasaran_win2dbb_kena_432d   int     `json:"pasaran_win2dbb_kena_432d" validate:"required,numeric"`
-	Pasaran_win2ddbb_kena_432d  int     `json:"pasaran_win2ddbb_kena_432d" validate:"required,numeric"`
-	Pasaran_win2dtbb_kena_432d  int     `json:"pasaran_win2dtbb_kena_432d" validate:"required,numeric"`
-	Pasaran_win4dbb_432d        int     `json:"pasaran_win4dbb_432d" validate:"required,numeric"`
-	Pasaran_win3dbb_432d        int     `json:"pasaran_win3dbb_432d" validate:"required,numeric"`
-	Pasaran_win3ddbb_432d       int     `json:"pasaran_win3ddbb_432d" validate:"required,numeric"`
-	Pasaran_win2dbb_432d        int     `json:"pasaran_win2dbb_432d" validate:"required,numeric"`
-	Pasaran_win2ddbb_432d       int     `json:"pasaran_win2ddbb_432d" validate:"required,numeric"`
-	Pasaran_win2dtbb_432d       int     `json:"pasaran_win2dtbb_432d" validate:"required,numeric"`
-	Pasaran_disc4d_432d         float32 `json:"pasaran_disc4d_432d" validate:"required,numeric"`
-	Pasaran_disc3d_432d         float32 `json:"pasaran_disc3d_432d" validate:"required,numeric"`
-	Pasaran_disc3dd_432d        float32 `json:"pasaran_disc3dd_432d" validate:"required,numeric"`
-	Pasaran_disc2d_432d         float32 `json:"pasaran_disc2d_432d" validate:"required,numeric"`
-	Pasaran_disc2dd_432d        float32 `json:"pasaran_disc2dd_432d" validate:"required,numeric"`
-	Pasaran_disc2dt_432d        float32 `json:"pasaran_disc2dt_432d" validate:"required,numeric"`
+	Company                            string  `json:"company" validate:"required"`
+	Master                             string  `json:"master" validate:"required"`
+	Pasaran_id                         string  `json:"pasaran_id" validate:"required"`
+	Companypasaran_id                  int     `json:"companypasaran_id" validate:"required"`
+	Pasaran_minbet_432d                int     `json:"pasaran_minbet_432d" validate:"required,numeric"`
+	Pasaran_maxbet4d_432d              int     `json:"pasaran_maxbet4d_432d" validate:"required,numeric"`
+	Pasaran_maxbet3d_432d              int     `json:"pasaran_maxbet3d_432d" validate:"required,numeric"`
+	Pasaran_maxbet3dd_432d             int     `json:"pasaran_maxbet3dd_432d" validate:"required,numeric"`
+	Pasaran_maxbet2d_432d              int     `json:"pasaran_maxbet2d_432d" validate:"required,numeric"`
+	Pasaran_maxbet2dd_432d             int     `json:"pasaran_maxbet2dd_432d" validate:"required,numeric"`
+	Pasaran_maxbet2dt_432d             int     `json:"pasaran_maxbet2dt_432d" validate:"required,numeric"`
+	Pasaran_maxbet4d_fullbb_432d       int     `json:"pasaran_maxbet4d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_maxbet3d_fullbb_432d       int     `json:"pasaran_maxbet3d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_maxbet3dd_fullbb_432d      int     `json:"pasaran_maxbet3dd_fullbb_432d" validate:"required,numeric"`
+	Pasaran_maxbet2d_fullbb_432d       int     `json:"pasaran_maxbet2d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_maxbet2dd_fullbb_432d      int     `json:"pasaran_maxbet2dd_fullbb_432d" validate:"required,numeric"`
+	Pasaran_maxbet2dt_fullbb_432d      int     `json:"pasaran_maxbet2dt_fullbb_432d" validate:"required,numeric"`
+	Pasaran_maxbuy4d_432d              int     `json:"pasaran_maxbuy4d_432d" validate:"required,numeric"`
+	Pasaran_maxbuy3d_432d              int     `json:"pasaran_maxbuy3d_432d" validate:"required,numeric"`
+	Pasaran_maxbuy3dd_432d             int     `json:"pasaran_maxbuy3dd_432d" validate:"required,numeric"`
+	Pasaran_maxbuy2d_432d              int     `json:"pasaran_maxbuy2d_432d" validate:"required,numeric"`
+	Pasaran_maxbuy2dd_432d             int     `json:"pasaran_maxbuy2dd_432d" validate:"required,numeric"`
+	Pasaran_maxbuy2dt_432d             int     `json:"pasaran_maxbuy2dt_432d" validate:"required,numeric"`
+	Pasaran_limitotal4d_432d           int     `json:"pasaran_limitotal4d_432d" validate:"required,numeric"`
+	Pasaran_limitotal3d_432d           int     `json:"pasaran_limitotal3d_432d" validate:"required,numeric"`
+	Pasaran_limitotal3dd_432d          int     `json:"pasaran_limitotal3dd_432d" validate:"required,numeric"`
+	Pasaran_limitotal2d_432d           int     `json:"pasaran_limitotal2d_432d" validate:"required,numeric"`
+	Pasaran_limitotal2dd_432d          int     `json:"pasaran_limitotal2dd_432d" validate:"required,numeric"`
+	Pasaran_limitotal2dt_432d          int     `json:"pasaran_limitotal2dt_432d" validate:"required,numeric"`
+	Pasaran_limitglobal4d_432d         int     `json:"pasaran_limitglobal4d_432d" validate:"required,numeric"`
+	Pasaran_limitglobal3d_432d         int     `json:"pasaran_limitglobal3d_432d" validate:"required,numeric"`
+	Pasaran_limitglobal3dd_432d        int     `json:"pasaran_limitglobal3dd_432d" validate:"required,numeric"`
+	Pasaran_limitglobal2d_432d         int     `json:"pasaran_limitglobal2d_432d" validate:"required,numeric"`
+	Pasaran_limitglobal2dd_432d        int     `json:"pasaran_limitglobal2dd_432d" validate:"required,numeric"`
+	Pasaran_limitglobal2dt_432d        int     `json:"pasaran_limitglobal2dt_432d" validate:"required,numeric"`
+	Pasaran_limitotal4d_fullbb_432d    int     `json:"pasaran_limitotal4d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitotal3d_fullbb_432d    int     `json:"pasaran_limitotal3d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitotal3dd_fullbb_432d   int     `json:"pasaran_limitotal3dd_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitotal2d_fullbb_432d    int     `json:"pasaran_limitotal2d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitotal2dd_fullbb_432d   int     `json:"pasaran_limitotal2dd_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitotal2dt_fullbb_432d   int     `json:"pasaran_limitotal2dt_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitglobal4d_fullbb_432d  int     `json:"pasaran_limitglobal4d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitglobal3d_fullbb_432d  int     `json:"pasaran_limitglobal3d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitglobal3dd_fullbb_432d int     `json:"pasaran_limitglobal3dd_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitglobal2d_fullbb_432d  int     `json:"pasaran_limitglobal2d_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitglobal2dd_fullbb_432d int     `json:"pasaran_limitglobal2dd_fullbb_432d" validate:"required,numeric"`
+	Pasaran_limitglobal2dt_fullbb_432d int     `json:"pasaran_limitglobal2dt_fullbb_432d" validate:"required,numeric"`
+	Pasaran_win4d_432d                 int     `json:"pasaran_win4d_432d" validate:"required,numeric"`
+	Pasaran_win3d_432d                 int     `json:"pasaran_win3d_432d" validate:"required,numeric"`
+	Pasaran_win3dd_432d                int     `json:"pasaran_win3dd_432d" validate:"required,numeric"`
+	Pasaran_win2d_432d                 int     `json:"pasaran_win2d_432d" validate:"required,numeric"`
+	Pasaran_win2dd_432d                int     `json:"pasaran_win2dd_432d" validate:"required,numeric"`
+	Pasaran_win2dt_432d                int     `json:"pasaran_win2dt_432d" validate:"required,numeric"`
+	Pasaran_win4dnodisc_432d           int     `json:"pasaran_win4dnodisc_432d" validate:"required,numeric"`
+	Pasaran_win3dnodisc_432d           int     `json:"pasaran_win3dnodisc_432d" validate:"required,numeric"`
+	Pasaran_win3ddnodisc_432d          int     `json:"pasaran_win3ddnodisc_432d" validate:"required,numeric"`
+	Pasaran_win2dnodisc_432d           int     `json:"pasaran_win2dnodisc_432d" validate:"required,numeric"`
+	Pasaran_win2ddnodisc_432d          int     `json:"pasaran_win2ddnodisc_432d" validate:"required,numeric"`
+	Pasaran_win2dtnodisc_432d          int     `json:"pasaran_win2dtnodisc_432d" validate:"required,numeric"`
+	Pasaran_win4dbb_kena_432d          int     `json:"pasaran_win4dbb_kena_432d" validate:"required,numeric"`
+	Pasaran_win3dbb_kena_432d          int     `json:"pasaran_win3dbb_kena_432d" validate:"required,numeric"`
+	Pasaran_win3ddbb_kena_432d         int     `json:"pasaran_win3ddbb_kena_432d" validate:"required,numeric"`
+	Pasaran_win2dbb_kena_432d          int     `json:"pasaran_win2dbb_kena_432d" validate:"required,numeric"`
+	Pasaran_win2ddbb_kena_432d         int     `json:"pasaran_win2ddbb_kena_432d" validate:"required,numeric"`
+	Pasaran_win2dtbb_kena_432d         int     `json:"pasaran_win2dtbb_kena_432d" validate:"required,numeric"`
+	Pasaran_win4dbb_432d               int     `json:"pasaran_win4dbb_432d" validate:"required,numeric"`
+	Pasaran_win3dbb_432d               int     `json:"pasaran_win3dbb_432d" validate:"required,numeric"`
+	Pasaran_win3ddbb_432d              int     `json:"pasaran_win3ddbb_432d" validate:"required,numeric"`
+	Pasaran_win2dbb_432d               int     `json:"pasaran_win2dbb_432d" validate:"required,numeric"`
+	Pasaran_win2ddbb_432d              int     `json:"pasaran_win2ddbb_432d" validate:"required,numeric"`
+	Pasaran_win2dtbb_432d              int     `json:"pasaran_win2dtbb_432d" validate:"required,numeric"`
+	Pasaran_disc4d_432d                float32 `json:"pasaran_disc4d_432d" validate:"required,numeric"`
+	Pasaran_disc3d_432d                float32 `json:"pasaran_disc3d_432d" validate:"required,numeric"`
+	Pasaran_disc3dd_432d               float32 `json:"pasaran_disc3dd_432d" validate:"required,numeric"`
+	Pasaran_disc2d_432d                float32 `json:"pasaran_disc2d_432d" validate:"required,numeric"`
+	Pasaran_disc2dd_432d               float32 `json:"pasaran_disc2dd_432d" validate:"required,numeric"`
+	Pasaran_disc2dt_432d               float32 `json:"pasaran_disc2dt_432d" validate:"required,numeric"`
 }
 type Controller_companypasarancolokbebas struct {
 	Company                    string  `json:"company" validate:"required"`
@@ -476,6 +500,7 @@ type Controller_companypasarancolokbebas struct {
 	Companypasaran_id          int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_cbebas      int     `json:"pasaran_minbet_cbebas" validate:"required,numeric"`
 	Pasaran_maxbet_cbebas      int     `json:"pasaran_maxbet_cbebas" validate:"required,numeric"`
+	Pasaran_maxbuy_cbebas      int     `json:"pasaran_maxbuy_cbebas" validate:"required,numeric"`
 	Pasaran_limitotal_cbebas   int     `json:"pasaran_limitotal_cbebas" validate:"required,numeric"`
 	Pasaran_limitglobal_cbebas int     `json:"pasaran_limitglobal_cbebas" validate:"required,numeric"`
 	Pasaran_win_cbebas         float32 `json:"pasaran_win_cbebas" validate:"required,numeric"`
@@ -488,6 +513,7 @@ type Controller_companypasarancolokmacau struct {
 	Companypasaran_id          int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_cmacau      int     `json:"pasaran_minbet_cmacau" validate:"required,numeric"`
 	Pasaran_maxbet_cmacau      int     `json:"pasaran_maxbet_cmacau" validate:"required,numeric"`
+	Pasaran_maxbuy_cmacau      int     `json:"pasaran_maxbuy_cmacau" validate:"required,numeric"`
 	Pasaran_limitotal_cmacau   int     `json:"pasaran_limitotal_cmacau" validate:"required,numeric"`
 	Pasaran_limitglobal_cmacau int     `json:"pasaran_limitglobal_cmacau" validate:"required,numeric"`
 	Pasaran_win2_cmacau        float32 `json:"pasaran_win2_cmacau" validate:"required,numeric"`
@@ -502,6 +528,7 @@ type Controller_companypasarancoloknaga struct {
 	Companypasaran_id         int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_cnaga      int     `json:"pasaran_minbet_cnaga" validate:"required,numeric"`
 	Pasaran_maxbet_cnaga      int     `json:"pasaran_maxbet_cnaga" validate:"required,numeric"`
+	Pasaran_maxbuy_cnaga      int     `json:"pasaran_maxbuy_cnaga" validate:"required,numeric"`
 	Pasaran_limittotal_cnaga  int     `json:"pasaran_limittotal_cnaga" validate:"required,numeric"`
 	Pasaran_limitglobal_cnaga int     `json:"pasaran_limitglobal_cnaga" validate:"required,numeric"`
 	Pasaran_win3_cnaga        float32 `json:"pasaran_win3_cnaga" validate:"required,numeric"`
@@ -515,6 +542,7 @@ type Controller_companypasarancolokjitu struct {
 	Companypasaran_id         int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_cjitu      int     `json:"pasaran_minbet_cjitu" validate:"required,numeric"`
 	Pasaran_maxbet_cjitu      int     `json:"pasaran_maxbet_cjitu" validate:"required,numeric"`
+	Pasaran_maxbuy_cjitu      int     `json:"pasaran_maxbuy_cjitu" validate:"required,numeric"`
 	Pasaran_limittotal_cjitu  int     `json:"pasaran_limittotal_cjitu" validate:"required,numeric"`
 	Pasaran_limitglobal_cjitu int     `json:"pasaran_limitglobal_cjitu" validate:"required,numeric"`
 	Pasaran_winas_cjitu       float32 `json:"pasaran_winas_cjitu" validate:"required,numeric"`
@@ -530,6 +558,7 @@ type Controller_companypasaran5050umum struct {
 	Companypasaran_id            int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_5050umum      int     `json:"pasaran_minbet_5050umum" validate:"required,numeric"`
 	Pasaran_maxbet_5050umum      int     `json:"pasaran_maxbet_5050umum" validate:"required,numeric"`
+	Pasaran_maxbuy_5050umum      int     `json:"pasaran_maxbuy_5050umum" validate:"required,numeric"`
 	Pasaran_limittotal_5050umum  int     `json:"pasaran_limittotal_5050umum" validate:"required,numeric"`
 	Pasaran_limitglobal_5050umum int     `json:"pasaran_limitglobal_5050umum" validate:"required,numeric"`
 	Pasaran_keibesar_5050umum    float64 `json:"pasaran_keibesar_5050umum" validate:"required,numeric"`
@@ -552,6 +581,7 @@ type Controller_companypasaran5050special struct {
 	Companypasaran_id                    int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_5050special           int     `json:"pasaran_minbet_5050special" validate:"required,numeric"`
 	Pasaran_maxbet_5050special           int     `json:"pasaran_maxbet_5050special" validate:"required,numeric"`
+	Pasaran_maxbuy_5050special           int     `json:"pasaran_maxbuy_5050special" validate:"required,numeric"`
 	Pasaran_limitglobal_5050special      int     `json:"pasaran_limitglobal_5050special" validate:"required,numeric"`
 	Pasaran_limittotal_5050special       int     `json:"pasaran_limittotal_5050special" validate:"required,numeric"`
 	Pasaran_keiasganjil_5050special      float64 `json:"pasaran_keiasganjil_5050special" validate:"required,numeric"`
@@ -594,6 +624,7 @@ type Controller_companypasaran5050kombinasi struct {
 	Companypasaran_id                         int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_5050kombinasi              int     `json:"pasaran_minbet_5050kombinasi" validate:"required,numeric"`
 	Pasaran_maxbet_5050kombinasi              int     `json:"pasaran_maxbet_5050kombinasi" validate:"required,numeric"`
+	Pasaran_maxbuy_5050kombinasi              int     `json:"pasaran_maxbuy_5050kombinasi" validate:"required,numeric"`
 	Pasaran_limitglobal_5050kombinasi         int     `json:"pasaran_limitglobal_5050kombinasi" validate:"required,numeric"`
 	Pasaran_limittotal_5050kombinasi          int     `json:"pasaran_limittotal_5050kombinasi" validate:"required,numeric"`
 	Pasaran_belakangkeimono_5050kombinasi     float64 `json:"pasaran_belakangkeimono_5050kombinasi" validate:"required,numeric"`
@@ -635,6 +666,7 @@ type Controller_companypasarankombinasi struct {
 	Companypasaran_id             int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_kombinasi      int     `json:"pasaran_minbet_kombinasi" validate:"required,numeric"`
 	Pasaran_maxbet_kombinasi      int     `json:"pasaran_maxbet_kombinasi" validate:"required,numeric"`
+	Pasaran_maxbuy_kombinasi      int     `json:"pasaran_maxbuy_kombinasi" validate:"required,numeric"`
 	Pasaran_limitglobal_kombinasi int     `json:"pasaran_limitglobal_kombinasi" validate:"required,numeric"`
 	Pasaran_limittotal_kombinasi  int     `json:"pasaran_limittotal_kombinasi" validate:"required,numeric"`
 	Pasaran_win_kombinasi         float32 `json:"pasaran_win_kombinasi" validate:"required,numeric"`
@@ -647,6 +679,7 @@ type Controller_companypasarandasar struct {
 	Companypasaran_id         int     `json:"companypasaran_id" validate:"required"`
 	Pasaran_minbet_dasar      int     `json:"pasaran_minbet_dasar" validate:"required,numeric"`
 	Pasaran_maxbet_dasar      int     `json:"pasaran_maxbet_dasar" validate:"required,numeric"`
+	Pasaran_maxbuy_dasar      int     `json:"pasaran_maxbuy_dasar" validate:"required,numeric"`
 	Pasaran_limitglobal_dasar int     `json:"pasaran_limitglobal_dasar" validate:"required,numeric"`
 	Pasaran_limittotal_dasar  int     `json:"pasaran_limittotal_dasar" validate:"required,numeric"`
 	Pasaran_keibesar_dasar    float32 `json:"pasaran_keibesar_dasar" validate:"numeric"`
@@ -666,6 +699,7 @@ type Controller_companypasaranshio struct {
 	Pasaran_shioyear_shio    string  `json:"pasaran_shioyear_shio" validate:"required"`
 	Pasaran_minbet_shio      int     `json:"pasaran_minbet_shio" validate:"required,numeric"`
 	Pasaran_maxbet_shio      int     `json:"pasaran_maxbet_shio" validate:"required,numeric"`
+	Pasaran_maxbuy_shio      int     `json:"pasaran_maxbuy_shio" validate:"required,numeric"`
 	Pasaran_limitglobal_shio int     `json:"pasaran_limitglobal_shio" validate:"required,numeric"`
 	Pasaran_limittotal_shio  int     `json:"pasaran_limittotal_shio" validate:"required,numeric"`
 	Pasaran_disc_shio        float32 `json:"pasaran_disc_shio" validate:"numeric"`

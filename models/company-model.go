@@ -2401,7 +2401,7 @@ func Fetch_companyPasaran5050umum(master, company, pasarancode string, idcomppas
 		sql_update := `
 			UPDATE   
 			` + config.DB_tbl_mst_company_game_pasaran + ` 
-			SET 6_minbet=? , 6_maxbet=?, 
+			SET 6_minbet=? , 6_maxbet=?, 6_maxbuy=?,
 			6_keibesar=?, 6_keikecil=?, 6_keigenap=?, 6_keiganjil=?, 6_keitengah=?, 6_keitepi=?, 
 			6_discbesar=?, 6_disckecil=?, 6_discgenap=?, 6_discganjil=?, 6_disctengah=?, 6_disctepi=?,  
 			6_limitbuang=?, 6_limittotal=?   

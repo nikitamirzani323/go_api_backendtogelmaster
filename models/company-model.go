@@ -332,7 +332,7 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 		2_minbet as minbet_cbebas, 2_maxbet as maxbet_cbebas, 2_maxbuy as maxbuy_cbebas, 
 		2_win as win_cbebas, 2_disc as disc_cbebas, 
 		2_limitbuang as limitglobal_cbebas, 2_limitotal as limittotal_cbebas, 
-		3_minbet as minbet_cmacau, 3_maxbet as maxbet_cmacau, 3_maxbet as maxbuy_cmacau, 
+		3_minbet as minbet_cmacau, 3_maxbet as maxbet_cmacau, 3_maxbuy as maxbuy_cmacau, 
 		3_win2digit as win2d_cmacau, 3_win3digit as win3d_cmacau, 3_win4digit as win4d_cmacau, 
 		3_disc as disc_cmacau, 3_limitbuang as limitglobal_cmacau, 3_limittotal as limitotal_cmacau, 
 		4_minbet as minbet_cnaga, 4_maxbet as maxbet_cnaga, 4_maxbuy as maxbuy_cnaga, 

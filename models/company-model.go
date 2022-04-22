@@ -368,7 +368,7 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 		8_tengahdiscmono as tengahdiscmono_5050kombinasi, 8_tengahdiscstereo as tengahdiscstereo_5050kombinasi, 8_tengahdisckembang as tengahdisckembang_5050kombinasi, 8_tengahdisckempis as tengahdisckempis_5050kombinasi, 8_tengahdisckembar as tengahdisckembar_5050kombinasi, 
 		8_depandiscmono as depandiscmono_5050kombinasi, 8_depandiscstereo as depandiscstereo_5050kombinasi, 8_depandisckembang as depandisckembang_5050kombinasi, 8_depandisckempis as depandisckempis_5050kombinasi, 8_depandisckembar as depandisckembar_5050kombinasi, 
 		8_limitbuang as limitglobal_5050kombinasi, 8_limittotal as limittotal_5050kombinasi, 
-		9_minbet as minbet_kombinasi, 9_maxbet as maxbet_kombinasi, 9_maxbuy as maxbuy as maxbuy_kombinasi, 
+		9_minbet as minbet_kombinasi, 9_maxbet as maxbet_kombinasi, 9_maxbuy as maxbuy_kombinasi, 
 		9_win as win_kombinasi, 9_discount as disc_kombinasi, 9_limitbuang as limitglobal_kombinasi, 9_limittotal as limittotal_kombinasi, 
 		10_minbet as minbet_dasar, 10_maxbet as maxbet_dasar, 10_maxbuy as maxbuy_dasar,
 		10_keibesar as keibesar_dasar, 10_keikecil as keikecil_dasar, 10_keigenap as keigenap_dasar, 10_keiganjil as keiganjil_dasar, 

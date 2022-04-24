@@ -1137,7 +1137,7 @@ func Fetch_company_invoice_listpermainan(company, permainan string, invoice int)
 	_, tbl_trx_keluarandetail, _, _ := Get_mappingdatabase(company)
 
 	sqldetail := `SELECT
-					idtrxkeluarandetail , datetimedetail, ipaddress, browsertogel, devicetogel,  username, typegame, nomortogel, 
+					idtrxkeluarandetail , datetimedetail, ipaddress, browsertogel, devicetogel,  username, typegame, nomortogel, posisitogel, 
 					bet, diskon, win, kei, statuskeluarandetail , createkeluarandetail, 
 					createdatekeluarandetail, updatekeluarandetail, updatedatekeluarandetail 
 					FROM ` + tbl_trx_keluarandetail + ` 
@@ -1153,14 +1153,14 @@ func Fetch_company_invoice_listpermainan(company, permainan string, invoice int)
 		totalbet += 1
 		var (
 			idtrxkeluarandetail_db, bet_db                                                                                                      int
-			datetimedetail_db, ipaddresss_db, username_db, typegame_db, nomortogel_db, browsertogel_db, devicetogel_db                          string
+			datetimedetail_db, ipaddresss_db, username_db, typegame_db, nomortogel_db, posisitogel_db, browsertogel_db, devicetogel_db          string
 			statuskeluarandetail_db, createkeluarandetail_db, createdatekeluarandetail_db, updatekeluarandetail_db, updatedatekeluarandetail_db string
 			diskon_db, win_db, kei_db                                                                                                           float32
 		)
 
 		err = row.Scan(
 			&idtrxkeluarandetail_db,
-			&datetimedetail_db, &ipaddresss_db, &browsertogel_db, &devicetogel_db, &username_db, &typegame_db, &nomortogel_db,
+			&datetimedetail_db, &ipaddresss_db, &browsertogel_db, &devicetogel_db, &username_db, &typegame_db, &nomortogel_db, &posisitogel_db,
 			&bet_db, &diskon_db, &win_db, &kei_db, &statuskeluarandetail_db, &createkeluarandetail_db,
 			&createdatekeluarandetail_db, &updatekeluarandetail_db, &updatedatekeluarandetail_db)
 
@@ -1200,6 +1200,7 @@ func Fetch_company_invoice_listpermainan(company, permainan string, invoice int)
 		obj.Bet_username = username_db
 		obj.Bet_typegame = typegame_db
 		obj.Bet_nomortogel = nomortogel_db
+		obj.Bet_posisitogel = posisitogel_db
 		obj.Bet_bet = bet_db
 		obj.Bet_diskon = diskonbet
 		obj.Bet_diskonpercen = int(diskonpercen)
@@ -1243,7 +1244,7 @@ func Fetch_company_invoice_listpermainanbystatus(company, status string, invoice
 	_, tbl_trx_keluarandetail, _, _ := Get_mappingdatabase(company)
 
 	sqldetail := `SELECT
-					idtrxkeluarandetail , datetimedetail, ipaddress, browsertogel, devicetogel,  username, typegame, nomortogel, 
+					idtrxkeluarandetail , datetimedetail, ipaddress, browsertogel, devicetogel,  username, typegame, nomortogel, posisitogel, 
 					bet, diskon, win, kei, statuskeluarandetail , createkeluarandetail, 
 					createdatekeluarandetail, updatekeluarandetail, updatedatekeluarandetail 
 					FROM ` + tbl_trx_keluarandetail + ` 
@@ -1260,14 +1261,14 @@ func Fetch_company_invoice_listpermainanbystatus(company, status string, invoice
 		totalbet += 1
 		var (
 			idtrxkeluarandetail_db, bet_db                                                                                                      int
-			datetimedetail_db, ipaddresss_db, username_db, typegame_db, nomortogel_db, browsertogel_db, devicetogel_db                          string
+			datetimedetail_db, ipaddresss_db, username_db, typegame_db, nomortogel_db, posisitogel_db, browsertogel_db, devicetogel_db          string
 			statuskeluarandetail_db, createkeluarandetail_db, createdatekeluarandetail_db, updatekeluarandetail_db, updatedatekeluarandetail_db string
 			diskon_db, win_db, kei_db                                                                                                           float32
 		)
 
 		err = row.Scan(
 			&idtrxkeluarandetail_db,
-			&datetimedetail_db, &ipaddresss_db, &browsertogel_db, &devicetogel_db, &username_db, &typegame_db, &nomortogel_db,
+			&datetimedetail_db, &ipaddresss_db, &browsertogel_db, &devicetogel_db, &username_db, &typegame_db, &nomortogel_db, &posisitogel_db,
 			&bet_db, &diskon_db, &win_db, &kei_db, &statuskeluarandetail_db, &createkeluarandetail_db,
 			&createdatekeluarandetail_db, &updatekeluarandetail_db, &updatedatekeluarandetail_db)
 
@@ -1307,6 +1308,7 @@ func Fetch_company_invoice_listpermainanbystatus(company, status string, invoice
 		obj.Bet_username = username_db
 		obj.Bet_typegame = typegame_db
 		obj.Bet_nomortogel = nomortogel_db
+		obj.Bet_posisitogel = posisitogel_db
 		obj.Bet_bet = bet_db
 		obj.Bet_diskon = diskonbet
 		obj.Bet_diskonpercen = int(diskonpercen)
@@ -1349,7 +1351,7 @@ func Fetch_company_invoice_listpermainanbyusername(company, username, permainan 
 	_, tbl_trx_keluarandetail, _, _ := Get_mappingdatabase(company)
 
 	sqldetail := `SELECT
-					idtrxkeluarandetail , datetimedetail, ipaddress, browsertogel, devicetogel,  username, typegame, nomortogel, 
+					idtrxkeluarandetail , datetimedetail, ipaddress, browsertogel, devicetogel,  username, typegame, nomortogel, posisitogel, 
 					bet, diskon, win, kei, statuskeluarandetail , createkeluarandetail, 
 					createdatekeluarandetail, updatekeluarandetail, updatedatekeluarandetail 
 					FROM ` + tbl_trx_keluarandetail + ` 
@@ -1366,14 +1368,14 @@ func Fetch_company_invoice_listpermainanbyusername(company, username, permainan 
 		totalbet += 1
 		var (
 			idtrxkeluarandetail_db, bet_db                                                                                                      int
-			datetimedetail_db, ipaddresss_db, username_db, typegame_db, nomortogel_db, browsertogel_db, devicetogel_db                          string
+			datetimedetail_db, ipaddresss_db, username_db, typegame_db, nomortogel_db, posisitogel_db, browsertogel_db, devicetogel_db          string
 			statuskeluarandetail_db, createkeluarandetail_db, createdatekeluarandetail_db, updatekeluarandetail_db, updatedatekeluarandetail_db string
 			diskon_db, win_db, kei_db                                                                                                           float32
 		)
 
 		err = row.Scan(
 			&idtrxkeluarandetail_db,
-			&datetimedetail_db, &ipaddresss_db, &browsertogel_db, &devicetogel_db, &username_db, &typegame_db, &nomortogel_db,
+			&datetimedetail_db, &ipaddresss_db, &browsertogel_db, &devicetogel_db, &username_db, &typegame_db, &nomortogel_db, &posisitogel_db,
 			&bet_db, &diskon_db, &win_db, &kei_db, &statuskeluarandetail_db, &createkeluarandetail_db,
 			&createdatekeluarandetail_db, &updatekeluarandetail_db, &updatedatekeluarandetail_db)
 
@@ -1414,6 +1416,7 @@ func Fetch_company_invoice_listpermainanbyusername(company, username, permainan 
 		obj.Bet_username = username_db
 		obj.Bet_typegame = typegame_db
 		obj.Bet_nomortogel = nomortogel_db
+		obj.Bet_posisitogel = posisitogel_db
 		obj.Bet_bet = bet_db
 		obj.Bet_diskon = diskonbet
 		obj.Bet_diskonpercen = int(diskonpercen)

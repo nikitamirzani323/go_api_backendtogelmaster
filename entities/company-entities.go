@@ -324,6 +324,7 @@ type Model_invoicelistpermainan struct {
 	Bet_username     string  `json:"bet_username"`
 	Bet_typegame     string  `json:"bet_typegame"`
 	Bet_nomortogel   string  `json:"bet_nomortogel"`
+	Bet_posisitogel  string  `json:"bet_posisitogel"`
 	Bet_bet          int     `json:"bet_bet"`
 	Bet_diskon       int     `json:"bet_diskon"`
 	Bet_diskonpercen int     `json:"bet_diskonpercen"`

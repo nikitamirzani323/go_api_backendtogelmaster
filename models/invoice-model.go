@@ -78,7 +78,6 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	if sData == "New" {
 		year := tglnow.Format("YYYY")
@@ -129,7 +128,6 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 					"PROGRESS",
 					master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 				if flag_insert {
-					flag = true
 					msg = "Succes"
 					log.Println(msg_insert)
 				} else {
@@ -143,17 +141,10 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 		defer row_select.Close()
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }
@@ -164,7 +155,6 @@ func Save_invoicestatus(master, invoice, tipe string) (helpers.Response, error) 
 	tglnow, _ := goment.New()
 	render_page := time.Now()
 	msg := "Failed"
-	flag := false
 
 	temp_invoice := strings.Split(invoice, "_")
 	idinvoice := temp_invoice[1]
@@ -209,7 +199,6 @@ func Save_invoicestatus(master, invoice, tipe string) (helpers.Response, error) 
 			winlose, master, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idinvoice)
 
 		if flag_update {
-			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
 		} else {
@@ -230,7 +219,6 @@ func Save_invoicestatus(master, invoice, tipe string) (helpers.Response, error) 
 			idinvoice)
 
 		if flag_update {
-			flag = true
 			msg = "Succes"
 			log.Println(msg_update)
 		} else {
@@ -238,17 +226,10 @@ func Save_invoicestatus(master, invoice, tipe string) (helpers.Response, error) 
 		}
 	}
 
-	if flag {
-		res.Status = fiber.StatusOK
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	} else {
-		res.Status = fiber.StatusBadRequest
-		res.Message = msg
-		res.Record = nil
-		res.Time = time.Since(render_page).String()
-	}
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
 
 	return res, nil
 }

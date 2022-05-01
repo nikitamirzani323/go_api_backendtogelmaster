@@ -136,8 +136,7 @@ func InvoiceSave(c *fiber.Ctx) error {
 		})
 	}
 
-	val_master := helpers.DeleteRedis(Fieldinvoice_home_redis)
-	log.Printf("Redis Delete MASTER LISTINVOICE_MASTER : %d", val_master)
+	_deleteredis_invoice()
 	return c.JSON(result)
 }
 func InvoiceSavewinlosestatus(c *fiber.Ctx) error {
@@ -181,4 +180,9 @@ func InvoiceSavewinlosestatus(c *fiber.Ctx) error {
 	val_master := helpers.DeleteRedis(Fieldinvoice_home_redis)
 	log.Printf("Redis Delete MASTER LISTINVOICE_MASTER : %d", val_master)
 	return c.JSON(result)
+}
+func _deleteredis_invoice() {
+	//MASTER
+	val_master := helpers.DeleteRedis(Fieldinvoice_home_redis)
+	log.Printf("Redis Delete MASTER INVOICE : %d", val_master)
 }

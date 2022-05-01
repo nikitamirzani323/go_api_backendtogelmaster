@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   apimaster:
-    image: toto_api_master:0.1.7
+    image: toto_api_master:0.1.8
     build: "."
     ports:
       - "7074"

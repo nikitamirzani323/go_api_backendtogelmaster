@@ -1210,6 +1210,7 @@ func CompanyInvoiceMemberSync(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
+	_deleteredis_company(client.Company, 0, "")
 	return c.JSON(result)
 }
 func CompanyInvoiceGroupPermainan(c *fiber.Ctx) error {

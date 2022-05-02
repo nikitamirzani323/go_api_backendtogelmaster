@@ -367,6 +367,8 @@ type Controller_companyinvoice struct {
 	Company  string `json:"company" validate:"required"`
 	Username string `json:"username" `
 	Invoice  int    `json:"invoice" validate:"required"`
+	Month    string `json:"month" validate:"required"`
+	Pasaran  string `json:"pasaran" validate:"required"`
 }
 type Controller_companysave struct {
 	Sdata     string `json:"sdata" validate:"required"`

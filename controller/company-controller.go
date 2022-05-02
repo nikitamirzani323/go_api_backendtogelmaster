@@ -1210,7 +1210,7 @@ func CompanyInvoiceMemberSync(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, 0, "")
+	_deleteredis_company(client.Company, client.Invoice, client.Pasaran, client.Month)
 	return c.JSON(result)
 }
 func CompanyInvoiceGroupPermainan(c *fiber.Ctx) error {
@@ -1478,7 +1478,7 @@ func CompanySave(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, 0, "")
+	_deleteredis_company(client.Company, 0, "", "")
 	return c.JSON(result)
 }
 func CompanySaveNewAdmin(c *fiber.Ctx) error {
@@ -1520,7 +1520,7 @@ func CompanySaveNewAdmin(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, 0, "")
+	_deleteredis_company(client.Company, 0, "", "")
 	return c.JSON(result)
 }
 func CompanySaveNewPasaran(c *fiber.Ctx) error {
@@ -1560,7 +1560,7 @@ func CompanySaveNewPasaran(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, 0, "")
+	_deleteredis_company(client.Company, 0, "", "")
 
 	return c.JSON(result)
 }
@@ -1601,7 +1601,7 @@ func CompanySaveNewPasaranHariOnline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, "")
+	_deleteredis_company(client.Company, client.Companypasaran_id, "", "")
 	return c.JSON(result)
 }
 func CompanyDeletePasaranHariOnline(c *fiber.Ctx) error {
@@ -1641,7 +1641,7 @@ func CompanyDeletePasaranHariOnline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, "")
+	_deleteredis_company(client.Company, client.Companypasaran_id, "", "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaranlimitline(c *fiber.Ctx) error {
@@ -1680,7 +1680,7 @@ func CompanyFetchPasaranlimitline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaran432(c *fiber.Ctx) error {
@@ -1719,7 +1719,7 @@ func CompanyFetchPasaran432(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasarancolokbebas(c *fiber.Ctx) error {
@@ -1758,7 +1758,7 @@ func CompanyFetchPasarancolokbebas(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasarancolokmacau(c *fiber.Ctx) error {
@@ -1797,7 +1797,7 @@ func CompanyFetchPasarancolokmacau(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasarancoloknaga(c *fiber.Ctx) error {
@@ -1836,7 +1836,7 @@ func CompanyFetchPasarancoloknaga(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasarancolokjitu(c *fiber.Ctx) error {
@@ -1875,7 +1875,7 @@ func CompanyFetchPasarancolokjitu(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaran5050umum(c *fiber.Ctx) error {
@@ -1914,7 +1914,7 @@ func CompanyFetchPasaran5050umum(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaran5050special(c *fiber.Ctx) error {
@@ -1953,7 +1953,7 @@ func CompanyFetchPasaran5050special(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaran5050kombinasi(c *fiber.Ctx) error {
@@ -1992,7 +1992,7 @@ func CompanyFetchPasaran5050kombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaranmacaukombinasi(c *fiber.Ctx) error {
@@ -2031,7 +2031,7 @@ func CompanyFetchPasaranmacaukombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasarandasar(c *fiber.Ctx) error {
@@ -2070,7 +2070,7 @@ func CompanyFetchPasarandasar(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyFetchPasaranshio(c *fiber.Ctx) error {
@@ -2109,7 +2109,7 @@ func CompanyFetchPasaranshio(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate(c *fiber.Ctx) error {
@@ -2152,7 +2152,7 @@ func CompanyPasaranUpdate(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, "")
+	_deleteredis_company(client.Company, client.Companypasaran_id, "", "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdateLimitline(c *fiber.Ctx) error {
@@ -2195,7 +2195,7 @@ func CompanyPasaranUpdateLimitline(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate432(c *fiber.Ctx) error {
@@ -2251,7 +2251,7 @@ func CompanyPasaranUpdate432(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecolokbebas(c *fiber.Ctx) error {
@@ -2295,7 +2295,7 @@ func CompanyPasaranUpdatecolokbebas(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecolokmacau(c *fiber.Ctx) error {
@@ -2339,7 +2339,7 @@ func CompanyPasaranUpdatecolokmacau(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecoloknaga(c *fiber.Ctx) error {
@@ -2383,7 +2383,7 @@ func CompanyPasaranUpdatecoloknaga(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatecolokjitu(c *fiber.Ctx) error {
@@ -2427,7 +2427,7 @@ func CompanyPasaranUpdatecolokjitu(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate5050umum(c *fiber.Ctx) error {
@@ -2472,7 +2472,7 @@ func CompanyPasaranUpdate5050umum(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate5050special(c *fiber.Ctx) error {
@@ -2523,7 +2523,7 @@ func CompanyPasaranUpdate5050special(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdate5050kombinasi(c *fiber.Ctx) error {
@@ -2572,7 +2572,7 @@ func CompanyPasaranUpdate5050kombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatekombinasi(c *fiber.Ctx) error {
@@ -2616,7 +2616,7 @@ func CompanyPasaranUpdatekombinasi(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdatedasar(c *fiber.Ctx) error {
@@ -2661,7 +2661,7 @@ func CompanyPasaranUpdatedasar(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
 func CompanyPasaranUpdateshio(c *fiber.Ctx) error {
@@ -2705,10 +2705,10 @@ func CompanyPasaranUpdateshio(c *fiber.Ctx) error {
 			"record":  nil,
 		})
 	}
-	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id)
+	_deleteredis_company(client.Company, client.Companypasaran_id, client.Pasaran_id, "")
 	return c.JSON(result)
 }
-func _deleteredis_company(company string, idcomppasaran int, pasaranid string) {
+func _deleteredis_company(company string, idcomppasaran int, pasaranid, periode string) {
 	//MASTER
 	val_company := helpers.DeleteRedis(Fieldcompany_home_redis)
 	log.Printf("Redis Delete MASTER COMPANY : %d", val_company)
@@ -2716,6 +2716,9 @@ func _deleteredis_company(company string, idcomppasaran int, pasaranid string) {
 	log.Printf("Redis Delete MASTER COMPANY LISTADMIN : %d", val_company_listadmin)
 	val_master := helpers.DeleteRedis(Fieldcompanylistpasaran_home_redis + "_" + company)
 	log.Printf("REDIS DELETE MASTER CONFIG : %d", val_master)
+
+	val_master2 := helpers.DeleteRedis(Fieldcompanylistpasarankeluaran_home_redis + "_" + company + "_" + periode + "_" + pasaranid)
+	log.Printf("REDIS DELETE MASTER2 CONFIG : %d", val_master2)
 
 	if idcomppasaran > 0 {
 		val_master_pasaranonline := helpers.DeleteRedis(Fieldcompanylistpasaranonline_home_redis + "_" + company + "_" + strconv.Itoa(idcomppasaran))

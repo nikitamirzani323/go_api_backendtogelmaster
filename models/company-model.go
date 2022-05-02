@@ -754,7 +754,7 @@ func Fetch_company_listpasaranonline(company string, idcomppasaran int) (helpers
 
 	return res, nil
 }
-func Fetch_company_listkeluaran(company, periode string, pasaran int) (helpers.ResponseListKeluaran, error) {
+func Fetch_company_listkeluaran(company, periode, year string, pasaran int) (helpers.ResponseListKeluaran, error) {
 	var obj entities.Model_companylistkeluaran
 	var arraobj []entities.Model_companylistkeluaran
 	var res helpers.ResponseListKeluaran
@@ -762,7 +762,7 @@ func Fetch_company_listkeluaran(company, periode string, pasaran int) (helpers.R
 	con := db.CreateCon()
 	ctx := context.Background()
 	render_page := time.Now()
-	_, startmonthyear, endmonthyear, _ := helpers.GetEndRangeDate(periode)
+	_, startmonthyear, endmonthyear, _ := helpers.GetEndRangeDate_year(periode, year)
 	var no int = 0
 	subtotalwinlose := 0
 	tbl_trx_keluaran, _, _, _ := Get_mappingdatabase(company)

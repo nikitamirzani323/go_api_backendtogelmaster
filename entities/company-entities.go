@@ -361,6 +361,7 @@ type Controller_companypasaranconf struct {
 type Controller_companylistkeluaran struct {
 	Company string `json:"company" validate:"required"`
 	Periode string `json:"periode" validate:"required"`
+	Year    string `json:"year" validate:"required"`
 	Pasaran int    `json:"pasaran" validate:"required"`
 }
 type Controller_companyinvoice struct {
@@ -368,6 +369,7 @@ type Controller_companyinvoice struct {
 	Username string `json:"username" `
 	Invoice  int    `json:"invoice" validate:"required"`
 	Month    string `json:"month" validate:"required"`
+	Year     string `json:"year" validate:"required"`
 	Pasaran  string `json:"pasaran" validate:"required"`
 }
 type Controller_companysave struct {

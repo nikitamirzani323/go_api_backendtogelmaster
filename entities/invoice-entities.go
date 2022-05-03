@@ -36,6 +36,5 @@ type Controller_invoicesavestatus struct {
 }
 type Controller_invoicesavepasaran struct {
 	Master  string `json:"master" validate:"required"`
-	Company string `json:"company" validate:"required"`
 	Invoice string `json:"invoice" validate:"required"`
 }

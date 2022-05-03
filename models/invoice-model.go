@@ -300,12 +300,16 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 	ctx := context.Background()
 	render_page := time.Now()
 
+	log.Println("Invoice URL:", invoice)
 	temp_invoice := strings.Split(invoice, "_")
 	idinvoice := temp_invoice[1]
 	company, periode := _invoice_id(idinvoice)
 	data_invoice := strings.Split(periode, "_")
 	year_invoice := data_invoice[0]
 	month_invoice := data_invoice[1]
+	log.Println("Invoice DB:", idinvoice)
+	log.Println("year_invoice :", year_invoice)
+	log.Println("month_invoice :", month_invoice)
 
 	tglnow, _ := goment.New(year_invoice + "-" + month_invoice + "-01")
 	endday, _, _, _ := helpers.GetEndRangeDate(tglnow.Format("MM"))
@@ -373,7 +377,7 @@ func _invoice_id(invoice string) (string, string) {
 	sql_select := `SELECT 
 		idcompany, periodeinvoice 
 		FROM ` + config.DB_tbl_trx_company_invoice + `  
-		WHERE invoice = ? 
+		WHERE idcompinvoice = ? 
 	`
 	var (
 		idcompany_db, periodeinvoice_db string

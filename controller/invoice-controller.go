@@ -13,13 +13,14 @@ import (
 )
 
 type redis_invoicehome struct {
-	Idinvoice string `json:"invoice_id"`
-	Company   string `json:"invoice_company"`
-	Date      string `json:"invoice_date"`
-	Name      string `json:"invoice_name"`
-	Winlose   int    `json:"invoice_winlose"`
-	Status    string `json:"invoice_status"`
-	Statuscss string `json:"invoice_statuscss"`
+	Idinvoice     string `json:"invoice_id"`
+	Company       string `json:"invoice_company"`
+	Date          string `json:"invoice_date"`
+	Name          string `json:"invoice_name"`
+	Winlose       int    `json:"invoice_winlose"`
+	Total_pasaran int    `json:"invoice_totalpasaran"`
+	Status        string `json:"invoice_status"`
+	Statuscss     string `json:"invoice_statuscss"`
 }
 
 const Fieldinvoice_home_redis = "LISTINVOICE_MASTER"
@@ -63,6 +64,7 @@ func InvoiceHome(c *fiber.Ctx) error {
 		invoice_date, _ := jsonparser.GetString(value, "invoice_date")
 		invoice_name, _ := jsonparser.GetString(value, "invoice_name")
 		invoice_winlose, _ := jsonparser.GetInt(value, "invoice_winlose")
+		invoice_totalpasaran, _ := jsonparser.GetInt(value, "invoice_totalpasaran")
 		invoice_status, _ := jsonparser.GetString(value, "invoice_status")
 		invoice_statuscss, _ := jsonparser.GetString(value, "invoice_statuscss")
 
@@ -71,6 +73,7 @@ func InvoiceHome(c *fiber.Ctx) error {
 		obj.Date = invoice_date
 		obj.Name = invoice_name
 		obj.Winlose = int(invoice_winlose)
+		obj.Total_pasaran = int(invoice_totalpasaran)
 		obj.Status = invoice_status
 		obj.Statuscss = invoice_statuscss
 		arraobj = append(arraobj, obj)

@@ -30,7 +30,7 @@ func Fetch_invoice() (helpers.Response, error) {
 			A.winlosecomp, A.statuscompinvoice   
 			FROM ` + config.DB_tbl_trx_company_invoice + ` as A 
 			JOIN ` + config.DB_tbl_mst_company + ` as B ON B.idcompany = A.idcompany
-			ORDER BY A.datecompinvoice DESC 
+			ORDER BY A.periodeinvoice DESC 
 		`
 	row, err := con.QueryContext(ctx, sql_periode)
 	helpers.ErrorCheck(err)
@@ -58,6 +58,7 @@ func Fetch_invoice() (helpers.Response, error) {
 		obj.Date = datecompinvoice_db
 		obj.Name = nmcompinvoice_db
 		obj.Winlose = winlosecomp_db
+		obj.Total_pasaran = _invoicepasaran_count(strconv.Itoa(idcompinvoice_db))
 		obj.Status = statuscompinvoice_db
 		obj.Statuscss = status_css
 		arraobj = append(arraobj, obj)
@@ -350,7 +351,7 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 			idrecord_counter := Get_counter(field_table)
 			idrecord := tglnow.Format("YY") + tglnow.Format("MM") + tglnow.Format("DD") + strconv.Itoa(idrecord_counter)
 			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_trx_company_invoice_detail, "INSERT",
-				idrecord, invoice, idcomppasaran_db, winlose,
+				idrecord, idinvoice, idcomppasaran_db, winlose,
 				master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 			if flag_insert {
 				msg = "Succes"
@@ -423,4 +424,27 @@ func _invoice_id(invoice string) (string, string) {
 		helpers.ErrorCheck(err)
 	}
 	return idcompany, periodeinvoice
+}
+func _invoicepasaran_count(invoice string) int {
+	con := db.CreateCon()
+	ctx := context.Background()
+	result := 0
+	sql_select := `SELECT 
+		COUNT(idcompinvoicedetail) as total
+		FROM ` + config.DB_tbl_trx_company_invoice_detail + `  
+		WHERE idcompinvoice = ? 
+	`
+	var (
+		total_pasaran_db int
+	)
+	rows := con.QueryRowContext(ctx, sql_select, invoice)
+	switch err := rows.Scan(&total_pasaran_db); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		result = total_pasaran_db
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return result
 }

@@ -1,13 +1,14 @@
 package entities
 
 type Model_invoicehome struct {
-	Idinvoice string `json:"invoice_id"`
-	Company   string `json:"invoice_company"`
-	Date      string `json:"invoice_date"`
-	Name      string `json:"invoice_name"`
-	Winlose   int    `json:"invoice_winlose"`
-	Status    string `json:"invoice_status"`
-	Statuscss string `json:"invoice_statuscss"`
+	Idinvoice     string `json:"invoice_id"`
+	Company       string `json:"invoice_company"`
+	Date          string `json:"invoice_date"`
+	Name          string `json:"invoice_name"`
+	Winlose       int    `json:"invoice_winlose"`
+	Total_pasaran int    `json:"invoice_totalpasaran"`
+	Status        string `json:"invoice_status"`
+	Statuscss     string `json:"invoice_statuscss"`
 }
 type Model_invoicehomedetail struct {
 	Idinvoicedetail string `json:"invoicedetail_id"`

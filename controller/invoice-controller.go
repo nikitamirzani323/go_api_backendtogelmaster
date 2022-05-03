@@ -291,6 +291,47 @@ func InvoiceSavePasaran(c *fiber.Ctx) error {
 	_deleteredis_invoice(client.Invoice)
 	return c.JSON(result)
 }
+func InvoiceDeletePasaran(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Controller_invoicesavepasaran)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+	log.Println(client.Invoice)
+	result, err := models.Delete_company_listpasaran(client.Master, client.Invoice)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+
+	_deleteredis_invoice(client.Invoice)
+	return c.JSON(result)
+}
 func _deleteredis_invoice(invoice string) {
 	//MASTER
 	val_master := helpers.DeleteRedis(Fieldinvoice_home_redis)

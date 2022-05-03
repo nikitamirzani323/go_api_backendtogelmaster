@@ -304,7 +304,7 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 	temp_invoice := strings.Split(invoice, "_")
 	idinvoice := temp_invoice[1]
 	company, periode := _invoice_id(idinvoice)
-	data_invoice := strings.Split(periode, "_")
+	data_invoice := strings.Split(periode, "-")
 	year_invoice := data_invoice[0]
 	month_invoice := data_invoice[1]
 	log.Println("Invoice DB:", idinvoice)
@@ -361,6 +361,36 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 		}
 	}
 	defer row.Close()
+
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
+
+	return res, nil
+}
+func Delete_company_listpasaran(master, invoice string) (helpers.Response, error) {
+	var res helpers.Response
+	msg := "Failed"
+	render_page := time.Now()
+
+	log.Println("Invoice URL:", invoice)
+	temp_invoice := strings.Split(invoice, "_")
+	idinvoice := temp_invoice[1]
+
+	sql_delete := `
+		DELETE FROM
+		` + config.DB_tbl_trx_company_invoice_detail + ` 
+		WHERE idcompinvoice=? 
+	`
+
+	flag_delete, msg_delete := Exec_SQL(sql_delete, config.DB_tbl_trx_company_invoice_detail, "DELETE", idinvoice)
+	if flag_delete {
+		msg = "Succes"
+		log.Println(msg_delete)
+	} else {
+		log.Println(msg_delete)
+	}
 
 	res.Status = fiber.StatusOK
 	res.Message = msg

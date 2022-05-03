@@ -98,6 +98,80 @@ func InvoiceHome(c *fiber.Ctx) error {
 		})
 	}
 }
+func InvoiceDetail(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Controller_invoicedetail)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+	render_page := time.Now()
+	var obj redis_invoicehome
+	var arraobj []redis_invoicehome
+	resultredis, flag := helpers.GetRedis(Fieldinvoice_home_redis + "_" + client.Invoice)
+	jsonredis := []byte(resultredis)
+	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
+	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		invoice_id, _ := jsonparser.GetString(value, "invoice_id")
+		invoice_company, _ := jsonparser.GetString(value, "invoice_company")
+		invoice_date, _ := jsonparser.GetString(value, "invoice_date")
+		invoice_name, _ := jsonparser.GetString(value, "invoice_name")
+		invoice_winlose, _ := jsonparser.GetInt(value, "invoice_winlose")
+		invoice_status, _ := jsonparser.GetString(value, "invoice_status")
+		invoice_statuscss, _ := jsonparser.GetString(value, "invoice_statuscss")
+
+		obj.Idinvoice = invoice_id
+		obj.Company = invoice_company
+		obj.Date = invoice_date
+		obj.Name = invoice_name
+		obj.Winlose = int(invoice_winlose)
+		obj.Status = invoice_status
+		obj.Statuscss = invoice_statuscss
+		arraobj = append(arraobj, obj)
+	})
+	if !flag {
+		result, err := models.Fetch_invoicedetail(client.Invoice)
+		if err != nil {
+			c.Status(fiber.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"status":  fiber.StatusBadRequest,
+				"message": err.Error(),
+				"record":  nil,
+			})
+		}
+		helpers.SetRedis(Fieldinvoice_home_redis+"_"+client.Invoice, result, 60*time.Minute)
+		log.Println("INVOICE DETAIL MYSQL")
+		return c.JSON(result)
+	} else {
+		log.Println("INVOICE DETAIL CACHE")
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusOK,
+			"message": "Success",
+			"record":  arraobj,
+			"time":    time.Since(render_page).String(),
+		})
+	}
+}
 func InvoiceSave(c *fiber.Ctx) error {
 	var errors []*helpers.ErrorResponse
 	client := new(entities.Controller_invoicesave)
@@ -179,6 +253,47 @@ func InvoiceSavewinlosestatus(c *fiber.Ctx) error {
 
 	val_master := helpers.DeleteRedis(Fieldinvoice_home_redis)
 	log.Printf("Redis Delete MASTER LISTINVOICE_MASTER : %d", val_master)
+	return c.JSON(result)
+}
+func InvoiceSavePasaran(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Controller_invoicesavepasaran)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+
+	result, err := models.Save_company_listpasaran(client.Master, client.Invoice)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+
+	_deleteredis_invoice()
 	return c.JSON(result)
 }
 func _deleteredis_invoice() {

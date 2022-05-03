@@ -2,6 +2,7 @@ package models
 
 import (
 	"context"
+	"database/sql"
 	"log"
 	"strconv"
 	"strings"
@@ -19,7 +20,7 @@ func Fetch_invoice() (helpers.Response, error) {
 	var obj entities.Model_invoicehome
 	var arraobj []entities.Model_invoicehome
 	var res helpers.Response
-	msg := "Error"
+	msg := "Data Not Found"
 	render_page := time.Now()
 	con := db.CreateCon()
 	ctx := context.Background()
@@ -59,6 +60,65 @@ func Fetch_invoice() (helpers.Response, error) {
 		obj.Winlose = winlosecomp_db
 		obj.Status = statuscompinvoice_db
 		obj.Statuscss = status_css
+		arraobj = append(arraobj, obj)
+		msg = "Success"
+	}
+	defer row.Close()
+
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = arraobj
+	res.Time = time.Since(render_page).String()
+
+	return res, nil
+}
+func Fetch_invoicedetail(invoice string) (helpers.Response, error) {
+	var obj entities.Model_invoicehomedetail
+	var arraobj []entities.Model_invoicehomedetail
+	var res helpers.Response
+	msg := "Data Not Found"
+	render_page := time.Now()
+	con := db.CreateCon()
+	ctx := context.Background()
+
+	temp_invoice := strings.Split(invoice, "_")
+	idinvoice := temp_invoice[1]
+
+	sql_select := `SELECT 
+			A.idcompinvoicedetail , A.winlosecomppasaran, C.nmpasarantogel, 
+			A.createcompinvoicedetail, A.createdatecompinvoicedetail, A.updatecompinvoicedetail, A.updatedatecompinvoicedetail 
+			FROM ` + config.DB_tbl_trx_company_invoice_detail + ` as A 
+			JOIN ` + config.DB_tbl_mst_company_game_pasaran + ` as B ON B.idcomppasaran = A.idcomppasaran 
+			JOIN ` + config.DB_tbl_mst_pasaran_togel + ` as C ON C.idpasarantogel = B.idpasarantogel 
+			WHERE A.idcompinvoice = ? 
+			ORDER BY A.winlosecomppasaran DESC    
+		`
+	row, err := con.QueryContext(ctx, sql_select, idinvoice)
+	helpers.ErrorCheck(err)
+	for row.Next() {
+		var (
+			idcompinvoicedetail_db, winlosecomppasaran_db                                                                          int
+			nmpasarantogel_db                                                                                                      string
+			createcompinvoicedetail_db, createdatecompinvoicedetail_db, updatecompinvoicedetail_db, updatedatecompinvoicedetail_db string
+		)
+
+		err = row.Scan(
+			&idcompinvoicedetail_db, &winlosecomppasaran_db, &nmpasarantogel_db,
+			&createcompinvoicedetail_db, &createdatecompinvoicedetail_db, &updatecompinvoicedetail_db, &updatedatecompinvoicedetail_db)
+		helpers.ErrorCheck(err)
+
+		create := createcompinvoicedetail_db + " , " + createdatecompinvoicedetail_db
+		update := ""
+
+		if updatecompinvoicedetail_db != "" {
+			update = updatecompinvoicedetail_db + " , " + updatedatecompinvoicedetail_db
+		}
+
+		obj.Idinvoicedetail = strconv.Itoa(idcompinvoicedetail_db)
+		obj.Pasaran = nmpasarantogel_db
+		obj.Winlose = winlosecomppasaran_db
+		obj.Create = create
+		obj.Update = update
 		arraobj = append(arraobj, obj)
 		msg = "Success"
 	}
@@ -232,4 +292,101 @@ func Save_invoicestatus(master, invoice, tipe string) (helpers.Response, error) 
 	res.Time = time.Since(render_page).String()
 
 	return res, nil
+}
+func Save_company_listpasaran(master, invoice string) (helpers.Response, error) {
+	var res helpers.Response
+	msg := "Failed"
+	con := db.CreateCon()
+	ctx := context.Background()
+	render_page := time.Now()
+
+	temp_invoice := strings.Split(invoice, "_")
+	idinvoice := temp_invoice[1]
+	company, periode := _invoice_id(idinvoice)
+	data_invoice := strings.Split(periode, "_")
+	year_invoice := data_invoice[0]
+	month_invoice := data_invoice[1]
+
+	tglnow, _ := goment.New(year_invoice + "-" + month_invoice + "-01")
+	endday, _, _, _ := helpers.GetEndRangeDate(tglnow.Format("MM"))
+	start := tglnow.Format("YYYY-MM") + "-" + "01"
+	end := tglnow.Format("YYYY-MM") + "-" + endday
+
+	sql_periode := `SELECT 
+			idcomppasaran 
+			FROM ` + config.DB_tbl_mst_company_game_pasaran + ` 
+			WHERE idcompany = ? 
+			AND statuspasaranactive = "Y"  
+		`
+
+	row, err := con.QueryContext(ctx, sql_periode, company)
+	helpers.ErrorCheck(err)
+	for row.Next() {
+		var (
+			idcomppasaran_db int
+		)
+
+		err = row.Scan(&idcomppasaran_db)
+		helpers.ErrorCheck(err)
+
+		flag_insert := CheckDBTwoField(config.DB_tbl_trx_company_invoice_detail, "idcompinvoice", idinvoice, "idcomppasaran", strconv.Itoa(idcomppasaran_db))
+		if !flag_insert {
+			sql_insert := `
+				INSERT INTO  
+				` + config.DB_tbl_trx_company_invoice_detail + ` (
+					idcompinvoicedetail , idcompinvoice, idcomppasaran, winlosecomppasaran, 
+					createcompinvoicedetail, createdatecompinvoicedetail
+				)VALUES( 
+					?,?,?,?,
+					?,?
+				) 
+			`
+			winlose := _winlose(company, start, end, idcomppasaran_db)
+			field_table := config.DB_tbl_trx_company_invoice_detail + tglnow.Format("YYYY")
+			idrecord_counter := Get_counter(field_table)
+			idrecord := tglnow.Format("YY") + tglnow.Format("MM") + tglnow.Format("DD") + strconv.Itoa(idrecord_counter)
+			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_trx_company_invoice_detail, "INSERT",
+				idrecord, invoice, idcomppasaran_db, winlose,
+				master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
+			if flag_insert {
+				msg = "Succes"
+				log.Println(msg_insert)
+			} else {
+				log.Println(msg_insert)
+			}
+		}
+	}
+	defer row.Close()
+
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = nil
+	res.Time = time.Since(render_page).String()
+
+	return res, nil
+}
+func _invoice_id(invoice string) (string, string) {
+	con := db.CreateCon()
+	ctx := context.Background()
+	idcompany := ""
+	periodeinvoice := ""
+	sql_select := `SELECT 
+		idcompany, periodeinvoice 
+		FROM ` + config.DB_tbl_trx_company_invoice + `  
+		WHERE invoice = ? 
+	`
+	var (
+		idcompany_db, periodeinvoice_db string
+	)
+	rows := con.QueryRowContext(ctx, sql_select, invoice)
+	switch err := rows.Scan(&idcompany_db, &periodeinvoice_db); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		idcompany = idcompany_db
+		periodeinvoice = periodeinvoice_db
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return idcompany, periodeinvoice
 }

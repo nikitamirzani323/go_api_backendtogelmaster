@@ -146,6 +146,7 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 	if sData == "New" {
 		year := tglnow.Format("YYYY")
 		month := periode
+		yearinvoice := year
 		periodeinvoice := year + "-" + month
 		endday, _, _, nmmonth := helpers.GetEndRangeDate(periode)
 		nmcompinvoice := nmmonth + " " + year
@@ -173,10 +174,10 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 				sql_insert := `
 					INSERT INTO  
 					` + config.DB_tbl_trx_company_invoice + ` (
-						idcompinvoice , idcompany, datecompinvoice, periodeinvoice, nmcompinvoice, winlosecomp, 
+						idcompinvoice , idcompany, datecompinvoice, yearinvoice, periodeinvoice, nmcompinvoice, winlosecomp, 
 						statuscompinvoice, createcompinvoice, createdatecompinvoice 
 					)VALUES( 
-						?,?,?,?,?,?,
+						?,?,?,?,?,?,?,
 						?,?,?
 					) 
 				`
@@ -186,6 +187,7 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 				flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_trx_company_invoice, "INSERT",
 					idrecord, idcompany_db,
 					tglnow.Format("YYYY-MM-DD"),
+					yearinvoice,
 					periodeinvoice,
 					nmcompinvoice,
 					winlose,
@@ -447,6 +449,31 @@ func _invoicepasaran_count(invoice string) int {
 
 	case nil:
 		result = total_pasaran_db
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return result
+}
+func _invoicewinlose_id(company, year, periode string) int {
+	con := db.CreateCon()
+	ctx := context.Background()
+	result := 0
+	sql_select := `SELECT 
+		winlosecomp  
+		FROM ` + config.DB_tbl_trx_company_invoice + `  
+		WHERE yearinvoice = ? 
+		AND idcompany = ? 
+		AND periodeinvoice = ? 
+	`
+	var (
+		winlosecomp_db int
+	)
+	rows := con.QueryRowContext(ctx, sql_select, year, company, periode)
+	switch err := rows.Scan(&winlosecomp_db); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		result = winlosecomp_db
 	default:
 		helpers.ErrorCheck(err)
 	}

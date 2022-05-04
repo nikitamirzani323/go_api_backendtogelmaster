@@ -20,6 +20,8 @@ func Init() *fiber.App {
 	api := app.Group("/api/", middleware.JWTProtected())
 
 	api.Post("home", controller.Home)
+	api.Post("dashboardwinlose", controller.Dashboardhome)
+
 	api.Post("allinvoice", controller.InvoiceHome)
 	api.Post("invoicedetail", controller.InvoiceDetail)
 	api.Post("saveinvoice", controller.InvoiceSave)

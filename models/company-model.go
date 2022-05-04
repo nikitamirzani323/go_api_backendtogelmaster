@@ -3122,7 +3122,7 @@ func Save_companyUpdatePasaranRoyaltyFee(
 	sql_update := `
 		UPDATE   
 		` + config.DB_tbl_mst_company_game_pasaran + ` 
-		SET royaltyfee=? 
+		SET royaltyfee=?,  
 		updatecomppas=?, updatedatecompas=? 
 		WHERE idcomppasaran=? AND idcompany=? 
 		`

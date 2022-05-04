@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -86,7 +87,7 @@ func Fetch_invoicedetail(invoice string) (helpers.Response, error) {
 	idinvoice := temp_invoice[1]
 
 	sql_select := `SELECT 
-			A.idcompinvoicedetail , A.winlosecomppasaran, C.nmpasarantogel, 
+			A.idcompinvoicedetail , A.winlosecomppasaran, A.royaltyfeecomppasaran, C.nmpasarantogel, 
 			A.createcompinvoicedetail, A.createdatecompinvoicedetail, A.updatecompinvoicedetail, A.updatedatecompinvoicedetail 
 			FROM ` + config.DB_tbl_trx_company_invoice_detail + ` as A 
 			JOIN ` + config.DB_tbl_mst_company_game_pasaran + ` as B ON B.idcomppasaran = A.idcomppasaran 
@@ -99,12 +100,13 @@ func Fetch_invoicedetail(invoice string) (helpers.Response, error) {
 	for row.Next() {
 		var (
 			idcompinvoicedetail_db, winlosecomppasaran_db                                                                          int
+			royaltyfeecomppasaran_db                                                                                               float32
 			nmpasarantogel_db                                                                                                      string
 			createcompinvoicedetail_db, createdatecompinvoicedetail_db, updatecompinvoicedetail_db, updatedatecompinvoicedetail_db string
 		)
 
 		err = row.Scan(
-			&idcompinvoicedetail_db, &winlosecomppasaran_db, &nmpasarantogel_db,
+			&idcompinvoicedetail_db, &winlosecomppasaran_db, &royaltyfeecomppasaran_db, &nmpasarantogel_db,
 			&createcompinvoicedetail_db, &createdatecompinvoicedetail_db, &updatecompinvoicedetail_db, &updatedatecompinvoicedetail_db)
 		helpers.ErrorCheck(err)
 
@@ -117,6 +119,7 @@ func Fetch_invoicedetail(invoice string) (helpers.Response, error) {
 
 		obj.Idinvoicedetail = strconv.Itoa(idcompinvoicedetail_db)
 		obj.Pasaran = nmpasarantogel_db
+		obj.Royaltyfee = royaltyfeecomppasaran_db
 		obj.Winlose = winlosecomppasaran_db
 		obj.Create = create
 		obj.Update = update
@@ -318,7 +321,7 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 	end := tglnow.Format("YYYY-MM") + "-" + endday
 
 	sql_periode := `SELECT 
-			idcomppasaran 
+			idcomppasaran, royaltyfee 
 			FROM ` + config.DB_tbl_mst_company_game_pasaran + ` 
 			WHERE idcompany = ? 
 			AND statuspasaranactive = "Y"  
@@ -329,9 +332,10 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 	for row.Next() {
 		var (
 			idcomppasaran_db int
+			royaltyfee_db    float32
 		)
 
-		err = row.Scan(&idcomppasaran_db)
+		err = row.Scan(&idcomppasaran_db, &royaltyfee_db)
 		helpers.ErrorCheck(err)
 
 		flag_insert := CheckDBTwoField(config.DB_tbl_trx_company_invoice_detail, "idcompinvoice", idinvoice, "idcomppasaran", strconv.Itoa(idcomppasaran_db))
@@ -339,10 +343,10 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 			sql_insert := `
 				INSERT INTO  
 				` + config.DB_tbl_trx_company_invoice_detail + ` (
-					idcompinvoicedetail , idcompinvoice, idcomppasaran, winlosecomppasaran, 
+					idcompinvoicedetail , idcompinvoice, idcomppasaran, winlosecomppasaran, royaltyfeecomppasaran, 
 					createcompinvoicedetail, createdatecompinvoicedetail
 				)VALUES( 
-					?,?,?,?,
+					?,?,?,?,?,
 					?,?
 				) 
 			`
@@ -351,7 +355,7 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 			idrecord_counter := Get_counter(field_table)
 			idrecord := tglnow.Format("YY") + tglnow.Format("MM") + tglnow.Format("DD") + strconv.Itoa(idrecord_counter)
 			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_trx_company_invoice_detail, "INSERT",
-				idrecord, idinvoice, idcomppasaran_db, winlose,
+				idrecord, idinvoice, idcomppasaran_db, winlose, fmt.Sprintf("%.2f", royaltyfee_db),
 				master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 			if flag_insert {
 				msg = "Succes"

@@ -11,11 +11,12 @@ type Model_invoicehome struct {
 	Statuscss     string `json:"invoice_statuscss"`
 }
 type Model_invoicehomedetail struct {
-	Idinvoicedetail string `json:"invoicedetail_id"`
-	Pasaran         string `json:"invoicedetail_pasaran"`
-	Winlose         int    `json:"invoicedetail_winlose"`
-	Create          string `json:"invoicedetail_create"`
-	Update          string `json:"invoicedetail_update"`
+	Idinvoicedetail string  `json:"invoicedetail_id"`
+	Pasaran         string  `json:"invoicedetail_pasaran"`
+	Royaltyfee      float32 `json:"invoicedetail_royaltyfee"`
+	Winlose         int     `json:"invoicedetail_winlose"`
+	Create          string  `json:"invoicedetail_create"`
+	Update          string  `json:"invoicedetail_update"`
 }
 
 type Controller_invoicehome struct {

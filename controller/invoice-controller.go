@@ -138,12 +138,14 @@ func InvoiceDetail(c *fiber.Ctx) error {
 		invoicedetail_id, _ := jsonparser.GetString(value, "invoicedetail_id")
 		invoicedetail_pasaran, _ := jsonparser.GetString(value, "invoicedetail_pasaran")
 		invoicedetail_winlose, _ := jsonparser.GetInt(value, "invoicedetail_winlose")
+		invoicedetail_royaltyfee, _ := jsonparser.GetFloat(value, "invoicedetail_royaltyfee")
 		invoicedetail_create, _ := jsonparser.GetString(value, "invoicedetail_create")
 		invoicedetail_update, _ := jsonparser.GetString(value, "invoicedetail_update")
 
 		obj.Idinvoicedetail = invoicedetail_id
 		obj.Pasaran = invoicedetail_pasaran
 		obj.Winlose = int(invoicedetail_winlose)
+		obj.Royaltyfee = float32(invoicedetail_royaltyfee)
 		obj.Create = invoicedetail_create
 		obj.Update = invoicedetail_update
 		arraobj = append(arraobj, obj)

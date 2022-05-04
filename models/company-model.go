@@ -235,7 +235,7 @@ func Fetch_company_listpasaran(company string) (helpers.Response, error) {
 	var no int = 0
 
 	sql_periode := `SELECT 
-			A.idcomppasaran , A.idpasarantogel, A.statuspasaran, A.statuspasaranactive, A.displaypasaran, B.nmpasarantogel 
+			A.idcomppasaran , A.idpasarantogel, A.statuspasaran, A.statuspasaranactive, A.displaypasaran, B.nmpasarantogel ,A.royaltyfee 
 			FROM ` + config.DB_tbl_mst_company_game_pasaran + ` as A 
 			JOIN ` + config.DB_tbl_mst_pasaran_togel + ` as B ON B.idpasarantogel = A.idpasarantogel 
 			WHERE A.idcompany = ? 
@@ -249,10 +249,11 @@ func Fetch_company_listpasaran(company string) (helpers.Response, error) {
 		var (
 			idcomppasaran_db, displaypasaran_db                                            int
 			idpasarantogel_db, statuspasaran_db, statuspasaranactive_db, nmpasarantogel_db string
+			royaltyfee_db                                                                  float32
 		)
 
 		err = row.Scan(
-			&idcomppasaran_db, &idpasarantogel_db, &statuspasaran_db, &statuspasaranactive_db, &displaypasaran_db, &nmpasarantogel_db)
+			&idcomppasaran_db, &idpasarantogel_db, &statuspasaran_db, &statuspasaranactive_db, &displaypasaran_db, &nmpasarantogel_db, &royaltyfee_db)
 		helpers.ErrorCheck(err)
 
 		status_css := ""
@@ -273,6 +274,7 @@ func Fetch_company_listpasaran(company string) (helpers.Response, error) {
 		obj.Company_pasaran_idcomppasaran = idcomppasaran_db
 		obj.Company_pasaran_idpasarantogel = idpasarantogel_db
 		obj.Company_pasaran_nmpasarantogel = nmpasarantogel_db
+		obj.Company_pasaran_royaltyfee = royaltyfee_db
 		obj.Company_pasaran_periode = bulanskrg
 		obj.Company_pasaran_winlose = _winlose(company, start, end, idcomppasaran_db)
 		obj.Company_pasaran_displaypasaran = displaypasaran_db

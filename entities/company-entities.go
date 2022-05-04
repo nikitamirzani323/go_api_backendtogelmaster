@@ -34,16 +34,17 @@ type Model_companylistadmin struct {
 }
 
 type Model_companylistpasaran struct {
-	Company_pasaran_idcomppasaran   int    `json:"company_pasaran_idcomppasaran"`
-	Company_pasaran_idpasarantogel  string `json:"company_pasaran_idpasarantogel"`
-	Company_pasaran_nmpasarantogel  string `json:"company_pasaran_nmpasarantogel"`
-	Company_pasaran_periode         string `json:"company_pasaran_periode"`
-	Company_pasaran_winlose         int    `json:"company_pasaran_winlose"`
-	Company_pasaran_displaypasaran  int    `json:"company_pasaran_displaypasaran"`
-	Company_pasaran_status          string `json:"company_pasaran_status"`
-	Company_pasaran_statuscss       string `json:"company_pasaran_statuscss"`
-	Company_pasaran_statusactive    string `json:"company_pasaran_statuspasaranactive"`
-	Company_pasaran_statusactivecss string `json:"company_pasaran_statuspasaranactivecss"`
+	Company_pasaran_idcomppasaran   int     `json:"company_pasaran_idcomppasaran"`
+	Company_pasaran_idpasarantogel  string  `json:"company_pasaran_idpasarantogel"`
+	Company_pasaran_nmpasarantogel  string  `json:"company_pasaran_nmpasarantogel"`
+	Company_pasaran_periode         string  `json:"company_pasaran_periode"`
+	Company_pasaran_royaltyfee      float32 `json:"company_pasaran_royaltyfee"`
+	Company_pasaran_winlose         int     `json:"company_pasaran_winlose"`
+	Company_pasaran_displaypasaran  int     `json:"company_pasaran_displaypasaran"`
+	Company_pasaran_status          string  `json:"company_pasaran_status"`
+	Company_pasaran_statuscss       string  `json:"company_pasaran_statuscss"`
+	Company_pasaran_statusactive    string  `json:"company_pasaran_statuspasaranactive"`
+	Company_pasaran_statusactivecss string  `json:"company_pasaran_statuspasaranactivecss"`
 }
 
 type Model_companylistpasaranonline struct {

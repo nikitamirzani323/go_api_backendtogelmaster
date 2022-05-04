@@ -294,6 +294,7 @@ func CompanyDetailListPasaran(c *fiber.Ctx) error {
 		company_pasaran_idpasarantogel, _ := jsonparser.GetString(value, "company_pasaran_idpasarantogel")
 		company_pasaran_nmpasarantogel, _ := jsonparser.GetString(value, "company_pasaran_nmpasarantogel")
 		company_pasaran_periode, _ := jsonparser.GetString(value, "company_pasaran_periode")
+		company_pasaran_royaltyfee, _ := jsonparser.GetFloat(value, "company_pasaran_royaltyfee")
 		company_pasaran_winlose, _ := jsonparser.GetInt(value, "company_pasaran_winlose")
 		company_pasaran_displaypasaran, _ := jsonparser.GetInt(value, "company_pasaran_displaypasaran")
 		company_pasaran_status, _ := jsonparser.GetString(value, "company_pasaran_status")
@@ -305,6 +306,7 @@ func CompanyDetailListPasaran(c *fiber.Ctx) error {
 		obj.Company_pasaran_idpasarantogel = company_pasaran_idpasarantogel
 		obj.Company_pasaran_nmpasarantogel = company_pasaran_nmpasarantogel
 		obj.Company_pasaran_periode = company_pasaran_periode
+		obj.Company_pasaran_royaltyfee = float32(company_pasaran_royaltyfee)
 		obj.Company_pasaran_winlose = int(company_pasaran_winlose)
 		obj.Company_pasaran_displaypasaran = int(company_pasaran_displaypasaran)
 		obj.Company_pasaran_status = company_pasaran_status

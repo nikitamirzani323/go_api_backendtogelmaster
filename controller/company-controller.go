@@ -440,6 +440,7 @@ func CompanyDetailListPasaranConf(c *fiber.Ctx) error {
 		pasaran_jamjadwal, _ := jsonparser.GetString(value, "pasaran_jamjadwal")
 		pasaran_jamopen, _ := jsonparser.GetString(value, "pasaran_jamopen")
 		pasaran_statusactive, _ := jsonparser.GetString(value, "pasaran_statusactive")
+		royaltyfee, _ := jsonparser.GetFloat(value, "royaltyfee")
 		limitline_4d, _ := jsonparser.GetInt(value, "limitline_4d")
 		limitline_3d, _ := jsonparser.GetInt(value, "limitline_3d")
 		limitline_3dd, _ := jsonparser.GetInt(value, "limitline_3dd")
@@ -678,6 +679,7 @@ func CompanyDetailListPasaranConf(c *fiber.Ctx) error {
 		obj.Company_Pasaran_jamjadwal = pasaran_jamjadwal
 		obj.Company_Pasaran_jamopen = pasaran_jamopen
 		obj.Company_Pasaran_statusactive = pasaran_statusactive
+		obj.Company_Royaltyfee = float32(royaltyfee)
 		obj.Company_Limitline4d = int(limitline_4d)
 		obj.Company_Limitline3d = int(limitline_3d)
 		obj.Company_Limitline3dd = int(limitline_3dd)
@@ -2144,6 +2146,47 @@ func CompanyPasaranUpdate(c *fiber.Ctx) error {
 		client.Master, client.Company, client.Pasaran_diundi,
 		client.Pasaran_url, client.Pasaran_jamtutup, client.Pasaran_jamjadwal,
 		client.Pasaran_jamopen, client.Pasaran_statusactive, client.Companypasaran_id)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	_deleteredis_company(client.Company, client.Companypasaran_id, "", "", "")
+	return c.JSON(result)
+}
+func CompanyPasaranUpdateRoyaltyFee(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Controller_companypasaranroyaltyfee)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+
+	result, err := models.Save_companyUpdatePasaranRoyaltyFee(
+		client.Master, client.Company, client.Royaltyfee, client.Companypasaran_id)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{

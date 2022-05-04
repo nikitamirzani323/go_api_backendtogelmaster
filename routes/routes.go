@@ -59,6 +59,7 @@ func Init() *fiber.App {
 	api.Post("savecompanyfetchpasarandasar", controller.CompanyFetchPasarandasar)
 	api.Post("savecompanyfetchpasaranshio", controller.CompanyFetchPasaranshio)
 	api.Post("savecompanyupdatepasaran", controller.CompanyPasaranUpdate)
+	api.Post("savecompanyupdatepasaranroyaltyfee", controller.CompanyPasaranUpdateRoyaltyFee)
 	api.Post("savecompanyupdatepasaranline", controller.CompanyPasaranUpdateLimitline)
 	api.Post("savecompanyupdatepasaran432", controller.CompanyPasaranUpdate432)
 	api.Post("savecompanyupdatepasarancolokbebas", controller.CompanyPasaranUpdatecolokbebas)

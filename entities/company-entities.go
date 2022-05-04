@@ -57,6 +57,7 @@ type Model_companypasaranconf struct {
 	Company_Pasaran_jamjadwal                 string  `json:"pasaran_jamjadwal"`
 	Company_Pasaran_jamopen                   string  `json:"pasaran_jamopen"`
 	Company_Pasaran_statusactive              string  `json:"pasaran_statusactive"`
+	Company_Royaltyfee                        float32 `json:"royaltyfee"`
 	Company_Limitline4d                       int     `json:"limitline_4d"`
 	Company_Limitline3d                       int     `json:"limitline_3d"`
 	Company_Limitline3dd                      int     `json:"limitline_3dd"`
@@ -407,6 +408,12 @@ type Controller_companypasaran struct {
 	Pasaran_jamjadwal    string `json:"pasaran_jamjadwal" validate:"required"`
 	Pasaran_jamopen      string `json:"pasaran_jamopen" validate:"required"`
 	Pasaran_statusactive string `json:"pasaran_statusactive" validate:"required"`
+}
+type Controller_companypasaranroyaltyfee struct {
+	Company           string  `json:"company" validate:"required"`
+	Master            string  `json:"master" validate:"required"`
+	Companypasaran_id int     `json:"companypasaran_id" validate:"required"`
+	Royaltyfee        float32 `json:"royaltyfee" validate:"required"`
 }
 type Controller_companypasaranline struct {
 	Company               string `json:"company" validate:"required"`

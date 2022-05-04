@@ -303,7 +303,7 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 	render_page := time.Now()
 
 	sql_detail := `SELECT 
-		pasarandiundi, pasaranurl, jamtutup, jamjadwal, jamopen, statuspasaranactive,  
+		pasarandiundi, pasaranurl, jamtutup, jamjadwal, jamopen, statuspasaranactive,  royaltyfee, 
 		limitline_4d, limitline_3d, limitline_3dd, limitline_2d, limitline_2dd, limitline_2dt, bbfs, 
 		1_minbet as minbet_432d, 1_maxbet4d as maxbet4d_432d, 1_maxbet3d as maxbet3d_432d, 1_maxbet3dd as maxbet3dd_432d, 
 		1_maxbet2d as maxbet2d_432d, 1_maxbet2dd as maxbet2dd_432d, 1_maxbet2dt as maxbet2dt_432d, 
@@ -383,6 +383,7 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 	var (
 		pasarandiundi_db, pasaranurl_db, jamtutup_db, jamjadwal_db, jamopen_db, statuspasaranactive_db                                                                                                                                                                                                           string
 		limitline_4d_db, limitline_3d_db, limitline_3dd_db, limitline_2d_db, limitline_2dd_db, limitline_2dt_db, bbfs_db                                                                                                                                                                                         int
+		royaltyfee_db                                                                                                                                                                                                                                                                                            float32
 		minbet_432d_db, maxbet4d_432d_db, maxbet3d_432d_db, maxbet3dd_432d_db, maxbet2d_432d_db, maxbet2dd_432d_db, maxbet2dt_432d_db                                                                                                                                                                            float32
 		maxbet4d_fullbb_432d, maxbet3d_fullbb_432d, maxbet3dd_fullbb_432d, maxbet2d_fullbb_432d, maxbet2dd_fullbb_432d, maxbet2dt_fullbb_432d                                                                                                                                                                    float32
 		maxbuy4d_432d, maxbuy3d_432d, maxbuy3dd_432d, maxbuy2d_432d, maxbuy2dd_432d, maxbuy2dt_432d                                                                                                                                                                                                              float32
@@ -421,7 +422,7 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 	)
 	rows := con.QueryRowContext(ctx, sql_detail, idcomppasaran, company)
 	switch err := rows.Scan(
-		&pasarandiundi_db, &pasaranurl_db, &jamtutup_db, &jamjadwal_db, &jamopen_db, &statuspasaranactive_db,
+		&pasarandiundi_db, &pasaranurl_db, &jamtutup_db, &jamjadwal_db, &jamopen_db, &statuspasaranactive_db, &royaltyfee_db,
 		&limitline_4d_db, &limitline_3d_db, &limitline_3dd_db, &limitline_2d_db, &limitline_2dd_db, &limitline_2dt_db, &bbfs_db,
 		&minbet_432d_db, &maxbet4d_432d_db, &maxbet3d_432d_db, &maxbet3dd_432d_db, &maxbet2d_432d_db, &maxbet2dd_432d_db, &maxbet2dt_432d_db,
 		&maxbet4d_fullbb_432d, &maxbet3d_fullbb_432d, &maxbet3dd_fullbb_432d, &maxbet2d_fullbb_432d, &maxbet2dd_fullbb_432d, &maxbet2dt_fullbb_432d,
@@ -467,6 +468,7 @@ func Fetch_company_listpasaranConf(company string, idcomppasaran int) (helpers.R
 		obj.Company_Pasaran_jamjadwal = jamjadwal_db
 		obj.Company_Pasaran_jamopen = jamopen_db
 		obj.Company_Pasaran_statusactive = statuspasaranactive_db
+		obj.Company_Royaltyfee = royaltyfee_db
 		obj.Company_Limitline4d = limitline_4d_db
 		obj.Company_Limitline3d = limitline_3d_db
 		obj.Company_Limitline3dd = limitline_3dd_db
@@ -3087,6 +3089,56 @@ func Save_companyUpdatePasaran(
 		noteafter += "PASARAN OPEN : " + pasaranjamopen + "<br />"
 		noteafter += "PASARAN STATUS : " + statuspasaranactive
 		Insert_log(company, master, "PASARAN", "UPDATE PASARAN", "", noteafter)
+	} else {
+		log.Println(msg_update)
+	}
+
+	if flag {
+		res.Status = fiber.StatusOK
+		res.Message = msg
+		res.Record = nil
+		res.Time = time.Since(render_page).String()
+	} else {
+		res.Status = fiber.StatusBadRequest
+		res.Message = msg
+		res.Record = nil
+		res.Time = time.Since(render_page).String()
+	}
+
+	return res, nil
+}
+func Save_companyUpdatePasaranRoyaltyFee(
+	master, company string,
+	royaltyfee float32,
+	idcomppasaran int) (helpers.Response, error) {
+	var res helpers.Response
+	tglnow, _ := goment.New()
+	render_page := time.Now()
+	msg := "Failed"
+	flag := false
+
+	sql_update := `
+		UPDATE   
+		` + config.DB_tbl_mst_company_game_pasaran + ` 
+		SET royaltyfee=? 
+		updatecomppas=?, updatedatecompas=? 
+		WHERE idcomppasaran=? AND idcompany=? 
+		`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
+		royaltyfee, master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
+		idcomppasaran, company)
+
+	if flag_update {
+		flag = true
+		msg = "Succes"
+		log.Println(msg_update)
+		idpasarantogel := _companypasaran_id(idcomppasaran, company, "idpasarantogel")
+		nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+		noteafter := ""
+		fee := royaltyfee * 100
+		noteafter += "PASARAN : " + nmpasarantogel + "<br />"
+		noteafter += "PASARAN ROYALTY FEE : " + strconv.Itoa(int(fee)) + "%"
+		Insert_log(company, master, "PASARAN", "UPDATE PASARAN ROYALTY FEE", "", noteafter)
 	} else {
 		log.Println(msg_update)
 	}

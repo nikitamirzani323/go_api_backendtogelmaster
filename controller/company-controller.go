@@ -2819,6 +2819,7 @@ func CompanyPasaranUpdateshio(c *fiber.Ctx) error {
 	return c.JSON(result)
 }
 func _deleteredis_company(company string, idcomppasaran int, pasaranid, periode, year string) {
+	_deleteredis_log()
 	//MASTER
 	val_listcompany := helpers.DeleteRedis(Fieldcompanylistcompany_home_redis)
 	log.Printf("Redis Delete MASTER LIST COMPANY : %d", val_listcompany)

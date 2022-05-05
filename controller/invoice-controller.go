@@ -348,4 +348,6 @@ func _deleteredis_invoice(invoice string) {
 
 	val_master2 := helpers.DeleteRedis(Fieldinvoice_home_redis + "_" + invoice)
 	log.Printf("Redis Delete MASTER INVOICE PASARAN : %d", val_master2)
+
+	_deleteredis_log()
 }

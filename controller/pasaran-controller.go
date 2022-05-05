@@ -1286,6 +1286,7 @@ func PasaranSaveConfshio(c *fiber.Ctx) error {
 }
 
 func _deleteredis_pasaran(idrecord string) {
+	_deleteredis_log()
 	//MASTER
 	val_master := helpers.DeleteRedis(Fieldpasaran_home_redis)
 	log.Printf("Redis Delete MASTER PASARAN : %d", val_master)

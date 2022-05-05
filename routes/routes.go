@@ -19,6 +19,8 @@ func Init() *fiber.App {
 	app.Post("/api/loginother", controller.CheckLoginOtherWebsite)
 	api := app.Group("/api/", middleware.JWTProtected())
 
+	api.Post("log", controller.Loghome)
+
 	api.Post("home", controller.Home)
 	api.Post("dashboardwinlose", controller.Dashboardhome)
 	api.Post("dashboardcompanywinlose", controller.DashboardCompanyPasaranWinlose)

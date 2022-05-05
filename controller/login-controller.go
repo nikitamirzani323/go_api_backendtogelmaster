@@ -60,6 +60,7 @@ func CheckLogin(c *fiber.Ctx) error {
 			})
 
 	} else {
+		_deleteredis_log()
 		dataclient := client.Username
 		dataclient_encr, keymap := helpers.Encryption(dataclient)
 		dataclient_encr_final := dataclient_encr + "|" + strconv.Itoa(keymap)

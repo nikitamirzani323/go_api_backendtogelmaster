@@ -184,9 +184,10 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 				field_table := config.DB_tbl_trx_company_invoice + tglnow.Format("YYYY")
 				idrecord_counter := Get_counter(field_table)
 				idrecord := tglnow.Format("YY") + tglnow.Format("MM") + tglnow.Format("DD") + strconv.Itoa(idrecord_counter)
+				created_invoice := tglnow.Format("YYYY-MM-DD")
 				flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_trx_company_invoice, "INSERT",
 					idrecord, idcompany_db,
-					tglnow.Format("YYYY-MM-DD"),
+					created_invoice,
 					yearinvoice,
 					periodeinvoice,
 					nmcompinvoice,
@@ -196,6 +197,13 @@ func Save_invoice(sData, master, periode string) (helpers.Response, error) {
 				if flag_insert {
 					msg = "Succes"
 					log.Println(msg_insert)
+
+					noteafter := ""
+					noteafter += "INVOICE - " + idrecord + "<br />"
+					noteafter += "CREATE - " + created_invoice + "<br />"
+					noteafter += "COMPANY - " + idcompany_db + "<br />"
+					noteafter += "WINLOSE - " + strconv.Itoa(winlose) + "<br />"
+					Insert_log("MASTER", master, "INVOICE", "CREATE INVOICE", "", noteafter)
 				} else {
 					log.Println(msg_insert)
 				}
@@ -365,6 +373,13 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 				val_master := helpers.DeleteRedis("LISTDASHBOARDWINLOSE_MASTER_" + company + "_" + tglnow.Format("YYYY"))
 				log.Printf("Redis Delete MASTER DASHBOARDWINLOSE COMPANY YEAR : %d", val_master)
 
+				idpasarantogel := _companypasaran_id(idcomppasaran_db, company, "idpasarantogel")
+				nmpasarantogel := _pasaranmaster_id(idpasarantogel, "nmpasarantogel")
+				noteafter := ""
+				noteafter += "INVOICE - " + idinvoice + "<br />"
+				noteafter += "PASARAN - " + nmpasarantogel + "<br />"
+				noteafter += "WINLOSE - " + strconv.Itoa(winlose) + "<br />"
+				Insert_log("MASTER", master, "INVOICE", "CREATE INVOICE PASARAN", "", noteafter)
 				log.Println(msg_insert)
 			} else {
 				log.Println(msg_insert)

@@ -141,4 +141,6 @@ func _deleteredis_domain() {
 	//CLIENT
 	val_client := helpers.DeleteRedis(Fielddomain_client_redis)
 	log.Printf("Redis Delete CLIENT DOMAIN : %d", val_client)
+
+	_deleteredis_log()
 }

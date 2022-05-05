@@ -175,4 +175,6 @@ func _deleteredis_dashboard() {
 	log.Printf("Redis Delete MASTER DASHBOARDWINLOSE : %d", val_master)
 	val_master2 := helpers.DeleteRedis(Fielddashboard_home_redis + "_" + strconv.Itoa(year_1))
 	log.Printf("Redis Delete MASTER DASHBOARDWINLOSE : %d", val_master2)
+
+	_deleteredis_log()
 }

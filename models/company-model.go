@@ -148,6 +148,48 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 
 	return res, nil
 }
+func Fetch_company_listcompany() (helpers.Response, error) {
+	var obj entities.Model_companylistcompany
+	var arraobj []entities.Model_companylistcompany
+	var res helpers.Response
+	msg := "Data Not Found"
+	con := db.CreateCon()
+	ctx := context.Background()
+	render_page := time.Now()
+	var no int = 0
+
+	sql_select := `SELECT 
+			idcompany, nmcompany 
+			FROM ` + config.DB_tbl_mst_company + ` 
+			WHERE statuscompany = "ACTIVE" 
+			ORDER BY nmcompany ASC   
+		`
+
+	row, err := con.QueryContext(ctx, sql_select)
+	helpers.ErrorCheck(err)
+	for row.Next() {
+		no++
+		var (
+			idcompany_db, nmcompany_db string
+		)
+
+		err = row.Scan(&idcompany_db, &nmcompany_db)
+		helpers.ErrorCheck(err)
+
+		obj.Company_idcompany = idcompany_db
+		obj.Company_nmcompany = nmcompany_db
+		arraobj = append(arraobj, obj)
+		msg = "Success"
+	}
+	defer row.Close()
+
+	res.Status = fiber.StatusOK
+	res.Message = msg
+	res.Record = arraobj
+	res.Time = time.Since(render_page).String()
+
+	return res, nil
+}
 func Fetch_company_listadmin(company string) (helpers.Response, error) {
 	var obj entities.Model_companylistadmin
 	var arraobj []entities.Model_companylistadmin

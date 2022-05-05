@@ -212,6 +212,7 @@ func InvoiceSave(c *fiber.Ctx) error {
 	}
 
 	_deleteredis_invoice("")
+	_deleteredis_dashboard()
 	return c.JSON(result)
 }
 func InvoiceSavewinlosestatus(c *fiber.Ctx) error {
@@ -253,6 +254,7 @@ func InvoiceSavewinlosestatus(c *fiber.Ctx) error {
 	}
 
 	_deleteredis_invoice(client.Invoice)
+	_deleteredis_dashboard()
 	return c.JSON(result)
 }
 func InvoiceSavePasaran(c *fiber.Ctx) error {
@@ -294,6 +296,7 @@ func InvoiceSavePasaran(c *fiber.Ctx) error {
 	}
 
 	_deleteredis_invoice(client.Invoice)
+	_deleteredis_dashboard()
 	return c.JSON(result)
 }
 func InvoiceDeletePasaran(c *fiber.Ctx) error {
@@ -335,6 +338,7 @@ func InvoiceDeletePasaran(c *fiber.Ctx) error {
 	}
 
 	_deleteredis_invoice(client.Invoice)
+	_deleteredis_dashboard()
 	return c.JSON(result)
 }
 func _deleteredis_invoice(invoice string) {

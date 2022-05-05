@@ -479,3 +479,52 @@ func _invoicewinlose_id(company, year, periode string) int {
 	}
 	return result
 }
+func _invoicewinlose_getidinvoice(company, year, periode string) int {
+	con := db.CreateCon()
+	ctx := context.Background()
+	result := 0
+	sql_select := `SELECT 
+		idcompinvoice  
+		FROM ` + config.DB_tbl_trx_company_invoice + `  
+		WHERE yearinvoice = ? 
+		AND idcompany = ? 
+		AND periodeinvoice = ? 
+	`
+	var (
+		idcompinvoice_db int
+	)
+	rows := con.QueryRowContext(ctx, sql_select, year, company, periode)
+	switch err := rows.Scan(&idcompinvoice_db); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		result = idcompinvoice_db
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return result
+}
+func _invoicewinlosepasaran_id(idcompinvoice, idcomppasaran int) int {
+	con := db.CreateCon()
+	ctx := context.Background()
+	result := 0
+	sql_select := `SELECT 
+		winlosecomppasaran  
+		FROM ` + config.DB_tbl_trx_company_invoice_detail + `   
+		WHERE idcompinvoice = ? 
+		AND idcomppasaran = ? 
+	`
+	var (
+		winlosecomp_db int
+	)
+	rows := con.QueryRowContext(ctx, sql_select, idcompinvoice, idcomppasaran)
+	switch err := rows.Scan(&winlosecomp_db); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		result = winlosecomp_db
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return result
+}

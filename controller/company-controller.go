@@ -16,6 +16,7 @@ import (
 
 const Fieldcompany_home_redis = "LISTCOMPANY_MASTER"
 const Fieldcompanydetail_home_redis = "LISTCOMPANYDETAIL_MASTER"
+const Fieldcompanylistcompany_home_redis = "LISTCOMPANYLISTCOMPANY_MASTER"
 const Fieldcompanylistadmin_home_redis = "LISTCOMPANYLISTADMIN_MASTER"
 const Fieldcompanylistpasaran_home_redis = "LISTCOMPANYLISTPASARAN_MASTER"
 const Fieldcompanylistpasaranonline_home_redis = "LISTCOMPANYLISTPASARANONLINE_MASTER"
@@ -170,6 +171,70 @@ func CompanyDetail(c *fiber.Ctx) error {
 		return c.JSON(result)
 	} else {
 		log.Println("COMPANY DETAIL CACHE " + client.Company)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusOK,
+			"message": "Success",
+			"record":  arraobj,
+			"time":    time.Since(render_page).String(),
+		})
+	}
+}
+func CompanyDetailListCompany(c *fiber.Ctx) error {
+	var errors []*helpers.ErrorResponse
+	client := new(entities.Controller_companylist)
+	validate := validator.New()
+	if err := c.BodyParser(client); err != nil {
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": err.Error(),
+			"record":  nil,
+		})
+	}
+	err := validate.Struct(client)
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			var element helpers.ErrorResponse
+			element.Field = err.StructField()
+			element.Tag = err.Tag()
+			errors = append(errors, &element)
+		}
+		c.Status(fiber.StatusBadRequest)
+		return c.JSON(fiber.Map{
+			"status":  fiber.StatusBadRequest,
+			"message": "validation",
+			"record":  errors,
+		})
+	}
+	render_page := time.Now()
+	var obj entities.Model_companylistcompany
+	var arraobj []entities.Model_companylistcompany
+	resultredis, flag := helpers.GetRedis(Fieldcompanylistcompany_home_redis)
+	jsonredis := []byte(resultredis)
+	record_RD, _, _, _ := jsonparser.Get(jsonredis, "record")
+	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+		company_idcompany, _ := jsonparser.GetString(value, "company_idcompany")
+		company_nmcompany, _ := jsonparser.GetString(value, "company_nmcompany")
+
+		obj.Company_idcompany = company_idcompany
+		obj.Company_nmcompany = company_nmcompany
+		arraobj = append(arraobj, obj)
+	})
+	if !flag {
+		result, err := models.Fetch_company_listcompany()
+		helpers.SetRedis(Fieldcompanylistcompany_home_redis, result, 30*time.Minute)
+		log.Println("COMPANY LISTCOMPANY MYSQL ")
+		if err != nil {
+			c.Status(fiber.StatusBadRequest)
+			return c.JSON(fiber.Map{
+				"status":  fiber.StatusBadRequest,
+				"message": err.Error(),
+				"record":  nil,
+			})
+		}
+		return c.JSON(result)
+	} else {
+		log.Println("COMPANY LISTCOMPANY CACHE ")
 		return c.JSON(fiber.Map{
 			"status":  fiber.StatusOK,
 			"message": "Success",
@@ -2755,6 +2820,8 @@ func CompanyPasaranUpdateshio(c *fiber.Ctx) error {
 }
 func _deleteredis_company(company string, idcomppasaran int, pasaranid, periode, year string) {
 	//MASTER
+	val_listcompany := helpers.DeleteRedis(Fieldcompanylistcompany_home_redis)
+	log.Printf("Redis Delete MASTER LIST COMPANY : %d", val_listcompany)
 	val_company := helpers.DeleteRedis(Fieldcompany_home_redis)
 	log.Printf("Redis Delete MASTER COMPANY : %d", val_company)
 	val_company_listadmin := helpers.DeleteRedis(Fieldcompanylistadmin_home_redis + "_" + company)

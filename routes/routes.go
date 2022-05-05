@@ -21,6 +21,7 @@ func Init() *fiber.App {
 
 	api.Post("home", controller.Home)
 	api.Post("dashboardwinlose", controller.Dashboardhome)
+	api.Post("dashboardcompanywinlose", controller.DashboardCompanyPasaranWinlose)
 
 	api.Post("allinvoice", controller.InvoiceHome)
 	api.Post("invoicedetail", controller.InvoiceDetail)
@@ -31,6 +32,7 @@ func Init() *fiber.App {
 
 	api.Post("allcompany", controller.CompanyHome)
 	api.Post("detailcompany", controller.CompanyDetail)
+	api.Post("companylist", controller.CompanyDetailListCompany)
 	api.Post("companylistadmin", controller.CompanyDetailListAdmin)
 	api.Post("companylistpasaran", controller.CompanyDetailListPasaran)
 	api.Post("companylistpasaranonline", controller.CompanyDetailListPasaranOnline)

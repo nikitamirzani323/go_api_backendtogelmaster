@@ -32,6 +32,10 @@ type Model_companylistadmin struct {
 	Company_admin_create        string `json:"company_admin_create"`
 	Company_admin_update        string `json:"company_admin_update"`
 }
+type Model_companylistcompany struct {
+	Company_idcompany string `json:"company_idcompany"`
+	Company_nmcompany string `json:"company_nmcompany"`
+}
 
 type Model_companylistpasaran struct {
 	Company_pasaran_idcomppasaran   int     `json:"company_pasaran_idcomppasaran"`
@@ -354,6 +358,9 @@ type Controller_companydetail struct {
 	Page    string `json:"page" validate:"required"`
 	Sdata   string `json:"sData" validate:"required"`
 	Company string `json:"company" validate:"required"`
+}
+type Controller_companylist struct {
+	Master string `json:"master" validate:"required"`
 }
 
 type Controller_companypasaranconf struct {

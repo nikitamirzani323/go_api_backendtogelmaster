@@ -22,7 +22,7 @@ func Fetch_log() (helpers.Response, error) {
 
 	sql_select := `SELECT 
 			idlog, datetimelog, username, pagelog,  
-			tipelog, noteafter  
+			tipelog, noteafter, idcompany  
 			FROM ` + config.DB_tbl_trx_log + ` 
 			ORDER BY datetimelog DESC  LIMIT 300
 		`
@@ -30,15 +30,16 @@ func Fetch_log() (helpers.Response, error) {
 	helpers.ErrorCheck(err)
 	for row.Next() {
 		var (
-			idlog_db                                                          int
-			datetimelog_db, username_db, pagelog_db, tipelog_db, noteafter_db string
+			idlog_db                                                                        int
+			datetimelog_db, username_db, pagelog_db, tipelog_db, noteafter_db, idcompany_db string
 		)
 
-		err = row.Scan(&idlog_db, &datetimelog_db, &username_db, &pagelog_db, &tipelog_db, &noteafter_db)
+		err = row.Scan(&idlog_db, &datetimelog_db, &username_db, &pagelog_db, &tipelog_db, &noteafter_db, &idcompany_db)
 		helpers.ErrorCheck(err)
 
 		obj.Log_id = idlog_db
 		obj.Log_datetime = datetimelog_db
+		obj.Log_company = idcompany_db
 		obj.Log_username = username_db
 		obj.Log_page = pagelog_db
 		obj.Log_tipe = tipelog_db

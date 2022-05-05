@@ -51,6 +51,7 @@ func Loghome(c *fiber.Ctx) error {
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		log_id, _ := jsonparser.GetInt(value, "log_id")
 		log_datetime, _ := jsonparser.GetString(value, "log_datetime")
+		log_company, _ := jsonparser.GetString(value, "log_company")
 		log_username, _ := jsonparser.GetString(value, "log_username")
 		log_page, _ := jsonparser.GetString(value, "log_page")
 		log_tipe, _ := jsonparser.GetString(value, "log_tipe")
@@ -58,6 +59,7 @@ func Loghome(c *fiber.Ctx) error {
 
 		obj.Log_id = int(log_id)
 		obj.Log_datetime = log_datetime
+		obj.Log_company = log_company
 		obj.Log_username = log_username
 		obj.Log_page = log_page
 		obj.Log_tipe = log_tipe

@@ -361,6 +361,10 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 				master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 			if flag_insert {
 				msg = "Succes"
+
+				val_master := helpers.DeleteRedis("LISTDASHBOARDWINLOSE_MASTER_" + company + "_" + tglnow.Format("YYYY"))
+				log.Printf("Redis Delete MASTER DASHBOARDWINLOSE COMPANY YEAR : %d", val_master)
+
 				log.Println(msg_insert)
 			} else {
 				log.Println(msg_insert)

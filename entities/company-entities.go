@@ -16,6 +16,7 @@ type Model_company struct {
 type Model_companydetail struct {
 	Company_name   string `json:"company_name"`
 	Company_url    string `json:"company_url"`
+	Company_minfee int    `json:"company_minfee"`
 	Company_status string `json:"company_status"`
 	Company_create string `json:"company_create"`
 	Company_update string `json:"company_update"`
@@ -389,6 +390,7 @@ type Controller_companysave struct {
 	Master    string `json:"master" validate:"required"`
 	Name      string `json:"name" validate:"required"`
 	Urldomain string `json:"urldomain" validate:"required"`
+	Minfee    int    `json:"minfee" `
 	Status    string `json:"status" validate:"required"`
 }
 type Controller_companyadminsave struct {

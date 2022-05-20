@@ -145,12 +145,14 @@ func CompanyDetail(c *fiber.Ctx) error {
 	jsonparser.ArrayEach(record_RD, func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
 		company_name, _ := jsonparser.GetString(value, "company_name")
 		company_url, _ := jsonparser.GetString(value, "company_url")
+		company_minfee, _ := jsonparser.GetInt(value, "company_minfee")
 		company_status, _ := jsonparser.GetString(value, "company_status")
 		company_create, _ := jsonparser.GetString(value, "company_create")
 		company_update, _ := jsonparser.GetString(value, "company_update")
 
 		obj.Company_name = company_name
 		obj.Company_url = company_url
+		obj.Company_minfee = int(company_minfee)
 		obj.Company_status = company_status
 		obj.Company_create = company_create
 		obj.Company_update = company_update

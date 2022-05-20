@@ -99,18 +99,19 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 	render_page := time.Now()
 
 	sql_detail := `SELECT 
-		nmcompany, companyurl,  
+		nmcompany, companyurl, minfee,  
 		statuscompany, createcompany, COALESCE(createdatecompany,""), updatecompany, COALESCE(updatedatecompany,"")   
 		FROM ` + config.DB_tbl_mst_company + `
 		WHERE idcompany = ? 
 	`
 	var (
+		minfee_db                                                                                        int
 		nmcompany_db, companyurl_db                                                                      string
 		statuscompany_db, createcompany_db, createdatecompany_db, updatecompany_db, updatedatecompany_db string
 	)
 	rows := con.QueryRowContext(ctx, sql_detail, company)
 	switch err := rows.Scan(
-		&nmcompany_db, &companyurl_db, &statuscompany_db,
+		&nmcompany_db, &companyurl_db, &minfee_db, &statuscompany_db,
 		&createcompany_db, &createdatecompany_db, &updatecompany_db, &updatedatecompany_db); err {
 	case sql.ErrNoRows:
 		flag = false
@@ -125,6 +126,7 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 		}
 		obj.Company_name = nmcompany_db
 		obj.Company_url = companyurl_db
+		obj.Company_minfee = minfee_db
 		obj.Company_status = statuscompany_db
 		obj.Company_create = create
 		obj.Company_update = update
@@ -1493,7 +1495,7 @@ func Fetch_company_invoice_listpermainanbyusername(company, username, permainan 
 
 	return res, nil
 }
-func Save_company(sData, master, company, name, urldomain, status string) (helpers.Response, error) {
+func Save_company(sData, master, company, name, urldomain, status string, minfee int) (helpers.Response, error) {
 	var res helpers.Response
 	con := db.CreateCon()
 	tglnow, _ := goment.New()
@@ -1509,15 +1511,15 @@ func Save_company(sData, master, company, name, urldomain, status string) (helpe
 			sql_insert := `
 				INSERT INTO  
 				` + config.DB_tbl_mst_company + ` (
-					idcompany, startjoincompany, idcurr, nmcompany, companyurl, statuscompany, createcompany, createdatecompany 
+					idcompany, startjoincompany, idcurr, nmcompany, companyurl, minfee, statuscompany, createcompany, createdatecompany 
 				)VALUES( 
-					?,?,?,?,?,?,?,?
+					?,?,?,?,?,?,?,?,?
 				) 
 			`
 			flag_insert, msg_insert := Exec_SQL(sql_insert, config.DB_tbl_mst_company, "INSERT",
 				company,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
-				"IDR", name, urldomain, status, master,
+				"IDR", name, urldomain, minfee, status, master,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 			if flag_insert {
 				flag = true
@@ -1543,13 +1545,14 @@ func Save_company(sData, master, company, name, urldomain, status string) (helpe
 			sql_update := `
 				UPDATE 
 				` + config.DB_tbl_mst_company + `  
-				SET nmcompany=?, companyurl=?, statuscompany=?,  
+				SET nmcompany=?, companyurl=?, minfee=?, statuscompany=?,  
 				updatecompany=?, updatedatecompany=?, endjoincompany=?  
 				WHERE idcompany=? 
 			`
 			flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company, "UPDATE",
 				name,
 				urldomain,
+				minfee,
 				status,
 				master,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
@@ -1567,13 +1570,14 @@ func Save_company(sData, master, company, name, urldomain, status string) (helpe
 			sql_update := `
 				UPDATE 
 				` + config.DB_tbl_mst_company + `  
-				SET nmcompany=?, companyurl=?, statuscompany=?,  
+				SET nmcompany=?, companyurl=?, minfee=?, statuscompany=?,  
 				updatecompany=?, updatedatecompany=? 
 				WHERE idcompany=? 
 			`
 			flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company, "UPDATE",
 				name,
 				urldomain,
+				minfee,
 				status,
 				master,
 				tglnow.Format("YYYY-MM-DD HH:mm:ss"),
@@ -3169,7 +3173,7 @@ func Save_companyUpdatePasaranRoyaltyFee(
 		WHERE idcomppasaran=? AND idcompany=? 
 		`
 	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_mst_company_game_pasaran, "UPDATE",
-		royaltyfee, master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
+		fmt.Sprintf("%.3f", royaltyfee), master, tglnow.Format("YYYY-MM-DD HH:mm:ss"),
 		idcomppasaran, company)
 
 	if flag_update {

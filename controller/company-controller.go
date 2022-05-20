@@ -1539,7 +1539,7 @@ func CompanySave(c *fiber.Ctx) error {
 		client.Sdata,
 		client.Master,
 		client.Company,
-		client.Name, client.Urldomain, client.Status)
+		client.Name, client.Urldomain, client.Status, client.Minfee)
 
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)

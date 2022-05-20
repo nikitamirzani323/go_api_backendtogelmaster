@@ -6,6 +6,7 @@ type Model_invoicehome struct {
 	Date          string `json:"invoice_date"`
 	Name          string `json:"invoice_name"`
 	Winlose       int    `json:"invoice_winlose"`
+	Pembayaranfee int    `json:"invoice_pembayaranfee"`
 	Total_pasaran int    `json:"invoice_totalpasaran"`
 	Status        string `json:"invoice_status"`
 	Statuscss     string `json:"invoice_statuscss"`

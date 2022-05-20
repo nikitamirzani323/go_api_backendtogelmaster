@@ -4119,3 +4119,29 @@ func _companypasaran_id(idcomppasaran int, company, tipecolumn string) string {
 	}
 	return result
 }
+func _company_id(company, tipecolumn string) int {
+	con := db.CreateCon()
+	ctx := context.Background()
+	result := 0
+	sql_select := `SELECT 
+		minfee 
+		FROM ` + config.DB_tbl_mst_company + `  
+		WHERE idcompany = ? 
+	`
+	var (
+		minfee int
+	)
+	rows := con.QueryRowContext(ctx, sql_select, company)
+	switch err := rows.Scan(&minfee); err {
+	case sql.ErrNoRows:
+
+	case nil:
+		switch tipecolumn {
+		case "minfee":
+			result = minfee
+		}
+	default:
+		helpers.ErrorCheck(err)
+	}
+	return result
+}

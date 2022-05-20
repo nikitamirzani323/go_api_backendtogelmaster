@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -28,7 +29,7 @@ func Fetch_invoice() (helpers.Response, error) {
 
 	sql_periode := `SELECT 
 			A.idcompinvoice, A.idcompany, B.nmcompany , A.datecompinvoice, A.nmcompinvoice, 
-			A.winlosecomp, A.statuscompinvoice   
+			A.winlosecomp, A.pembarayanfee, A.statuscompinvoice   
 			FROM ` + config.DB_tbl_trx_company_invoice + ` as A 
 			JOIN ` + config.DB_tbl_mst_company + ` as B ON B.idcompany = A.idcompany
 			ORDER BY A.periodeinvoice DESC 
@@ -37,13 +38,13 @@ func Fetch_invoice() (helpers.Response, error) {
 	helpers.ErrorCheck(err)
 	for row.Next() {
 		var (
-			idcompinvoice_db, winlosecomp_db                                                       int
+			idcompinvoice_db, winlosecomp_db, pembarayanfee_db                                     int
 			idcompany_db, datecompinvoice_db, nmcompany_db, nmcompinvoice_db, statuscompinvoice_db string
 		)
 
 		err = row.Scan(
 			&idcompinvoice_db, &idcompany_db, &nmcompany_db, &datecompinvoice_db,
-			&nmcompinvoice_db, &winlosecomp_db, &statuscompinvoice_db)
+			&nmcompinvoice_db, &winlosecomp_db, &pembarayanfee_db, &statuscompinvoice_db)
 		helpers.ErrorCheck(err)
 
 		status_css := ""
@@ -59,6 +60,7 @@ func Fetch_invoice() (helpers.Response, error) {
 		obj.Date = datecompinvoice_db
 		obj.Name = nmcompinvoice_db
 		obj.Winlose = winlosecomp_db
+		obj.Pembayaranfee = pembarayanfee_db
 		obj.Total_pasaran = _invoicepasaran_count(strconv.Itoa(idcompinvoice_db))
 		obj.Status = statuscompinvoice_db
 		obj.Statuscss = status_css
@@ -330,6 +332,8 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 	start := tglnow.Format("YYYY-MM") + "-" + "01"
 	end := tglnow.Format("YYYY-MM") + "-" + endday
 
+	temp_feecompany := 0
+
 	sql_periode := `SELECT 
 			idcomppasaran, royaltyfee 
 			FROM ` + config.DB_tbl_mst_company_game_pasaran + ` 
@@ -368,6 +372,8 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 				idrecord, idinvoice, idcomppasaran_db, winlose, fmt.Sprintf("%.2f", royaltyfee_db),
 				master, tglnow.Format("YYYY-MM-DD HH:mm:ss"))
 			if flag_insert {
+				feepasaran := math.Ceil(float64(winlose) * float64(royaltyfee_db))
+				temp_feecompany = temp_feecompany + int(feepasaran)
 				msg = "Succes"
 
 				val_master := helpers.DeleteRedis("LISTDASHBOARDWINLOSE_MASTER_" + company + "_" + tglnow.Format("YYYY"))
@@ -387,6 +393,30 @@ func Save_company_listpasaran(master, invoice string) (helpers.Response, error) 
 		}
 	}
 	defer row.Close()
+
+	// UPDATE INVOICE pembarayanfee
+	minfeecomp := _company_id(company, "minfee")
+	if temp_feecompany < 5000000 {
+		temp_feecompany = minfeecomp
+	}
+
+	sql_update := `
+			UPDATE 
+			` + config.DB_tbl_trx_company_invoice + `  
+			SET pembarayanfee=?,  
+			updatecompinvoice=?, updatedatecompinvoice=? 
+			WHERE idcompinvoice =? 
+			AND idcompany =? 
+		`
+	flag_update, msg_update := Exec_SQL(sql_update, config.DB_tbl_trx_company_invoice, "UPDATE",
+		temp_feecompany, master, tglnow.Format("YYYY-MM-DD HH:mm:ss"), idinvoice, company)
+
+	if flag_update {
+		msg = "Succes"
+		log.Println(msg_update)
+	} else {
+		log.Println(msg_update)
+	}
 
 	res.Status = fiber.StatusOK
 	res.Message = msg

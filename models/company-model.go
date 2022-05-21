@@ -207,7 +207,7 @@ func Fetch_company_listadmin(company string) (helpers.Response, error) {
 			lastipaddres_comp, createcomp_admin, createdatecomp_admin,  COALESCE(updatecomp_admin,""),  COALESCE(updatedatecomp_admin,"")     
 			FROM ` + config.DB_tbl_mst_company_admin + ` 
 			WHERE idcompany = ? 
-			ORDER BY lastlogin_comp  
+			ORDER BY lastlogin_comp DESC 
 		`
 
 	row, err := con.QueryContext(ctx, sql_periode, company)

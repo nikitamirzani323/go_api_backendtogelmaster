@@ -105,7 +105,7 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 		WHERE idcompany = ? 
 	`
 	var (
-		minfee_db                                                                                        int
+		minfee_db                                                                                        float32
 		nmcompany_db, companyurl_db                                                                      string
 		statuscompany_db, createcompany_db, createdatecompany_db, updatecompany_db, updatedatecompany_db string
 	)
@@ -126,7 +126,7 @@ func Fetch_companyDetail(company string) (helpers.Response, error) {
 		}
 		obj.Company_name = nmcompany_db
 		obj.Company_url = companyurl_db
-		obj.Company_minfee = minfee_db
+		obj.Company_minfee = int(minfee_db)
 		obj.Company_status = statuscompany_db
 		obj.Company_create = create
 		obj.Company_update = update
@@ -4129,7 +4129,7 @@ func _company_id(company, tipecolumn string) int {
 		WHERE idcompany = ? 
 	`
 	var (
-		minfee int
+		minfee float32
 	)
 	rows := con.QueryRowContext(ctx, sql_select, company)
 	switch err := rows.Scan(&minfee); err {
@@ -4138,7 +4138,7 @@ func _company_id(company, tipecolumn string) int {
 	case nil:
 		switch tipecolumn {
 		case "minfee":
-			result = minfee
+			result = int(minfee)
 		}
 	default:
 		helpers.ErrorCheck(err)
